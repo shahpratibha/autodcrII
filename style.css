@@ -20,7 +20,7 @@ body, html {
     display:none;
 }
 .summary-section {
-    position: absolute; /* Or 'fixed' if you want it to stay at the bottom even when scrolling */
+   
     bottom: 0;
     left: 0;
     right: 0;
@@ -39,7 +39,11 @@ body, html {
 
 .summary-header h2 {
     margin: 0;
-    color: #000; /* Adjust as needed for readability */
+    color: var(--Grey-800, #262626);
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
 }
 
 .proposal-info {
@@ -50,8 +54,14 @@ body, html {
 
 .proposal-info span {
     margin-right: 20px;
-    font-weight: bold;
-    color: #000; /* Adjust as needed for readability */
+    color: var(--Grey-800, #262626);
+leading-trim: both;
+text-edge: cap;
+font-family: "Plus Jakarta Sans";
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
 }
 
 .proposal-icons, .navigation-icons {
@@ -75,12 +85,24 @@ body, html {
     display: flex;
     justify-content: space-between;
 }
+.card {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: row !important;
+    min-width: 0;
+    /* word-wrap: break-word; */
+    background-color: #fff;
+    background-clip: border-box;
+    /* border: 1px solid rgba(0, 0, 0, .125); */
+    border-radius: .25rem;
+}
 
 .card {
     background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white */
     border-radius: 8px;
     padding: 20px;
-    width: 23%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -92,6 +114,7 @@ body, html {
 .navigation-icons button {
     font-size: 20px;
     font-weight: bold;
+  
     color: #000;
 }
 
@@ -162,11 +185,14 @@ body, html {
 .total-proposals .icon {
     margin-left: 10px;
 }
-
 .card {
+    /* margin-bottom: 10px; */
+    background-color: rgba(255, 255, 255, 0.8);
+    
+    
     margin-bottom: 10px;
-    background-color: rgba(255, 255, 255, 0.8); 
 }
+
 
 .chart-bar {
     height: 20px;
@@ -236,21 +262,20 @@ body, html {
 }
 
 .toggle-button {
-    background-color: #666666;
+    background-color: #000000B2;
     color: #FFF;
-   
-   font-size: 20px;
-   font-style: normal;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 30.24px;
+    text-align: left;
+    font-style: normal;
    font-weight: 700;
     line-height: normal;
     border: none;
     border-radius: 8px;
-    background: var(--Grey-500, #6F6F6F);
-    box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.10);
-    backdrop-filter: blur(5px);
+    background: var(--Grey-500, #000000B2);
     padding: 8px 10px;
     margin-bottom: 10px;
-    background: var(--Grey-500, #6F6F6F);
 }
 
 .btn-group {
@@ -270,10 +295,14 @@ body, html {
     border: none;
     padding: 8px; 
     border-radius: 8px;
-    background: var(--Blue-100, #B0D5F4);
+    background: #B0D5F480;
+
     text-align: center; 
     white-space: nowrap; 
   
+}
+.proposal-icons{
+    background-color: white;
 }
 
 /* Your existing CSS styles */
@@ -325,7 +354,7 @@ gap: 8px;
 
 .north-arrow-container {
     position: absolute;
-    bottom: 50px;
+    bottom: 38px;
     left: 7px;
     z-index: 1000;
 }
@@ -360,6 +389,7 @@ gap: 8px;
     height: auto; /* Adjust height for larger buttons */
     line-height: 28px;
     display: flex;
+    border: none;
     background-color: transparent;
     color: white;
     align-items: center;
@@ -398,7 +428,8 @@ gap: 8px;
 /* Styling the leaflet control container */
 .leaflet-bar {
    background: linear-gradient(180deg, #6F6F6F 0%, #262626 100%);
-    border-radius: 30px; /* Rounded corners for the container */
+    border-radius: 10px; /* Rounded corners for the container */
+   
     padding: 5px; /* Add some padding */
     box-shadow: 0px 0px 14.035px 0px rgba(0, 0, 0, 0.15);
     display: inline-block;
@@ -431,16 +462,35 @@ gap: 8px;
             color: white; /* Active text color */
             border: none;
         }
-           
-       
+           /* CSS for moving elements */
 .move-up {
-    transform: translateY(-150px); /* Adjust the value as needed */
-    transition: transform 0.3s ease;
+    transform: translateY(-255px);
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Only apply move-up to the north-arrow-container */
+.north-arrow-container.move-up {
+    transform: translateY(-255px); /* Adjust the value as needed */
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Adjust the leaflet control scale to prevent it from moving too much */
+.leaflet-control-scale.move-up {
+    transform: translateY(-1px); /* Adjust the value as needed */
+    transition: transform 0.3s ease-in-out;
 }
 
 
 .summary-section {
-    transition: all 0.3s ease-in-out;
+    transition: display 0.3s ease-in-out;
+}
+#map {
+    transition: all 0.5s ease; /* Smooth transition for map resizing */
 }
 
-        
+.summary-section-open #map {
+    height: calc(100vh - 260px); /* Adjust height when summary is open */
+}
+
+
+     
