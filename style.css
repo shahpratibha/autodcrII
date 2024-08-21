@@ -1,0 +1,497 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: "Plus Jakarta Sans";
+    font-size: 12px;
+    overflow-y: hidden;
+ 
+}
+
+#map {
+    width: 100%;
+    height:100vh; 
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+    margin: 0;
+  
+}
+.leaflet-container .leaflet-control-attribution{
+    display:none;
+}
+.summary-section {
+   
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(234, 240, 246, 0.8); /* Semi-transparent background */
+    padding: 20px;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000; /* Ensures it stays above the map */
+}
+
+.summary-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.summary-header h2 {
+    margin: 0;
+    color: var(--Grey-800, #262626);
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.proposal-info {
+    display: flex;
+    align-items: center;
+  
+}
+
+.proposal-info span {
+    margin-right: 20px;
+    color: var(--Grey-800, #262626);
+leading-trim: both;
+text-edge: cap;
+font-family: "Plus Jakarta Sans";
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
+
+.proposal-icons, .navigation-icons {
+    display: flex;
+    align-items: center;
+}
+
+.proposal-icons button, .navigation-icons button {
+    background: none;
+    border: none;
+    cursor: pointer;
+   
+}
+
+.proposal-icons img, .navigation-icons img {
+    width: 24px;
+    height: 24px;
+}
+
+.cards {
+    display: flex;
+    justify-content: space-between;
+}
+.card {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: row !important;
+    min-width: 0;
+    /* word-wrap: break-word; */
+    background-color: #fff;
+    background-clip: border-box;
+    /* border: 1px solid rgba(0, 0, 0, .125); */
+    border-radius: .25rem;
+}
+
+.card {
+    background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white */
+    border-radius: 8px;
+    padding: 20px;
+
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card h3 {
+    margin-top: 0;
+    color: #000; /* Adjust as needed for readability */
+}
+
+.navigation-icons button {
+    font-size: 20px;
+    font-weight: bold;
+  
+    color: #000;
+}
+
+.navigation-icons button:hover {
+    color: #555;
+}
+
+
+.chart-bar {
+    height: 20px;
+    margin: 10px 0;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+}
+
+.chart-bar-segment {
+    height: 100%;
+}
+
+.bg-danger {
+    background-color: #dc3545;
+}
+
+.bg-warning {
+    background-color: #ffc107;
+}
+
+.bg-success {
+    background-color: #28a745;
+}
+
+.bg-primary {
+    background-color: #007bff;
+}
+
+.total {
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.summary-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.summary-footer button {
+    background-color: #f8f9fa;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.summary-footer button img {
+    width: 16px;
+    height: 16px;
+}
+
+.total-proposals {
+    display: flex;
+    align-items: center;
+}
+
+.total-proposals .icon {
+    margin-left: 10px;
+}
+.card {
+    /* margin-bottom: 10px; */
+    background-color: rgba(255, 255, 255, 0.8);
+    
+    
+    margin-bottom: 10px;
+}
+
+
+.chart-bar {
+    height: 20px;
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.chart-bar-segment {
+    height: 100%;
+}
+
+.map-control-btn {
+    background: var(--Grey-500, #6F6F6F); 
+    border-radius: 50%; 
+    padding: 10px; 
+    border: none; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.map-control-btn .icon {
+    width: 14px; 
+    height: 14px; 
+}
+
+.map-controls {
+    position: absolute;
+    top: 73px;
+    right: 19px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+}
+
+.map-control-btn {
+    margin: 5px 0;
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+}
+
+.top-section {
+    padding: 10px;
+    background-color: #f8f9fa;
+    z-index: 1000;
+    position: relative;
+}
+
+.control-panel {
+    position: absolute;
+    top: 1px;
+    left: 10px;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.control-panel .btn-group {
+    display: flex;
+    flex-direction: row; 
+    gap: 10px; 
+}
+
+.toggle-button {
+    background-color: #000000B2;
+    color: #FFF;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 30.24px;
+    text-align: left;
+    font-style: normal;
+   font-weight: 700;
+    line-height: normal;
+    border: none;
+    border-radius: 8px;
+    background: var(--Grey-500, #000000B2);
+    padding: 8px 10px;
+    margin-bottom: 10px;
+}
+
+.btn-group {
+    display: flex;
+    gap: 10px; 
+}
+
+.btn-blue, .btn-area {
+    flex: 1; 
+    border-radius: 8px;
+    color: var(--Grey-800, #262626);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    color: black;
+    border: none;
+    padding: 8px; 
+    border-radius: 8px;
+    background: #B0D5F480;
+
+    text-align: center; 
+    white-space: nowrap; 
+  
+}
+.proposal-icons{
+    background-color: white;
+}
+
+/* Your existing CSS styles */
+
+.date-picker {
+    position: absolute;
+    top: 44px;
+    right: 5px;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: 20px;
+    padding: 5px 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.date-picker button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    display: flex;
+padding-left: 12px;
+align-items: center;
+gap: 8px;
+    border-radius: 12px;
+    padding: 5px 10px;
+   
+    margin-right: 10px;
+}
+
+.date-picker .date-range {
+    color: #333;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.date-picker .calendar-icon {
+    background-color: #007bff;
+    border-radius: 50%;
+    padding: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+.leaflet-right{
+    left: 10px;
+}
+
+.north-arrow-container {
+    position: absolute;
+    bottom: 38px;
+    left: 7px;
+    z-index: 1000;
+}
+.north-arrow {
+    height:50px;
+    width: 32px;
+    margin-left: 10px;
+    color: white; /* Ensures the arrow itself is white */
+    border-radius: 8px; /* Adjusted border radius */
+    border: 1px solid rgba(255, 255, 255, 0.50); /* Light white border */
+    background: linear-gradient(180deg, #6F6F6F 0%, #262626 100%); /* Background gradient */
+    box-shadow: 0px 0px 14.035px 0px rgba(0, 0, 0, 0.15); /* Slight shadow for depth */
+}
+
+
+.top-section {
+    padding: 10px;
+    background-color: rgba(248, 249, 250, 0); 
+    z-index: 1000;
+    position: relative;
+}
+
+.leaflet-container {
+    font-size: 12px;
+    font-size: 0.75rem;
+    line-height: 1.5;
+    top: -18px;
+}
+/* Styling the leaflet bar */
+.leaflet-touch .leaflet-bar a {
+    width: 18px; /* Adjust width for larger buttons */
+    height: auto; /* Adjust height for larger buttons */
+    line-height: 28px;
+    display: flex;
+    border: none;
+    background-color: transparent;
+    color: white;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px; /* Size of the plus and minus symbols */
+    text-decoration: none;
+}
+.leaflet-popup-content-wrapper, .leaflet-popup-tip {
+    background: white;
+    color: #333;
+    display: none;
+    box-shadow: 0 3px 14px rgba(0, 0, 0, 0.4);
+}
+.leaflet-container a.leaflet-popup-close-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: none;
+    display: none;
+    text-align: center;
+    width: 24px;
+    height: 24px;
+    font: 16px / 24px Tahoma, Verdana, sans-serif;
+    color: #757575;
+    text-decoration: none;
+    background: transparent;
+}
+.leaflet-marker-pane {
+    z-index: 600;
+    display: none;
+}
+.leaflet-container a {
+    color: #0078A8;
+}
+
+/* Styling the leaflet control container */
+.leaflet-bar {
+   background: linear-gradient(180deg, #6F6F6F 0%, #262626 100%);
+    border-radius: 10px; /* Rounded corners for the container */
+   
+    padding: 5px; /* Add some padding */
+    box-shadow: 0px 0px 14.035px 0px rgba(0, 0, 0, 0.15);
+    display: inline-block;
+}
+
+/* Fixing the position on the map */
+.leaflet-top.leaflet-left .leaflet-bar {
+    position: fixed; /* Keep it fixed */
+    bottom: 1vh; /* Center vertically on the viewport */
+    right: 2vh; /* Adjust the position from the left */
+    z-index: 1000; /* Ensure it stays on top */
+}
+
+
+ .leaflet-control.scale {
+            position: absolute;
+            top: 60%; /* Position scale control at 60% from the top */
+            right: 10px; /* Position it 10px from the right */
+           
+            transform: translateY(-50%); /* Center the scale vertically at the 60% mark */
+            z-index: 1000; /* Ensure it appears above other map elements */
+        }
+        .leaflet-right .leaflet-control {
+           float: left;
+        }
+       
+        .btn-active {
+
+            background: var(--Blue-500, #0077DA) !important; 
+            color: white; /* Active text color */
+            border: none;
+        }
+           /* CSS for moving elements */
+.move-up {
+    transform: translateY(-255px);
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Only apply move-up to the north-arrow-container */
+.north-arrow-container.move-up {
+    transform: translateY(-255px); /* Adjust the value as needed */
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Adjust the leaflet control scale to prevent it from moving too much */
+.leaflet-control-scale.move-up {
+    transform: translateY(-1px); /* Adjust the value as needed */
+    transition: transform 0.3s ease-in-out;
+}
+
+
+.summary-section {
+    transition: display 0.3s ease-in-out;
+}
+#map {
+    transition: all 0.5s ease; /* Smooth transition for map resizing */
+}
+
+.summary-section-open #map {
+    height: calc(100vh - 260px); /* Adjust height when summary is open */
+}
+
+
+     
