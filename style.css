@@ -267,20 +267,13 @@ line-height: normal;
 
 
 .toggle-button {
-    background-color: #666666;
-    color: #FFF;
-    background: rgba(38, 38, 38, 0.60);
-    box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.10);
-    backdrop-filter: blur(2px);
-   font-size: 18px;
-   font-style: normal;
-   font-weight: 700;
-    line-height: normal;
+    width: 46.164px;
+    height: 44px;
+    /* flex-shrink: 0; */
+   /* font-size: 18px; */
     border: none;
-    border-radius: 8px;
   
     display: flex;
-    padding: 7px;
     justify-content: center;
     align-items: center;
     margin-bottom: 10px;
@@ -591,7 +584,7 @@ height: 32px;
     top: 50px; /* Adjust this value to control how far from the top the button should be */
     left: 10px; /* Adjust this value to control the distance from the left edge */
     position: absolute; /* Ensure the button is positioned absolutely within the map container */
-    background-color:blue ; /* Dark blue background */
+  
     border-radius: 50%;
   
     background-image: url('path/to/your-icon.svg'); /* Use an icon if needed */
@@ -614,19 +607,19 @@ height: 32px;
     border-top: 1px solid #0077DA;
     margin: 10px 0;
 } */
-.date-range {
-    position: relative; /* Ensure that the calendar-container is positioned relative to this parent */
-}
 
-.calendar-container {
-    display: none; /* Hide initially */
-    position: absolute; /* Position absolutely to not affect the layout */
-    top: 100%; /* Position it just below the .date-range div */
-    left: 0; /* Align it with the left edge of .date-range */
-    z-index: 1000; /* Ensure it appears above other elements */
-    border: 1px solid #ddd; /* Border style */
-    background-color: #fff; /* Background color */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25); /* Shadow for visibility */
-    border-radius: 10px; /* Rounded corners */
-    padding: 10px; /* Padding inside the calendar */
+.flatpickr-calendar.inline {
+    display: block;
+    position: relative;
+    left: -237px;
+    top: 12px !important;
+}
+.rangeMode .flatpickr-day {
+    margin-top: -7px;
+}
+.rangeMode .flatpickr-day {
+    margin-top: -14px !important;
+}
+.flatpickr-day.today {
+    /* border-color: #959ea9; */
 }

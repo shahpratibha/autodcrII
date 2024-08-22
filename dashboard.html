@@ -22,7 +22,10 @@
             <div class="col-12 d-flex justify-content-between align-items-center p-0">
                 <!-- Control Panel -->
                 <div class="control-panel">
-                    <button class="toggle-button">AutoDCR</button>
+                    <button class="toggle-button">
+                        <img src="image/pmcjpeg.png" alt="AutoDCR" style="width: 24px; height: 24px;">
+                    </button>
+                    
                     <div class="btn-group">
                         <button class="btn-blue" id="status-wise-button">Status Wise</button>
                         <button class="btn-blue btn-area">Area Wise</button>
@@ -35,19 +38,24 @@
                     <div class="date-range" id="date-range-display">April 1, 2024 – March 31, 2025
                     <div class="calendar-icon" id="calendar-icon">
                         <img src="image/time.png" alt="">
+                        <div id="calendar-container" class="calendar-container" style="display: none;">
+                      
+                        </div>
                       </div>
                     </div>
                     
-                    <div id="calendar-container" class="calendar-container" style="display: none;">
-                      
-                    </div>
+                    
              
                     <button id="select-year-button">Select Year</button>
                     <input type="date" id="date-input" style="display: none;">
                 </div>
             </div>
+            
         </div>
 
+
+
+        
         <!-- Map Section -->
         <div class="north-arrow-container">
             <img src="image/002-cardinal-point.png" class="north-arrow" alt="North Arrow">
@@ -283,7 +291,7 @@
                             </div>
                         </div>
                     </div>
-            <!-- <div style="width: 25%; height: 70%; padding: 12px;     margin-top: -15px;background: white; border-radius: 12px; backdrop-filter: blur(4px); flex-direction: column; justify-content: flex-start; align-items: flex-start;  display: inline-flex">
+            <div style="width: 25%; height: 70%; padding: 12px;     margin-top: -15px;background: white; border-radius: 12px; backdrop-filter: blur(4px); flex-direction: column; justify-content: flex-start; align-items: flex-start;  display: inline-flex">
                         <div style="text-align: right; color: #262626; font-size: 14px; font-family: Plus Jakarta Sans; font-weight: 600; word-wrap: break-word">Plinth</div>
                         <div style="width: 311px; height: 202px; position: relative; background: white; border-radius: 8px">
                             <div style="left: 41px; top: 153px; position: absolute; text-align: right; color: #262626; font-size: 12px; font-family: Plus Jakarta Sans; font-weight: 600; word-wrap: break-word">Total</div>
@@ -368,7 +376,7 @@
                             </div>
                         </div>
                     </div>
-                   -->
+                  
                 </div>
 
 
@@ -455,30 +463,60 @@ nextButton.addEventListener('click', () => {
         updateSlider();
     }
 });
-document.getElementById('calendar-icon').addEventListener('click', function() {
-    var calendarContainer = document.getElementById('calendar-container');
-    if (calendarContainer.style.display === 'none' || calendarContainer.style.display === '') {
-        calendarContainer.style.display = 'block'; // Show the calendar
-    } else {
-        calendarContainer.style.display = 'none'; // Hide the calendar
-    }
-});
+
 
 // Initialize Flatpickr in inline mode
-flatpickr("#calendar-container", {
-    inline: true,
-    mode: "range",
-    dateFormat: "F j, Y", // Adjust the format as needed
-    onChange: function(selectedDates, dateStr, instance) {
-        // Update the date range display
-        if (selectedDates.length > 0) {
-            document.getElementById('date-range-display').innerHTML =
-                selectedDates[0].toLocaleDateString() + " – " + selectedDates[1].toLocaleDateString() +
-                '<div class="calendar-icon" id="calendar-icon"><img src="image/time.png" alt="Calendar Icon"></div>';
-            // Hide the calendar after selection
-            document.getElementById('calendar-container').style.display = 'none';
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize Flatpickr on the calendar-container
+    flatpickr("#calendar-container", {
+        inline: true, // Display calendar inline
+        mode: "range", // Allows selecting a date range
+        dateFormat: "F j, Y", // Format of the selected date
+        onChange: function(selectedDates, dateStr, instance) {
+            // Update the date range display with selected dates
+            if (selectedDates.length > 0) {
+                const [startDate, endDate] = selectedDates;
+                document.getElementById('date-range-display').innerHTML =
+                    startDate.toLocaleDateString() + " – " + (endDate ? endDate.toLocaleDateString() : '') +
+                    '<div class="calendar-icon" id="calendar-icon"><img src="image/time.png" alt="Calendar Icon"></div>';
+                // Hide the calendar after selection
+                document.getElementById('calendar-container').style.display = 'none';
+            }
         }
-    }
+    });
+
+    // Toggle calendar visibility when clicking the calendar icon
+    document.getElementById('calendar-icon').addEventListener('click', function() {
+        var calendarContainer = document.getElementById('calendar-container');
+        if (calendarContainer.style.display === 'none' || calendarContainer.style.display === '') {
+            calendarContainer.style.display = 'block'; // Show the calendar
+        } else {
+            calendarContainer.style.display = 'none'; // Hide the calendar
+        }
+    });
+
+    // Hide calendar if clicked outside
+    document.addEventListener('click', function(event) {
+        var calendarContainer = document.getElementById('calendar-container');
+        var calendarIcon = document.getElementById('calendar-icon');
+        if (!calendarContainer.contains(event.target) && !calendarIcon.contains(event.target)) {
+            calendarContainer.style.display = 'none'; // Hide the calendar
+        }
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Array containing the desired abbreviations
+    const newWeekdayNames = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
+
+    // Get all span elements with the class 'flatpickr-weekday'
+    const weekdayElements = document.querySelectorAll('.flatpickr-weekday');
+
+    // Update the text content of each span element
+    weekdayElements.forEach((span, index) => {
+        span.textContent = newWeekdayNames[index];
+    });
 });
 
 
