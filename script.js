@@ -49,8 +49,116 @@ var auto_test = L.tileLayer.wms(
     }
 ).addTo(map);
 
+var PlotBoundary_Layer = L.tileLayer
+    .wms("https://portal.geopulsea.com/geoserver/AutoDCR/wms", {
+        layers: "plotboundary",
+        format: "image/png",
+        transparent: true,
+        tiled: true,
+        version: "1.1.0",
+        // attribution: "Revenue",
+        opacity: 1,
+    }).addTo(map);
+
+
+var Revenue_Layer = L.tileLayer
+    .wms("https://iwmsgis.pmc.gov.in/geoserver/AutoDCR/wms", {
+        layers: "Revenue_1",
+        format: "image/png",
+        transparent: true,
+        tiled: true,
+        version: "1.1.0",
+        // attribution: "Revenue",
+        opacity: 1,
+    });
+
+// .addTo(map);
+
+
+// for only gut showing
+var Revenue_Layer1 = L.tileLayer
+    .wms("https://iwmsgis.pmc.gov.in/geoserver/AutoDCR/wms", {
+        layers: "Revenue_1",
+        format: "image/png",
+        transparent: true,
+        tiled: true,
+        version: "1.1.0",
+        // attribution: "Revenue",
+        opacity: 1,
+    });
+
+var PLU_Layer = L.tileLayer
+    .wms("https://iwmsgis.pmc.gov.in/geoserver/AutoDCR/wms", {
+        layers: "PLU_Ward",
+        format: "image/png",
+        transparent: true,
+        tiled: true,
+        version: "1.1.0",
+        // attribution: "Revenue",
+        opacity: 1,
+    });
+
+var DPRoad_Layer = L.tileLayer
+    .wms("https://iwmsgis.pmc.gov.in/geoserver/AutoDCR/wms", {
+        layers: "DP_Ward_Road",
+        format: "image/png",
+        transparent: true,
+        tiled: true,
+        version: "1.1.0",
+        // attribution: "Revenue",
+        opacity: 1,
+    });
+
+var Boundary_Layer = L.tileLayer
+    .wms("https://iwmsgis.pmc.gov.in/geoserver/AutoDCR/wms", {
+        layers: "PMC_Boundary",
+        format: "image/png",
+        transparent: true,
+        tiled: true,
+        version: "1.1.0",
+        // attribution: "Revenue",
+        opacity: 1,
+    }).addTo(map);
+
+var Village_Boundary = L.tileLayer
+    .wms("https://iwmsgis.pmc.gov.in/geoserver/AutoDCR/wms", {
+        layers: "Village_Boundary",
+        format: "image/png",
+        transparent: true,
+        tiled: true,
+        version: "1.1.0",
+        // attribution: "Revenue",
+        opacity: 1,
+    });
+
+    var aviation = L.tileLayer
+    .wms("https://portal.geopulsea.com/geoserver/AutoDCR/wms", {
+        layers: "Aviation_data",
+        format: "image/png",
+        transparent: true,
+        tiled: true,
+        version: "1.1.0",
+        // attribution: "Revenue",
+        opacity: 1,
+    }).addTo(map);
+
+
+function refreshWMSLayer() {
+    // Remove the layer from the map
+    map.removeLayer(PlotBoundary_Layer);
+    // Add the layer again
+    PlotBoundary_Layer.addTo(map);
+  }
+
 var WMSlayers = {
     auto_test: auto_test,
+    Plot:PlotBoundary_Layer,
+    Revenue: Revenue_Layer,
+    PLU: PLU_Layer,
+    DPRoad: DPRoad_Layer,
+    Boundary: Boundary_Layer,
+    Village: Village_Boundary,
+    Aviation: aviation,
 };
 
 // Create the layers control and add it to the map
