@@ -537,5 +537,96 @@ height: 32px;
     height: calc(100vh - 313px);
 }
 
+.leaflet-control-layers {
+    margin-left:  73%;
+    
+  
+}
+/* Position the layer control on the left side of the map */
+.leaflet-left .leaflet-control-layers {
+    left: 10px;
+    right: auto;
+    top: 10px;
+    bottom: auto;
+    width: auto;
+    height: auto;
+    z-index: 1000; /* Ensure it stays above other map elements */
+}
 
-     
+/* Ensure the layers list opens to the left */
+.leaflet-control-layers-expanded {
+    left: 10px;
+    right: auto;
+    top: 50px;
+    border: 1px solid  #0077DA !important; 
+    height: 170px;
+    width: 180px; /* Adjust width as needed */
+    border-radius: 10px; /* Rounded corners */
+    overflow-y: scroll; /* Scroll only vertically */
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+
+
+/* Additional styling for the radio and checkbox labels */
+.leaflet-control-layers-base label,
+.leaflet-control-layers-overlays label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333; /* Darker text color for readability */
+}
+
+.leaflet-control-layers-base label span,
+.leaflet-control-layers-overlays label span {
+    display: inline-flex;
+    align-items: center;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+/* Adjust the appearance of the toggle button */
+.leaflet-control-layers-toggle {
+    width: 20px;
+    height: 20px;
+    top: 50px; /* Adjust this value to control how far from the top the button should be */
+    left: 10px; /* Adjust this value to control the distance from the left edge */
+    position: absolute; /* Ensure the button is positioned absolutely within the map container */
+    background-color:blue ; /* Dark blue background */
+    border-radius: 50%;
+  
+    background-image: url('path/to/your-icon.svg'); /* Use an icon if needed */
+    background-size: 16px;
+    background-repeat: no-repeat;
+    background-position: center;
+   
+    transition: transform 0.2s ease-in-out; /* Smooth hover effect */
+    z-index: 1000; /* Ensure the button stays above other map elements */
+}
+
+
+/* Add a hover effect to the toggle button */
+.leaflet-control-layers-toggle:hover {
+    transform: scale(1.1); /* Slightly increase size on hover */
+}
+
+/* Optional: Styling the separator between base layers and overlays */
+/* .leaflet-control-layers-separator {
+    border-top: 1px solid #0077DA;
+    margin: 10px 0;
+} */
+.date-range {
+    position: relative; /* Ensure that the calendar-container is positioned relative to this parent */
+}
+
+.calendar-container {
+    display: none; /* Hide initially */
+    position: absolute; /* Position absolutely to not affect the layout */
+    top: 100%; /* Position it just below the .date-range div */
+    left: 0; /* Align it with the left edge of .date-range */
+    z-index: 1000; /* Ensure it appears above other elements */
+    border: 1px solid #ddd; /* Border style */
+    background-color: #fff; /* Background color */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25); /* Shadow for visibility */
+    border-radius: 10px; /* Rounded corners */
+    padding: 10px; /* Padding inside the calendar */
+}

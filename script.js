@@ -183,20 +183,6 @@ L.control.scale({
 }).addTo(map);
 
 
-// calender
-
-// JavaScript for date picker functionality
-document.getElementById('calendar-icon').addEventListener('click', function () {
-    document.getElementById('date-input').click();
-});
-
-document.getElementById('date-input').addEventListener('change', function () {
-    const selectedDate = new Date(this.value);
-    const formattedDate = selectedDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-
-    // Display the selected date in the date-range-display div
-    document.getElementById('date-range-display').textContent = formattedDate;
-});
 
 
 

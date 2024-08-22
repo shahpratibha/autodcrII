@@ -4,13 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PMC</title>
+    <title>Map with Transparent Summary Section</title>
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
 </head>
 
 <body>
@@ -35,7 +37,11 @@
                         <img src="image/time.png" alt="">
                       </div>
                     </div>
+                    
+                    <div id="calendar-container" class="calendar-container" style="display: none;">
                       
+                    </div>
+             
                     <button id="select-year-button">Select Year</button>
                     <input type="date" id="date-input" style="display: none;">
                 </div>
@@ -51,22 +57,27 @@
             <div class="col-12 p-0">
                 <div id="map"></div>
                 <div class="map-controls">
-                    <button id="toggle-layers-button" class="btn btn-light map-control-btn"><img src="image/new-removebg-preview.png"
+                    <button class="btn btn-light map-control-btn "><img src="image/new-removebg-preview.png"
                             alt="Layers" class="icon"></button>
-                    <button class="btn btn-light map-control-btn"><img src="image/search-removebg-preview.png"
-                            alt="Search" class="icon"></button>
+                            <button id="toggleSearchButton" class="btn btn-light map-control-btn">
+                                <img src="image/search-removebg-preview.png" alt="Search" class="icon">
+                            </button>
+                            
+                        
+                            
                     <button class="btn btn-light map-control-btn"><img src="image/Group 93.svg" alt="Zoom In"
-                            class="icon"></button>
+                            class="icon"> </button>
                     <button class="btn btn-light map-control-btn"><img src="image/Group 96.svg" alt="Zoom Out"
                             class="icon"></button>
-                    <button class="btn btn-light map-control-btn"><img src="image/Group.svg" alt="Info" class="icon">
-                    </button>
+                    <button class="btn btn-light map-control-btn"><img src="image/Group.svg" alt="Info"
+                            class="icon"></button>
                 </div>
             </div>
         </div>
 
         <!-- Summary Section -->
-        <div class="summary-section" style="display: none; position: absolute; bottom: 0; width: 100%; background: rgba(0, 119, 218, 0.40); backdrop-filter: blur(2px);">
+        <div class="summary-section" style="display: none;    margin-top: -18px; border-radius: 10px;
+ width: 100%; background: rgba(0, 119, 218, 0.40); backdrop-filter: blur(2px);">
             <div class="summary-header">
                 <h2>Summary of Commencement</h2>
                 <div class="proposal-info">
@@ -358,7 +369,6 @@
                         </div>
                     </div>
                    -->
-                    </div>         
                 </div>
 
 
@@ -367,6 +377,8 @@
         <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
         <!-- Custom JS -->
         <script src="script.js"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
         <script>
             document.getElementById('status-wise-button').addEventListener('click', function() {
@@ -406,14 +418,24 @@ document.getElementById('closeButton').addEventListener('click', function() {
                 document.getElementById('date-range-display').textContent = formattedDate;
             });
 
-          
-            document.addEventListener('DOMContentLoaded', () => {
-    const prevButton = document.querySelector('.prev-button');
-    const nextButton = document.querySelector('.next-button');
-    const slider = document.querySelector('.slider');
-    const sliderItems = document.querySelectorAll('.slider-item');
-    const totalItems = sliderItems.length;
-    let currentIndex = 0;
+            // Leaflet map initialization (example setup)
+            // var map = L.map('map').setView([51.505, -0.09], 13); // Example coordinates
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+
+            // Add scale control
+            L.control.scale({
+                position: 'bottomright'
+            }).addTo(map);
+           
+            const prevButton = document.querySelector('.prev-button');
+const nextButton = document.querySelector('.next-button');
+const slider = document.querySelector('.slider');
+const sliderItems = document.querySelectorAll('.slider-item');
+const totalItems = sliderItems.length;
+let currentIndex = 0;
 
 function updateSlider() {
     const offset = -currentIndex * 100;
@@ -433,6 +455,34 @@ nextButton.addEventListener('click', () => {
         updateSlider();
     }
 });
+document.getElementById('calendar-icon').addEventListener('click', function() {
+    var calendarContainer = document.getElementById('calendar-container');
+    if (calendarContainer.style.display === 'none' || calendarContainer.style.display === '') {
+        calendarContainer.style.display = 'block'; // Show the calendar
+    } else {
+        calendarContainer.style.display = 'none'; // Hide the calendar
+    }
+});
+
+// Initialize Flatpickr in inline mode
+flatpickr("#calendar-container", {
+    inline: true,
+    mode: "range",
+    dateFormat: "F j, Y", // Adjust the format as needed
+    onChange: function(selectedDates, dateStr, instance) {
+        // Update the date range display
+        if (selectedDates.length > 0) {
+            document.getElementById('date-range-display').innerHTML =
+                selectedDates[0].toLocaleDateString() + " – " + selectedDates[1].toLocaleDateString() +
+                '<div class="calendar-icon" id="calendar-icon"><img src="image/time.png" alt="Calendar Icon"></div>';
+            // Hide the calendar after selection
+            document.getElementById('calendar-container').style.display = 'none';
+        }
+    }
+});
+
+
+
 
         </script>
     </div>
