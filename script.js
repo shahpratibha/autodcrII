@@ -1,5 +1,5 @@
 /// Initialize the map
-var map = L.map('map').setView([18.5204, 73.8567], 13);
+var map = L.map('map').setView([18.5204, 73.8567], 12);
 
 // Add a tile layer
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -50,7 +50,7 @@ var auto_test = L.tileLayer.wms(
 ).addTo(map);
 
 var PlotBoundary_Layer = L.tileLayer
-    .wms("https://portal.geopulsea.com/geoserver/AutoDCR/wms", {
+    .wms("https://iwmsgis.pmc.gov.in/geoserver/AutoDCR/wms", {
         layers: "plotboundary",
         format: "image/png",
         transparent: true,
@@ -85,7 +85,7 @@ var Revenue_Layer1 = L.tileLayer
         version: "1.1.0",
         // attribution: "Revenue",
         opacity: 1,
-    });
+    }).addTo(map);
 
 var PLU_Layer = L.tileLayer
     .wms("https://iwmsgis.pmc.gov.in/geoserver/AutoDCR/wms", {
@@ -132,7 +132,7 @@ var Village_Boundary = L.tileLayer
     });
 
     var aviation = L.tileLayer
-    .wms("https://portal.geopulsea.com/geoserver/AutoDCR/wms", {
+    .wms("https://iwmsgis.pmc.gov.in/geoserver/AutoDCR/wms", {
         layers: "Aviation_data",
         format: "image/png",
         transparent: true,
@@ -140,7 +140,7 @@ var Village_Boundary = L.tileLayer
         version: "1.1.0",
         // attribution: "Revenue",
         opacity: 1,
-    }).addTo(map);
+    });
 
 
 function refreshWMSLayer() {
@@ -151,14 +151,16 @@ function refreshWMSLayer() {
   }
 
 var WMSlayers = {
+    Aviation: aviation,
     auto_test: auto_test,
+
     Plot:PlotBoundary_Layer,
     Revenue: Revenue_Layer,
     PLU: PLU_Layer,
     DPRoad: DPRoad_Layer,
     Boundary: Boundary_Layer,
     Village: Village_Boundary,
-    Aviation: aviation,
+  
 };
 
 // Create the layers control and add it to the map

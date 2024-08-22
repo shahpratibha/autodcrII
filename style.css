@@ -19,6 +19,43 @@ body, html {
 .leaflet-container .leaflet-control-attribution{
     display:none;
 }
+
+
+.leaflet-retina .leaflet-control-layers-toggle {
+    background-image: url('image/Group 93.svg');
+    background-size: 17px 24px;
+}
+.leaflet-touch .leaflet-control-layers-toggle {
+    width: 29px;
+    height: 30px;
+}
+
+.leaflet-right .leaflet-control {
+    float: left;
+    position: relative;
+    top: 30vh;
+    left: 96.5vw;
+    border-radius: 50%;
+    background: #6f6f6f;
+    height: 31px;
+    width: 31px;
+    border: #6f6f6f;
+}
+
+ .leaflet-control-layers-list, .leaflet-control-layers-expanded .leaflet-control-layers-toggle {
+    display: none;
+    padding: 10px;
+    BACKGROUND: white !important;
+    width: 100px !important;
+    position: absolute;
+    right: 75px;
+    top: -6px;
+    height: 300px !important;
+    overflow: auto;
+    scrollbar-width: thin;
+}
+/* image/Group 93.svg */
+
 .summary-section {
    
     bottom: 0;
@@ -503,9 +540,9 @@ height: 32px;
        
         .btn-active {
 
-            background: var(--Blue-500, #0077DA) !important; 
+            background: #0077da70 !important;
             color: white; /* Active text color */
-            border: none;
+            border: #0077da70 !important;
         }
            /* CSS for moving elements */
 .move-up {
@@ -534,7 +571,7 @@ height: 32px;
 }
 
 .summary-section-open #map {
-    height: calc(100vh - 313px);
+    /* height: calc(100vh - 313px); */
 }
 
 
