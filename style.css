@@ -23,11 +23,11 @@ body, html {
 
 .leaflet-retina .leaflet-control-layers-toggle {
     background-image: url('image/Group 93.svg');
-    background-size: 17px 24px;
+    background-size: 14px 14px;
 }
 .leaflet-touch .leaflet-control-layers-toggle {
-    width: 29px;
-    height: 30px;
+    width: 34px;
+    height: 34px;
 }
 
 .leaflet-right .leaflet-control {
@@ -37,8 +37,8 @@ body, html {
     left: 96.5vw;
     border-radius: 50%;
     background: #6f6f6f;
-    height: 31px;
-    width: 31px;
+    height: 34px;
+    width: 34px;
     border: #6f6f6f;
 }
 
@@ -48,9 +48,9 @@ body, html {
     BACKGROUND: white !important;
     width: 100px !important;
     position: absolute;
-    right: 75px;
+    right: 72.5px;
     top: -6px;
-    height: 300px !important;
+    height: 200px !important;
     overflow: auto;
     scrollbar-width: thin;
 }
