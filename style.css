@@ -538,4 +538,8 @@ height: 32px;
     height: calc(100vh - 313px);
 }
 
-
+.slider-item {
+   
+    flex-shrink: 0;
+    /* Your existing styles */
+}
