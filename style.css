@@ -24,9 +24,9 @@ body, html {
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: rgba(234, 240, 246, 0.8); /* Semi-transparent background */
+  
     padding: 20px;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+ 
     z-index: 1000; /* Ensures it stays above the map */
 }
 
@@ -43,6 +43,7 @@ body, html {
     font-size: 17px;
     font-style: normal;
     font-weight: 600;
+    /* margin-top: -35px; */
     line-height: normal;
 }
 
@@ -83,6 +84,7 @@ line-height: normal;
 
 .cards {
     display: flex;
+    gap: 30px;
     justify-content: space-between;
 }
 .card {
@@ -222,7 +224,7 @@ line-height: normal;
 
 .map-controls {
     position: absolute;
-    top: 73px;
+    top: 45px;
     right: 19px;
     z-index: 1000;
     display: flex;
@@ -261,21 +263,28 @@ line-height: normal;
     gap: 10px; 
 }
 
+
+
+
 .toggle-button {
-    background-color: #000000B2;
+    background-color: #666666;
     color: #FFF;
-    font-size: 24px;
-    font-weight: 700;
-    line-height: 30.24px;
-    text-align: left;
-    font-style: normal;
+    background: rgba(38, 38, 38, 0.60);
+    box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.10);
+    backdrop-filter: blur(2px);
+   font-size: 18px;
+   font-style: normal;
    font-weight: 700;
     line-height: normal;
     border: none;
     border-radius: 8px;
-    background: var(--Grey-500, #000000B2);
-    padding: 8px 10px;
+  
+    display: flex;
+    padding: 7px;
+    justify-content: center;
+    align-items: center;
     margin-bottom: 10px;
+  
 }
 
 .btn-group {
@@ -286,64 +295,100 @@ line-height: normal;
 .btn-blue, .btn-area {
     flex: 1; 
     border-radius: 8px;
-    color: var(--Grey-800, #262626);
+    border-radius: 8px;
+    border: 2px solid #FFF;
+    background: rgba(255, 255, 255, 0.50);
+    backdrop-filter: blur(2px);
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
     color: black;
     border: none;
-    padding: 8px; 
-    border-radius: 8px;
-    background: #B0D5F480;
+    display: flex;
+padding: 8px;
+justify-content: center;
+ width: 20vh;
+align-self: stretch;
+  
+  
 
     text-align: center; 
     white-space: nowrap; 
   
-}
-.proposal-icons{
-    background-color: white;
 }
 
 /* Your existing CSS styles */
 
 .date-picker {
     position: absolute;
-    top: 44px;
+    top: 4px;
     right: 5px;
     z-index: 999;
-    display: flex;
-    align-items: center;
-    background-color: white;
-    border-radius: 20px;
-    padding: 5px 10px;
+    color: var(--Grey-700, #393939);
+
+
+font-size: 14px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+    display: inline-flex;
+
+justify-content: center;
+align-items: center;
+gap: 12px;
+   
+  
+    border-radius: 9px;
+background: rgba(255, 255, 255, 0.20);
+box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
+backdrop-filter: blur(2px);
+    border-radius: 9px;
+
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 .date-picker button {
-    background-color: #007bff;
-    color: white;
+    background: none;
     border: none;
+    
     display: flex;
-padding-left: 12px;
+
 align-items: center;
-gap: 8px;
-    border-radius: 12px;
-    padding: 5px 10px;
-   
-    margin-right: 10px;
+
 }
+.date-range {
+    display: flex;
+    align-items: center; /* Align items vertically centered */
+  }
+  
+  .calendar-icon {
+    margin-left: 10px; /* Space between date range and icon */
+  }
+  
+  .calendar-icon img {
+    width: 24px;  /* Adjust width as needed */
+    height: 24px; /* Adjust height as needed */
+    margin-top: 3px;
+  }
+  
 
 .date-picker .date-range {
     color: #333;
     font-weight: bold;
-    margin-right: 10px;
+    padding: 2px 2px 2px 2px;
+    border-radius: 8px;
+background: var(--Basic-Colors-White, #FFF);
 }
 
 .date-picker .calendar-icon {
-    background-color: #007bff;
-    border-radius: 50%;
-    padding: 5px;
+    
+    width: 32px;
+height: 32px;
+
+
+
+
     color: white;
     cursor: pointer;
 }
@@ -464,13 +509,13 @@ gap: 8px;
         }
            /* CSS for moving elements */
 .move-up {
-    transform: translateY(-255px);
+    transform: translateY(-312px);
     transition: transform 0.3s ease-in-out;
 }
 
 /* Only apply move-up to the north-arrow-container */
 .north-arrow-container.move-up {
-    transform: translateY(-255px); /* Adjust the value as needed */
+    transform: translateY(-312px); /* Adjust the value as needed */
     transition: transform 0.3s ease-in-out;
 }
 
@@ -489,7 +534,7 @@ gap: 8px;
 }
 
 .summary-section-open #map {
-    height: calc(100vh - 260px); /* Adjust height when summary is open */
+    height: calc(100vh - 313px);
 }
 
 

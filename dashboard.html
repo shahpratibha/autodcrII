@@ -29,9 +29,14 @@
 
                 <!-- Date Picker -->
                 <div class="date-picker">
+                   
+                    <div class="date-range" id="date-range-display">April 1, 2024 – March 31, 2025
+                    <div class="calendar-icon" id="calendar-icon">
+                        <img src="image/time.png" alt="">
+                      </div>
+                    </div>
+                      
                     <button id="select-year-button">Select Year</button>
-                    <div class="date-range" id="date-range-display">April 1, 2024 – March 31, 2025</div>
-                    <div class="calendar-icon" id="calendar-icon">📅</div>
                     <input type="date" id="date-input" style="display: none;">
                 </div>
             </div>
@@ -72,15 +77,15 @@
                         <button class="btn-action"><img src="./image/Excel.svg" alt="Export"></button>
                     </div>
                     <div class="navigation-icons">
-                        <button>&lt;</button> <!-- Previous button -->
-                        <button>&gt;</button> <!-- Next button -->
+                        <button class="slider-button prev-button">&lt;</button>
+                        <button class="slider-button next-button">&gt;</button>
                         <button id="closeButton">&times;</button> <!-- Close button -->
                     </div>
                 </div>
             </div>
 
-            <div class="cards">
-                <div style="width: 70%; height: 70%; padding: 12px;     margin-top: -15px; background: white; border-radius: 12px; backdrop-filter: blur(4px); flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 12px; display: inline-flex">
+            <div class="cards slider">
+                <div class ="slider-item" style="width: 25%; height: 70%; padding: 12px;     margin-top: -15px; background: white; border-radius: 12px; backdrop-filter: blur(4px); flex-direction: column; justify-content: flex-start; align-items: flex-start;  display: inline-flex">
                     <div style="text-align: right; color: #262626; font-size: 14px; font-family: Plus Jakarta Sans; font-weight: 600; word-wrap: break-word">Building Permissions</div>
                     <div style="width: 311px; height: 202px; position: relative; background: white; border-radius: 8px">
                         <div style="left: 41px; top: 153px; position: absolute; text-align: right; color: #262626; font-size: 12px; font-family: Plus Jakarta Sans; font-weight: 600; word-wrap: break-word">Total</div>
@@ -131,7 +136,7 @@
         
             
                
-                    <div style="width: 100%; height: 100%; padding: 12px; background: white; border-radius: 12px; backdrop-filter: blur(4px); flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 12px; display: inline-flex">
+                    <div class =" slider slider-item" style="width: 25%; height: 70%; padding: 12px;     margin-top: -15px;background: white; border-radius: 12px; backdrop-filter: blur(4px); flex-direction: column; justify-content: flex-start; align-items: flex-start;  display: inline-flex">
                         <div style="text-align: right; color: #262626; font-size: 14px; font-family: Plus Jakarta Sans; font-weight: 600; word-wrap: break-word">Plinth</div>
                         <div style="width: 311px; height: 202px; position: relative; background: white; border-radius: 8px">
                             <div style="left: 41px; top: 153px; position: absolute; text-align: right; color: #262626; font-size: 12px; font-family: Plus Jakarta Sans; font-weight: 600; word-wrap: break-word">Total</div>
@@ -173,10 +178,11 @@
                             </div>
                         </div>
                     </div>
+     
         
              
                   
-                    <div style="width: 100%; height: 100%; padding: 12px; background: white; border-radius: 12px; backdrop-filter: blur(4px); flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 12px; display: inline-flex">
+                    <div class ="  slider-item" style="width: 25%; height: 70%; padding: 12px;     margin-top: -15px;background: white;border-radius: 12px; backdrop-filter: blur(4px); flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
                         <div style="text-align: right; color: #262626; font-size: 14px; font-family: Plus Jakarta Sans; font-weight: 600; word-wrap: break-word">Occupancy</div>
                         <div style="width: 311px; height: 202px; position: relative; background: white; border-radius: 8px">
                             <div style="left: 41px; top: 153px; position: absolute; text-align: right; color: #262626; font-size: 12px; font-family: Plus Jakarta Sans; font-weight: 600; word-wrap: break-word">Total</div>
@@ -223,7 +229,7 @@
         
           
                   
-                    <div style="width: 100%; height: 100%; padding: 12px; background: white; border-radius: 12px; backdrop-filter: blur(4px); flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 12px; display: inline-flex">
+                    <div   class =" slider slider-item" style="width: 25%; height: 70%; padding: 12px;     margin-top: -15px;background: white; border-radius: 12px; backdrop-filter: blur(4px); flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
                         <div style="text-align: right; color: #262626; font-size: 14px; font-family: Plus Jakarta Sans; font-weight: 600; word-wrap: break-word">Gunthewari</div>
                         <div style="width: 311px; height: 202px; position: relative; background: white; border-radius: 8px">
                             <div style="left: 41px; top: 153px; position: absolute; text-align: right; color: #262626; font-size: 12px; font-family: Plus Jakarta Sans; font-weight: 600; word-wrap: break-word">Total</div>
@@ -267,8 +273,100 @@
                             </div>
                         </div>
                     </div>
+            <!-- <div  class ="slider-item"style="width: 25%; height: 70%; padding: 12px;     margin-top: -15px;background: white; border-radius: 12px; backdrop-filter: blur(4px); flex-direction: column; justify-content: flex-start; align-items: flex-start;  display: inline-flex">
+                        <div style="text-align: right; color: #262626; font-size: 14px; font-family: Plus Jakarta Sans; font-weight: 600; word-wrap: break-word">Plinth</div>
+                        <div style="width: 311px; height: 202px; position: relative; background: white; border-radius: 8px">
+                            <div style="left: 41px; top: 153px; position: absolute; text-align: right; color: #262626; font-size: 12px; font-family: Plus Jakarta Sans; font-weight: 600; word-wrap: break-word">Total</div>
+                            <div style="left: 8px; top: 121px; position: absolute; text-align: right; color: #262626; font-size: 12px; font-family: Plus Jakarta Sans; font-weight: 400; word-wrap: break-word">Submitted</div>
+                            <div style="left: 11px; top: 90px; position: absolute; text-align: right; color: #262626; font-size: 12px; font-family: Plus Jakarta Sans; font-weight: 400; word-wrap: break-word">Approved</div>
+                            <div style="left: 10px; top: 58px; position: absolute; text-align: right; color: #262626; font-size: 12px; font-family: Plus Jakarta Sans; font-weight: 400; word-wrap: break-word">In Process</div>
+                            <div style="left: 17px; top: 26px; position: absolute; text-align: right; color: #262626; font-size: 12px; font-family: Plus Jakarta Sans; font-weight: 400; word-wrap: break-word">Rejected</div>
+                            <div style="left: 254px; top: 184px; position: absolute; text-align: center; color: #262626; font-size: 12px; font-family: Plus Jakarta Sans; font-weight: 400; word-wrap: break-word">750</div>
+                            <div style="left: 192px; top: 184px; position: absolute; text-align: center; color: #262626; font-size: 12px; font-family: Plus Jakarta Sans; font-weight: 400; word-wrap: break-word">500</div>
+                            <div style="left: 132px; top: 184px; position: absolute; text-align: center; color: #262626; font-size: 12px; font-family: Plus Jakarta Sans; font-weight: 400; word-wrap: break-word">250</div>
+                            <div style="left: 88px; top: 184px; position: absolute; text-align: center; color: #262626; font-size: 12px; font-family: Plus Jakarta Sans; font-weight: 400; word-wrap: break-word">0</div>
+                            <div style="width: 168px; height: 0px; left: 265px; top: 176px; position: absolute; transform: rotate(-90deg); transform-origin: 0 0; border: 1px #E0E0E0 solid"></div>
+                            <div style="width: 168px; height: 0px; left: 205px; top: 176px; position: absolute; transform: rotate(-90deg); transform-origin: 0 0; border: 1px #E0E0E0 solid"></div>
+                            <div style="width: 168px; height: 0px; left: 145px; top: 176px; position: absolute; transform: rotate(-90deg); transform-origin: 0 0; border: 1px #E0E0E0 solid"></div>
+                            <div style="width: 168px; height: 0px; left: 93px; top: 176px; position: absolute; transform: rotate(-90deg); transform-origin: 0 0; border: 1px #E0E0E0 solid"></div>
+                            <div style="width: 186px; height: 0px; left: 81px; top: 8px; position: absolute; transform: rotate(90deg); transform-origin: 0 0; border: 1px #A8A8A8 dotted"></div>
+                            <div style="width: 289px; height: 0px; left: 9px; top: 176px; position: absolute; border: 1px #A8A8A8 dotted"></div>
+                            <div style="height: 148px; left: 93px; top: 20px; position: absolute; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 12px; display: inline-flex">
+                                <div style="justify-content: flex-start; align-items: center; gap: 4px; display: inline-flex">
+                                    <div style="width: 1px; height: 20px; opacity: 0; background: #DA1E28"></div>
+                                    <div style="color: #262626; font-size: 12px; font-family: Plus Jakarta Sans; font-weight: 400; word-wrap: break-word">0</div>
+                                </div>
+                                <div style="justify-content: flex-start; align-items: center; gap: 4px; display: inline-flex">
+                                    <div style="width: 2px; height: 20px; background: #F1C21B"></div>
+                                    <div style="color: #262626; font-size: 12px; font-family: Plus Jakarta Sans; font-weight: 400; word-wrap: break-word">6</div>
+                                </div>
+                                <div style="justify-content: flex-start; align-items: center; gap: 4px; display: inline-flex">
+                                    <div style="width: 2px; height: 20px; background: #08BDBA"></div>
+                                    <div style="color: #262626; font-size: 12px; font-family: Plus Jakarta Sans; font-weight: 400; word-wrap: break-word">6</div>
+                                </div>
+                                <div style="align-self: stretch; justify-content: flex-start; align-items: center; gap: 4px; display: inline-flex">
+                                    <div style="width: 125px; height: 20px; background: #42BE65"></div>
+                                    <div style="color: #262626; font-size: 12px; font-family: Plus Jakarta Sans; font-weight: 400; word-wrap: break-word">593</div>
+                                </div>
+                                <div style="justify-content: flex-start; align-items: center; gap: 4px; display: inline-flex">
+                                    <div style="width: 4px; height: 20px; background: #0077DA"></div>
+                                    <div style="color: #262626; font-size: 12px; font-family: Plus Jakarta Sans; font-weight: 400; word-wrap: break-word">12</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
                   
-        </div>
+                    
+               
+                    <div class =" slider slider-item" style="width: 25%; height: 70%; padding: 12px;     margin-top: -15px;background: white; border-radius: 12px; backdrop-filter: blur(4px); flex-direction: column; justify-content: flex-start; align-items: flex-start;  display: inline-flex">
+                        <div style="text-align: right; color: #262626; font-size: 14px; font-family: Plus Jakarta Sans; font-weight: 600; word-wrap: break-word">Plinth</div>
+                        <div style="width: 311px; height: 202px; position: relative; background: white; border-radius: 8px">
+                            <div style="left: 41px; top: 153px; position: absolute; text-align: right; color: #262626; font-size: 12px; font-family: Plus Jakarta Sans; font-weight: 600; word-wrap: break-word">Total</div>
+                            <div style="left: 8px; top: 121px; position: absolute; text-align: right; color: #262626; font-size: 12px; font-family: Plus Jakarta Sans; font-weight: 400; word-wrap: break-word">Submitted</div>
+                            <div style="left: 11px; top: 90px; position: absolute; text-align: right; color: #262626; font-size: 12px; font-family: Plus Jakarta Sans; font-weight: 400; word-wrap: break-word">Approved</div>
+                            <div style="left: 10px; top: 58px; position: absolute; text-align: right; color: #262626; font-size: 12px; font-family: Plus Jakarta Sans; font-weight: 400; word-wrap: break-word">In Process</div>
+                            <div style="left: 17px; top: 26px; position: absolute; text-align: right; color: #262626; font-size: 12px; font-family: Plus Jakarta Sans; font-weight: 400; word-wrap: break-word">Rejected</div>
+                            <div style="left: 254px; top: 184px; position: absolute; text-align: center; color: #262626; font-size: 12px; font-family: Plus Jakarta Sans; font-weight: 400; word-wrap: break-word">750</div>
+                            <div style="left: 192px; top: 184px; position: absolute; text-align: center; color: #262626; font-size: 12px; font-family: Plus Jakarta Sans; font-weight: 400; word-wrap: break-word">500</div>
+                            <div style="left: 132px; top: 184px; position: absolute; text-align: center; color: #262626; font-size: 12px; font-family: Plus Jakarta Sans; font-weight: 400; word-wrap: break-word">250</div>
+                            <div style="left: 88px; top: 184px; position: absolute; text-align: center; color: #262626; font-size: 12px; font-family: Plus Jakarta Sans; font-weight: 400; word-wrap: break-word">0</div>
+                            <div style="width: 168px; height: 0px; left: 265px; top: 176px; position: absolute; transform: rotate(-90deg); transform-origin: 0 0; border: 1px #E0E0E0 solid"></div>
+                            <div style="width: 168px; height: 0px; left: 205px; top: 176px; position: absolute; transform: rotate(-90deg); transform-origin: 0 0; border: 1px #E0E0E0 solid"></div>
+                            <div style="width: 168px; height: 0px; left: 145px; top: 176px; position: absolute; transform: rotate(-90deg); transform-origin: 0 0; border: 1px #E0E0E0 solid"></div>
+                            <div style="width: 168px; height: 0px; left: 93px; top: 176px; position: absolute; transform: rotate(-90deg); transform-origin: 0 0; border: 1px #E0E0E0 solid"></div>
+                            <div style="width: 186px; height: 0px; left: 81px; top: 8px; position: absolute; transform: rotate(90deg); transform-origin: 0 0; border: 1px #A8A8A8 dotted"></div>
+                            <div style="width: 289px; height: 0px; left: 9px; top: 176px; position: absolute; border: 1px #A8A8A8 dotted"></div>
+                            <div style="height: 148px; left: 93px; top: 20px; position: absolute; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 12px; display: inline-flex">
+                                <div style="justify-content: flex-start; align-items: center; gap: 4px; display: inline-flex">
+                                    <div style="width: 1px; height: 20px; opacity: 0; background: #DA1E28"></div>
+                                    <div style="color: #262626; font-size: 12px; font-family: Plus Jakarta Sans; font-weight: 400; word-wrap: break-word">0</div>
+                                </div>
+                                <div style="justify-content: flex-start; align-items: center; gap: 4px; display: inline-flex">
+                                    <div style="width: 2px; height: 20px; background: #F1C21B"></div>
+                                    <div style="color: #262626; font-size: 12px; font-family: Plus Jakarta Sans; font-weight: 400; word-wrap: break-word">6</div>
+                                </div>
+                                <div style="justify-content: flex-start; align-items: center; gap: 4px; display: inline-flex">
+                                    <div style="width: 2px; height: 20px; background: #08BDBA"></div>
+                                    <div style="color: #262626; font-size: 12px; font-family: Plus Jakarta Sans; font-weight: 400; word-wrap: break-word">6</div>
+                                </div>
+                                <div style="align-self: stretch; justify-content: flex-start; align-items: center; gap: 4px; display: inline-flex">
+                                    <div style="width: 125px; height: 20px; background: #42BE65"></div>
+                                    <div style="color: #262626; font-size: 12px; font-family: Plus Jakarta Sans; font-weight: 400; word-wrap: break-word">593</div>
+                                </div>
+                                <div style="justify-content: flex-start; align-items: center; gap: 4px; display: inline-flex">
+                                    <div style="width: 4px; height: 20px; background: #0077DA"></div>
+                                    <div style="color: #262626; font-size: 12px; font-family: Plus Jakarta Sans; font-weight: 400; word-wrap: break-word">12</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+     
+         -->
+             
+                  
+                  
+                </div>
 
 
 
@@ -315,19 +413,38 @@ document.getElementById('closeButton').addEventListener('click', function() {
                 document.getElementById('date-range-display').textContent = formattedDate;
             });
 
-            // Leaflet map initialization (example setup)
-            // var map = L.map('map').setView([51.505, -0.09], 13); // Example coordinates
+          
+            document.addEventListener('DOMContentLoaded', () => {
+    const prevButton = document.querySelector('.prev-button');
+    const nextButton = document.querySelector('.next-button');
+    const slider = document.querySelector('.slider');
+    const sliderItems = document.querySelectorAll('.slider-item');
+    const totalItems = sliderItems.length;
+    let currentIndex = 0;
 
-            // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            //     attribution: '© OpenStreetMap contributors'
-            // }).addTo(map);
+    function updateSlider() {
+        const offset = -currentIndex * 100;
+        slider.style.transform = `translateX(${offset}%)`;
+    }
 
-            // // Add scale control
-            // L.control.scale({
-            //     position: 'bottomright'
-            // }).addTo(map);
+    prevButton.addEventListener('click', () => {
+        if (currentIndex > 0) {
+            currentIndex--;
+            updateSlider();
+        }
+    });
+
+    nextButton.addEventListener('click', () => {
+        if (currentIndex < totalItems - 0) {
+            currentIndex++;
+            updateSlider();
+        }
+    });
+});
+
+
         </script>
-    </div>
+    
 </body>
 
 </html>
