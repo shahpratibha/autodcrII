@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 
 <body>
@@ -21,6 +23,7 @@
                 <!-- Control Panel -->
                 <div class="control-panel">
                     <!-- <button class="toggle-button">AutoDCR</button> -->
+                    <a href="https://geopulsea.com/" class="geopulseaname">@GeoPulse Analytics</a>
                     <div class="btn-group">
                         <button class="btn-blue" id="status-wise-button">Status Wise</button>
                         <button class="btn-blue btn-area">Area Wise</button>
@@ -42,28 +45,24 @@
             </div>
         </div>
 
-        <!-- Map Section -->
-        <!-- <div class="north-arrow-container">
-            <img src="image/north_image.svg" class="north-arrow" alt="North Arrow" style="width: 25px;">
-        </div> -->
         <div class="north-arrow-container">
             <img src="image/002-cardinal-point.png" class="north-arrow" alt="North Arrow">
         </div>
 
         <div class="row m-0">
             <div class="col-12 p-0">
-                <div id="map"></div>
+                <div id="map"></div>    
                 <div class="map-controls">
-                    <button id="toggle-layers-button" class="btn btn-light map-control-btn"><img src="image/new-removebg-preview.png"
+                    <!-- <button id="toggle-layers-button" class="btn btn-light map-control-btn"><img src="image/new-removebg-preview.png"
                             alt="Layers" class="icon"></button>
                     <button class="btn btn-light map-control-btn"><img src="image/search-removebg-preview.png"
-                            alt="Search" class="icon"></button>
+                            alt="Search" class="icon"></button> -->
                     <!-- <button class="btn btn-light map-control-btn"><img src="image/Group 93.svg" alt="Zoom In"
                             class="icon"></button> -->
-                    <button class="btn btn-light map-control-btn"><img src="image/Group 96.svg" alt="Zoom Out"
+                    <!-- <button class="btn btn-light map-control-btn"><img src="image/Group 96.svg" alt="Zoom Out"
                             class="icon"></button>
                     <button class="btn btn-light map-control-btn"><img src="image/Group.svg" alt="Info" class="icon">
-                    </button>
+                    </button> -->
                 </div>
             </div>
         </div>
@@ -284,9 +283,12 @@
         <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
         <!-- Custom JS -->
         <script src="script.js"></script>
+        <!-- <script src="legend.js"></script> -->
+         <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
         <script>
-            document.getElementById('status-wise-button').addEventListener('click', function() {
+            
+    document.getElementById('status-wise-button').addEventListener('click', function() {
     document.querySelector('.summary-section').style.display = 'block';
     document.querySelector('.north-arrow-container').classList.add('move-up');
     document.querySelector('.leaflet-top.leaflet-left .leaflet-bar').classList.add('move-up');
@@ -352,6 +354,8 @@ document.getElementById('closeButton').addEventListener('click', function() {
     });
 });
 
+
+// calender
 
         </script>
     

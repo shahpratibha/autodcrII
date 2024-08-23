@@ -41,16 +41,23 @@ body, html {
     width: 31px;
     border: #6f6f6f;
 }
+.leaflet-touch .geocoder-control {
+    width: 30px;
+    height: 30px;
+}
 
- .leaflet-control-layers-list, .leaflet-control-layers-expanded .leaflet-control-layers-toggle {
+
+.leaflet-control-layers-list, .leaflet-control-layers-expanded .leaflet-control-layers-toggle {
     display: none;
     padding: 10px;
     BACKGROUND: white !important;
-    width: 100px !important;
+    width: 120px !important;
     position: absolute;
-    right: 75px;
-    top: -6px;
-    height: 300px !important;
+    right: 97px;
+    border-radius: 5px;
+    border: 1px solid darkblue;
+    top: -5px;
+    height: 213px !important;
     overflow: auto;
     scrollbar-width: thin;
 }
@@ -520,7 +527,7 @@ height: 32px;
 /* Fixing the position on the map */
 .leaflet-top.leaflet-left .leaflet-bar {
     position: fixed; /* Keep it fixed */
-    bottom: 1vh; /* Center vertically on the viewport */
+    bottom: 3vh; /* Center vertically on the viewport */
     right: 2vh; /* Adjust the position from the left */
     z-index: 1000; /* Ensure it stays on top */
 }
@@ -575,4 +582,20 @@ height: 32px;
 }
 
 
-     
+.geopulseaname {
+  
+    position: fixed;
+    z-index: 99999;
+    bottom: 1vh;
+    /* margin-top: 670px; */
+    right: 9px;
+    text-decoration: none;
+    color: black;
+  
+    font-family: Roboto;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: bold;
+    line-height: normal;
+}/* Style for the calendar popup */
+

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <style>
+        #calendar-popup {
+            position: absolute;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+            border-radius: 10px;
+        }
+
+        .date-range {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .flatpickr-calendar {
+            border-radius: 10px;
+        }
+
+        .flatpickr-day {
+            border-radius: 5px;
+        }
+
+        .flatpickr-day.today, .flatpickr-day.selected {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .flatpickr-day:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+    </style>
+    <title>Calendar Example</title>
+</head>
+<body>
+    <div class="date-range" id="date-range-display">
+        April 1, 2024 – March 31, 2025
+        <div class="calendar-icon" id="calendar-icon">
+            <img src="image/time.png" alt="Calendar Icon">
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        document.getElementById('calendar-icon').addEventListener('click', function() {
+            console.log("Calendar icon clicked."); // Debugging log
+
+            const calendarContainer = document.createElement('div');
+            calendarContainer.id = "calendar-popup";
+            document.getElementById('date-range-display').appendChild(calendarContainer);
+
+            flatpickr(calendarContainer, {
+                mode: "range",
+                inline: true,
+                defaultDate: ["2024-04-01", "2025-03-31"],
+                onClose: function(selectedDates, dateStr, instance) {
+                    document.getElementById('date-range-display').innerText = dateStr;
+                    document.getElementById('calendar-popup').remove(); // Remove calendar after date selection
+                }
+            });
+
+            console.log("Flatpickr initialized."); // Debugging log
+        });
+    </script>
+</body>
+</html>
