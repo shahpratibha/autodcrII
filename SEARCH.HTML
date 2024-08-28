@@ -3,68 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <title>Search Button Example</title>
     <style>
-        #calendar-popup {
-            position: absolute;
-            z-index: 1000;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
-            border-radius: 10px;
+        /* Container to hold the button and search input */
+        .button-container {
+            width: 100%; /* Full width container */
+            display: flex; /* Center the content horizontally */
+            justify-content: center; /* Center the content horizontally */
+            align-items: center; /* Center the content vertically */
+            margin-top: 50px; /* Added margin for better visual placement */
+            position: relative; /* Position relative for the button and search input */
         }
 
-        .date-range {
-            position: relative;
-            cursor: pointer;
+        /* Initial button styling */
+        #search-button {
+            width: 30px; /* Initial width */
+            height: 30px; /* Initial height */
+            transition: width 0.3s, height 0.3s, background-color 0.3s, opacity 0.3s; /* Smooth transition */
+            background: linear-gradient(180deg, #6F6F6F 0%, #262626 100%);
+            box-shadow: 0px 0px 14.035px 0px rgba(0, 0, 0, 0.15);
+            border: none; /* Remove border */
+            border-radius: 50%; /* Make it round */
+            cursor: pointer; /* Pointer cursor on hover */
+            display: flex; /* Center the icon */
+            align-items: center;
+            justify-content: center;
+            overflow: hidden; /* Ensure smooth resizing */
+            position: absolute; /* Position absolute within the container */
+            top: 0; /* Align with container top */
+            left: 0; /* Align with container left */
         }
 
-        .flatpickr-calendar {
-            border-radius: 10px;
+        /* Full width when expanded */
+        #search-button.full-width {
+            width: 100%; /* Full width of the container */
+            height: 50px; /* Adjust height if needed */
+            border-radius: 30px; /* Change border radius for a different look */
+            background-color: #FF5733; /* New background color when expanded */
+            position: absolute; /* Maintain position */
+            top: 0; /* Align with container top */
+            left: 0; /* Align with container left */
         }
 
-        .flatpickr-day {
-            border-radius: 5px;
+        /* Search icon inside the button */
+        #search-button img {
+            width: 19px; /* Icon size */
+            height: auto; /* Maintain aspect ratio */
+            transition: opacity 0.3s; /* Smooth transition for opacity */
+            position: absolute; /* Fix the icon in place */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); /* Center the icon */
         }
 
-        .flatpickr-day.today, .flatpickr-day.selected {
-            background-color: #007bff;
-            color: #fff;
+        /* Hide the icon when button is expanded */
+        #search-button.full-width img {
+            opacity: 0; /* Hide the icon */
         }
 
-        .flatpickr-day:hover {
-            background-color: #007bff;
-            color: #fff;
+        /* Search input styling */
+        #searchInputDashboard {
+            display: none; /* Hide initially */
+            width: calc(100% - 50px); /* Full width minus the button width */
+            height: 50px; /* Height */
+            padding: 0 20px; /* Padding */
+            border-radius: 25px; /* Rounded corners */
+            border: 1px solid #ccc; /* Border color */
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Box shadow */
+            position: absolute; /* Position absolute within the container */
+            top: 0; /* Align with container top */
+            left: 0; /* Align with container left */
+            transition: opacity 0.3s, width 0.3s; /* Smooth transition */
+        }
+
+        /* Show input field when button is expanded */
+        #search-button.full-width ~ #searchInputDashboard {
+            display: block; /* Show the input field */
         }
     </style>
-    <title>Calendar Example</title>
 </head>
 <body>
-    <div class="date-range" id="date-range-display">
-        April 1, 2024 – March 31, 2025
-        <div class="calendar-icon" id="calendar-icon">
-            <img src="image/time.png" alt="Calendar Icon">
-        </div>
+    <div class="button-container">
+        <button id="search-button" class="search-button">
+            <img src="image/Search.svg" alt="Search Icon">
+        </button>
+        <input type="text" id="searchInputDashboard" placeholder="search...">
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
-        document.getElementById('calendar-icon').addEventListener('click', function() {
-            console.log("Calendar icon clicked."); // Debugging log
+        document.getElementById('search-button').addEventListener('click', function() {
+            const searchButton = document.getElementById('search-button');
+            const searchInput = document.getElementById('searchInputDashboard');
 
-            const calendarContainer = document.createElement('div');
-            calendarContainer.id = "calendar-popup";
-            document.getElementById('date-range-display').appendChild(calendarContainer);
-
-            flatpickr(calendarContainer, {
-                mode: "range",
-                inline: true,
-                defaultDate: ["2024-04-01", "2025-03-31"],
-                onClose: function(selectedDates, dateStr, instance) {
-                    document.getElementById('date-range-display').innerText = dateStr;
-                    document.getElementById('calendar-popup').remove(); // Remove calendar after date selection
-                }
-            });
-
-            console.log("Flatpickr initialized."); // Debugging log
+            // Expand the button to full width
+            searchButton.classList.toggle('full-width');
+            
+            // Toggle the visibility of the search input field
+            searchInput.style.display = searchButton.classList.contains('full-width') ? 'block' : 'none';
+            
+            // Focus on the search input field
+            if (searchButton.classList.contains('full-width')) {
+                searchInput.focus();
+            }
         });
     </script>
 </body>

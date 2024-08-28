@@ -100,20 +100,19 @@ var collapseButton = L.control({ position: "topright" });
 
 collapseButton.onAdd = function (map) {
   var button = L.DomUtil.create("button", "collapse-button");
-  button.innerHTML = "<i class='fa-solid fa-list' style='color:darkblue;'></i>"; // Initial text
-
+  button.innerHTML = "<img src='image/legend_cons.svg' alt='' style='width: 53px; height: 53px; margin-top: -21.200px; margin-left: -21px;'>"; // Image instead of icon
   // Apply styling
-  button.style.backgroundColor = "white";
-  button.style.border = "2px solid darkblue";
-  button.style.width = "35px";
-  button.style.height = "35px";
-  button.style.borderRadius = "5px";
+  
+ 
+  button.style.width = "31px";
+  button.style.height = "31px";
+  
   button.style.color = "black";
   button.style.padding = "10px";
   button.style.textAlign = "center";
   button.style.textDecoration = "none";
   button.style.display = "block";
-  button.style.margin = "10px";
+ 
   button.style.cursor = "pointer";
   button.style.transition = "background-color 0.3s ease-in-out"; // Add transition for smooth animation
 
@@ -127,20 +126,22 @@ collapseButton.onAdd = function (map) {
       legendDiv.style.display = "block";
       legendDiv.style.height = "40vh";
       legendDiv.style.width = "200px";
-      legendDiv.style.top ="12%";
-      legendDiv.style.right ="4%";
+      legendDiv.style.top ="15%";
+      legendDiv.style.left ="84%";
       legendDiv.style.scrollbarWidth = "thin";
       legendDiv.style.scrollbarColor =  "#163140 white";
       legendDiv.style.borderRadius= "10px";
       legendDiv.style.boxShadow = "5px 5px 5px rgba(0, 0, 0, 0.7)"; // Add shadow
-      button.innerHTML = "<i class='fa-solid fa-list' style='color:darkblue;'></i>";
+      button.innerHTML = "<img src='image/legend_cons.svg' alt='' style='width: 53px; height: 53px; margin-top: -21.200px; margin-left: -21px;'>"; // Image instead of icon
+  // Apply styling
 
-      button.style.backgroundColor = "white"; // Change color to indicate action
+    
       legendVisible = true;
     } else {
       legendDiv.style.display = "none";
-      button.innerHTML = "<i class='fa-solid fa-list' style='color:darkblue;'></i>";
-      button.style.backgroundColor = "white"; // Change color to indicate action
+      button.innerHTML = "<img src='image/legend_cons.svg' alt='' style='width: 53px; height: 53px; margin-top: -21.200px; margin-left: -21px;'>"; // Image instead of icon
+    
+      
       legendVisible = false;
     }
   };
@@ -226,42 +227,20 @@ legend.onAdd = function (map) {
   return div;
 };
 
-legend.addTo(map);
 
 legend.addTo(map);
-map.on('mousemove', function () {
+map.on('click', function () {
   var legendDiv = document.querySelector(".info.legend");
-  if (legendDiv.style.display === "block") {
-    legendDiv.style.display = "none";
-    var button = document.querySelector(".collapse-button");
-    button.innerHTML = "<i class='fa-solid fa-list' style='color:darkblue;'></i>";
-    button.style.backgroundColor = "white"; // Change color to indicate action
+  var button = document.querySelector(".collapse-button");
+
+  // Check if the legend is currently visible
+  if (legendDiv.style.display === "none" || legendDiv.style.display === "") {
+    // Hide the legend
+  
+
+    // Update the button's inner HTML with the image
+    button.innerHTML = "<img src='image/legend_cons.svg' alt='' style='width: 53px; height: 53px; margin-top: -21.200px; margin-left: -21px;'>";
+    legendVisible = false;
   }
 });
-
-
-// North Image and scale
-
-// scale
-map.options.scale = true; 
-
-L.control.scale().addTo(map);
-
-// Create a custom control for the north arrow
-var northArrowControl = L.Control.extend({
-  options: {
-    position: "bottomleft",
-  },
-
-  onAdd: function (map) {
-    var container = L.DomUtil.create("div", "leaflet-bar leaflet-control");
-    container.innerHTML =
-      '<img  src="png/002-cardinal-point.png" class="border-0;" alt="" style="width: 30px;  height:50px; background-color: white; border:2px solid darkblue; ">';
-    return container;
-  },
-});
-
-
-map.addControl(new northArrowControl());
-
 

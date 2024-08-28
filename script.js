@@ -179,16 +179,6 @@ function toggleLayersControl() {
 document.getElementById('toggle-layers-button').addEventListener('click', function() {
     toggleLayersControl();
 });
-// Add scale control
-L.control.scale({
-    position: 'bottomright' // Change position to bottom right
-}).addTo(map);
-
-
-
-
-
-
 
 
 
