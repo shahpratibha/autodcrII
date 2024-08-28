@@ -69,6 +69,8 @@ legendControl.onAdd = function (map) {
   div.style.bottom = "0";
   div.style.right = "0";
   div.style.height = "40vh";
+  div.style.marginTop = "60px";
+
   div.style.width = "300px";
   div.style.overflowY = "auto";
   div.style.scrollbarWidth = "thin";

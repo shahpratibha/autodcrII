@@ -19,7 +19,6 @@ html {
 }
 
 .leaflet-retina .leaflet-control-layers-toggle {
-<<<<<<< HEAD
   background-image: url("image/Group 93.svg");
   background-size: 17px 24px;
 }
@@ -31,7 +30,7 @@ html {
 .leaflet-right .leaflet-control {
   float: left;
   position: relative;
-  top: 8vh;
+  top: 12vh !important;
   left: 96.5vw;
   border-radius: 50%;
   background: #6f6f6f;
@@ -59,7 +58,6 @@ html {
   height: 213px !important;
   overflow: auto;
   scrollbar-width: thin;
-=======
     background-image: url('image/Group 93.svg');
     background-size: 14px 14px;
 }
@@ -91,7 +89,6 @@ html {
     height: 200px !important;
     overflow: auto;
     scrollbar-width: thin;
->>>>>>> bef961235b6fed754f9ac1136539030a3de2ec76
 }
 /* image/Group 93.svg */
 
@@ -399,7 +396,7 @@ html {
 
 .map-controls {
   position: absolute;
-  top: 18vh;
+  top: 16vh;
   right: 11px;
   z-index: 1000;
   display: flex;
@@ -424,11 +421,12 @@ html {
 
 .control-panel {
   position: absolute;
-  top: 1px;
+  top: 15px;
   left: 10px;
   z-index: 999;
+  gap: 25px;
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   align-items: flex-start;
 }
 
@@ -444,6 +442,8 @@ html {
   cursor: pointer; /* Change cursor to pointer */
   display: flex; /* Center the image */
   align-items: center;
+  margin-top: -8px;
+
   justify-content: center;
 }
 
@@ -884,7 +884,7 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   font-family: inherit;
   font-weight: 300;
   height: auto;
-  font-size: 17.5px !important;
+  font-size: 15px !important;
   line-height: inherit;
   margin: -1px 0 0 0;
   outline: none;
@@ -965,11 +965,11 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   cursor: pointer; /* Pointer cursor on hover */
   display: flex; /* Center the icon */
   align-items: center;
-
+ bottom: 52px;
   justify-content: center;
   overflow: hidden; /* Ensure smooth resizing */
   position: absolute; /* Position absolute within the container */
-  top: 0; /* Align with container top */
+  
 }
 
 /* Full width when expanded */
@@ -1007,7 +1007,7 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
 .close-icon {
   position: absolute;
   right: 10px;
-  top: 50%;
+  bottom: 66px;
   transform: translateY(60%); /* Center vertically */
   cursor: pointer;
   display: none; /* Initially hidden */
@@ -1040,7 +1040,7 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   border: 1px solid #ccc; /* Border color */
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Box shadow */
   position: absolute; /* Position absolute within the container */
-  top: 0; /* Align with container top */
+  bottom: 45px;
   right: 0;
   transition: opacity 0.3s, width 0.3s; /* Smooth transition */
 }
