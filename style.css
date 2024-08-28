@@ -19,7 +19,6 @@ html {
 }
 
 .leaflet-retina .leaflet-control-layers-toggle {
-<<<<<<< HEAD
   background-image: url("image/Group 93.svg");
   background-size: 17px 24px;
 }
@@ -59,39 +58,6 @@ html {
   height: 213px !important;
   overflow: auto;
   scrollbar-width: thin;
-=======
-    background-image: url('image/Group 93.svg');
-    background-size: 14px 14px;
-}
-.leaflet-touch .leaflet-control-layers-toggle {
-    width: 34px;
-    height: 34px;
-}
-
-.leaflet-right .leaflet-control {
-    float: left;
-    position: relative;
-    top: 30vh;
-    left: 96.5vw;
-    border-radius: 50%;
-    background: #6f6f6f;
-    height: 34px;
-    width: 34px;
-    border: #6f6f6f;
-}
-
- .leaflet-control-layers-list, .leaflet-control-layers-expanded .leaflet-control-layers-toggle {
-    display: none;
-    padding: 10px;
-    BACKGROUND: white !important;
-    width: 100px !important;
-    position: absolute;
-    right: 72.5px;
-    top: -6px;
-    height: 200px !important;
-    overflow: auto;
-    scrollbar-width: thin;
->>>>>>> bef961235b6fed754f9ac1136539030a3de2ec76
 }
 /* image/Group 93.svg */
 
@@ -437,7 +403,7 @@ html {
   flex-direction: row;
   gap: 10px;
 }
-.toggle-button {
+.toggle-button1 {
   background: none; /* Remove background color */
   border: none; /* Remove button border */
   padding: 0; /* Remove padding */
@@ -447,7 +413,7 @@ html {
   justify-content: center;
 }
 
-.toggle-button img {
+.toggle-button1 img {
   width: 46.164px; /* Set image width */
   height: 44px; /* Set image height */
   margin-bottom: 13px;
@@ -920,20 +886,6 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   -webkit-box-shadow: 1px 0 0 #e6e6e6, -1px 0 0 #e6e6e6, 0 1px 0 #e6e6e6, 0 -1px 0 #e6e6e6, 0 3px 13px rgba(0, 0, 0, 0.08);
   box-shadow: 1px 0 0 #e6e6e6, -1px 0 0 #e6e6e6, 0 1px 0 #e6e6e6, 0 -1px 0 #e6e6e6, 0 3px 13px rgba(0, 0, 0, 0.08);
 }
-/* Initial button styling */
-#search-button {
-  width: 30px; /* Initial width */
-  height: 30px; /* Initial height */
-  /* Smooth transition for width, height, and background color */
-  border: 1px rgba(255, 255, 255, 0.5);
-
-  background: linear-gradient(180deg, #6f6f6f 0%, #262626 100%);
-
-  box-shadow: 0px 0px 14.035px 0px rgba(0, 0, 0, 0.15);
-  border: none; /* Remove border */
-  border-radius: 50%; /* Make it round */
-  cursor: pointer; /* Pointer cursor on hover */
-}
 
 /* Search icon inside the button */
 #search-button img {
@@ -954,7 +906,7 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
 
 /* Initial button styling */
 #search-button {
-  left: -30px;
+  right: 7px;
   width: 30px; /* Initial width */
   height: 30px; /* Initial height */
   transition: width 0.3s, height 0.3s, background-color 0.3s, opacity 0.3s; /* Smooth transition */
@@ -1049,6 +1001,63 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
 #search-button.full-width ~ #searchInputDashboard {
   display: block; /* Show the input field */
 }
+
+/* filter */
+
+/* Search icon inside the button */
+/* #toggleFilters img {
+  width: 19px;
+  height: auto;
+  margin-top: -1px;
+  margin-left: 0px;
+} */
+/* Container to hold the button and search input */
+.button-container {
+  width: 100%; /* Full width container */
+  display: flex; /* Center the content horizontally */
+  justify-content: center; /* Center the content horizontally */
+  align-items: center; /* Center the content vertically */
+  margin-top: 50px; /* Added margin for better visual placement */
+  position: relative; /* Position relative for the button and search input */
+}
+
+/* Initial button styling */
+#toggleFilters {
+  right: 7px;
+  width: 30px; /* Initial width */
+  height: 30px; /* Initial height */
+  transition: width 0.3s, height 0.3s, background-color 0.3s, opacity 0.3s; /* Smooth transition */
+  background: linear-gradient(180deg, #6f6f6f 0%, #262626 100%);
+  box-shadow: 0px 0px 14.035px 0px rgba(0, 0, 0, 0.15);
+  border: none; /* Remove border */
+  border-radius: 50%; /* Make it round */
+  cursor: pointer; /* Pointer cursor on hover */
+  display: flex; /* Center the icon */
+  align-items: center;
+
+  justify-content: center;
+  overflow: hidden; /* Ensure smooth resizing */
+  position: absolute; /* Position absolute within the container */
+  top: 36px; /* Align with container top */
+}
+
+
+
+/* Search icon inside the button */
+#toggleFilters img {
+  width: 19px; /* Icon size */
+  height: auto; /* Maintain aspect ratio */
+  transition: opacity 0.3s; /* Smooth transition for opacity */
+  position: absolute; /* Fix the icon in place */
+  top: 55%;
+  left: 52%;
+  transform: translate(-50%, -50%); /* Center the icon */
+}
+
+
+
+
+
 
 /* cards */
 /* Container for slider items */
@@ -1445,3 +1454,27 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   background: #0077da;
 }
 
+.filter_div{
+  height: auto; 
+  max-height: 65vh;
+  overflow: hidden;
+  transition: overflow 0.3s ease;
+
+}
+.filter_div:hover {
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #888 #f1f1f1;
+
+}
+.toggle-button {
+  position: relative;
+  top: 14vh;
+  right: 49px;
+  z-index: 1000;
+  border: none;
+  background: none;
+  color:#8AC0EE;
+  font-size: 21px;
+  border-radius: 5px;
+}
