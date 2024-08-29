@@ -404,6 +404,17 @@ html {
   flex-direction: row;
   gap: 10px;
 }
+.toggle-button {
+  background: none; /* Remove background color */
+  border: none; /* Remove button border */
+  padding: 0; /* Remove padding */
+  cursor: pointer; /* Change cursor to pointer */
+  display: flex; /* Center the image */
+  align-items: center;
+  margin-top: -8px;
+
+  justify-content: center;
+}
 
 
 .btn-group {
@@ -1039,6 +1050,7 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   left: 52%;
   transform: translate(-50%, -50%); /* Center the icon */
 }
+
 
 
 

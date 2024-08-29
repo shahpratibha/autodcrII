@@ -63,54 +63,89 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 });
-
-
 document.addEventListener('DOMContentLoaded', function () {
   const filters = document.getElementById('filters');
   const map = document.getElementById('map');
   const searchbtn = document.getElementById('map-controls');
-  // const //tableinfo = document.getElementById('tablecontainer');
-
   const button = document.getElementById('toggleFilters');
+  const leafletControlLayers = document.querySelector('.leaflet-control-layers'); // Target the leaflet control layers
+  const leafletControlZoom = document.querySelector('.leaflet-control-zoom'); // Target the leaflet control zoom
+  const geopulseaname = document.querySelector('.geopulseaname'); // Target the GeoPulse Analytics link
+  const legendControl = document.querySelector('.collapse-button'); // Target the legend button
 
-
-  // const button = document.getElementById('toggleFilters');
+  if (!filters || !map || !button || !searchbtn || !leafletControlLayers || !leafletControlZoom || !geopulseaname || !legendControl) {
+    console.error('One or more elements are not found in the DOM.');
+    return;
+  }
 
   // Set the title attribute
   button.setAttribute('title', 'Filter');
-
 
   let filtersVisible = false;
 
   button.addEventListener('click', function () {
     if (!filtersVisible) {
+      console.log('Showing filters');
+      
+      // Show the filters and adjust the map and icons accordingly
       filters.style.marginLeft = '0';
       filters.style.opacity = '1';
       map.style.width = '81vw';
+
+      // Move the filter button
       button.style.top = "15vh";
-      button.style.right = 'calc(0.8vw)';
+      button.style.right = '20vw'; // Moves with the filter
       button.innerHTML = '<img src="image/filter.png" alt="Search Icon" id="search-icon">';
-      searchbtn.style.right = 'calc(0.8vw)';
-      searchbtn.style.top = '22vh';
+
+      // Move the search button along with the map
       searchbtn.style.right = 'calc(20vw - 1px)';
+      searchbtn.style.top = '22vh';
+
+      // Move the leaflet control layers to stay in line with the map
+      leafletControlLayers.style.right = '21vw';
+      
+      // Move the leaflet zoom controls to stay in line with the map
+      leafletControlZoom.style.right = '21vw';
+
+      // Move the GeoPulse Analytics link to stay in line with the map
+      geopulseaname.style.right = '21vw';
+
+      // Move the legend button to stay in line with the map
+      legendControl.style.right = '21vw';
+
     } else {
+      console.log('Hiding filters');
+
+      // Hide the filters and restore the map and icons to their original positions
       filters.style.marginLeft = '-35vw';
       filters.style.opacity = '0';
       map.style.width = '100vw';
+
+      // Restore filter button position
       button.style.top = "15vh";
-      // button.style.right = '40px';
       button.style.right = '10px';
       button.innerHTML = '<img src="image/filter.png" alt="Search Icon" id="search-icon">';
-      searchbtn.style.right = '40px';
-      searchbtn.style.top = '22vh';
+
+      // Restore search button position
       searchbtn.style.right = '10px';
-      //tableinfo.style.right = '10px'; // Adjusted position for //tableinfo
+      searchbtn.style.top = '22vh';
+
+      // Restore leaflet control layers position
+      leafletControlLayers.style.right = '10px';
+      
+      // Restore leaflet zoom controls position
+      leafletControlZoom.style.right = '10px';
+
+      // Restore the GeoPulse Analytics link position
+      geopulseaname.style.right = '10px';
+
+      // Restore the legend button position
+      legendControl.style.right = '10px';
     }
+
+    // Toggle the visibility state
     filtersVisible = !filtersVisible;
   });
-  // -------------------------------------------------------------------------
-
-
 });
 
 
