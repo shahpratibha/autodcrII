@@ -1572,3 +1572,121 @@ color: black; /* Default color */
 .abcscroll::-webkit-scrollbar-thumb:hover {
   background: #555; /* Darker color on hover state for visibility */
 }
+
+
+
+
+
+
+#tablecontainer {
+  z-index: 9999;
+  position: absolute;
+  width: 53%;
+  bottom: 24%;
+  right: 4%;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-height: 200px;
+  font-size: 12px;
+  transition: all 0.3s ease;
+}
+
+
+.tableDetail {
+max-height: 550px; 
+overflow-y: auto; 
+/* margin-top: 10px;  */
+border: 1px solid #ccc; 
+background-color: #f9f9f9; 
+
+}
+
+.minimize-button {
+background-color:#8AC0EE;
+color: red;
+border: none;
+padding: 5px;
+cursor: pointer;
+font-size: 15px;
+/* border-radius: 50%; */
+position: absolute;
+right: 0%;
+top:0%;
+z-index: 1000;
+width: 27px;
+height:28px;
+display: flex;
+justify-content: center;
+align-items: center;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+} 
+/* 
+
+.download-button
+ {
+  
+  background-color: darkblue;
+  color: white;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+  font-size: 15px;
+  
+  position: absolute;
+  right: 5%;
+  top:0%;
+  z-index: 1000;
+  width: 27px;
+  height:28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+  } 
+
+.data-table {
+width: 100%;
+border-collapse: collapse;
+}
+
+
+.data-table th {
+
+background-color:#E6F1FB;
+color: var(--Blue-500, #0077DA);
+
+font-size: 10px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+text-align: center;
+
+text-transform: uppercase;
+font-weight: bold;
+
+
+
+}
+
+
+
+.dataTables_wrapper .dataTables_scrollHead {
+overflow: visible;
+}
+
+.dataTables_wrapper .dataTables_scrollBody {
+overflow: auto;
+scrollbar-width: thin;
+text-align: center;
+height: 248px;
+max-height: 248px; }
+
+.dataTables_wrapper .dataTables_scrollFoot {
+overflow: visible;
+}
+ 
+
+ */
