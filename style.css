@@ -403,22 +403,7 @@ html {
   flex-direction: row;
   gap: 10px;
 }
-.toggle-button1 {
-  background: none; /* Remove background color */
-  border: none; /* Remove button border */
-  padding: 0; /* Remove padding */
-  cursor: pointer; /* Change cursor to pointer */
-  display: flex; /* Center the image */
-  align-items: center;
-  justify-content: center;
-}
 
-.toggle-button1 img {
-  width: 46.164px; /* Set image width */
-  height: 44px; /* Set image height */
-  margin-bottom: 13px;
-  object-fit: contain; /* Ensure image scales properly */
-}
 
 .btn-group {
   display: flex;
@@ -1477,4 +1462,113 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   color:#8AC0EE;
   font-size: 21px;
   border-radius: 5px;
+}
+
+.toggle-button1 {
+  background: none; /* Remove background color */
+  border: none; /* Remove button border */
+  padding: 0; /* Remove padding */
+  cursor: pointer; /* Change cursor to pointer */
+  display: flex; /* Center the image */
+  align-items: center;
+  justify-content: center;
+}
+
+.toggle-button1 img {
+  width: 46.164px; /* Set image width */
+  height: 44px; /* Set image height */
+  margin-bottom: 13px;
+  object-fit: contain; /* Ensure image scales properly */
+}
+
+
+.filters {
+  margin-bottom: 20px;
+  margin-top: 20px;
+  position: absolute;
+  top: 20px;
+  right: 18px;
+  width:250px;
+
+}
+
+
+.filter-group {
+  margin-bottom: 5px;
+  padding: 10px;
+  border: 1px solid gray;
+  font-size: 10px;
+}
+.filter-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  font-size: 12px;
+  cursor: pointer;
+  position: relative;
+  background: aliceblue;
+}
+
+.filter-group input[type="text"] {
+width: 80%;
+padding: 5px;
+margin-bottom: 10px;
+font-size: 12px;
+font-weight: bold;
+display: none;
+border-radius: 8px;
+border: 2px solid #bbb;
+}
+.filter-group ul {
+list-style-type: none;
+padding: 0;
+display: none;
+}
+.filter-group ul.active,
+.filter-group input[type="text"].active {
+display: block;
+forced-color-adjust: blue;
+}
+.filter-group li {
+  margin-bottom: 5px;
+}
+
+.icon-container {
+position:absolute;
+right:1%; 
+top:0%;
+font-size: 15px;
+}
+
+/* Style the icon */
+.icon-container i {
+color: black; /* Default color */
+}
+
+.abcscroll {
+  height: auto;
+  max-height: 200px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: #888 #f1f1f1; /* For Firefox */
+}
+
+/* WebKit (Safari, older Chrome) */
+.abcscroll::-webkit-scrollbar {
+  width: 10px; /* Makes scrollbars thinner */
+}
+
+.abcscroll::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Color of scrollbar track */
+  border-radius: 10px; /* Rounded corners for scrollbar track */
+}
+
+.abcscroll::-webkit-scrollbar-thumb {
+  background: #888; /* Color of scrollbar handle */
+  border-radius: 10px; /* Rounded corners for scrollbar handle */
+}
+
+.abcscroll::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Darker color on hover state for visibility */
 }

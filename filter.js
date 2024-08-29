@@ -65,102 +65,53 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-// });
-
-// toggleFilterend---------------------------------------------------------
 document.addEventListener('DOMContentLoaded', function () {
   const filters = document.getElementById('filters');
   const map = document.getElementById('map');
-  const tableBtn = document.getElementById('openTableBtn');
-  const tableinfo = document.getElementById('tablecontainer');
+  const searchbtn = document.getElementById('map-controls');
+  // const //tableinfo = document.getElementById('tablecontainer');
+
   const button = document.getElementById('toggleFilters');
-  const layerToggle = document.getElementById('layerToggle');
-  const layersList = document.querySelector('.leaflet-control-layers-list');
-  
+
+
+  // const button = document.getElementById('toggleFilters');
+
+  // Set the title attribute
+  button.setAttribute('title', 'Filter');
+
 
   let filtersVisible = false;
-  let layersVisible = false;
-  
 
   button.addEventListener('click', function () {
     if (!filtersVisible) {
-      map.classList.add('shifted'); // Move the map
-      filters.classList.add('active');
-      button.innerHTML = '<i class="fa-solid fa-filter"></i>';
-           // Hide layers list when filters are visible
-      if (layerToggle) {
-        layersList.style.display = 'block'; // Hide layers list
-        layersVisible = false;
-      }
+      filters.style.marginLeft = '0';
+      filters.style.opacity = '1';
+      map.style.width = '81vw';
+      button.style.top = "15vh";
+      button.style.right = 'calc(0.8vw)';
+      button.innerHTML = '<img src="image/filter.png" alt="Search Icon" id="search-icon">';
+      searchbtn.style.right = 'calc(0.8vw)';
+      searchbtn.style.top = '22vh';
+      searchbtn.style.right = 'calc(20vw - 1px)';
     } else {
-      filters.classList.remove('active');
-      map.classList.remove('shifted'); // Move the map back
-
-     
-      
-      tableinfo.style.right = '10px'; // Adjusted position for tableinfo
-      button.innerHTML = '<i class="fa-solid fa-filter"></i>';
+      filters.style.marginLeft = '-35vw';
+      filters.style.opacity = '0';
+      map.style.width = '100vw';
+      button.style.top = "15vh";
+      // button.style.right = '40px';
+      button.style.right = '10px';
+      button.innerHTML = '<img src="image/filter.png" alt="Search Icon" id="search-icon">';
+      searchbtn.style.right = '40px';
+      searchbtn.style.top = '22vh';
+      searchbtn.style.right = '10px';
+      //tableinfo.style.right = '10px'; // Adjusted position for //tableinfo
     }
     filtersVisible = !filtersVisible;
   });
-  if (layerToggle) {
-    layerToggle.addEventListener('click', function (event) {
-      event.preventDefault(); // Prevent default anchor behavior
-
-      if (!layersVisible) {
-        layersList.style.display = 'block'; // Show layers list
-        // Hide filters when layers list is visible
-        if (filtersVisible) {
-          filters.classList.remove('active');
-          map.classList.remove('shifted'); // Move the map back
-          filtersVisible = false;
-        }
-      } else {
-        layersList.style.display = 'none'; // Hide layers list
-      }
-      layersVisible = !layersVisible;
-    });
-  }
-
-  
-  
-     window.closeFilters = function () {
-                filters.classList.remove('active');
-                map.classList.remove('shifted'); // Move the map back
-                filtersVisible = false;
-            }
-
-            window.toggleFilter = function (element) {
-              const icon = element.querySelector('.icon-container i');
-              const input = element.nextElementSibling; // Input field
-              const ul = input.nextElementSibling; // UL list
-          
-              // Check current display state
-              const isListVisible = ul.style.display === 'block';
-          
-              // Toggle visibility based on the current state
-              if (isListVisible) {
-                  ul.style.display = 'none';
-                  input.style.display = 'none'; // Hide the input field
-                  icon.classList.remove('fa-angle-up');
-                  icon.classList.add('fa-angle-down');
-              } else {
-                  ul.style.display = 'block';
-                  input.style.display = 'block'; // Show the input field
-                  icon.classList.remove('fa-angle-down');
-                  icon.classList.add('fa-angle-up');
-              }
-          };
-          
   // -------------------------------------------------------------------------
 
-  // Ensure zoom control doesn't move
-  const zoomControl = document.querySelector('.leaflet-control-zoom');
-  if (zoomControl) {
-    zoomControl.style.position = 'fixed';
-  }
-});
 
+});
 
 
 function updateTableStats(stats) {
@@ -175,141 +126,160 @@ $(document).ready(function () {
   var cql_filter1 ='';
 
 
-  // initializeCheckboxes();
-//   function getCheckedValuess() {
-//     var checkedValues = [];
-//     var checkboxes = document.querySelectorAll("#checkboxContainer input[type='checkbox']:checked");
-//     checkboxes.forEach(function(checkbox) {
-//         checkedValues.push("'" + checkbox.value + "'"); // Push value wrapped in single quotes
-//     });
+  initializeCheckboxes();
+  function getCheckedValuess() {
+    var checkedValues = [];
+    var checkboxes = document.querySelectorAll("#checkboxContainer input[type='checkbox']:checked");
+    checkboxes.forEach(function(checkbox) {
+        checkedValues.push("'" + checkbox.value + "'"); // Push value wrapped in single quotes
+    });
 
-//     if (checkedValues.length === 0) {
-//         checkedValues.push("''"); // Push an empty string to simulate no results
-//     }
+    if (checkedValues.length === 0) {
+        checkedValues.push("''"); // Push an empty string to simulate no results
+    }
 
-//     return checkedValues;
-// }
+    return checkedValues;
+}
 
 
-// document.getElementById("checkboxContainer").addEventListener("change", function() {
-//     var checkedValues = getCheckedValuess();
+document.getElementById("checkboxContainer").addEventListener("change", function() {
+    var checkedValues = getCheckedValuess();
    
     var filterString1 = "";
-
+ 
     loadinitialData(filterString1);
     // FilterAndZoom(filterString1)
-
+ 
   getCheckedValues(function (filterString) {
-    console.log("Filter Stringinside: ", filterString1); 
+    console.log("Filter Stringinside: ", filterString1);
     const mainfilter = combineFilters(filterString1, filterString);
-    console.log("Filter Stringinside: ", mainfilter); 
+    console.log("Filter Stringinside: ", mainfilter);
     FilterAndZoom(mainfilter);
     DataTableFilter(mainfilter)
    
-
-  // });
+ 
+  });
 });
 
 
 
 
-  
+var filterString1 = "";
+ 
+loadinitialData(filterString1);
+// FilterAndZoom(filterString1)
+
+getCheckedValues(function (filterString) {
+console.log("Filter Stringinside: ", filterString1);
+const mainfilter = combineFilters(filterString1, filterString);
+console.log("Filter Stringinside: ", mainfilter);
+FilterAndZoom(mainfilter);
+DataTableFilter(mainfilter)
 
 
-  function loadinitialData(cql_filter) {
+// });
+});
 
-    const filternames = ["village", "width", "status", "type"];//accordn column names , if want add one more filter criteria add here
-    var workspace = 'MissingLinks';
-    var layerName = 'Missing_Links';
-    filternames.forEach(function (filtername) {
-      var url = `${main_url}${workspace}/wms?service=WFS&version=1.1.0&request=GetFeature&typeName=${layerName}&propertyName=${filtername}&outputFormat=application/json`;
 
-        if (cql_filter) {
-            url += `&cql_filter=${encodeURIComponent(cql_filter)}`;
-         
-        }
+
+
+
+
+
+function loadinitialData(cql_filter) {
+
+const filternames = ["applyfor", "width", "status", "type"];//accordn column names , if want add one more filter criteria add here
+var workspace = 'AutoDCR';
+var layerName = 'auto_test';
+filternames.forEach(function (filtername) {
+  var url = `${main_url}${workspace}/wms?service=WFS&version=1.1.0&request=GetFeature&typeName=${layerName}&propertyName=${filtername}&outputFormat=application/json`;
+
+    if (cql_filter) {
+        url += `&cql_filter=${encodeURIComponent(cql_filter)}`;
      
-      $.getJSON(url, function (data) {
-        var projectFiSet = new Set();
-        var projectFiMap = new Map();
+    }
+ 
+  $.getJSON(url, function (data) {
+    var projectFiSet = new Set();
+    var projectFiMap = new Map();
 
-        // Iterate through the features and add non-null values to the set
-        $.each(data.features, function (index, feature) {
-          var column_name = feature.properties[filtername];
-          if (column_name !== null && column_name !== "#N/A") {
-            if (projectFiMap.has(column_name)) {
-              // projectFiMap.set(column_name, projectFiMap.get(column_name) + 1);
-              projectFiMap.set(column_name, (projectFiMap.get(column_name) || 0) + 1);
-            } else {
-              projectFiMap.set(column_name, 1);
-            }
-          }
-        });
-        var uniqueProjectFiList = Array.from(projectFiMap.entries()).map(([name, count]) => `${name} (${count})`);
-        populateDropdown(filtername, uniqueProjectFiList);
-      });
+    // Iterate through the features and add non-null values to the set
+    $.each(data.features, function (index, feature) {
+      var column_name = feature.properties[filtername];
+      if (column_name !== null && column_name !== "#N/A") {
+        if (projectFiMap.has(column_name)) {
+          // projectFiMap.set(column_name, projectFiMap.get(column_name) + 1);
+          projectFiMap.set(column_name, (projectFiMap.get(column_name) || 0) + 1);
+        } else {
+          projectFiMap.set(column_name, 1);
+        }
+      }
     });
+    var uniqueProjectFiList = Array.from(projectFiMap.entries()).map(([name, count]) => `${name} (${count})`);
+    populateDropdown(filtername, uniqueProjectFiList);
+  });
+});
 
     // FilterAndZoom(cql_filter)
   }
 
-  // function combineFilters(cql_filter, filterString) {
-  //   return `(${cql_filter}) AND (${filterString})`;
-  // }
+  function combineFilters(cql_filter, filterString) {
+    return `(${cql_filter}) AND (${filterString})`;
+  }
 
 
 });
 
 
-// function initializeCheckboxes() {
-//   var columns = { "All": "All","Haveli": "Haveli", "Mawal": "Mawal", "Bhor": "Bhor", "Purandar": "Purandar", "Mulshi": "Mulshi", "Khed": "Khed", "Shirur": "Shirur" };
-//   var checkboxContainer = document.getElementById("checkboxContainer");
+function initializeCheckboxes() {
+  var columns = { "All": "All","Haveli": "Haveli", "Mawal": "Mawal", "Bhor": "Bhor", "Purandar": "Purandar", "Mulshi": "Mulshi", "Khed": "Khed", "Shirur": "Shirur" };
+  var checkboxContainer = document.getElementById("checkboxContainer");
 
-//   // Clear any existing checkboxes
-//   checkboxContainer.innerHTML = '';
+  // Clear any existing checkboxes
+  checkboxContainer.innerHTML = '';
 
-//   // Populate checkboxContainer with checkboxes
-//   for (var key in columns) {
-//     if (columns.hasOwnProperty(key)) {
-//       var checkboxDiv = document.createElement("div");
-//       checkboxDiv.classList.add("form-check", "me-2"); // Adjust classes as per your styling needs
+  // Populate checkboxContainer with checkboxes
+  for (var key in columns) {
+    if (columns.hasOwnProperty(key)) {
+      var checkboxDiv = document.createElement("div");
+      checkboxDiv.classList.add("form-check", "me-2"); // Adjust classes as per your styling needs
 
-//       var checkboxInput = document.createElement("input");
-//       checkboxInput.type = "checkbox";
-//       checkboxInput.classList.add("form-check-input");
-//       checkboxInput.id = key;
-//       checkboxInput.value = key; // Use key as the value (e.g., Work_ID, Budget_Code)
+      var checkboxInput = document.createElement("input");
+      checkboxInput.type = "checkbox";
+      checkboxInput.classList.add("form-check-input");
+      checkboxInput.id = key;
+      checkboxInput.value = key; // Use key as the value (e.g., Work_ID, Budget_Code)
 
-//       var checkboxLabel = document.createElement("label");
-//       checkboxLabel.classList.add("form-check-label");
-//       checkboxLabel.setAttribute("for", key);
-//       checkboxLabel.textContent = columns[key]; // Use columns[key] to get the column name
+      var checkboxLabel = document.createElement("label");
+      checkboxLabel.classList.add("form-check-label");
+      checkboxLabel.setAttribute("for", key);
+      checkboxLabel.textContent = columns[key]; // Use columns[key] to get the column name
 
-//       checkboxDiv.appendChild(checkboxInput);
-//       checkboxDiv.appendChild(checkboxLabel);
+      checkboxDiv.appendChild(checkboxInput);
+      checkboxDiv.appendChild(checkboxLabel);
 
-//       checkboxContainer.appendChild(checkboxDiv);
+      checkboxContainer.appendChild(checkboxDiv);
 
-//       if (key === "Work_ID") {
-//         checkboxInput.checked = true;
-//       }
-//     }
-//   }
-// }
+      if (key === "Work_ID") {
+        checkboxInput.checked = true;
+      }
+    }
+  }
+}
 
 
 function DataTableFilter(cql_filter1) {
-  var layers = ["MissingLinks:Missing_Links"];
+  var layers = ["AutoDCR:auto_test"];
   var typeName = layers.join(',');
   var cqlFilter = cql_filter1;
-  var workspace = 'MissingLinks'
+  var workspace = 'AutoDCR'
   var geoServerURL =
     `${main_url}${workspace}/wms?service=WFS&version=1.1.0&request=GetFeature&typeName=${typeName}&outputFormat=application/json`;
   if (cql_filter1 !== '') {
     geoServerURL += "&CQL_FILTER=" + encodeURIComponent(cqlFilter);
   }
   // ;&CQL_FILTER=${encodeURIComponent(cqlFilter)}`;
-  var headers = ["link_no", "name", "gut_no", "village", "width","length", "type"];
+  var headers = ["village_na", "applyfor","casetype","proposaltype","tdrzone","grossplotarea","developmentzonedp","owner_det_email"];
   
 
   showtable(typeName, geoServerURL, cqlFilter, headers);
@@ -332,7 +302,7 @@ function populateDropdown(dropdownId, data) {
 
 function getCheckedValues(callback) {
   var selectedValues = {};
-  const filternames = ["village", "width", "status", "type"];
+  const filternames = ["village_na", "applyfor", "projecttype", "casetype","proposaltype","tdrzone","grossplotarea","developmentzonedp","owner_det_email"];
 
   filternames.forEach(function (filtername) {
     selectedValues[filtername] = []; // Initialize empty array for each filtername
@@ -393,7 +363,7 @@ function getCheckedValues(callback) {
 
 function FilterAndZoom(filter) {
   fitbous(filter)
-  Missing_Links_buffer.setParams({
+  auto_test_buffer.setParams({
     CQL_FILTER: filter,
     maxZoom: 19.5,
   }).addTo(map);
@@ -406,7 +376,7 @@ function FilterAndZoom(filter) {
 
 
 function fitbous(filter) {
-  var layers = ["MissingLinks:Missing_Links"];
+  var layers = ["AutoDCR:auto_test"];
   var bounds = null;
 
   var processLayer = function (layerName, callback) {
@@ -795,7 +765,7 @@ $(document).ready(function () {
 
 
 document.addEventListener('DOMContentLoaded', (event) => {
-  var columns = { "name": "Road Name", "village": "Village", "width": "Road width","link_no":"Link_number" };
+  var columns = { "name": "Road Name", "village_na": "village_na", "width": "Road width","link_no":"Link_number" };
   var select = document.getElementById("search_type");
 
   // Populate dropdown with column names
@@ -814,8 +784,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
     var selectedValue = $(this).val();
     var selectedText = $("#search_type option:selected").text(); // Get the selected option text
     $("#searchInputDashboard").attr("placeholder", "Search " + selectedText); // Set the input placeholder
-    var layerName = 'Missing_Links'
-    var workspace = 'MissingLinks'
+    var layerName = 'auto_test'
+    var workspace = 'AutoDCR'
     function getValues(callback) {
       var geoServerURL = `${main_url}${workspace}/wms?service=WFS&version=1.1.0&request=GetFeature&typeName=${layerName}&propertyName=${selectedValue}&outputFormat=application/json`;
       // console.log(geoServerURL, "geoServerURLsearch");
@@ -873,13 +843,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
             cqlFilter = `${searchtypefield} IN ('${selectedValue}')`;
 
-            Missing_Links_buffer.setParams({
+            auto_test_buffer.setParams({
               CQL_FILTER: cqlFilter,
               maxZoom: 19.5,
               // styles: "Missing_Link_"
             });
 
-            Missing_Links_buffer.addTo(map).bringToFront();
+            auto_test_buffer.addTo(map).bringToFront();
 
             MissingLinkLine.setParams({
               CQL_FILTER: cqlFilter,
@@ -975,13 +945,13 @@ function getCheckedValuess() {
 
 
 const layerDetails = {
-  "MissingLinks:Missing_Links": ["link_no","name","village", "width","gut_no", "status","type","length"],
+  "AutoDCR:auto_test": ["village_na", "applyfor","casetype","proposaltype","tdrzone","grossplotarea","developmentzonedp","owner_det_email"],
 };
 
 function getCheckedValuesforpopuups() {
   return new Promise((resolve, reject) => {
     var selectedValues = {};
-    const filternames = ["link_no", "name","village", "width","gut_no", "status","type","length"];
+    const filternames = ["village_na", "applyfor","casetype","proposaltype","tdrzone","grossplotarea","developmentzonedp","owner_det_email"];
 
     filternames.forEach(function (filtername) {
       selectedValues[filtername] = []; // Initialize empty array for each filtername
@@ -1029,7 +999,7 @@ function combineFilters(cql_filter123, filterString) {
 //   let size = map.getSize();
 
 
-//   workspace = 'MissingLinks'
+//   workspace = 'AutoDCR'
 //   // console.log("{{{{{{================")
 //   let filterString = await getCheckedValuesforpopuups();
 
