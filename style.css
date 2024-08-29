@@ -963,6 +963,16 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   width: 18px; /* Adjust size as needed */
   height: 18px; /* Adjust size as needed */
 }
+.close {
+  position: absolute;
+  right: -6px;
+  top: 6px;
+  /* bottom: 66px; */
+  cursor: pointer;
+  /* display: none; */
+  width: 20px;
+  height: 20px;
+}
 
 /* When search input is shown */
 .full-width #searchInputDashboard {
@@ -1020,7 +1030,7 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
 
 /* Initial button styling */
 #toggleFilters {
-  right: 9px;
+  right: 1px;
   width: 30px; /* Initial width */
   height: 30px; /* Initial height */
   transition: width 0.3s, height 0.3s, background-color 0.3s, opacity 0.3s; /* Smooth transition */
@@ -1035,7 +1045,7 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   justify-content: center;
   overflow: hidden; /* Ensure smooth resizing */
   position: absolute; /* Position absolute within the container */
-  top: 42px; /* Align with container top */
+  top: 50px; /* Align with container top */
 }
 
 
@@ -1584,4 +1594,19 @@ color: black; /* Default color */
 
 .abcscroll::-webkit-scrollbar-thumb:hover {
   background: #555; /* Darker color on hover state for visibility */
+}
+
+
+
+.cards {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+
+
+.filter-group ul {
+  display: none; /* Hidden by default */
+  margin-top: 5px;
 }

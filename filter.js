@@ -68,17 +68,21 @@ document.addEventListener('DOMContentLoaded', function () {
   const map = document.getElementById('map');
   const searchbtn = document.getElementById('map-controls');
   const button = document.getElementById('toggleFilters');
-  const leafletControlLayers = document.querySelector('.leaflet-control-layers'); // Target the leaflet control layers
-  const leafletControlZoom = document.querySelector('.leaflet-control-zoom'); // Target the leaflet control zoom
-  const geopulseaname = document.querySelector('.geopulseaname'); // Target the GeoPulse Analytics link
-  const legendControl = document.querySelector('.collapse-button'); // Target the legend button
+  const leafletControlLayers = document.querySelector('.leaflet-control-layers');
+  const leafletControlLayersToggle = document.querySelector('.leaflet-control-layers-toggle');
+  const leafletControlZoom = document.querySelector('.leaflet-control-zoom');
+  const geopulseaname = document.querySelector('.geopulseaname');
+  const legendControl = document.querySelector('.collapse-button');
+  const datePicker = document.querySelector('.date-picker');
+  const summarySection = document.querySelector('.summary-section');
+  const cardsContainer = document.querySelector('.cards');
 
-  if (!filters || !map || !button || !searchbtn || !leafletControlLayers || !leafletControlZoom || !geopulseaname || !legendControl) {
+  // Check if all elements are available
+  if (!filters || !map || !button || !searchbtn || !leafletControlLayers || !leafletControlLayersToggle || !leafletControlZoom || !geopulseaname || !legendControl || !datePicker || !summarySection || !cardsContainer) {
     console.error('One or more elements are not found in the DOM.');
     return;
   }
 
-  // Set the title attribute
   button.setAttribute('title', 'Filter');
 
   let filtersVisible = false;
@@ -86,67 +90,64 @@ document.addEventListener('DOMContentLoaded', function () {
   button.addEventListener('click', function () {
     if (!filtersVisible) {
       console.log('Showing filters');
-      
-      // Show the filters and adjust the map and icons accordingly
+
       filters.style.marginLeft = '0';
       filters.style.opacity = '1';
       map.style.width = '81vw';
-
-      // Move the filter button
+      summarySection.style.position = 'absolute';
+      summarySection.style.right = '0';
+      summarySection.style.marginRight = '0';
+      summarySection.style.transform = 'translateX(-19vw)';
       button.style.top = "15vh";
-      button.style.right = '20vw'; // Moves with the filter
-      button.innerHTML = '<img src="image/filter.png" alt="Search Icon" id="search-icon">';
-
-      // Move the search button along with the map
+      button.style.right = '20vw';
+      button.innerHTML = '<img src="image/filter.png" alt="Filter Icon" id="search-icon">';
       searchbtn.style.right = 'calc(20vw - 1px)';
       searchbtn.style.top = '22vh';
-
-      // Move the leaflet control layers to stay in line with the map
-      leafletControlLayers.style.right = '21vw';
-      
-      // Move the leaflet zoom controls to stay in line with the map
+      leafletControlLayers.style.right = '35vw';
+      leafletControlLayersToggle.style.right = '30vw'; // Move layers toggle button
       leafletControlZoom.style.right = '21vw';
-
-      // Move the GeoPulse Analytics link to stay in line with the map
       geopulseaname.style.right = '21vw';
+      legendControl.style.right = '40vw';
+      datePicker.style.right = '20vw';
 
-      // Move the legend button to stay in line with the map
-      legendControl.style.right = '21vw';
-
+      cardsContainer.style.width = 'calc(100% - 1vw)';
+      cardsContainer.style.overflowX = 'auto';
     } else {
       console.log('Hiding filters');
 
-      // Hide the filters and restore the map and icons to their original positions
       filters.style.marginLeft = '-35vw';
       filters.style.opacity = '0';
       map.style.width = '100vw';
-
-      // Restore filter button position
+      summarySection.style.position = 'absolute';
+      summarySection.style.marginRight = '1vw';
+      summarySection.style.transform = 'translateX(0)';
       button.style.top = "15vh";
       button.style.right = '10px';
-      button.innerHTML = '<img src="image/filter.png" alt="Search Icon" id="search-icon">';
-
-      // Restore search button position
+      button.innerHTML = '<img src="image/filter.png" alt="Filter Icon" id="search-icon">';
       searchbtn.style.right = '10px';
       searchbtn.style.top = '22vh';
-
-      // Restore leaflet control layers position
       leafletControlLayers.style.right = '10px';
-      
-      // Restore leaflet zoom controls position
+      leafletControlLayersToggle.style.right = '10px'; // Reset layers toggle button position
       leafletControlZoom.style.right = '10px';
-
-      // Restore the GeoPulse Analytics link position
       geopulseaname.style.right = '10px';
-
-      // Restore the legend button position
       legendControl.style.right = '10px';
+      datePicker.style.right = '10px';
+
+      cardsContainer.style.width = '100%';
+      cardsContainer.style.overflowX = 'hidden';
     }
 
-    // Toggle the visibility state
     filtersVisible = !filtersVisible;
   });
 });
+
+
+
+
+
+  // Optional: Add a click event listener to cards or status items if needed
+  // For example, adjust the card size or position on status item click
+
 
 
 function updateTableStats(stats) {
@@ -1026,67 +1027,30 @@ function combineFilters(cql_filter123, filterString) {
     return filterString;
   }
 }
+function closeFilters() {
+  const filters = document.getElementById('filters');
+  filters.style.display = 'none'; // Hide the entire filter section
+}
 
-// console.log("hehehe")
+function toggleFilter(label) {
+  const icon = label.querySelector('.icon-container i'); // Find the icon inside the label
+  const filterInput = label.nextElementSibling; // Input follows the label
+  const filterList = filterInput.nextElementSibling; // ul follows the input
 
-// map.on("contextmenu", async (e) => {
-//   let bbox = map.getBounds().toBBoxString();
-//   let size = map.getSize();
+  // Toggle arrow direction
+  if (icon.classList.contains('fa-angle-down')) {
+    icon.classList.remove('fa-angle-down');
+    icon.classList.add('fa-angle-up');
 
+    // Show search input and filter list
+    filterInput.style.display = 'block';
+    filterList.style.display = 'block';
+  } else {
+    icon.classList.remove('fa-angle-up');
+    icon.classList.add('fa-angle-down');
 
-//   workspace = 'AutoDCR'
-//   // console.log("{{{{{{================")
-//   let filterString = await getCheckedValuesforpopuups();
-
-//   var searchtypefield = $("#search_type").val();
-//   var searchtypefield1 = $("#searchInputDashboard").val();
-
-//   let cqlFilter123 = "";
-
-//   if (searchtypefield1) {
-//     cqlFilter123 = `${searchtypefield} IN ('${searchtypefield1}')`;
-//   } else {
-    
-//     if (filterString.trim() !== "") {
-//       cqlFilter123 = combineFilters(cqlFilter123, filterString);
-//     }
-//   }
-
-
-//   console.log(cqlFilter123, "cqlFilter123");
-//   for (let layer in layerDetails) {
-//     let selectedKeys = layerDetails[layer];
-//     let urrr = `${main_url}${workspace}/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&FORMAT=image%2Fpng&TRANSPARENT=true&QUERY_LAYERS=${layer}&STYLES&LAYERS=${layer}&exceptions=application%2Fvnd.ogc.se_inimage&INFO_FORMAT=application/json&FEATURE_COUNT=50&X=${Math.round(e.containerPoint.x)}&Y=${Math.round(e.containerPoint.y)}&SRS=EPSG%3A4326&WIDTH=${size.x}&HEIGHT=${size.y}&BBOX=${bbox}&CQL_FILTER=${cqlFilter123}`;
-
-//     try {
-//       let response = await fetch(urrr);
-//       let html = await response.json();
-//       let features = html.features;
-//       console.log(features,"features")
-//       let detaildata = "";
-
-//       features.forEach((feature, index) => {
-//         let htmldata = feature.properties;
-//         let txtk1 = "";
-
-//         for (let key of selectedKeys) {
-//           if (htmldata.hasOwnProperty(key)) {
-//             let value = htmldata[key];
-//             txtk1 += "<tr><td>" + key + "</td><td>" + value + "</td></tr>";
-//           }
-//         }
-
-//         detaildata += `<div style='max-height: 350px; max-height: 250px;'><table style='width:110%;' class='popup-table'>
-//                       <tr><td colspan="2">Feature ${index + 1}</td></tr>${txtk1}
-//                       <tr><td>Co-Ordinates</td><td>${e.latlng}</td></tr>
-//                     </table></div>`;
-//       });
-
-//       L.popup().setLatLng(e.latlng).setContent(detaildata).openOn(map);
-//     } catch (error) {
-//       console.error("Error fetching data:", error);
-//     }
-//   }
-
-
-// });
+    // Hide search input and filter list
+    filterInput.style.display = 'none';
+    filterList.style.display = 'none';
+  }
+}
