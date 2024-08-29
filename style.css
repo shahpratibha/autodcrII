@@ -304,20 +304,13 @@ line-height: normal;
 
 
 .toggle-button {
-    background-color: #666666;
-    color: #FFF;
-    background: rgba(38, 38, 38, 0.60);
-    box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.10);
-    backdrop-filter: blur(2px);
-   font-size: 18px;
-   font-style: normal;
-   font-weight: 700;
-    line-height: normal;
+    width: 46.164px;
+    height: 44px;
+    /* flex-shrink: 0; */
+   /* font-size: 18px; */
     border: none;
-    border-radius: 8px;
   
     display: flex;
-    padding: 7px;
     justify-content: center;
     align-items: center;
     margin-bottom: 10px;
@@ -574,5 +567,96 @@ height: 32px;
     /* height: calc(100vh - 313px); */
 }
 
+.leaflet-control-layers {
+    margin-left:  73%;
+    
+  
+}
+/* Position the layer control on the left side of the map */
+.leaflet-left .leaflet-control-layers {
+    left: 10px;
+    right: auto;
+    top: 10px;
+    bottom: auto;
+    width: auto;
+    height: auto;
+    z-index: 1000; /* Ensure it stays above other map elements */
+}
 
-     
+/* Ensure the layers list opens to the left */
+.leaflet-control-layers-expanded {
+    left: 10px;
+    right: auto;
+    top: 50px;
+    border: 1px solid  #0077DA !important; 
+    height: 170px;
+    width: 180px; /* Adjust width as needed */
+    border-radius: 10px; /* Rounded corners */
+    overflow-y: scroll; /* Scroll only vertically */
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+
+
+/* Additional styling for the radio and checkbox labels */
+.leaflet-control-layers-base label,
+.leaflet-control-layers-overlays label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333; /* Darker text color for readability */
+}
+
+.leaflet-control-layers-base label span,
+.leaflet-control-layers-overlays label span {
+    display: inline-flex;
+    align-items: center;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+/* Adjust the appearance of the toggle button */
+.leaflet-control-layers-toggle {
+    width: 20px;
+    height: 20px;
+    top: 50px; /* Adjust this value to control how far from the top the button should be */
+    left: 10px; /* Adjust this value to control the distance from the left edge */
+    position: absolute; /* Ensure the button is positioned absolutely within the map container */
+  
+    border-radius: 50%;
+  
+    background-image: url('path/to/your-icon.svg'); /* Use an icon if needed */
+    background-size: 16px;
+    background-repeat: no-repeat;
+    background-position: center;
+   
+    transition: transform 0.2s ease-in-out; /* Smooth hover effect */
+    z-index: 1000; /* Ensure the button stays above other map elements */
+}
+
+
+/* Add a hover effect to the toggle button */
+.leaflet-control-layers-toggle:hover {
+    transform: scale(1.1); /* Slightly increase size on hover */
+}
+
+/* Optional: Styling the separator between base layers and overlays */
+/* .leaflet-control-layers-separator {
+    border-top: 1px solid #0077DA;
+    margin: 10px 0;
+} */
+
+.flatpickr-calendar.inline {
+    display: block;
+    position: relative;
+    left: -237px;
+    top: 12px !important;
+}
+.rangeMode .flatpickr-day {
+    margin-top: -7px;
+}
+.rangeMode .flatpickr-day {
+    margin-top: -14px !important;
+}
+.flatpickr-day.today {
+    /* border-color: #959ea9; */
+}
