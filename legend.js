@@ -5,7 +5,7 @@
 // GeoServer URL
 var geoserverUrl = "https://iwmsgis.pmc.gov.in/geoserver";
 
-var workspace = "Bhavan";
+var workspace = "AutoDCR";
 
 // Variable to keep track of legend visibility
 var legendVisible = true;
