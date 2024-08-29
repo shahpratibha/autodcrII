@@ -175,10 +175,10 @@ function toggleLayersControl() {
     }
 }
 
-// Add event listener to the button
-document.getElementById('toggle-layers-button').addEventListener('click', function() {
-    toggleLayersControl();
-});
+// // Add event listener to the button
+// document.getElementById('toggle-layers-button').addEventListener('click', function() {
+//     toggleLayersControl();
+// });
 
 
 
