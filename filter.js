@@ -65,6 +65,77 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
+// });
+
+// toggleFilterend---------------------------------------------------------
+// document.addEventListener('DOMContentLoaded', function () {
+//   const filters = document.getElementById('filters');
+//   const map = document.getElementById('map');
+//   const tableBtn = document.getElementById('openTableBtn');
+//   const tableinfo = document.getElementById('tablecontainer');
+//   const button = document.getElementById('toggleFilters');
+//   const layerToggle = document.getElementById('layerToggle');
+//   const layersList = document.querySelector('.leaflet-control-layers-list');
+  
+
+//   let filtersVisible = false;
+  
+
+//   button.addEventListener('click', function () {
+//     if (!filtersVisible) {
+//       map.classList.add('shifted'); // Move the map
+//       filters.classList.add('active');
+    
+//       // Adjust other elements as needed
+   
+//         button.innerHTML = '<i class="fa-solid fa-filter"></i>';
+//     } else {
+//       filters.classList.remove('active');
+//       map.classList.remove('shifted'); // Move the map back
+      
+//       tableinfo.style.right = '10px'; // Adjusted position for tableinfo
+//       button.innerHTML = '<i class="fa-solid fa-filter"></i>';
+//     }
+//     filtersVisible = !filtersVisible;
+//   });
+
+  
+//      window.closeFilters = function () {
+//                 filters.classList.remove('active');
+//                 map.classList.remove('shifted'); // Move the map back
+//                 filtersVisible = false;
+//             }
+
+//             window.toggleFilter = function (element) {
+//               const icon = element.querySelector('.icon-container i');
+//               const input = element.nextElementSibling; // Input field
+//               const ul = input.nextElementSibling; // UL list
+          
+//               // Check current display state
+//               const isListVisible = ul.style.display === 'block';
+          
+//               // Toggle visibility based on the current state
+//               if (isListVisible) {
+//                   ul.style.display = 'none';
+//                   input.style.display = 'none'; // Hide the input field
+//                   icon.classList.remove('fa-angle-up');
+//                   icon.classList.add('fa-angle-down');
+//               } else {
+//                   ul.style.display = 'block';
+//                   input.style.display = 'block'; // Show the input field
+//                   icon.classList.remove('fa-angle-down');
+//                   icon.classList.add('fa-angle-up');
+//               }
+//           };
+          
+//   // -------------------------------------------------------------------------
+
+//   // Ensure zoom control doesn't move
+//   const zoomControl = document.querySelector('.leaflet-control-zoom');
+//   if (zoomControl) {
+//     zoomControl.style.position = 'fixed';
+//   }
+// });
 document.addEventListener('DOMContentLoaded', function () {
   const filters = document.getElementById('filters');
   const map = document.getElementById('map');
@@ -87,8 +158,8 @@ document.addEventListener('DOMContentLoaded', function () {
       filters.style.marginLeft = '0';
       filters.style.opacity = '1';
       map.style.width = '81vw';
-      button.style.top = "15vh";
-      button.style.right = 'calc(0.8vw)';
+      button.style.top = "10vh";
+      button.style.right = 'calc(19.8vw)';
       button.innerHTML = '<img src="image/filter.png" alt="Search Icon" id="search-icon">';
       searchbtn.style.right = 'calc(0.8vw)';
       searchbtn.style.top = '22vh';
@@ -97,7 +168,7 @@ document.addEventListener('DOMContentLoaded', function () {
       filters.style.marginLeft = '-35vw';
       filters.style.opacity = '0';
       map.style.width = '100vw';
-      button.style.top = "15vh";
+      button.style.top = "10vh";
       // button.style.right = '40px';
       button.style.right = '10px';
       button.innerHTML = '<img src="image/filter.png" alt="Search Icon" id="search-icon">';
@@ -126,146 +197,127 @@ $(document).ready(function () {
   var cql_filter1 ='';
 
 
-  initializeCheckboxes();
-  function getCheckedValuess() {
-    var checkedValues = [];
-    var checkboxes = document.querySelectorAll("#checkboxContainer input[type='checkbox']:checked");
-    checkboxes.forEach(function(checkbox) {
-        checkedValues.push("'" + checkbox.value + "'"); // Push value wrapped in single quotes
-    });
+  // initializeCheckboxes();
+//   function getCheckedValuess() {
+//     var checkedValues = [];
+//     var checkboxes = document.querySelectorAll("#checkboxContainer input[type='checkbox']:checked");
+//     checkboxes.forEach(function(checkbox) {
+//         checkedValues.push("'" + checkbox.value + "'"); // Push value wrapped in single quotes
+//     });
 
-    if (checkedValues.length === 0) {
-        checkedValues.push("''"); // Push an empty string to simulate no results
-    }
+//     if (checkedValues.length === 0) {
+//         checkedValues.push("''"); // Push an empty string to simulate no results
+//     }
 
-    return checkedValues;
-}
+//     return checkedValues;
+// }
 
 
-document.getElementById("checkboxContainer").addEventListener("change", function() {
-    var checkedValues = getCheckedValuess();
+// document.getElementById("checkboxContainer").addEventListener("change", function() {
+//     var checkedValues = getCheckedValuess();
    
     var filterString1 = "";
- 
+
     loadinitialData(filterString1);
     // FilterAndZoom(filterString1)
- 
+
   getCheckedValues(function (filterString) {
-    console.log("Filter Stringinside: ", filterString1);
+    console.log("Filter Stringinside: ", filterString1); 
     const mainfilter = combineFilters(filterString1, filterString);
-    console.log("Filter Stringinside: ", mainfilter);
+    console.log("Filter Stringinside: ", mainfilter); 
     FilterAndZoom(mainfilter);
     DataTableFilter(mainfilter)
    
- 
-  });
+
+  // });
 });
 
 
 
 
-var filterString1 = "";
- 
-loadinitialData(filterString1);
-// FilterAndZoom(filterString1)
-
-getCheckedValues(function (filterString) {
-console.log("Filter Stringinside: ", filterString1);
-const mainfilter = combineFilters(filterString1, filterString);
-console.log("Filter Stringinside: ", mainfilter);
-FilterAndZoom(mainfilter);
-DataTableFilter(mainfilter)
+  
 
 
-// });
-});
+  function loadinitialData(cql_filter) {
 
+    const filternames = ["village_na", "applyfor","casetype","proposaltype","tdrzone","grossplotarea","developmentzonedp","owner_det_email"];//accordn column names , if want add one more filter criteria add here
+    var workspace = 'AutoDCR';
+    var layerName = 'auto_test';
+    filternames.forEach(function (filtername) {
+      var url = `${main_url}${workspace}/wms?service=WFS&version=1.1.0&request=GetFeature&typeName=${layerName}&propertyName=${filtername}&outputFormat=application/json`;
 
-
-
-
-
-
-function loadinitialData(cql_filter) {
-
-const filternames = ["applyfor", "width", "status", "type"];//accordn column names , if want add one more filter criteria add here
-var workspace = 'AutoDCR';
-var layerName = 'auto_test';
-filternames.forEach(function (filtername) {
-  var url = `${main_url}${workspace}/wms?service=WFS&version=1.1.0&request=GetFeature&typeName=${layerName}&propertyName=${filtername}&outputFormat=application/json`;
-
-    if (cql_filter) {
-        url += `&cql_filter=${encodeURIComponent(cql_filter)}`;
-     
-    }
- 
-  $.getJSON(url, function (data) {
-    var projectFiSet = new Set();
-    var projectFiMap = new Map();
-
-    // Iterate through the features and add non-null values to the set
-    $.each(data.features, function (index, feature) {
-      var column_name = feature.properties[filtername];
-      if (column_name !== null && column_name !== "#N/A") {
-        if (projectFiMap.has(column_name)) {
-          // projectFiMap.set(column_name, projectFiMap.get(column_name) + 1);
-          projectFiMap.set(column_name, (projectFiMap.get(column_name) || 0) + 1);
-        } else {
-          projectFiMap.set(column_name, 1);
+        if (cql_filter) {
+            url += `&cql_filter=${encodeURIComponent(cql_filter)}`;
+         
         }
-      }
+     
+      $.getJSON(url, function (data) {
+        var projectFiSet = new Set();
+        var projectFiMap = new Map();
+
+        // Iterate through the features and add non-null values to the set
+        $.each(data.features, function (index, feature) {
+          var column_name = feature.properties[filtername];
+          if (column_name !== null && column_name !== "#N/A") {
+            if (projectFiMap.has(column_name)) {
+              // projectFiMap.set(column_name, projectFiMap.get(column_name) + 1);
+              projectFiMap.set(column_name, (projectFiMap.get(column_name) || 0) + 1);
+            } else {
+              projectFiMap.set(column_name, 1);
+            }
+          }
+        });
+        var uniqueProjectFiList = Array.from(projectFiMap.entries()).map(([name, count]) => `${name} (${count})`);
+        populateDropdown(filtername, uniqueProjectFiList);
+      });
     });
-    var uniqueProjectFiList = Array.from(projectFiMap.entries()).map(([name, count]) => `${name} (${count})`);
-    populateDropdown(filtername, uniqueProjectFiList);
-  });
-});
 
     // FilterAndZoom(cql_filter)
   }
 
-  function combineFilters(cql_filter, filterString) {
-    return `(${cql_filter}) AND (${filterString})`;
-  }
+  // function combineFilters(cql_filter, filterString) {
+  //   return `(${cql_filter}) AND (${filterString})`;
+  // }
 
 
 });
 
 
-function initializeCheckboxes() {
-  var columns = { "All": "All","Haveli": "Haveli", "Mawal": "Mawal", "Bhor": "Bhor", "Purandar": "Purandar", "Mulshi": "Mulshi", "Khed": "Khed", "Shirur": "Shirur" };
-  var checkboxContainer = document.getElementById("checkboxContainer");
+// function initializeCheckboxes() {
+//   var columns = { "All": "All","Haveli": "Haveli", "Mawal": "Mawal", "Bhor": "Bhor", "Purandar": "Purandar", "Mulshi": "Mulshi", "Khed": "Khed", "Shirur": "Shirur" };
+//   var checkboxContainer = document.getElementById("checkboxContainer");
 
-  // Clear any existing checkboxes
-  checkboxContainer.innerHTML = '';
+//   // Clear any existing checkboxes
+//   checkboxContainer.innerHTML = '';
 
-  // Populate checkboxContainer with checkboxes
-  for (var key in columns) {
-    if (columns.hasOwnProperty(key)) {
-      var checkboxDiv = document.createElement("div");
-      checkboxDiv.classList.add("form-check", "me-2"); // Adjust classes as per your styling needs
+//   // Populate checkboxContainer with checkboxes
+//   for (var key in columns) {
+//     if (columns.hasOwnProperty(key)) {
+//       var checkboxDiv = document.createElement("div");
+//       checkboxDiv.classList.add("form-check", "me-2"); // Adjust classes as per your styling needs
 
-      var checkboxInput = document.createElement("input");
-      checkboxInput.type = "checkbox";
-      checkboxInput.classList.add("form-check-input");
-      checkboxInput.id = key;
-      checkboxInput.value = key; // Use key as the value (e.g., Work_ID, Budget_Code)
+//       var checkboxInput = document.createElement("input");
+//       checkboxInput.type = "checkbox";
+//       checkboxInput.classList.add("form-check-input");
+//       checkboxInput.id = key;
+//       checkboxInput.value = key; // Use key as the value (e.g., Work_ID, Budget_Code)
 
-      var checkboxLabel = document.createElement("label");
-      checkboxLabel.classList.add("form-check-label");
-      checkboxLabel.setAttribute("for", key);
-      checkboxLabel.textContent = columns[key]; // Use columns[key] to get the column name
+//       var checkboxLabel = document.createElement("label");
+//       checkboxLabel.classList.add("form-check-label");
+//       checkboxLabel.setAttribute("for", key);
+//       checkboxLabel.textContent = columns[key]; // Use columns[key] to get the column name
 
-      checkboxDiv.appendChild(checkboxInput);
-      checkboxDiv.appendChild(checkboxLabel);
+//       checkboxDiv.appendChild(checkboxInput);
+//       checkboxDiv.appendChild(checkboxLabel);
 
-      checkboxContainer.appendChild(checkboxDiv);
+//       checkboxContainer.appendChild(checkboxDiv);
 
-      if (key === "Work_ID") {
-        checkboxInput.checked = true;
-      }
-    }
-  }
-}
+//       if (key === "Work_ID") {
+//         checkboxInput.checked = true;
+//       }
+//     }
+//   }
+// }
 
 
 function DataTableFilter(cql_filter1) {
@@ -302,7 +354,7 @@ function populateDropdown(dropdownId, data) {
 
 function getCheckedValues(callback) {
   var selectedValues = {};
-  const filternames = ["village_na", "applyfor", "projecttype", "casetype","proposaltype","tdrzone","grossplotarea","developmentzonedp","owner_det_email"];
+  const filternames = ["village_na", "applyfor","casetype","proposaltype","tdrzone","grossplotarea","developmentzonedp","owner_det_email"];
 
   filternames.forEach(function (filtername) {
     selectedValues[filtername] = []; // Initialize empty array for each filtername
@@ -363,7 +415,7 @@ function getCheckedValues(callback) {
 
 function FilterAndZoom(filter) {
   fitbous(filter)
-  auto_test_buffer.setParams({
+  Missing_Links_buffer.setParams({
     CQL_FILTER: filter,
     maxZoom: 19.5,
   }).addTo(map);
@@ -534,15 +586,6 @@ function showtable(typeName, geoServerURL, cqlFilter, headers) {
     var topContainer = document.createElement('div');
     topContainer.className = 'top-container';
 
-    // Create download CSV button
-    var downloadButton = document.createElement('button');
-    downloadButton.innerHTML = '<i class="fa-solid fa-download"></i>';
-    downloadButton.className = 'download-button';
-    downloadButton.addEventListener('click', function () {
-      downloadCSV(data, headers);
-    });
-    topContainer.appendChild(downloadButton);
-
     // Create minimize button
     var minimizeButton = document.createElement('button');
     minimizeButton.innerHTML = '<i class="fas fa-minus"></i>';
@@ -556,8 +599,7 @@ function showtable(typeName, geoServerURL, cqlFilter, headers) {
       } else {
         tableDetail.style.display = 'none';
         minimizeButton.style.display = 'none';
-        downloadButton.style.display='none';
-      
+        // minimizeButton.innerTextpagination = '+';
         document.getElementById('openTableBtn').style.display = 'block'; // Show the show button
       }
     });
@@ -598,7 +640,9 @@ function showtable(typeName, geoServerURL, cqlFilter, headers) {
 
     var tbody = document.createElement('tbody');
 
-     data.forEach((item, index) => {
+    // Populate table rows with data
+    
+    data.forEach((item, index) => {
       var row = document.createElement('tr');
 
       // Add serial number as the first column
@@ -615,7 +659,7 @@ function showtable(typeName, geoServerURL, cqlFilter, headers) {
         }
       });
 
-      
+      // Add click listener to highlight the geometry on the map
       row.addEventListener('click', function () {
         // console.log(item);
         var boundsLayer = L.geoJSON(item.geometry, {
@@ -666,11 +710,8 @@ function showtable(typeName, geoServerURL, cqlFilter, headers) {
   function showTable() {
     var tableDetail = document.querySelector('.tableDetail');
     var minimizeButton = document.querySelector('.minimize-button');
-    var downloadButton = document.querySelector('.download-button')
     tableDetail.style.display = 'block';
     minimizeButton.style.display = 'block';
-    minimizeButton.style.display = 'block';
-    downloadButton.style.display ='block';
     // minimizeButton.innerText = '-';
     document.getElementById('openTableBtn').style.display = 'none'; // Hide the show button
   }
@@ -678,37 +719,6 @@ function showtable(typeName, geoServerURL, cqlFilter, headers) {
   // Add event listener to the show table button
   document.getElementById('openTableBtn').addEventListener('click', showTable);
 
-
-  // Function to download table data as CSV
-  
-  function downloadCSV(data, headers) {
-    var csvContent = "data:text/csv;charset=utf-8,";
-    csvContent += headers.join(",") + "\n"; // Add headers
-
-    data.forEach((item, index) => {
-        var row = [index + 1]; // Add serial number as the first column
-        headers.slice(1).forEach(header => {
-            if (header !== 'Serial No' && header !== 'geometry') {
-                // Ensure NAME column values are not split
-                let value = item[header] ? `"${item[header]}"` : '';
-                row.push(value); // Handle cases where item[header] might be undefined
-            }
-        });
-        csvContent += row.join(",") + "\n"; // Add row
-    });
-
-    var encodedUri = encodeURI(csvContent);
-    var link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "table_data.csv");
-    document.body.appendChild(link);
-
-    link.click(); // This will download the data file named "table_data.csv"
-}
-
-
-
-  
 
   // -------------------------------------------------------------
   function tableData(typeName, geoServerURL, cqlFilter, headers) {
@@ -721,20 +731,20 @@ function showtable(typeName, geoServerURL, cqlFilter, headers) {
         headers.forEach(header => {
           // Convert header to camelCase or other naming convention if necessary
           let propertyName = header.replace(/ /g, '');
-          if (header === 'length') {
+          if (header === 'length_m') {
             mappedData[propertyName] = (feature.properties[header]).toFixed(2); // Format to two decimal places
         } else {
             mappedData[propertyName] = feature.properties[header];
         }
         });
         mappedData.geometry = feature.geometry;
-        work_id.push(feature.properties.link_no)
+        work_id.push(feature.properties.id)
 
         return mappedData;
       });
 
       const shapeAreaSum = data.features.reduce((sum, feature) => {
-        return sum + feature.properties.length;
+        return sum + feature.properties.length_m;
       }, 0);
       let uniqueCount = new Set(work_id).size;
       console.log(work_id.length, "lllllllllllll",work_id,uniqueCount)
@@ -765,7 +775,7 @@ $(document).ready(function () {
 
 
 document.addEventListener('DOMContentLoaded', (event) => {
-  var columns = { "name": "Road Name", "village_na": "village_na", "width": "Road width","link_no":"Link_number" };
+  var columns = { "name": "Road Name", "applyfor": "applyfor", "width": "Road width","link_no":"Link_number" };
   var select = document.getElementById("search_type");
 
   // Populate dropdown with column names
@@ -778,6 +788,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     }
   }
 
+  // Initialize selected value variable
   let selectedValue;
 
   $("#search_type").change(function () {
@@ -843,13 +854,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
             cqlFilter = `${searchtypefield} IN ('${selectedValue}')`;
 
-            auto_test_buffer.setParams({
+            Missing_Links_buffer.setParams({
               CQL_FILTER: cqlFilter,
               maxZoom: 19.5,
               // styles: "Missing_Link_"
             });
 
-            auto_test_buffer.addTo(map).bringToFront();
+            Missing_Links_buffer.addTo(map).bringToFront();
 
             MissingLinkLine.setParams({
               CQL_FILTER: cqlFilter,
@@ -992,4 +1003,67 @@ function combineFilters(cql_filter123, filterString) {
   }
 }
 
+// console.log("hehehe")
+
+map.on("contextmenu", async (e) => {
+  let bbox = map.getBounds().toBBoxString();
+  let size = map.getSize();
+
+
+  workspace = 'AutoDCR'
+  // console.log("{{{{{{================")
+  let filterString = await getCheckedValuesforpopuups();
+
+  var searchtypefield = $("#search_type").val();
+  var searchtypefield1 = $("#searchInputDashboard").val();
+
+  let cqlFilter123 = "";
+
+  if (searchtypefield1) {
+    cqlFilter123 = `${searchtypefield} IN ('${searchtypefield1}')`;
+  } else {
+    
+    if (filterString.trim() !== "") {
+      cqlFilter123 = combineFilters(cqlFilter123, filterString);
+    }
+  }
+
+
+  console.log(cqlFilter123, "cqlFilter123");
+  for (let layer in layerDetails) {
+    let selectedKeys = layerDetails[layer];
+    let urrr = `${main_url}${workspace}/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&FORMAT=image%2Fpng&TRANSPARENT=true&QUERY_LAYERS=${layer}&STYLES&LAYERS=${layer}&exceptions=application%2Fvnd.ogc.se_inimage&INFO_FORMAT=application/json&FEATURE_COUNT=50&X=${Math.round(e.containerPoint.x)}&Y=${Math.round(e.containerPoint.y)}&SRS=EPSG%3A4326&WIDTH=${size.x}&HEIGHT=${size.y}&BBOX=${bbox}&CQL_FILTER=${cqlFilter123}`;
+
+    try {
+      let response = await fetch(urrr);
+      let html = await response.json();
+      let features = html.features;
+      console.log(features,"features")
+      let detaildata = "";
+
+      features.forEach((feature, index) => {
+        let htmldata = feature.properties;
+        let txtk1 = "";
+
+        for (let key of selectedKeys) {
+          if (htmldata.hasOwnProperty(key)) {
+            let value = htmldata[key];
+            txtk1 += "<tr><td>" + key + "</td><td>" + value + "</td></tr>";
+          }
+        }
+
+        detaildata += `<div style='max-height: 350px; max-height: 250px;'><table style='width:110%;' class='popup-table'>
+                      <tr><td colspan="2">Feature ${index + 1}</td></tr>${txtk1}
+                      <tr><td>Co-Ordinates</td><td>${e.latlng}</td></tr>
+                    </table></div>`;
+      });
+
+      L.popup().setLatLng(e.latlng).setContent(detaildata).openOn(map);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  }
+
+
+});
 
