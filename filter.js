@@ -87,22 +87,22 @@ document.addEventListener('DOMContentLoaded', function () {
       filters.style.marginLeft = '0';
       filters.style.opacity = '1';
       map.style.width = '81vw';
-      button.style.top = "15vh";
-      button.style.right = 'calc(0.8vw)';
+      button.style.top = "4vh";
+      button.style.right = 'calc(19.8vw)';
       button.innerHTML = '<img src="image/filter.png" alt="Search Icon" id="search-icon">';
       searchbtn.style.right = 'calc(0.8vw)';
-      searchbtn.style.top = '22vh';
+      searchbtn.style.top = '17vh';
       searchbtn.style.right = 'calc(20vw - 1px)';
     } else {
       filters.style.marginLeft = '-35vw';
       filters.style.opacity = '0';
       map.style.width = '100vw';
-      button.style.top = "15vh";
+      button.style.top = "4vh";
       // button.style.right = '40px';
       button.style.right = '10px';
       button.innerHTML = '<img src="image/filter.png" alt="Search Icon" id="search-icon">';
       searchbtn.style.right = '40px';
-      searchbtn.style.top = '22vh';
+      searchbtn.style.top = '17vh';
       searchbtn.style.right = '10px';
       //tableinfo.style.right = '10px'; // Adjusted position for //tableinfo
     }
