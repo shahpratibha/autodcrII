@@ -54,6 +54,9 @@ var Revenue_Layer1 = L.tileLayer.wms("https://iwmsgis.pmc.gov.in/geoserver/AutoD
   version: "1.1.0",
   opacity: 1
 });
+
+
+
 document.addEventListener('DOMContentLoaded', function () {
   const filters = document.getElementById('filters');
   const map = document.getElementById('map');
@@ -67,6 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const datePicker = document.querySelector('.date-picker');
   const summarySection = document.querySelector('.summary-section');
   const cardsContainer = document.querySelector('.cards');
+  const summaryHeader = document.querySelector('.summary-header'); // Select the summary header
 
   // Check if all elements are available
   if (!filters || !map || !button || !searchbtn || !leafletControlLayers || !leafletControlLayersToggle || !leafletControlZoom || !geopulseaname || !legendControl || !datePicker || !summarySection || !cardsContainer) {
@@ -91,11 +95,11 @@ document.addEventListener('DOMContentLoaded', function () {
       summarySection.style.transform = 'translateX(-19vw)';
       button.style.top = "15vh";
       button.style.right = '20vw';
-      button.innerHTML = '<img src="image/filter.png" alt="Filter Icon" id="search-icon">';
+      button.innerHTML = '<img src="image/filter.svg" alt="Filter Icon" id="search-icon">';
       searchbtn.style.right = 'calc(20vw - 1px)';
       searchbtn.style.top = '22vh';
       leafletControlLayers.style.right = '35vw';
-      leafletControlLayersToggle.style.right = '30vw'; // Move layers toggle button
+      leafletControlLayersToggle.style.right = '30vw';
       leafletControlZoom.style.right = '21vw';
       geopulseaname.style.right = '21vw';
       legendControl.style.right = '40vw';
@@ -103,6 +107,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
       cardsContainer.style.width = 'calc(100% - 1vw)';
       cardsContainer.style.overflowX = 'auto';
+      summaryHeader.style.position = 'fixed'; // Keep the summary header fixed
+      summaryHeader.style.top = '10vh'; // Adjust based on your needs
     } else {
       console.log('Hiding filters');
 
@@ -114,11 +120,11 @@ document.addEventListener('DOMContentLoaded', function () {
       summarySection.style.transform = 'translateX(0)';
       button.style.top = "15vh";
       button.style.right = '10px';
-      button.innerHTML = '<img src="image/filter.png" alt="Filter Icon" id="search-icon">';
+      button.innerHTML = '<img src="image/filter.svg" alt="Filter Icon" id="search-icon">';
       searchbtn.style.right = '10px';
       searchbtn.style.top = '22vh';
       leafletControlLayers.style.right = '10px';
-      leafletControlLayersToggle.style.right = '10px'; // Reset layers toggle button position
+      leafletControlLayersToggle.style.right = '10px';
       leafletControlZoom.style.right = '10px';
       geopulseaname.style.right = '10px';
       legendControl.style.right = '10px';
@@ -126,14 +132,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
       cardsContainer.style.width = '100%';
       cardsContainer.style.overflowX = 'hidden';
+      summaryHeader.style.position = 'relative'; // Reset the summary header
     }
 
     filtersVisible = !filtersVisible;
   });
 });
-
-
-
 
 
   // Optional: Add a click event listener to cards or status items if needed
@@ -244,30 +248,17 @@ function combineFilters(cql_filter123, filterString) {
     return filterString;
   }
 }
-function closeFilters() {
-  const filters = document.getElementById('filters');
-  filters.style.display = 'none'; // Hide the entire filter section
-}
 
-function toggleFilter(label) {
-  const icon = label.querySelector('.icon-container i'); // Find the icon inside the label
-  const filterInput = label.nextElementSibling; // Input follows the label
-  const filterList = filterInput.nextElementSibling; // ul follows the input
+  // Additional functionality to show/hide filter content if needed
+  const filterInput = label.nextElementSibling; // Assuming the input follows the label
+  const filterList = filterInput.nextElementSibling; // Assuming the ul follows the input
 
-  // Toggle arrow direction
-  if (icon.classList.contains('fa-angle-down')) {
-    icon.classList.remove('fa-angle-down');
-    icon.classList.add('fa-angle-up');
-
-    // Show search input and filter list
-    filterInput.style.display = 'block';
+  // Toggle the visibility of the filter list
+  if (filterList.style.display === 'none' || !filterList.style.display) {
     filterList.style.display = 'block';
   } else {
-    icon.classList.remove('fa-angle-up');
-    icon.classList.add('fa-angle-down');
-
-    // Hide search input and filter list
-    filterInput.style.display = 'none';
     filterList.style.display = 'none';
   }
-}
+
+
+

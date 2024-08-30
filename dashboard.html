@@ -85,13 +85,23 @@
 
                 <div class="map-controls">
                     <button class="toggle-button" id="toggleFilters">
-                        <img src="image/filter.png" alt="Search Icon" id="search-icon">
+                        <img src="image/filter.svg" alt="" id="search-icon">
                     </button>
-                    
+                
                 </div>
+<!-- 
+                <button class="toggle-button" id="toggleFilters">
+                    <img src="image/table.svg" alt="" id="search-icon">
+                </button> -->
+
+               
+            
+
+                <button id="openTableBtn"><img src="image/table.svg" alt="" class="tablebtn"></button>
+
                 
                 <div class="filters" id="filters">
-                    <h3>Filters <span class="close" onclick="closeFilters()">×</span></h3>
+                    <h3>Filters <span class="close" onclick="closeFilters()"></span></h3>
                     <div class="filter_div" >
                         <div class="filter-group">
                             <label for="village_na" onclick="toggleFilter(this)">
@@ -108,13 +118,14 @@
                           
                       <div class="filter-group">
 
-                        <label for="wapplyfor" onclick="toggleFilter(this)">Apply For <span class="icon-
+                        <label for="applyfor" onclick="toggleFilter(this)">Apply For <span class="icon-
                             container"><i
                               class="fa-solid fa-angle-down"></i></span><span class="selected-count"></s
                                 pan></label>
                         <input type="text" placeholder="Search" class="filter-input" id="widthSearch">
                         <ul class="select2 abcscroll" multiple="multiple" id="applyfor"></ul>
                       </div>
+
                       <div class="filter-group">
                         <label for="projecttype" onclick="toggleFilter(this)">projecttype <span class="icon-container"><i
                               class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
