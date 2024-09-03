@@ -5,7 +5,7 @@ document.getElementById('status-wise-button').addEventListener('click', function
     document.querySelector('.leaflet-top.leaflet-left .leaflet-bar').classList.add('move-up');
     document.querySelector('.leaflet-control-scale').classList.add('move-up');
     document.querySelector('.container-fluid').classList.add('summary-section-open');
-    document.querySelector('.geopulseaname').classList.add('move-up'); // Add class for moving up
+    document.querySelector('.geopulseaname').classList.add('move-up'); // Add class for moving upgi
 
     this.classList.toggle('btn-active');
 });

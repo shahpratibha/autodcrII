@@ -367,10 +367,10 @@ document.addEventListener('DOMContentLoaded', function () {
             proposalInfo.style.transform = 'translateX(-1vw)';
             
             button.style.top = "6vh";
-            button.style.right = '20vw';
+            button.style.right = '19.1000vw';
             button.innerHTML = '<img src="image/filter.svg" alt="" id="search-icon">';
-            searchbtn.style.right = 'calc(20vw - 1px)';
-            searchbtn.style.top = '22vh';
+            searchbtn.style.right = '20vw';  // Keep search button in sync with filters
+            searchbtn.style.top = '16vh';
             
             leafletControlLayers.style.right = '35vw';
             leafletControlZoom.style.right = '21vw';
@@ -381,8 +381,8 @@ document.addEventListener('DOMContentLoaded', function () {
             cardsContainer.style.width = 'calc(100% - -1vw)';
 
             // Move the openTableBtn when filters are shown
-            openTableBtn.style.right = '20.900vw'; // Adjust as needed
-            openTableBtn.style.top = '25vh'; // Adjust as needed
+            openTableBtn.style.right = '19.900vw'; // Adjust as needed
+            openTableBtn.style.top = '26vh'; // Adjust as needed
             
         } else {
             console.log('Hiding filters');
@@ -401,10 +401,10 @@ document.addEventListener('DOMContentLoaded', function () {
             proposalInfo.style.transform = 'translateX(0)';
             
             button.style.top = "6vh";
-            button.style.right = '10px';
+            button.style.right = '0px';
             button.innerHTML = '<img src="image/filter.svg" alt="" id="search-icon">';
-            searchbtn.style.right = '10px';
-            searchbtn.style.top = '22vh';
+            searchbtn.style.right = '10px'; // Restore original position of search button
+            searchbtn.style.top = '16vh';
             
             leafletControlLayers.style.right = '10px';
             leafletControlZoom.style.right = '10px';
@@ -414,14 +414,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Restore the position of openTableBtn when filters are hidden
             openTableBtn.style.right = '10px'; // Adjust as needed
-            openTableBtn.style.top = '25vh'; // Adjust as needed
+            openTableBtn.style.top = '25.500vh'; // Adjust as needed
         }
 
         filtersVisible = !filtersVisible;
     });
 });
-
-
 
 
 

@@ -1824,7 +1824,7 @@ overflow: visible;
 
  
   #data-table th, #data-table td {
-    padding: 8px 12px;
+    /* padding: 8px 12px; */
     border: 1px solid #ddd;
   }
 
@@ -1837,5 +1837,4 @@ overflow: visible;
   #data-table thead tr {
     background-color:#E6F1FB;
   }
-
-
+  
