@@ -49,14 +49,6 @@
       </div>
     </div>
 
-    <!-- Move showCount to the bottom -->
-    <!-- <div class="showCount">
-          <h5 class="tablestats" id="tablestats" style="font-size: large;"> </h5>
-        </div>
-      </div>
-
- -->
-
     <!-- <button id="printTableBtn">Download CSV</button> -->
     <div id="tablecontainer"></div>
 
@@ -152,12 +144,227 @@
         </div>
       </div>
     </div>
-    <!-- <div class="map-controls">
-                  
-                  
-              </div> --></div>
+ 
+  </div>
 
 
+
+
+  <!-- Summary Section -->
+  <div class="summary-section">
+    <div class="summary-header">
+      <h2>Summary of Commencement</h2>
+      <div class="proposal-info">
+        <span>Total number of proposals: 06</span>
+        <div class="proposal-icons">
+          <button class="btn-action"><img src="./image/Refresh.svg" alt="Refresh"></button>
+          <button class="btn-action" id="printButton"><img src="./image/Print.svg" alt="Print"></button>
+          <button class="btn-action" id="excelButton"><img src="./image/Excel.svg" alt="Export">
+          </button>
+          <div id="excelData"></div>
+        </div>
+
+        <div class="navigation-icons">
+          <button class="slider-button prev-button">&lt;</button>
+          <button class="slider-button next-button">&gt;</button>
+          <button id="closeButton">&times;</button> <!-- Close button -->
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <!--card1-->
+    <div class="cards slider">
+      <div class="slider-item">
+        <div class="building-permissions">Building Permissions</div>
+        <div class="main-container">
+          <div class="text-small text-600 text-right position-total">Total</div>
+          <div class="text-small text-400 text-right position-submitted">Submitted</div>
+          <div class="text-small text-400 text-right position-approved">Approved</div>
+          <div class="text-small text-400 text-right position-process">In Process</div>
+          <div class="text-small text-400 text-right position-rejected">Rejected</div>
+          <div class="text-small text-400 text-center position-bottom-1">1500</div>
+          <div class="text-small text-400 text-center position-bottom-2">1000</div>
+          <div class="text-small text-400 text-center position-bottom-3">500</div>
+          <div class="text-small text-400 text-center position-bottom-4">0</div>
+          <div class="border-solid" style="left: 265px; top: 176px;"></div>
+          <div class="border-solid" style="left: 205px; top: 176px;"></div>
+          <div class="border-solid" style="left: 145px; top: 176px;"></div>
+          <div class="border-solid" style="left: 93px; top: 176px;"></div>
+          <div class="border-dotted-vertical"></div>
+          <div class="border-dotted-horizontal"></div>
+          <div class="bars-container">
+            <div class="bar-item">
+              <div class="bar-red"></div>
+              <div class="text-small text-400">770</div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-yellow"></div>
+              <div class="text-small text-400">147</div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-cyan"></div>
+              <div class="text-small text-400">397</div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-green"></div>
+              <div class="text-small text-400">323</div>
+            </div>
+            <div class="bar-item" style="align-self: stretch;">
+              <div class="bar-blue"></div>
+              <div class="text-small text-400">1315</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!--card2-->
+      <div class=" slider slider-item">
+        <div class="header-text">Plinth</div>
+        <div class="content-box">
+          <div class="label total">Total</div>
+          <div class="label submitted">Submitted</div>
+          <div class="label approved">Approved</div>
+          <div class="label in-process">In Process</div>
+          <div class="label rejected">Rejected</div>
+
+          <div class="number total">750</div>
+          <div class="number submitted">500</div>
+          <div class="number approved">250</div>
+          <div class="number in-process">0</div>
+
+          <div class="vertical-line vertical-line-1"></div>
+          <div class="vertical-line vertical-line-2"></div>
+          <div class="vertical-line vertical-line-3"></div>
+          <div class="vertical-line vertical-line-4"></div>
+          <div class="horizontal-dotted-line"></div>
+          <div class="bottom-dotted-line"></div>
+
+          <div class="status-bars">
+            <div class="status-bar">
+              <div class="bar bar-0"></div>
+              <div class="label">0</div>
+            </div>
+            <div class="status-bar">
+              <div class="bar bar-6-yellow"></div>
+              <div class="label">6</div>
+            </div>
+            <div class="status-bar">
+              <div class="bar bar-6-blue"></div>
+              <div class="label">6</div>
+            </div>
+            <div class="status-bar">
+              <div class="bar bar-593"></div>
+              <div class="label">593</div>
+            </div>
+            <div class="status-bar">
+              <div class="bar bar-12"></div>
+              <div class="label">12</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!--card3-->
+      <div class="slider slider-item">
+
+        <div class="building-permissions">Building Permissions</div>
+        <div class="main-container">
+          <div class="text-small text-600 text-right position-total">Total</div>
+          <div class="text-small text-400 text-right position-submitted">Submitted</div>
+          <div class="text-small text-400 text-right position-approved">Approved</div>
+          <div class="text-small text-400 text-right position-process">In Process</div>
+          <div class="text-small text-400 text-right position-rejected">Rejected</div>
+          <div class="text-small text-400 text-center position-bottom-1">1500</div>
+          <div class="text-small text-400 text-center position-bottom-2">1000</div>
+          <div class="text-small text-400 text-center position-bottom-3">500</div>
+          <div class="text-small text-400 text-center position-bottom-4">0</div>
+          <div class="border-solid" style="left: 265px; top: 176px;"></div>
+          <div class="border-solid" style="left: 205px; top: 176px;"></div>
+          <div class="border-solid" style="left: 145px; top: 176px;"></div>
+          <div class="border-solid" style="left: 93px; top: 176px;"></div>
+          <div class="border-dotted-vertical"></div>
+          <div class="border-dotted-horizontal"></div>
+          <div class="bars-container">
+            <div class="bar-item">
+              <div class="bar-red"></div>
+              <div class="text-small text-400">770</div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-yellow"></div>
+              <div class="text-small text-400">147</div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-cyan"></div>
+              <div class="text-small text-400">397</div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-green"></div>
+              <div class="text-small text-400">323</div>
+            </div>
+            <div class="bar-item" style="align-self: stretch;">
+              <div class="bar-blue"></div>
+              <div class="text-small text-400">1315</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--card4-->
+      <div class="  slider-item">
+        <div class="header-text">Plinth</div>
+        <div class="content-box">
+          <div class="label total">Total</div>
+          <div class="label submitted">Submitted</div>
+          <div class="label approved">Approved</div>
+          <div class="label in-process">In Process</div>
+          <div class="label rejected">Rejected</div>
+
+          <div class="number total">750</div>
+          <div class="number submitted">500</div>
+          <div class="number approved">250</div>
+          <div class="number in-process">0</div>
+
+          <div class="vertical-line vertical-line-1"></div>
+          <div class="vertical-line vertical-line-2"></div>
+          <div class="vertical-line vertical-line-3"></div>
+          <div class="vertical-line vertical-line-4"></div>
+          <div class="horizontal-dotted-line"></div>
+          <div class="bottom-dotted-line"></div>
+
+          <div class="status-bars">
+            <div class="status-bar">
+              <div class="bar bar-0"></div>
+              <div class="label">0</div>
+            </div>
+            <div class="status-bar">
+              <div class="bar bar-6-yellow"></div>
+              <div class="label">6</div>
+            </div>
+            <div class="status-bar">
+              <div class="bar bar-6-blue"></div>
+              <div class="label">6</div>
+            </div>
+            <div class="status-bar">
+              <div class="bar bar-593"></div>
+              <div class="label">593</div>
+            </div>
+            <div class="status-bar">
+              <div class="bar bar-12"></div>
+              <div class="label">12</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+  </div>
 
   <div id="map"></div>
   <!--.tab-section OPTION-->
@@ -1139,9 +1346,15 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
 
 
+<<<<<<< HEAD
   <!-- <script src="legend.js"></script> -->
 
 <script src="script1.js"></script>
+=======
+  <script src="legend.js"></script>
+<script src="map.js"></script>
+<script src="script.js"></script>
+>>>>>>> f827db1a5aad874bb4b2e48fbc562004b01c8728
   <script src="filter.js"></script>
   <script src="script2.js"></script>
 

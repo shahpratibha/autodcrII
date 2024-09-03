@@ -2,18 +2,18 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PMC</title>
-    <link rel="icon" href="png/pmcjpeg.png" type="image/x-icon">
+    <link rel="icon" href="png/pmcjpeg.png" type="image/x-icon" />
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
 </head>
 
 <body>
@@ -24,153 +24,137 @@
                 <!-- Control Panel -->
                 <div class="control-panel">
                     <button class="toggle-button1">
-                        <img src="image/pmcjpeg.png" alt="Button Image">
+                        <img src="image/pmcjpeg.png" alt="Button Image" />
                     </button>
 
                     <a href="https://geopulsea.com/" class="geopulseaname">@GeoPulse Analytics</a>
                     <div class="btn-group">
-                        <button class="btn-blue" id="status-wise-button">Status Wise</button>
+                        <button class="btn-blue" id="status-wise-button">
+                            Status Wise
+                        </button>
                         <button class="btn-blue btn-area">Area Wise</button>
                     </div>
-
                 </div>
 
                 <!-- Date Picker -->
                 <div class="date-picker">
-
-                    <div class="date-range" id="date-range-display">April 1, 2024 – March 31, 2025
+                    <div class="date-range" id="date-range-display">
+                        April 1, 2024 – March 31, 2025
                         <div class="calendar-icon" id="calendar-icon">
-                            <img src="image/time.png" alt="">
+                            <img src="image/time.png" alt="" />
                         </div>
                     </div>
 
                     <button id="select-year-button">Select Year</button>
-                    <input type="date" id="date-input" style="display: none;">
+                    <input type="date" id="date-input" style="display: none" />
                 </div>
             </div>
         </div>
-
-        <!-- Move showCount to the bottom -->
-        <!-- <div class="showCount">
-            <h5 class="tablestats" id="tablestats" style="font-size: large;"> </h5>
-          </div>
-        </div>
-  
-   -->
 
         <!-- <button id="printTableBtn">Download CSV</button> -->
         <div id="tablecontainer"></div>
 
         <!-- Map Section -->
         <div class="north-arrow-container">
-            <img src="image/North.png" class="north-arrow" alt="North Arrow">
+            <img src="image/North.png" class="north-arrow" alt="North Arrow" />
         </div>
-
 
         <div class="row m-0">
             <div class="col-12 p-0">
                 <div id="map"></div>
                 <div class="map-controls" id="map-controls">
                     <button id="search-button" class="search-button">
-                        <img src="image/Search.svg" alt="Search Icon" id="search-icon">
+                        <img src="image/Search.svg" alt="Search Icon" id="search-icon" />
                     </button>
                     <div class="search-wrapper">
-                        <input type="text" id="searchInputDashboard" placeholder="search...">
-                        <img src="image/Close.svg" alt="Close Icon" id="close-icon" class="close-icon">
+                        <input type="text" id="searchInputDashboard" placeholder="search..." />
+                        <img src="image/Close.svg" alt="Close Icon" id="close-icon" class="close-icon" />
                     </div>
                 </div>
 
                 <div class="map-controls">
                     <button class="toggle-button" id="toggleFilters">
-                        <img src="image/filter.png" alt="Search Icon" id="search-icon">
+                        <img src="image/filter.png" alt="Search Icon" id="search-icon" />
                     </button>
-
                 </div>
 
                 <div class="filters" id="filters">
-                    <h3>Filters <span class="close-icon" onclick="closeFilters()">×</span></h3>
+                    <h3>
+                        Filters <span class="close-icon" onclick="closeFilters()">×</span>
+                    </h3>
                     <div class="filter_div">
                         <div class="filter-group">
-                            <label for="village_na" onclick="toggleFilter(this)">Village <span class="icon-container"><i
-                                        class="fa-solid fa-angle-down"></i></span><span
+                            <label for="village_na" onclick="toggleFilter(this)">Village
+                                <span class="icon-container"><i class="fa-solid fa-angle-down"></i></span><span
                                     class="selected-count"></span></label>
-                            <input type="text" placeholder="Search" class="filter-input" id="villageSearch">
-                            <ul class="select2  abcscroll" multiple="multiple" id="village_na"></ul>
+                            <input type="text" placeholder="Search" class="filter-input" id="villageSearch" />
+                            <ul class="select2 abcscroll" multiple="multiple" id="village_na"></ul>
                         </div>
                         <div class="filter-group">
-                            <label for="wapplyfor" onclick="toggleFilter(this)">Apply For <span
-                                    class="icon-container"><i class="fa-solid fa-angle-down"></i></span><span
+                            <label for="wapplyfor" onclick="toggleFilter(this)">Apply For
+                                <span class="icon-container"><i class="fa-solid fa-angle-down"></i></span><span
                                     class="selected-count"></span></label>
-                            <input type="text" placeholder="Search" class="filter-input" id="widthSearch">
+                            <input type="text" placeholder="Search" class="filter-input" id="widthSearch" />
                             <ul class="select2 abcscroll" multiple="multiple" id="applyfor"></ul>
                         </div>
                         <div class="filter-group">
-                            <label for="projecttype" onclick="toggleFilter(this)">projecttype <span
-                                    class="icon-container"><i class="fa-solid fa-angle-down"></i></span><span
+                            <label for="projecttype" onclick="toggleFilter(this)">projecttype
+                                <span class="icon-container"><i class="fa-solid fa-angle-down"></i></span><span
                                     class="selected-count"></span></label>
-                            <input type="text" placeholder="Search" class="filter-input" id="statusSearch">
+                            <input type="text" placeholder="Search" class="filter-input" id="statusSearch" />
                             <ul class="select2" multiple="multiple" id="projecttype"></ul>
                         </div>
                         <div class="filter-group">
-                            <label for="casetype" onclick="toggleFilter(this)">Casetype <span class="icon-container"><i
-                                        class="fa-solid fa-angle-down"></i></span><span
+                            <label for="casetype" onclick="toggleFilter(this)">Casetype
+                                <span class="icon-container"><i class="fa-solid fa-angle-down"></i></span><span
                                     class="selected-count"></span></label>
-                            <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
-                            <ul class="select2 " multiple="multiple" id="casetype"></ul>
+                            <input type="text" placeholder="Search" class="filter-input" id="typeSearch" />
+                            <ul class="select2" multiple="multiple" id="casetype"></ul>
                         </div>
                         <div class="filter-group">
                             <label for="proposaltype" onclick="toggleFilter(this)">proposal type<span
                                     class="icon-container"><i class="fa-solid fa-angle-down"></i></span><span
                                     class="selected-count"></span></label>
-                            <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
-                            <ul class="select2 " multiple="multiple" id="proposaltype"></ul>
+                            <input type="text" placeholder="Search" class="filter-input" id="typeSearch" />
+                            <ul class="select2" multiple="multiple" id="proposaltype"></ul>
                         </div>
                         <div class="filter-group">
                             <label for="tdrzone" onclick="toggleFilter(this)">tdrzone<span class="icon-container"><i
                                         class="fa-solid fa-angle-down"></i></span><span
                                     class="selected-count"></span></label>
-                            <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
-                            <ul class="select2 " multiple="multiple" id="tdrzone"></ul>
+                            <input type="text" placeholder="Search" class="filter-input" id="typeSearch" />
+                            <ul class="select2" multiple="multiple" id="tdrzone"></ul>
                         </div>
                         <div class="filter-group">
-                            <label for="grossplotarea" onclick="toggleFilter(this)">grossplotarea <span
-                                    class="icon-container"><i class="fa-solid fa-angle-down"></i></span><span
+                            <label for="grossplotarea" onclick="toggleFilter(this)">grossplotarea
+                                <span class="icon-container"><i class="fa-solid fa-angle-down"></i></span><span
                                     class="selected-count"></span></label>
-                            <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
-                            <ul class="select2 " multiple="multiple" id="grossplotarea"></ul>
+                            <input type="text" placeholder="Search" class="filter-input" id="typeSearch" />
+                            <ul class="select2" multiple="multiple" id="grossplotarea"></ul>
                         </div>
                         <div class="filter-group">
-                            <label for="developmentzonedp" onclick="toggleFilter(this)">developmentzonedp <span
-                                    class="icon-container"><i class="fa-solid fa-angle-down"></i></span><span
+                            <label for="developmentzonedp" onclick="toggleFilter(this)">developmentzonedp
+                                <span class="icon-container"><i class="fa-solid fa-angle-down"></i></span><span
                                     class="selected-count"></span></label>
-                            <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
-                            <ul class="select2 " multiple="multiple" id="developmentzonedp"></ul>
+                            <input type="text" placeholder="Search" class="filter-input" id="typeSearch" />
+                            <ul class="select2" multiple="multiple" id="developmentzonedp"></ul>
                         </div>
                         <div class="filter-group">
-                            <label for="owner_det_email" onclick="toggleFilter(this)">owner_det_email <span
-                                    class="icon-container"><i class="fa-solid fa-angle-down"></i></span><span
+                            <label for="owner_det_email" onclick="toggleFilter(this)">owner_det_email
+                                <span class="icon-container"><i class="fa-solid fa-angle-down"></i></span><span
                                     class="selected-count"></span></label>
-                            <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
-                            <ul class="select2 " multiple="multiple" id="owner_det_email"></ul>
+                            <input type="text" placeholder="Search" class="filter-input" id="typeSearch" />
+                            <ul class="select2" multiple="multiple" id="owner_det_email"></ul>
                         </div>
                     </div>
 
                     <div class="showCount">
-                        <h5 class="tablestats" id="tablestats" style="font-size: large;"> </h5>
+                        <h5 class="tablestats" id="tablestats" style="font-size: large"></h5>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- <div class="map-controls">
-                    
-                    
-                </div> -->
-
-
     </div>
-    <!-- </div> -->
-
-
 
     <!-- Summary Section -->
     <div class="summary-section">
@@ -179,9 +163,14 @@
             <div class="proposal-info">
                 <span>Total number of proposals: 06</span>
                 <div class="proposal-icons">
-                    <button class="btn-action"><img src="./image/Refresh.svg" alt="Refresh"></button>
-                    <button class="btn-action" id="printButton"><img src="./image/Print.svg" alt="Print"></button>
-                    <button class="btn-action" id="excelButton"><img src="./image/Excel.svg" alt="Export">
+                    <button class="btn-action">
+                        <img src="./image/Refresh.svg" alt="Refresh" />
+                    </button>
+                    <button class="btn-action" id="printButton">
+                        <img src="./image/Print.svg" alt="Print" />
+                    </button>
+                    <button class="btn-action" id="excelButton">
+                        <img src="./image/Excel.svg" alt="Export" />
                     </button>
                     <div id="excelData"></div>
                 </div>
@@ -189,32 +178,48 @@
                 <div class="navigation-icons">
                     <button class="slider-button prev-button">&lt;</button>
                     <button class="slider-button next-button">&gt;</button>
-                    <button id="closeButton">&times;</button> <!-- Close button -->
+                    <button id="closeButton">&times;</button>
+                    <!-- Close button -->
                 </div>
             </div>
         </div>
-
-
-
 
         <!--card1-->
         <div class="cards slider">
             <div class="slider-item">
                 <div class="building-permissions">Building Permissions</div>
                 <div class="main-container">
-                    <div class="text-small text-600 text-right position-total">Total</div>
-                    <div class="text-small text-400 text-right position-submitted">Submitted</div>
-                    <div class="text-small text-400 text-right position-approved">Approved</div>
-                    <div class="text-small text-400 text-right position-process">In Process</div>
-                    <div class="text-small text-400 text-right position-rejected">Rejected</div>
-                    <div class="text-small text-400 text-center position-bottom-1">1500</div>
-                    <div class="text-small text-400 text-center position-bottom-2">1000</div>
-                    <div class="text-small text-400 text-center position-bottom-3">500</div>
-                    <div class="text-small text-400 text-center position-bottom-4">0</div>
-                    <div class="border-solid" style="left: 265px; top: 176px;"></div>
-                    <div class="border-solid" style="left: 205px; top: 176px;"></div>
-                    <div class="border-solid" style="left: 145px; top: 176px;"></div>
-                    <div class="border-solid" style="left: 93px; top: 176px;"></div>
+                    <div class="text-small text-600 text-right position-total">
+                        Total
+                    </div>
+                    <div class="text-small text-400 text-right position-submitted">
+                        Submitted
+                    </div>
+                    <div class="text-small text-400 text-right position-approved">
+                        Approved
+                    </div>
+                    <div class="text-small text-400 text-right position-process">
+                        In Process
+                    </div>
+                    <div class="text-small text-400 text-right position-rejected">
+                        Rejected
+                    </div>
+                    <div class="text-small text-400 text-center position-bottom-1">
+                        1500
+                    </div>
+                    <div class="text-small text-400 text-center position-bottom-2">
+                        1000
+                    </div>
+                    <div class="text-small text-400 text-center position-bottom-3">
+                        500
+                    </div>
+                    <div class="text-small text-400 text-center position-bottom-4">
+                        0
+                    </div>
+                    <div class="border-solid" style="left: 265px; top: 176px"></div>
+                    <div class="border-solid" style="left: 205px; top: 176px"></div>
+                    <div class="border-solid" style="left: 145px; top: 176px"></div>
+                    <div class="border-solid" style="left: 93px; top: 176px"></div>
                     <div class="border-dotted-vertical"></div>
                     <div class="border-dotted-horizontal"></div>
                     <div class="bars-container">
@@ -234,7 +239,7 @@
                             <div class="bar-green"></div>
                             <div class="text-small text-400">323</div>
                         </div>
-                        <div class="bar-item" style="align-self: stretch;">
+                        <div class="bar-item" style="align-self: stretch">
                             <div class="bar-blue"></div>
                             <div class="text-small text-400">1315</div>
                         </div>
@@ -242,9 +247,8 @@
                 </div>
             </div>
 
-
             <!--card2-->
-            <div class=" slider slider-item">
+            <div class="slider slider-item">
                 <div class="header-text">Plinth</div>
                 <div class="content-box">
                     <div class="label total">Total</div>
@@ -290,25 +294,41 @@
                 </div>
             </div>
 
-
             <!--card3-->
             <div class="slider slider-item">
-
                 <div class="building-permissions">Building Permissions</div>
                 <div class="main-container">
-                    <div class="text-small text-600 text-right position-total">Total</div>
-                    <div class="text-small text-400 text-right position-submitted">Submitted</div>
-                    <div class="text-small text-400 text-right position-approved">Approved</div>
-                    <div class="text-small text-400 text-right position-process">In Process</div>
-                    <div class="text-small text-400 text-right position-rejected">Rejected</div>
-                    <div class="text-small text-400 text-center position-bottom-1">1500</div>
-                    <div class="text-small text-400 text-center position-bottom-2">1000</div>
-                    <div class="text-small text-400 text-center position-bottom-3">500</div>
-                    <div class="text-small text-400 text-center position-bottom-4">0</div>
-                    <div class="border-solid" style="left: 265px; top: 176px;"></div>
-                    <div class="border-solid" style="left: 205px; top: 176px;"></div>
-                    <div class="border-solid" style="left: 145px; top: 176px;"></div>
-                    <div class="border-solid" style="left: 93px; top: 176px;"></div>
+                    <div class="text-small text-600 text-right position-total">
+                        Total
+                    </div>
+                    <div class="text-small text-400 text-right position-submitted">
+                        Submitted
+                    </div>
+                    <div class="text-small text-400 text-right position-approved">
+                        Approved
+                    </div>
+                    <div class="text-small text-400 text-right position-process">
+                        In Process
+                    </div>
+                    <div class="text-small text-400 text-right position-rejected">
+                        Rejected
+                    </div>
+                    <div class="text-small text-400 text-center position-bottom-1">
+                        1500
+                    </div>
+                    <div class="text-small text-400 text-center position-bottom-2">
+                        1000
+                    </div>
+                    <div class="text-small text-400 text-center position-bottom-3">
+                        500
+                    </div>
+                    <div class="text-small text-400 text-center position-bottom-4">
+                        0
+                    </div>
+                    <div class="border-solid" style="left: 265px; top: 176px"></div>
+                    <div class="border-solid" style="left: 205px; top: 176px"></div>
+                    <div class="border-solid" style="left: 145px; top: 176px"></div>
+                    <div class="border-solid" style="left: 93px; top: 176px"></div>
                     <div class="border-dotted-vertical"></div>
                     <div class="border-dotted-horizontal"></div>
                     <div class="bars-container">
@@ -328,7 +348,7 @@
                             <div class="bar-green"></div>
                             <div class="text-small text-400">323</div>
                         </div>
-                        <div class="bar-item" style="align-self: stretch;">
+                        <div class="bar-item" style="align-self: stretch">
                             <div class="bar-blue"></div>
                             <div class="text-small text-400">1315</div>
                         </div>
@@ -337,7 +357,7 @@
             </div>
 
             <!--card4-->
-            <div class="  slider-item">
+            <div class="slider-item">
                 <div class="header-text">Plinth</div>
                 <div class="content-box">
                     <div class="label total">Total</div>
@@ -382,17 +402,8 @@
                     </div>
                 </div>
             </div>
-
         </div>
-
-
     </div>
-
-
-
-
-
-
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -411,14 +422,10 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
-
-
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
-
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css" />
 
     <script type="text/javascript" charset="utf8"
         src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
-
 
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
@@ -429,9 +436,6 @@
     <script src="legend.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
-
-
-
 </body>
 
 </html>

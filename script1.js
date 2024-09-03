@@ -1,5 +1,5 @@
 //click on status-wise open the summary section 
-document.getElementById('status-wise-button').addEventListener('click', function() {
+document.getElementById('status-wise-button').addEventListener('click', function () {
     document.querySelector('.summary-section').style.display = 'block';
     document.querySelector('.north-arrow-container').classList.add('move-up');
     document.querySelector('.leaflet-top.leaflet-left .leaflet-bar').classList.add('move-up');
@@ -55,7 +55,7 @@ document.getElementById('status-wise-button').addEventListener('click', function
 
 
 // calender
-document.getElementById('calendar-icon').addEventListener('click', function() {
+document.getElementById('calendar-icon').addEventListener('click', function () {
     // Check if the calendar is already open
     let calendarElement = document.querySelector('.flatpickr-calendar');
     if (calendarElement) {
@@ -73,14 +73,14 @@ document.getElementById('calendar-icon').addEventListener('click', function() {
         mode: "range",
         inline: true,
         defaultDate: ["2024-04-01", "2025-03-31"],
-        onClose: function(selectedDates, dateStr, instance) {
+        onClose: function (selectedDates, dateStr, instance) {
             // Format and display the selected date range
-            let formattedDates = selectedDates.map(function(date) {
+            let formattedDates = selectedDates.map(function (date) {
                 return formatDate(date);
             }).join(' to '); // Join dates if range selected
             document.getElementById('date-range-display').innerText = formattedDates;
         },
-        onReady: function(selectedDates, dateStr, instance) {
+        onReady: function (selectedDates, dateStr, instance) {
             // Add custom buttons
             let calendarFooter = document.createElement('div');
             calendarFooter.className = 'flatpickr-custom-buttons';
@@ -91,11 +91,11 @@ document.getElementById('calendar-icon').addEventListener('click', function() {
             document.querySelector('.flatpickr-calendar').appendChild(calendarFooter);
 
             // Add event listeners to the buttons
-            document.getElementById('apply-button').addEventListener('click', function() {
+            document.getElementById('apply-button').addEventListener('click', function () {
                 instance.close(); // Close the calendar on apply
             });
 
-            document.getElementById('cancel-button').addEventListener('click', function() {
+            document.getElementById('cancel-button').addEventListener('click', function () {
                 calendarContainer.remove(); // Close and remove the calendar on cancel
             });
 
@@ -116,7 +116,7 @@ document.getElementById('calendar-icon').addEventListener('click', function() {
 });
 
 // Close the calendar when the mouse moves over the map
-map.on('mousemove', function() {
+map.on('mousemove', function () {
     let calendarElement = document.querySelector('.flatpickr-calendar');
     if (calendarElement) {
         calendarElement.remove(); // Remove only the calendar, keep the icon
@@ -129,8 +129,8 @@ function formatDate(date) {
     return date.toLocaleDateString('en-US', options);
 }
 
-    
- // Function to toggle the visibility of the search input
+
+// Function to toggle the visibility of the search input
 function toggleSearchInput() {
     const searchButton = document.getElementById('search-button');
     const searchInput = document.getElementById('searchInputDashboard');
@@ -213,21 +213,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
 //excle
 
-document.getElementById('excelButton').addEventListener('click', function() {
+document.getElementById('excelButton').addEventListener('click', function () {
     // Define the URL of the Excel file
     var excelFileUrl = 'path/to/yourfile.xlsx';
-    
+
     // Create a temporary link element
     var link = document.createElement('a');
     link.href = excelFileUrl;
     link.download = 'filename.xlsx'; // Optional: specify the filename
-    
+
     // Append the link to the body (it has to be part of the document to work)
     document.body.appendChild(link);
-    
+
     // Programmatically click the link to trigger the download
     link.click();
-    
+
     // Remove the link from the document
     document.body.removeChild(link);
 });

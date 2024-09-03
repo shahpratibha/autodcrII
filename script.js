@@ -1,178 +1,178 @@
-/// Initialize the map
-var map = L.map('map').setView([18.5204, 73.8567], 12);
+// /// Initialize the map
+// var map = L.map('map').setView([18.5204, 73.8567], 12);
 
-// Add a tile layer
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
+// // Add a tile layer
+// L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+//   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+// }).addTo(map);
 
-// Add a marker for the specific location
-L.marker([18.5204, 73.8567]).addTo(map)
-    .bindPopup('Pune')
-    .openPopup();
+// // Add a marker for the specific location
+// L.marker([18.5204, 73.8567]).addTo(map)
+//   .bindPopup('Pune')
+//   .openPopup();
 
-var googleSat = L.tileLayer(
-    "http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}",
-    {
-        maxZoom: 21,
-        subdomains: ["mt0", "mt1", "mt2", "mt3"],
-    }
-);
+// var googleSat = L.tileLayer(
+//   "http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}",
+//   {
+//     maxZoom: 21,
+//     subdomains: ["mt0", "mt1", "mt2", "mt3"],
+//   }
+// );
 
-var osm = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    maxZoom: 19,
-}).addTo(map);
+// var osm = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+//   maxZoom: 19,
+// }).addTo(map);
 
-var Esri_WorldImagery = L.tileLayer(
-    "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
-    {
-        maxZoom: 19.9,
-    }
-);
+// var Esri_WorldImagery = L.tileLayer(
+//   "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+//   {
+//     maxZoom: 19.9,
+//   }
+// );
 
-var baseLayers = {
-    "OSM": osm,
-    "Esri": Esri_WorldImagery,
-    "Satellite": googleSat,
-};
+// var baseLayers = {
+//   "OSM": osm,
+//   "Esri": Esri_WorldImagery,
+//   "Satellite": googleSat,
+// };
 
-var auto_test = L.tileLayer.wms(
-    "http://iwmsgis.pmc.gov.in:8080/geoserver1/wms",
-    {
-        layers: "auto_test",
-        format: "image/png",
-        transparent: true,
-        tiled: true,
-        version: "1.1.0",
-        maxZoom: 21,
-        opacity: 1,
-    }
-).addTo(map);
+// var auto_test = L.tileLayer.wms(
+//   "http://iwmsgis.pmc.gov.in:8080/geoserver1/wms",
+//   {
+//     layers: "auto_test",
+//     format: "image/png",
+//     transparent: true,
+//     tiled: true,
+//     version: "1.1.0",
+//     maxZoom: 21,
+//     opacity: 1,
+//   }
+// ).addTo(map);
 
-var PlotBoundary_Layer = L.tileLayer
-    .wms("https://iwmsgis.pmc.gov.in/geoserver/AutoDCR/wms", {
-        layers: "plotboundary",
-        format: "image/png",
-        transparent: true,
-        tiled: true,
-        version: "1.1.0",
-        // attribution: "Revenue",
-        opacity: 1,
-    }).addTo(map);
-
-
-var Revenue_Layer = L.tileLayer
-    .wms("https://iwmsgis.pmc.gov.in/geoserver/AutoDCR/wms", {
-        layers: "Revenue_1",
-        format: "image/png",
-        transparent: true,
-        tiled: true,
-        version: "1.1.0",
-        // attribution: "Revenue",
-        opacity: 1,
-    });
-
-// .addTo(map);
+// var PlotBoundary_Layer = L.tileLayer
+//   .wms("https://iwmsgis.pmc.gov.in/geoserver/AutoDCR/wms", {
+//     layers: "plotboundary",
+//     format: "image/png",
+//     transparent: true,
+//     tiled: true,
+//     version: "1.1.0",
+//     // attribution: "Revenue",
+//     opacity: 1,
+//   }).addTo(map);
 
 
-// for only gut showing
-var Revenue_Layer1 = L.tileLayer
-    .wms("https://iwmsgis.pmc.gov.in/geoserver/AutoDCR/wms", {
-        layers: "Revenue_1",
-        format: "image/png",
-        transparent: true,
-        tiled: true,
-        version: "1.1.0",
-        // attribution: "Revenue",
-        opacity: 1,
-    }).addTo(map);
+// var Revenue_Layer = L.tileLayer
+//   .wms("https://iwmsgis.pmc.gov.in/geoserver/AutoDCR/wms", {
+//     layers: "Revenue_1",
+//     format: "image/png",
+//     transparent: true,
+//     tiled: true,
+//     version: "1.1.0",
+//     // attribution: "Revenue",
+//     opacity: 1,
+//   });
 
-var PLU_Layer = L.tileLayer
-    .wms("https://iwmsgis.pmc.gov.in/geoserver/AutoDCR/wms", {
-        layers: "PLU_Ward",
-        format: "image/png",
-        transparent: true,
-        tiled: true,
-        version: "1.1.0",
-        // attribution: "Revenue",
-        opacity: 1,
-    });
-
-var DPRoad_Layer = L.tileLayer
-    .wms("https://iwmsgis.pmc.gov.in/geoserver/AutoDCR/wms", {
-        layers: "DP_Ward_Road",
-        format: "image/png",
-        transparent: true,
-        tiled: true,
-        version: "1.1.0",
-        // attribution: "Revenue",
-        opacity: 1,
-    });
-
-var Boundary_Layer = L.tileLayer
-    .wms("https://iwmsgis.pmc.gov.in/geoserver/AutoDCR/wms", {
-        layers: "PMC_Boundary",
-        format: "image/png",
-        transparent: true,
-        tiled: true,
-        version: "1.1.0",
-        // attribution: "Revenue",
-        opacity: 1,
-    }).addTo(map);
-
-var Village_Boundary = L.tileLayer
-    .wms("https://iwmsgis.pmc.gov.in/geoserver/AutoDCR/wms", {
-        layers: "Village_Boundary",
-        format: "image/png",
-        transparent: true,
-        tiled: true,
-        version: "1.1.0",
-        // attribution: "Revenue",
-        opacity: 1,
-    });
-
-    var aviation = L.tileLayer
-    .wms("https://iwmsgis.pmc.gov.in/geoserver/AutoDCR/wms", {
-        layers: "Aviation_data",
-        format: "image/png",
-        transparent: true,
-        tiled: true,
-        version: "1.1.0",
-        // attribution: "Revenue",
-        opacity: 1,
-    });
+// // .addTo(map);
 
 
-function refreshWMSLayer() {
-    // Remove the layer from the map
-    map.removeLayer(PlotBoundary_Layer);
-    // Add the layer again
-    PlotBoundary_Layer.addTo(map);
-  }
+// // for only gut showing
+// var Revenue_Layer1 = L.tileLayer
+//   .wms("https://iwmsgis.pmc.gov.in/geoserver/AutoDCR/wms", {
+//     layers: "Revenue_1",
+//     format: "image/png",
+//     transparent: true,
+//     tiled: true,
+//     version: "1.1.0",
+//     // attribution: "Revenue",
+//     opacity: 1,
+//   }).addTo(map);
 
-var WMSlayers = {
-    Aviation: aviation,
-    auto_test: auto_test,
+// var PLU_Layer = L.tileLayer
+//   .wms("https://iwmsgis.pmc.gov.in/geoserver/AutoDCR/wms", {
+//     layers: "PLU_Ward",
+//     format: "image/png",
+//     transparent: true,
+//     tiled: true,
+//     version: "1.1.0",
+//     // attribution: "Revenue",
+//     opacity: 1,
+//   });
 
-    Plot:PlotBoundary_Layer,
-    Revenue: Revenue_Layer,
-    PLU: PLU_Layer,
-    DPRoad: DPRoad_Layer,
-    Boundary: Boundary_Layer,
-    Village: Village_Boundary,
-  
-};
+// var DPRoad_Layer = L.tileLayer
+//   .wms("https://iwmsgis.pmc.gov.in/geoserver/AutoDCR/wms", {
+//     layers: "DP_Ward_Road",
+//     format: "image/png",
+//     transparent: true,
+//     tiled: true,
+//     version: "1.1.0",
+//     // attribution: "Revenue",
+//     opacity: 1,
+//   });
 
-// Create the layers control and add it to the map
-var control = L.control.layers(baseLayers, WMSlayers).addTo(map);
+// var Boundary_Layer = L.tileLayer
+//   .wms("https://iwmsgis.pmc.gov.in/geoserver/AutoDCR/wms", {
+//     layers: "PMC_Boundary",
+//     format: "image/png",
+//     transparent: true,
+//     tiled: true,
+//     version: "1.1.0",
+//     // attribution: "Revenue",
+//     opacity: 1,
+//   }).addTo(map);
+
+// var Village_Boundary = L.tileLayer
+//   .wms("https://iwmsgis.pmc.gov.in/geoserver/AutoDCR/wms", {
+//     layers: "Village_Boundary",
+//     format: "image/png",
+//     transparent: true,
+//     tiled: true,
+//     version: "1.1.0",
+//     // attribution: "Revenue",
+//     opacity: 1,
+//   });
+
+// var aviation = L.tileLayer
+//   .wms("https://iwmsgis.pmc.gov.in/geoserver/AutoDCR/wms", {
+//     layers: "Aviation_data",
+//     format: "image/png",
+//     transparent: true,
+//     tiled: true,
+//     version: "1.1.0",
+//     // attribution: "Revenue",
+//     opacity: 1,
+//   });
+
+
+// function refreshWMSLayer() {
+//   // Remove the layer from the map
+//   map.removeLayer(PlotBoundary_Layer);
+//   // Add the layer again
+//   PlotBoundary_Layer.addTo(map);
+// }
+
+// var WMSlayers = {
+//   Aviation: aviation,
+//   auto_test: auto_test,
+
+//   Plot: PlotBoundary_Layer,
+//   Revenue: Revenue_Layer,
+//   PLU: PLU_Layer,
+//   DPRoad: DPRoad_Layer,
+//   Boundary: Boundary_Layer,
+//   Village: Village_Boundary,
+
+// };
+
+// // Create the layers control and add it to the map
+// var control = L.control.layers(baseLayers, WMSlayers).addTo(map);
 
 // Function to toggle layers control visibility
 function toggleLayersControl() {
-    var controlContainer = document.querySelector('.leaflet-control-layers');
-    if (controlContainer) {
-        // Toggle visibility of the layers control
-        controlContainer.style.display = controlContainer.style.display === 'none' ? 'block' : 'none';
-    }
+  var controlContainer = document.querySelector('.leaflet-control-layers');
+  if (controlContainer) {
+    // Toggle visibility of the layers control
+    controlContainer.style.display = controlContainer.style.display === 'none' ? 'block' : 'none';
+  }
 }
 
 // // Add event listener to the button
@@ -185,7 +185,7 @@ function toggleLayersControl() {
 
 
 // var main_url = "https://iwmsgis.pmc.gov.in/geoserver/"
-var main_url = "https://iwmsgis.pmc.gov.in/geoserver/"
+// var main_url = "https://iwmsgis.pmc.gov.in/geoserver/"
 
 // html page code ......................
 // const map = L.map('map').setView([51.505, -0.09], 13);
@@ -251,77 +251,6 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-// });
-
-// toggleFilterend---------------------------------------------------------
-// document.addEventListener('DOMContentLoaded', function () {
-//   const filters = document.getElementById('filters');
-//   const map = document.getElementById('map');
-//   const tableBtn = document.getElementById('openTableBtn');
-//   const tableinfo = document.getElementById('tablecontainer');
-//   const button = document.getElementById('toggleFilters');
-//   const layerToggle = document.getElementById('layerToggle');
-//   const layersList = document.querySelector('.leaflet-control-layers-list');
-  
-
-//   let filtersVisible = false;
-  
-
-//   button.addEventListener('click', function () {
-//     if (!filtersVisible) {
-//       map.classList.add('shifted'); // Move the map
-//       filters.classList.add('active');
-    
-//       // Adjust other elements as needed
-   
-//         button.innerHTML = '<i class="fa-solid fa-filter"></i>';
-//     } else {
-//       filters.classList.remove('active');
-//       map.classList.remove('shifted'); // Move the map back
-      
-//       tableinfo.style.right = '10px'; // Adjusted position for tableinfo
-//       button.innerHTML = '<i class="fa-solid fa-filter"></i>';
-//     }
-//     filtersVisible = !filtersVisible;
-//   });
-
-  
-//      window.closeFilters = function () {
-//                 filters.classList.remove('active');
-//                 map.classList.remove('shifted'); // Move the map back
-//                 filtersVisible = false;
-//             }
-
-//             window.toggleFilter = function (element) {
-//               const icon = element.querySelector('.icon-container i');
-//               const input = element.nextElementSibling; // Input field
-//               const ul = input.nextElementSibling; // UL list
-          
-//               // Check current display state
-//               const isListVisible = ul.style.display === 'block';
-          
-//               // Toggle visibility based on the current state
-//               if (isListVisible) {
-//                   ul.style.display = 'none';
-//                   input.style.display = 'none'; // Hide the input field
-//                   icon.classList.remove('fa-angle-up');
-//                   icon.classList.add('fa-angle-down');
-//               } else {
-//                   ul.style.display = 'block';
-//                   input.style.display = 'block'; // Show the input field
-//                   icon.classList.remove('fa-angle-down');
-//                   icon.classList.add('fa-angle-up');
-//               }
-//           };
-          
-//   // -------------------------------------------------------------------------
-
-//   // Ensure zoom control doesn't move
-//   const zoomControl = document.querySelector('.leaflet-control-zoom');
-//   if (zoomControl) {
-//     zoomControl.style.position = 'fixed';
-//   }
-// });
 document.addEventListener('DOMContentLoaded', function () {
   const filters = document.getElementById('filters');
   const map = document.getElementById('map');
@@ -380,63 +309,63 @@ function updateTableStats(stats) {
 $(document).ready(function () {
 
 
-  var cql_filter1 ='';
+  var cql_filter1 = '';
 
 
   // initializeCheckboxes();
-//   function getCheckedValuess() {
-//     var checkedValues = [];
-//     var checkboxes = document.querySelectorAll("#checkboxContainer input[type='checkbox']:checked");
-//     checkboxes.forEach(function(checkbox) {
-//         checkedValues.push("'" + checkbox.value + "'"); // Push value wrapped in single quotes
-//     });
+  //   function getCheckedValuess() {
+  //     var checkedValues = [];
+  //     var checkboxes = document.querySelectorAll("#checkboxContainer input[type='checkbox']:checked");
+  //     checkboxes.forEach(function(checkbox) {
+  //         checkedValues.push("'" + checkbox.value + "'"); // Push value wrapped in single quotes
+  //     });
 
-//     if (checkedValues.length === 0) {
-//         checkedValues.push("''"); // Push an empty string to simulate no results
-//     }
+  //     if (checkedValues.length === 0) {
+  //         checkedValues.push("''"); // Push an empty string to simulate no results
+  //     }
 
-//     return checkedValues;
-// }
+  //     return checkedValues;
+  // }
 
 
-// document.getElementById("checkboxContainer").addEventListener("change", function() {
-//     var checkedValues = getCheckedValuess();
-   
-    var filterString1 = "";
+  // document.getElementById("checkboxContainer").addEventListener("change", function() {
+  //     var checkedValues = getCheckedValuess();
 
-    loadinitialData(filterString1);
-    // FilterAndZoom(filterString1)
+  var filterString1 = "";
+
+  loadinitialData(filterString1);
+  // FilterAndZoom(filterString1)
 
   getCheckedValues(function (filterString) {
-    console.log("Filter Stringinside: ", filterString1); 
+    console.log("Filter Stringinside: ", filterString1);
     const mainfilter = combineFilters(filterString1, filterString);
-    console.log("Filter Stringinside: ", mainfilter); 
+    console.log("Filter Stringinside: ", mainfilter);
     FilterAndZoom(mainfilter);
     DataTableFilter(mainfilter)
-   
-
-  // });
-});
 
 
+    // });
+  });
 
 
-  
+
+
+
 
 
   function loadinitialData(cql_filter) {
 
-    const filternames = ["village_na", "applyfor","casetype","proposaltype","tdrzone","grossplotarea","developmentzonedp","owner_det_email"];//accordn column names , if want add one more filter criteria add here
+    const filternames = ["village_na", "applyfor", "casetype", "proposaltype", "tdrzone", "grossplotarea", "developmentzonedp", "owner_det_email"];//accordn column names , if want add one more filter criteria add here
     var workspace = 'AutoDCR';
     var layerName = 'auto_test';
     filternames.forEach(function (filtername) {
       var url = `${main_url}${workspace}/wms?service=WFS&version=1.1.0&request=GetFeature&typeName=${layerName}&propertyName=${filtername}&outputFormat=application/json`;
 
-        if (cql_filter) {
-            url += `&cql_filter=${encodeURIComponent(cql_filter)}`;
-         
-        }
-     
+      if (cql_filter) {
+        url += `&cql_filter=${encodeURIComponent(cql_filter)}`;
+
+      }
+
       $.getJSON(url, function (data) {
         var projectFiSet = new Set();
         var projectFiMap = new Map();
@@ -517,8 +446,8 @@ function DataTableFilter(cql_filter1) {
     geoServerURL += "&CQL_FILTER=" + encodeURIComponent(cqlFilter);
   }
   // ;&CQL_FILTER=${encodeURIComponent(cqlFilter)}`;
-  var headers = ["village_na", "applyfor","casetype","proposaltype","tdrzone","grossplotarea","developmentzonedp","owner_det_email"];
-  
+  var headers = ["village_na", "applyfor", "casetype", "proposaltype", "tdrzone", "grossplotarea", "developmentzonedp", "owner_det_email"];
+
 
   showtable(typeName, geoServerURL, cqlFilter, headers);
 
@@ -540,7 +469,7 @@ function populateDropdown(dropdownId, data) {
 
 function getCheckedValues(callback) {
   var selectedValues = {};
-  const filternames = ["village_na", "applyfor","casetype","proposaltype","tdrzone","grossplotarea","developmentzonedp","owner_det_email"];
+  const filternames = ["village_na", "applyfor", "casetype", "proposaltype", "tdrzone", "grossplotarea", "developmentzonedp", "owner_det_email"];
 
   filternames.forEach(function (filtername) {
     selectedValues[filtername] = []; // Initialize empty array for each filtername
@@ -601,7 +530,7 @@ function getCheckedValues(callback) {
 
 function FilterAndZoom(filter) {
   fitbous(filter)
- auto_test.setParams({
+  auto_test.setParams({
     CQL_FILTER: filter,
     maxZoom: 19.5,
   }).addTo(map);
@@ -742,7 +671,7 @@ function showtable(typeName, geoServerURL, cqlFilter, headers) {
 
       // Next Button
       var nextButton = document.createElement('button');
-      nextButton.innerHTML = '&rarr;'; 
+      nextButton.innerHTML = '&rarr;';
       nextButton.disabled = currentPage === pageCount;
       nextButton.addEventListener('click', function () {
         if (currentPage < pageCount) {
@@ -790,16 +719,16 @@ function showtable(typeName, geoServerURL, cqlFilter, headers) {
       }
     });
     tableContainer.appendChild(minimizeButton);
-       // Create pagination controls
-       var paginationContainer = document.createElement('div');
-       paginationContainer.id = 'pagination';
-   
-       // Append pagination container to top container
-       topContainer.appendChild(paginationContainer);
-   
-       // Append top container to tableContainer
-       tableContainer.appendChild(topContainer);
-       
+    // Create pagination controls
+    var paginationContainer = document.createElement('div');
+    paginationContainer.id = 'pagination';
+
+    // Append pagination container to top container
+    topContainer.appendChild(paginationContainer);
+
+    // Append top container to tableContainer
+    tableContainer.appendChild(topContainer);
+
     // Create tableDetail div
     var tableDetail = document.createElement('div');
     tableDetail.className = 'tableDetail';
@@ -827,7 +756,7 @@ function showtable(typeName, geoServerURL, cqlFilter, headers) {
     var tbody = document.createElement('tbody');
 
     // Populate table rows with data
-    
+
     data.forEach((item, index) => {
       var row = document.createElement('tr');
 
@@ -883,7 +812,7 @@ function showtable(typeName, geoServerURL, cqlFilter, headers) {
         searching: true, // Enable search box
         ordering: true, // Enable column sorting
         info: true, // Enable showing 'Showing X of Y entries' info
-        autoWidth: false, 
+        autoWidth: false,
         scrollY: 400,
         scrollX: true,
         scrollCollapse: true,
@@ -910,7 +839,7 @@ function showtable(typeName, geoServerURL, cqlFilter, headers) {
   function tableData(typeName, geoServerURL, cqlFilter, headers) {
     $.getJSON(geoServerURL, function (data) {
       var filteredData = data;
-   
+
       const work_id = [];
       var exampleData = filteredData.features.map(feature => {
         let mappedData = {};
@@ -919,9 +848,9 @@ function showtable(typeName, geoServerURL, cqlFilter, headers) {
           let propertyName = header.replace(/ /g, '');
           if (header === 'length_m') {
             mappedData[propertyName] = (feature.properties[header]).toFixed(2); // Format to two decimal places
-        } else {
+          } else {
             mappedData[propertyName] = feature.properties[header];
-        }
+          }
         });
         mappedData.geometry = feature.geometry;
         work_id.push(feature.properties.id)
@@ -933,7 +862,7 @@ function showtable(typeName, geoServerURL, cqlFilter, headers) {
         return sum + feature.properties.length_m;
       }, 0);
       let uniqueCount = new Set(work_id).size;
-      console.log(work_id.length, "lllllllllllll",work_id,uniqueCount)
+      console.log(work_id.length, "lllllllllllll", work_id, uniqueCount)
       document.getElementById('tablestats').innerHTML = `
       <div class="stat-button">
         <div class="stat-label">Total Length (In Meter):</div>
@@ -944,7 +873,7 @@ function showtable(typeName, geoServerURL, cqlFilter, headers) {
         <div class="stat-value" id="totalLinks">${uniqueCount}</div>
       </div>
     `;
-    
+
       createTable(exampleData, headers);
     });
   }
@@ -961,7 +890,7 @@ $(document).ready(function () {
 
 
 document.addEventListener('DOMContentLoaded', (event) => {
-  var columns = { "name": "Road Name", "applyfor": "applyfor", "width": "Road width","link_no":"Link_number" };
+  var columns = { "name": "Road Name", "applyfor": "applyfor", "width": "Road width", "link_no": "Link_number" };
   var select = document.getElementById("search_type");
 
   // Populate dropdown with column names
@@ -1033,20 +962,20 @@ document.addEventListener('DOMContentLoaded', (event) => {
           item.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
           item.addEventListener("click", function () {
             selectedValue = this.getElementsByTagName("input")[0].value; // Store the selected value
-    
+
             var searchtypefield = $("#search_type").val();
-           
+
             let cqlFilter;
 
             cqlFilter = `${searchtypefield} IN ('${selectedValue}')`;
 
-           auto_test.setParams({
+            auto_test.setParams({
               CQL_FILTER: cqlFilter,
               maxZoom: 19.5,
               // styles: "Missing_Link_"
             });
 
-           auto_test.addTo(map).bringToFront();
+            auto_test.addTo(map).bringToFront();
 
             auto_test.setParams({
               CQL_FILTER: cqlFilter,
@@ -1129,12 +1058,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
 function getCheckedValuess() {
   var checkedValues = [];
   var checkboxes = document.querySelectorAll("#checkboxContainer input[type='checkbox']:checked");
-  checkboxes.forEach(function(checkbox) {
-      checkedValues.push("'" + checkbox.value + "'"); // Push value wrapped in single quotes
+  checkboxes.forEach(function (checkbox) {
+    checkedValues.push("'" + checkbox.value + "'"); // Push value wrapped in single quotes
   });
 
   if (checkedValues.length === 0) {
-      checkedValues.push("''"); // Push an empty string to simulate no results
+    checkedValues.push("''"); // Push an empty string to simulate no results
   }
 
   return checkedValues;
@@ -1142,13 +1071,13 @@ function getCheckedValuess() {
 
 
 const layerDetails = {
-  "AutoDCR:auto_test": ["village_na", "applyfor","casetype","proposaltype","tdrzone","grossplotarea","developmentzonedp","owner_det_email"],
+  "AutoDCR:auto_test": ["village_na", "applyfor", "casetype", "proposaltype", "tdrzone", "grossplotarea", "developmentzonedp", "owner_det_email"],
 };
 
 function getCheckedValuesforpopuups() {
   return new Promise((resolve, reject) => {
     var selectedValues = {};
-    const filternames = ["village_na", "applyfor","casetype","proposaltype","tdrzone","grossplotarea","developmentzonedp","owner_det_email"];
+    const filternames = ["village_na", "applyfor", "casetype", "proposaltype", "tdrzone", "grossplotarea", "developmentzonedp", "owner_det_email"];
 
     filternames.forEach(function (filtername) {
       selectedValues[filtername] = []; // Initialize empty array for each filtername
@@ -1158,7 +1087,7 @@ function getCheckedValuesforpopuups() {
         if (single_val) {
           var actualValue = single_val.split(' (')[0];
           selectedValues[filtername].push(actualValue);
-          console.log(selectedValues,"lllllllllll99999999999999")
+          console.log(selectedValues, "lllllllllll99999999999999")
         }
       });
     });
@@ -1171,9 +1100,8 @@ function getCheckedValuesforpopuups() {
     }
     var checkedValues = getCheckedValuess();
 
-    
-    if (checkedValues)
-    {
+
+    if (checkedValues) {
       var filterString = filters.join(" AND ");
     }
 
@@ -1208,7 +1136,7 @@ map.on("contextmenu", async (e) => {
   if (searchtypefield1) {
     cqlFilter123 = `${searchtypefield} IN ('${searchtypefield1}')`;
   } else {
-    
+
     if (filterString.trim() !== "") {
       cqlFilter123 = combineFilters(cqlFilter123, filterString);
     }
@@ -1224,7 +1152,7 @@ map.on("contextmenu", async (e) => {
       let response = await fetch(urrr);
       let html = await response.json();
       let features = html.features;
-      console.log(features,"features")
+      console.log(features, "features")
       let detaildata = "";
 
       features.forEach((feature, index) => {
