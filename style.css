@@ -13,6 +13,7 @@ html {
   z-index: 1;
   flex-shrink: 0;
   margin: 0;
+  transition: all 0.5s ease; /* Smooth transition for map resizing */
 }
 .leaflet-container .leaflet-control-attribution {
   display: none;
@@ -161,8 +162,7 @@ html {
   font-weight: 400;
   word-wrap: break-word;
 }
-
-.slider-line {
+ .slider-line {
   position: absolute;
   border: 1px #e0e0e0 solid;
 }
@@ -529,13 +529,13 @@ html {
   ); /* Background gradient */
   box-shadow: 0px 0px 14.035px 0px rgba(0, 0, 0, 0.15); /* Slight shadow for depth */
 }
-
+/* 
 .top-section {
   padding: 10px;
   background-color: rgba(248, 249, 250, 0);
   z-index: 1000;
   position: relative;
-}
+} */
 
 .leaflet-container {
   font-size: 12px;
@@ -647,10 +647,14 @@ html {
   background: rgba(246, 246, 242, 0.47); /* Converted RGB to RGBA */
   backdrop-filter: blur(2px);
   transition: display 0.3s ease-in-out;
+  
+  padding: 20px;
+
+  z-index: 1000; /* Ensures it stays above the map */
 }
 
 #map {
-  transition: all 0.5s ease; /* Smooth transition for map resizing */
+
 }
 
 

@@ -9,7 +9,7 @@
         .bufferColor {
            
     background-color: #0876ff69;
-    padding: 10px;
+    padding: 20px;
     border-radius: 50%;
     text-align: center;
     font-weight: bold;
@@ -18,6 +18,15 @@
     box-shadow: #0876ff;
     transform: translate();
     transition: 6ms ease-in;
+}
+
+.cluster-text {
+    /* Styles for the text inside the cluster */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 14px; /* Default font size */
 }
 
 /* .leaflet-marker-icon {
@@ -143,9 +152,10 @@
 
         function createClusterIcon(cluster) {
             var childCount = cluster.getChildCount();
-            var size = Math.sqrt(childCount) * 5; // Adjust the size based on the number of markers
+            // childCount.style.z-index="999";
+            var size = Math.sqrt(childCount) * 8 // Adjust the size based on the number of markers
             return L.divIcon({
-                html: '<div class="bufferColor" style=" width: ' + size + 'px; height: ' + size + 'px;  line-height: ' + size + 'px;">' + childCount + '</div>',
+                html: '<div class="bufferColor cluster-text">' + childCount + '</div>',
                 className: 'custom-cluster-icon',
                 iconSize: [2, 2]
             });
