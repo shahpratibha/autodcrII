@@ -1,66 +1,418 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <link rel="stylesheet" href="style2.css">
+  <link rel="stylesheet" href="leafletCustom.css">
 
-      <!-- Bootstrap CSS -->
-      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-      <!-- Custom CSS -->
-      <link rel="stylesheet" href="style2.css">
-    
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <style>
-       
-
-
-    </style>
 </head>
+
 <body>
-    <div id="map"></div>
 
 
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
-    <script src="https://unpkg.com/@turf/turf"></script>
+  <div class="container-fluid p-0">
+    <!-- Top Section -->
+    <div class="row top-section m-0">
+      <div class="col-12 d-flex justify-content-between align-items-center p-0">
+        <!-- Control Panel -->
+        <div class="control-panel">
+          <a  class="logoPMC">
+            <img src="image/pmcjpeg.png" alt="Button Image">
+          </a>
+
+          <a href="https://geopulsea.com/" class="geopulseaname">@GeoPulse Analytics</a>
+          <div class="btn-group">
+            <button class="btn-blue" id="status-wise-button">Status Wise</button>
+            <button class="btn-blue btn-area">Area Wise</button>
+          </div>
+
+        </div>
+
+        <!-- Date Picker -->
+        <div class="date-picker">
+
+          <div class="date-range" id="date-range-display">April 1, 2024 - March 31, 2025
+            <div class="calendar-icon" id="calendar-icon">
+              <img src="image/time.png" alt="">
+            </div>
+          </div>
+
+          <button id="select-year-button">Select Year</button>
+          <input type="date" id="date-input" style="display: none;">
+        </div>
+      </div>
+    </div>
+
+    <!-- Move showCount to the bottom -->
+    <!-- <div class="showCount">
+          <h5 class="tablestats" id="tablestats" style="font-size: large;"> </h5>
+        </div>
+      </div>
+
+ -->
+
+    <!-- <button id="printTableBtn">Download CSV</button> -->
+    <div id="tablecontainer"></div>
+
+    <!-- Map Section -->
+    <div class="north-arrow-container">
+      <img src="image/North.png" class="north-arrow" alt="North Arrow">
+    </div>
 
 
-    
-  
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-    <!-- for date picker -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <div class="row m-0">
+      <div class="col-12 p-0">
+        <div id="map"></div>
+        <div class="map-controls" id="map-controls">
+          <button id="search-button" class="search-button">
+            <img src="image/Search.svg" alt="Search Icon" id="search-icon">
+          </button>
+          <div class="search-wrapper">
+            <input type="text" id="searchInputDashboard" placeholder="search...">
+            <img src="image/Close.svg" alt="Close Icon" id="close-icon" class="close-icon">
+          </div>
+        </div>
 
-    <!-- Include daterangepicker JS -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+        <div class="map-controls">
+          <button class="toggle-button" id="toggleFilters">
+            <img src="image/filter.png" alt="Search Icon" id="search-icon">
+          </button>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css"
-      integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw=="
-      crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+        </div>
+
+        <div class="filters" id="filters">
+          <h3>Filters <span class="close-icon" onclick="closeFilters()">×</span></h3>
+          <div class="filter_div">
+            <div class="filter-group">
+              <label for="village_na" onclick="toggleFilter(this)">Village <span class="icon-container"><i
+                    class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
+              <input type="text" placeholder="Search" class="filter-input" id="villageSearch">
+              <ul class="select2  abcscroll" multiple="multiple" id="village_na"></ul>
+            </div>
+            <div class="filter-group">
+              <label for="wapplyfor" onclick="toggleFilter(this)">Apply For <span class="icon-container"><i
+                    class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
+              <input type="text" placeholder="Search" class="filter-input" id="widthSearch">
+              <ul class="select2 abcscroll" multiple="multiple" id="applyfor"></ul>
+            </div>
+            <div class="filter-group">
+              <label for="projecttype" onclick="toggleFilter(this)">projecttype <span class="icon-container"><i
+                    class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
+              <input type="text" placeholder="Search" class="filter-input" id="statusSearch">
+              <ul class="select2" multiple="multiple" id="projecttype"></ul>
+            </div>
+            <div class="filter-group">
+              <label for="casetype" onclick="toggleFilter(this)">Casetype <span class="icon-container"><i
+                    class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
+              <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
+              <ul class="select2 " multiple="multiple" id="casetype"></ul>
+            </div>
+            <div class="filter-group">
+              <label for="proposaltype" onclick="toggleFilter(this)">proposal type<span class="icon-container"><i
+                    class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
+              <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
+              <ul class="select2 " multiple="multiple" id="proposaltype"></ul>
+            </div>
+            <div class="filter-group">
+              <label for="tdrzone" onclick="toggleFilter(this)">tdrzone<span class="icon-container"><i
+                    class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
+              <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
+              <ul class="select2 " multiple="multiple" id="tdrzone"></ul>
+            </div>
+            <div class="filter-group">
+              <label for="grossplotarea" onclick="toggleFilter(this)">grossplotarea <span class="icon-container"><i
+                    class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
+              <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
+              <ul class="select2 " multiple="multiple" id="grossplotarea"></ul>
+            </div>
+            <div class="filter-group">
+              <label for="developmentzonedp" onclick="toggleFilter(this)">developmentzonedp <span
+                  class="icon-container"><i class="fa-solid fa-angle-down"></i></span><span
+                  class="selected-count"></span></label>
+              <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
+              <ul class="select2 " multiple="multiple" id="developmentzonedp"></ul>
+            </div>
+            <div class="filter-group">
+              <label for="owner_det_email" onclick="toggleFilter(this)">owner_det_email <span class="icon-container"><i
+                    class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
+              <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
+              <ul class="select2 " multiple="multiple" id="owner_det_email"></ul>
+            </div>
+          </div>
+
+          <div class="showCount">
+            <h5 class="tablestats" id="tablestats" style="font-size: large;"> </h5>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="map-controls">
+                  
+                  
+              </div> -->
+
+
+  </div>
 
 
 
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+
+  <!-- Summary Section -->
+  <div class="summary-section">
+    <div class="summary-header">
+      <h2>Summary of Commencement</h2>
+      <div class="proposal-info">
+        <span>Total number of proposals: 06</span>
+        <div class="proposal-icons">
+          <button class="btn-action"><img src="./image/Refresh.svg" alt="Refresh"></button>
+          <button class="btn-action" id="printButton"><img src="./image/Print.svg" alt="Print"></button>
+          <button class="btn-action" id="excelButton"><img src="./image/Excel.svg" alt="Export">
+          </button>
+          <div id="excelData"></div>
+        </div>
+
+        <div class="navigation-icons">
+          <button class="slider-button prev-button">&lt;</button>
+          <button class="slider-button next-button">&gt;</button>
+          <button id="closeButton">&times;</button> <!-- Close button -->
+        </div>
+      </div>
+    </div>
 
 
-    <script type="text/javascript" charset="utf8"
-      src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
 
 
-    <script src="legend.js"></script>
+    <!--card1-->
+    <div class="cards slider">
+      <div class="slider-item">
+        <div class="building-permissions">Building Permissions</div>
+        <div class="main-container">
+          <div class="text-small text-600 text-right position-total">Total</div>
+          <div class="text-small text-400 text-right position-submitted">Submitted</div>
+          <div class="text-small text-400 text-right position-approved">Approved</div>
+          <div class="text-small text-400 text-right position-process">In Process</div>
+          <div class="text-small text-400 text-right position-rejected">Rejected</div>
+          <div class="text-small text-400 text-center position-bottom-1">1500</div>
+          <div class="text-small text-400 text-center position-bottom-2">1000</div>
+          <div class="text-small text-400 text-center position-bottom-3">500</div>
+          <div class="text-small text-400 text-center position-bottom-4">0</div>
+          <div class="border-solid" style="left: 265px; top: 176px;"></div>
+          <div class="border-solid" style="left: 205px; top: 176px;"></div>
+          <div class="border-solid" style="left: 145px; top: 176px;"></div>
+          <div class="border-solid" style="left: 93px; top: 176px;"></div>
+          <div class="border-dotted-vertical"></div>
+          <div class="border-dotted-horizontal"></div>
+          <div class="bars-container">
+            <div class="bar-item">
+              <div class="bar-red"></div>
+              <div class="text-small text-400">770</div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-yellow"></div>
+              <div class="text-small text-400">147</div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-cyan"></div>
+              <div class="text-small text-400">397</div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-green"></div>
+              <div class="text-small text-400">323</div>
+            </div>
+            <div class="bar-item" style="align-self: stretch;">
+              <div class="bar-blue"></div>
+              <div class="text-small text-400">1315</div>
+            </div>
+          </div>
+        </div>
+      </div>
 
 
-    <script src="filter.js"></script>
-    <script>
-      
-    </script>
+      <!--card2-->
+      <div class=" slider slider-item">
+        <div class="header-text">Plinth</div>
+        <div class="content-box">
+          <div class="label total">Total</div>
+          <div class="label submitted">Submitted</div>
+          <div class="label approved">Approved</div>
+          <div class="label in-process">In Process</div>
+          <div class="label rejected">Rejected</div>
+
+          <div class="number total">750</div>
+          <div class="number submitted">500</div>
+          <div class="number approved">250</div>
+          <div class="number in-process">0</div>
+
+          <div class="vertical-line vertical-line-1"></div>
+          <div class="vertical-line vertical-line-2"></div>
+          <div class="vertical-line vertical-line-3"></div>
+          <div class="vertical-line vertical-line-4"></div>
+          <div class="horizontal-dotted-line"></div>
+          <div class="bottom-dotted-line"></div>
+
+          <div class="status-bars">
+            <div class="status-bar">
+              <div class="bar bar-0"></div>
+              <div class="label">0</div>
+            </div>
+            <div class="status-bar">
+              <div class="bar bar-6-yellow"></div>
+              <div class="label">6</div>
+            </div>
+            <div class="status-bar">
+              <div class="bar bar-6-blue"></div>
+              <div class="label">6</div>
+            </div>
+            <div class="status-bar">
+              <div class="bar bar-593"></div>
+              <div class="label">593</div>
+            </div>
+            <div class="status-bar">
+              <div class="bar bar-12"></div>
+              <div class="label">12</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!--card3-->
+      <div class="slider slider-item">
+
+        <div class="building-permissions">Building Permissions</div>
+        <div class="main-container">
+          <div class="text-small text-600 text-right position-total">Total</div>
+          <div class="text-small text-400 text-right position-submitted">Submitted</div>
+          <div class="text-small text-400 text-right position-approved">Approved</div>
+          <div class="text-small text-400 text-right position-process">In Process</div>
+          <div class="text-small text-400 text-right position-rejected">Rejected</div>
+          <div class="text-small text-400 text-center position-bottom-1">1500</div>
+          <div class="text-small text-400 text-center position-bottom-2">1000</div>
+          <div class="text-small text-400 text-center position-bottom-3">500</div>
+          <div class="text-small text-400 text-center position-bottom-4">0</div>
+          <div class="border-solid" style="left: 265px; top: 176px;"></div>
+          <div class="border-solid" style="left: 205px; top: 176px;"></div>
+          <div class="border-solid" style="left: 145px; top: 176px;"></div>
+          <div class="border-solid" style="left: 93px; top: 176px;"></div>
+          <div class="border-dotted-vertical"></div>
+          <div class="border-dotted-horizontal"></div>
+          <div class="bars-container">
+            <div class="bar-item">
+              <div class="bar-red"></div>
+              <div class="text-small text-400">770</div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-yellow"></div>
+              <div class="text-small text-400">147</div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-cyan"></div>
+              <div class="text-small text-400">397</div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-green"></div>
+              <div class="text-small text-400">323</div>
+            </div>
+            <div class="bar-item" style="align-self: stretch;">
+              <div class="bar-blue"></div>
+              <div class="text-small text-400">1315</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--card4-->
+      <div class="  slider-item">
+        <div class="header-text">Plinth</div>
+        <div class="content-box">
+          <div class="label total">Total</div>
+          <div class="label submitted">Submitted</div>
+          <div class="label approved">Approved</div>
+          <div class="label in-process">In Process</div>
+          <div class="label rejected">Rejected</div>
+
+          <div class="number total">750</div>
+          <div class="number submitted">500</div>
+          <div class="number approved">250</div>
+          <div class="number in-process">0</div>
+
+          <div class="vertical-line vertical-line-1"></div>
+          <div class="vertical-line vertical-line-2"></div>
+          <div class="vertical-line vertical-line-3"></div>
+          <div class="vertical-line vertical-line-4"></div>
+          <div class="horizontal-dotted-line"></div>
+          <div class="bottom-dotted-line"></div>
+
+          <div class="status-bars">
+            <div class="status-bar">
+              <div class="bar bar-0"></div>
+              <div class="label">0</div>
+            </div>
+            <div class="status-bar">
+              <div class="bar bar-6-yellow"></div>
+              <div class="label">6</div>
+            </div>
+            <div class="status-bar">
+              <div class="bar bar-6-blue"></div>
+              <div class="label">6</div>
+            </div>
+            <div class="status-bar">
+              <div class="bar bar-593"></div>
+              <div class="label">593</div>
+            </div>
+            <div class="status-bar">
+              <div class="bar bar-12"></div>
+              <div class="label">12</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+  </div>
+
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
+  <script src="https://unpkg.com/@turf/turf"></script>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css"
+    integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+
+
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+
+
+  <script src="legend.js"></script>
+
+<script src="script1.js"></script>
+  <script src="filter.js"></script>
+  <script>
+
+  </script>
 </body>
+
 </html>
