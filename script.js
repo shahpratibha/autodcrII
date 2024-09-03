@@ -322,53 +322,107 @@ document.addEventListener('DOMContentLoaded', function () {
 //     zoomControl.style.position = 'fixed';
 //   }
 // });
-document.addEventListener('DOMContentLoaded', function () {
-  const filters = document.getElementById('filters');
-  const map = document.getElementById('map');
-  const searchbtn = document.getElementById('map-controls');
-  // const //tableinfo = document.getElementById('tablecontainer');
 
-  const button = document.getElementById('toggleFilters');
-
-
-  // const button = document.getElementById('toggleFilters');
-
-  // Set the title attribute
-  button.setAttribute('title', 'Filter');
-
-
-  let filtersVisible = false;
-
-  button.addEventListener('click', function () {
-    if (!filtersVisible) {
-      filters.style.marginLeft = '0';
-      filters.style.opacity = '1';
-      map.style.width = '81vw';
-      button.style.top = "4vh";
-      button.style.right = 'calc(19.8vw)';
-      button.innerHTML = '<img src="image/filter.png" alt="Search Icon" id="search-icon">';
-      searchbtn.style.right = 'calc(0.8vw)';
-      searchbtn.style.top = '17vh';
-      searchbtn.style.right = 'calc(20vw - 1px)';
-    } else {
-      filters.style.marginLeft = '-35vw';
-      filters.style.opacity = '0';
-      map.style.width = '100vw';
-      button.style.top = "4vh";
-      // button.style.right = '40px';
-      button.style.right = '10px';
-      button.innerHTML = '<img src="image/filter.png" alt="Search Icon" id="search-icon">';
-      searchbtn.style.right = '40px';
-      searchbtn.style.top = '17vh';
-      searchbtn.style.right = '10px';
-      //tableinfo.style.right = '10px'; // Adjusted position for //tableinfo
-    }
-    filtersVisible = !filtersVisible;
-  });
   // -------------------------------------------------------------------------
+  document.addEventListener('DOMContentLoaded', function () {
+    const filters = document.getElementById('filters');
+    const map = document.getElementById('map');
+    const searchbtn = document.getElementById('map-controls');
+    const button = document.getElementById('toggleFilters');
+    const leafletControlLayers = document.querySelector('.leaflet-control-layers');
+    const leafletControlZoom = document.querySelector('.leaflet-control-zoom');
+    const geopulseaname = document.querySelector('.geopulseaname');
+    const legendControl = document.querySelector('.collapse-button');
+    const datePicker = document.querySelector('.date-picker');
+    const summarySection = document.querySelector('.summary-section'); 
+    const cardsContainer = document.querySelector('.cards');
+    const proposalInfo = document.querySelector('.proposal-info');
+    const openTableBtn = document.getElementById('openTableBtn'); // Select the openTableBtn element
+    
+    if (!filters || !map || !button || !searchbtn || !leafletControlLayers || !leafletControlZoom || !geopulseaname || !legendControl || !datePicker || !summarySection || !cardsContainer || !proposalInfo || !openTableBtn) {
+        console.error('One or more elements are not found in the DOM.');
+        return;
+    }
 
+    button.setAttribute('title', 'Filter');
 
+    let filtersVisible = false;
+
+    button.addEventListener('click', function () {
+        if (!filtersVisible) {
+            console.log('Showing filters');
+
+            filters.style.marginLeft = '0';
+            filters.style.opacity = '1';
+            map.style.width = '81vw';
+            
+            summarySection.style.width = 'calc(100% - 19vw)';
+            summarySection.style.position = 'absolute';
+            summarySection.style.right = '0';
+            summarySection.style.marginRight = '0';
+            
+            proposalInfo.style.position = 'absolute';
+            proposalInfo.style.right = '0';
+            proposalInfo.style.marginRight = '0';
+            proposalInfo.style.transform = 'translateX(-1vw)';
+            
+            button.style.top = "6vh";
+            button.style.right = '20vw';
+            button.innerHTML = '<img src="image/filter.svg" alt="" id="search-icon">';
+            searchbtn.style.right = 'calc(20vw - 1px)';
+            searchbtn.style.top = '22vh';
+            
+            leafletControlLayers.style.right = '35vw';
+            leafletControlZoom.style.right = '21vw';
+            geopulseaname.style.right = '21vw';
+            legendControl.style.right = '40vw';
+            datePicker.style.right = '20vw';
+            
+            cardsContainer.style.width = 'calc(100% - -1vw)';
+
+            // Move the openTableBtn when filters are shown
+            openTableBtn.style.right = '20.900vw'; // Adjust as needed
+            openTableBtn.style.top = '25vh'; // Adjust as needed
+            
+        } else {
+            console.log('Hiding filters');
+
+            filters.style.marginLeft = '-35vw';
+            filters.style.opacity = '0';
+            map.style.width = '100vw';
+            
+            summarySection.style.width = '100%';
+            summarySection.style.position = 'relative';
+            summarySection.style.marginRight = '1vw';
+            summarySection.style.transform = 'translateX(0)';
+            
+            proposalInfo.style.position = 'relative';
+            proposalInfo.style.marginRight = '1vw';
+            proposalInfo.style.transform = 'translateX(0)';
+            
+            button.style.top = "6vh";
+            button.style.right = '10px';
+            button.innerHTML = '<img src="image/filter.svg" alt="" id="search-icon">';
+            searchbtn.style.right = '10px';
+            searchbtn.style.top = '22vh';
+            
+            leafletControlLayers.style.right = '10px';
+            leafletControlZoom.style.right = '10px';
+            geopulseaname.style.right = '10px';
+            legendControl.style.right = '10px';
+            datePicker.style.right = '10px';
+
+            // Restore the position of openTableBtn when filters are hidden
+            openTableBtn.style.right = '10px'; // Adjust as needed
+            openTableBtn.style.top = '25vh'; // Adjust as needed
+        }
+
+        filtersVisible = !filtersVisible;
+    });
 });
+
+
+
 
 
 function updateTableStats(stats) {

@@ -239,3 +239,89 @@ L.control.scale({
     position: 'bottomleft' // Change position to bottom right
 }).addTo(map);
 
+// Toggle arrow direction
+function toggleFilter(label) {
+    const icon = label.querySelector('.icon-container i');
+    const filterInput = label.nextElementSibling; // Assuming the input follows the label
+    const filterList = filterInput.nextElementSibling; // Assuming the ul follows the input
+
+
+    if (icon.classList.contains('fa-angle-down')) {
+        icon.classList.remove('fa-angle-down');
+        icon.classList.add('fa-angle-up');
+    } else {
+        icon.classList.remove('fa-angle-up');
+        icon.classList.add('fa-angle-down');
+    }
+
+    // Toggle the visibility of the search input and filter list
+    if (filterInput.style.display === 'none' || !filterInput.style.display) {
+        filterInput.style.display = 'block';
+        filterList.style.display = 'block';
+    } else {
+        filterInput.style.display = 'none';
+        filterList.style.display = 'none';
+    }
+}
+
+
+
+
+// //
+
+// document.addEventListener('DOMContentLoaded', function () {
+//     const filters = document.getElementById('filters');
+//     const map = document.getElementById('map');
+//     const button = document.getElementById('toggleFilters');
+//     const closeFiltersBtn = document.querySelector('.close'); // Close button element
+//     const mapControls = document.getElementById('map-controls');
+//     const summarySection = document.querySelector('.summary-section');
+
+//     if (!filters || !map || !button || !closeFiltersBtn || !mapControls || !summarySection) {
+//         console.error('One or more elements are not found in the DOM.');
+//         return;
+//     }
+
+//     let filtersVisible = false;
+
+//     button.addEventListener('click', function () {
+//         if (!filtersVisible) {
+//             showFilters();
+//         } else {
+//             closeFilters();
+//         }
+//         filtersVisible = !filtersVisible;
+//     });
+
+//     closeFiltersBtn.addEventListener('click', closeFilters);
+
+//     function showFilters() {
+//         console.log('Showing filters');
+//         filters.style.display = 'block'; // Show filters
+//         filters.style.opacity = '1';
+//         map.style.width = '81vw'; // Reduce map width to accommodate filters
+
+//         // Move map controls and summary section for filters
+//         mapControls.style.right = 'calc(20vw - 1px)';
+//         summarySection.style.position = 'absolute';
+//         summarySection.style.right = '0';
+//         summarySection.style.marginRight = '0';
+//         summarySection.style.transform = 'translateX(-19vw)';
+//     }
+
+//     function closeFilters() {
+//         console.log('Closing filters');
+//         filters.style.display = 'none'; // Hide filters
+//         filters.style.opacity = '0';
+//         map.style.width = '100vw'; // Reset map width to full
+
+//         // Reset map controls and summary section
+//         mapControls.style.right = '10px';
+//         summarySection.style.position = 'relative';
+//         summarySection.style.right = '10px';
+//         summarySection.style.marginRight = '1vw';
+//         summarySection.style.transform = 'translateX(0)';
+//     }
+// });
+
+

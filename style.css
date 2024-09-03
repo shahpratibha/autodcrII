@@ -31,7 +31,7 @@ html {
 .leaflet-right .leaflet-control {
   float: left;
   position: relative;
-  top: 8vh;
+  top: 12vh !important;
   left: 96.5vw;
   border-radius: 50%;
   background: #6f6f6f;
@@ -54,7 +54,7 @@ html {
   right: 97px;
   z-index: 1000;
   border-radius: 5px;
-  border: 1px solid #0077DA;
+  border: 1px solid #0077da;
   top: -5px;
   height: 213px !important;
   overflow: auto;
@@ -124,7 +124,6 @@ html {
   width: 24px;
   height: 24px;
 }
-
 
 .slider-title {
   text-align: right;
@@ -236,7 +235,7 @@ html {
 
   background-color: rgba(255, 255, 255, 0.9);
   border-radius: 8px;
- 
+
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
   padding: 15px; /* Add padding inside the card */
@@ -255,7 +254,6 @@ html {
 .cards::-webkit-scrollbar-thumb:hover {
   background-color: #555;
 }
-
 
 .navigation-icons button {
   font-size: 20px;
@@ -365,7 +363,7 @@ html {
 
 .map-controls {
   position: absolute;
-  top: 18vh;
+  top: 16vh;
   right: 11px;
   z-index: 1000;
   display: flex;
@@ -390,11 +388,12 @@ html {
 
 .control-panel {
   position: absolute;
-  top: 1px;
+  top: 15px;
   left: 10px;
   z-index: 999;
+  gap: 25px;
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   align-items: flex-start;
 }
 
@@ -403,7 +402,17 @@ html {
   flex-direction: row;
   gap: 10px;
 }
+.toggle-button {
+  background: none; /* Remove background color */
+  border: none; /* Remove button border */
+  padding: 0; /* Remove padding */
+  cursor: pointer; /* Change cursor to pointer */
+  display: flex; /* Center the image */
+  align-items: center;
+  margin-top: -8px;
 
+  justify-content: center;
+}
 
 .btn-group {
   display: flex;
@@ -475,11 +484,8 @@ html {
   align-items: center; /* Align items vertically centered */
 }
 
-
-
 .calendar-icon {
   margin-left: 10px; /* Space between date range and icon */
-
 }
 
 .calendar-icon img {
@@ -657,10 +663,11 @@ html {
 
 }
 
-
 /* Define how the .move-up class affects the elements */
 .move-up {
-  transform: translateY(-315px); /* Adjust value based on how much you want to move up */
+  transform: translateY(
+    -315px
+  ); /* Adjust value based on how much you want to move up */
   transition: transform 0.3s ease; /* Smooth transition */
 }
 
@@ -682,11 +689,15 @@ html {
 
 /* Style for the calendar popup */
 /* Style for the selected date range boxes */
-day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRange.endRange {
-  border-radius:8px !important;
+day.selected.endRange,
+.flatpickr-day.startRange.endRange,
+.flatpickr-day.endRange.endRange {
+  border-radius: 8px !important;
 }
 
-.flatpickr-day.selected.startRange, .flatpickr-day.startRange.startRange, .flatpickr-day.endRange.startRange {
+.flatpickr-day.selected.startRange,
+.flatpickr-day.startRange.startRange,
+.flatpickr-day.endRange.startRange {
   border-radius: 8px !important;
 }
 .flatpickr-day.selected.startRange {
@@ -721,11 +732,21 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   /* -webkit-box-shadow: -5px 0 0 #e6e6e6, 5px 0 0 #e6e6e6; */
   /* box-shadow: -5px 0 0 #e6e6e6, 5px 0 0 #e6e6e6; */
 }
-.flatpickr-day.inRange, .flatpickr-day.prevMonthDay.inRange, .flatpickr-day.nextMonthDay.inRange, .flatpickr-day.today.inRange, .flatpickr-day.prevMonthDay.today.inRange, .flatpickr-day.nextMonthDay.today.inRange, .flatpickr-day:hover, .flatpickr-day.prevMonthDay:hover, .flatpickr-day.nextMonthDay:hover, .flatpickr-day:focus, .flatpickr-day.prevMonthDay:focus, .flatpickr-day.nextMonthDay:focus {
+.flatpickr-day.inRange,
+.flatpickr-day.prevMonthDay.inRange,
+.flatpickr-day.nextMonthDay.inRange,
+.flatpickr-day.today.inRange,
+.flatpickr-day.prevMonthDay.today.inRange,
+.flatpickr-day.nextMonthDay.today.inRange,
+.flatpickr-day:hover,
+.flatpickr-day.prevMonthDay:hover,
+.flatpickr-day.nextMonthDay:hover,
+.flatpickr-day:focus,
+.flatpickr-day.prevMonthDay:focus,
+.flatpickr-day.nextMonthDay:focus {
   cursor: pointer;
   outline: 0;
   background: #e6e6e6 !important;
-
 }
 
 .flatpickr-day.inRange {
@@ -739,7 +760,7 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   display: inline !important;
   top: 40px !important;
   width: 280px;
- right: 38px !important;
+  right: 38px !important;
   position: absolute !important;
 }
 
@@ -815,11 +836,11 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
 }
 
 #apply-button {
-  background-color: #888; /* Blue background for apply button */;
+  background-color: #888; /* Blue background for apply button */
 }
 
 #cancel-button {
-  background-color: #007bff /* Gray background for cancel button */
+  background-color: #007bff; /* Gray background for cancel button */
 }
 
 .flatpickr-calendar {
@@ -839,7 +860,7 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   font-family: inherit;
   font-weight: 300;
   height: auto;
-  font-size: 17.5px !important;
+  font-size: 15px !important;
   line-height: inherit;
   margin: -1px 0 0 0;
   outline: none;
@@ -872,8 +893,10 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   -ms-touch-action: manipulation;
   touch-action: manipulation;
   background: #fff;
-  -webkit-box-shadow: 1px 0 0 #e6e6e6, -1px 0 0 #e6e6e6, 0 1px 0 #e6e6e6, 0 -1px 0 #e6e6e6, 0 3px 13px rgba(0, 0, 0, 0.08);
-  box-shadow: 1px 0 0 #e6e6e6, -1px 0 0 #e6e6e6, 0 1px 0 #e6e6e6, 0 -1px 0 #e6e6e6, 0 3px 13px rgba(0, 0, 0, 0.08);
+  -webkit-box-shadow: 1px 0 0 #e6e6e6, -1px 0 0 #e6e6e6, 0 1px 0 #e6e6e6,
+    0 -1px 0 #e6e6e6, 0 3px 13px rgba(0, 0, 0, 0.08);
+  box-shadow: 1px 0 0 #e6e6e6, -1px 0 0 #e6e6e6, 0 1px 0 #e6e6e6,
+    0 -1px 0 #e6e6e6, 0 3px 13px rgba(0, 0, 0, 0.08);
 }
 
 /* Search icon inside the button */
@@ -906,11 +929,10 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   cursor: pointer; /* Pointer cursor on hover */
   display: flex; /* Center the icon */
   align-items: center;
-
+  bottom: 52px;
   justify-content: center;
   overflow: hidden; /* Ensure smooth resizing */
   position: absolute; /* Position absolute within the container */
-  top: 0; /* Align with container top */
 }
 
 /* Full width when expanded */
@@ -948,12 +970,22 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
 .close-icon {
   position: absolute;
   right: 10px;
-  top: 50%;
+  bottom: 66px;
   transform: translateY(60%); /* Center vertically */
   cursor: pointer;
   display: none; /* Initially hidden */
   width: 18px; /* Adjust size as needed */
   height: 18px; /* Adjust size as needed */
+}
+.close {
+  position: absolute;
+  right: -6px;
+  top: 6px;
+  /* bottom: 66px; */
+  cursor: pointer;
+  /* display: none; */
+  width: 20px;
+  height: 20px;
 }
 
 /* When search input is shown */
@@ -964,8 +996,6 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
 .full-width #search-icon {
   display: none;
 }
-
-
 
 /* Hide the icon when button is expanded */
 #search-button.full-width img {
@@ -981,7 +1011,7 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   border: 1px solid #ccc; /* Border color */
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Box shadow */
   position: absolute; /* Position absolute within the container */
-  top: 0; /* Align with container top */
+  bottom: 45px;
   right: 0;
   transition: opacity 0.3s, width 0.3s; /* Smooth transition */
 }
@@ -990,8 +1020,18 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
 #search-button.full-width ~ #searchInputDashboard {
   display: block; /* Show the input field */
 }
+/* CSS to hide filters initially */
+#filters {
+  margin-left: -35vw; /* Hide off-screen */
+  opacity: 0; /* Invisible */
+  transition: margin-left 0.3s, opacity 0.3s; /* Smooth transition */
+}
+*/
 
 /* filter */
+/* .filters{
+  display: none ;
+} */
 
 /* Search icon inside the button */
 /* #toggleFilters img {
@@ -1012,7 +1052,7 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
 
 /* Initial button styling */
 #toggleFilters {
-  right: 9px;
+  right: 1px;
   width: 30px; /* Initial width */
   height: 30px; /* Initial height */
   transition: width 0.3s, height 0.3s, background-color 0.3s, opacity 0.3s; /* Smooth transition */
@@ -1027,10 +1067,8 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   justify-content: center;
   overflow: hidden; /* Ensure smooth resizing */
   position: absolute; /* Position absolute within the container */
-  top: 42px; /* Align with container top */
+  top: 50px; /* Align with container top */
 }
-
-
 
 /* Search icon inside the button */
 #toggleFilters img {
@@ -1042,11 +1080,6 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   left: 52%;
   transform: translate(-50%, -50%); /* Center the icon */
 }
-
-
-
-
-
 
 /* cards */
 /* Container for slider items */
@@ -1443,18 +1476,16 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   background: #0077da;
 }
 
-.filter_div{
-  height: auto; 
+.filter_div {
+  height: auto;
   max-height: 65vh;
   overflow: hidden;
   transition: overflow 0.3s ease;
-
 }
 .filter_div:hover {
   overflow: auto;
   scrollbar-width: thin;
   scrollbar-color: #888 #f1f1f1;
-
 }
 .toggle-button {
   position: relative;
@@ -1463,7 +1494,7 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   z-index: 1000;
   border: none;
   background: none;
-  color:#8AC0EE;
+  color: #8ac0ee;
   font-size: 21px;
   border-radius: 5px;
 }
@@ -1485,68 +1516,72 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   object-fit: contain; /* Ensure image scales properly */
 }
 
-
 .filters {
   margin-bottom: 20px;
   margin-top: 20px;
   position: absolute;
   top: 20px;
   right: 18px;
-  width:250px;
-
+  width: 250px;
 }
-
 
 .filter-group {
-  margin-bottom: 5px;
+  margin-bottom: -17px;
   padding: 10px;
-  border: 1px solid gray;
+  /* border: 1px solid gray; */
   font-size: 10px;
 }
-.filter-group label {
+.filter-group {
   display: block;
-  font-weight: bold;
+  /* font-weight: bold; */
   margin-bottom: 5px;
-  font-size: 12px;
+  /* font-size: 12px; */
+  color: var(--Basic-Colors-Black, #000);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  padding: 8px;
+  line-height: normal;
+  border-radius: 8px;
+  background: var(--Blue-50, #e6f1fb);
   cursor: pointer;
   position: relative;
-  background: aliceblue;
 }
 
 .filter-group input[type="text"] {
-width: 80%;
-padding: 5px;
-margin-bottom: 10px;
-font-size: 12px;
-font-weight: bold;
-display: none;
-border-radius: 8px;
-border: 2px solid #bbb;
+  width: 80%;
+  padding: 5px;
+  margin-bottom: 10px;
+  font-size: 12px;
+  font-weight: bold;
+  display: none;
+  border-radius: 8px;
+  border: 2px solid #bbb;
 }
 .filter-group ul {
-list-style-type: none;
-padding: 0;
-display: none;
+  list-style-type: none;
+  padding: 0;
+  display: none;
 }
 .filter-group ul.active,
 .filter-group input[type="text"].active {
-display: block;
-forced-color-adjust: blue;
+  display: block;
+  forced-color-adjust: blue;
 }
 .filter-group li {
   margin-bottom: 5px;
 }
-
 .icon-container {
-position:absolute;
-right:1%; 
-top:0%;
-font-size: 15px;
+  position: absolute;
+  right: 3%;
+  /* top: 0%; */
+  font-size: 15px;
 }
 
+s
 /* Style the icon */
 .icon-container i {
-color: black; /* Default color */
+  color: black; /* Default color */
 }
 
 .abcscroll {
@@ -1577,17 +1612,12 @@ color: black; /* Default color */
   background: #555; /* Darker color on hover state for visibility */
 }
 
-
-
-
-
-
 #tablecontainer {
   z-index: 9999;
   position: absolute;
   width: 53%;
   bottom: 24%;
-  right: 4%;
+  right: 19%;
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -1596,36 +1626,33 @@ color: black; /* Default color */
   transition: all 0.3s ease;
 }
 
-
 .tableDetail {
-max-height: 550px; 
-overflow-y: auto; 
-/* margin-top: 10px;  */
-border: 1px solid #ccc; 
-background-color: #f9f9f9; 
-
+  max-height: 550px;
+  overflow-y: auto;
+  /* margin-top: 10px;  */
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
 }
 
 .minimize-button {
-background-color:#8AC0EE;
-color: red;
-border: none;
-padding: 5px;
-cursor: pointer;
-font-size: 15px;
-/* border-radius: 50%; */
-position: absolute;
-right: 0%;
-top:0%;
-z-index: 1000;
-width: 27px;
-height:28px;
-display: flex;
-justify-content: center;
-align-items: center;
-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
-} 
+  background-color: #8ac0ee;
+  color: red;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+  font-size: 15px;
+  /* border-radius: 50%; */
+  position: absolute;
+  right: 0%;
+  top: 0%;
+  z-index: 1000;
+  width: 27px;
+  height: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 /* 
 
 .download-button
@@ -1694,3 +1721,125 @@ overflow: visible;
  
 
  */
+
+/* Style for the container div */
+
+.tablestats {
+  margin-top: 24px;
+
+  color: #262626;
+  font-weight: bold;
+  text-shadow: black;
+}
+.stat-button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--Blue-50, #e6f1fb);
+  /* border: 1px solid #ccc;  */
+  border-radius: 5px;
+  padding: 10px;
+  color: #0077da;
+  font-size: 14px;
+}
+
+.stat-label {
+  margin-right: 10px;
+  font-weight: bold;
+  color: #0077da;
+}
+
+.stat-value {
+  background-color: #8ac0ee;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px 10px;
+  min-width: 85px;
+  text-align: center;
+  color: black;
+  font-weight: bold;
+}
+
+.table{
+  right: 1px;
+    width: 30px;
+    height: 30px;
+    transition: width 0.3s, height 0.3s, background-color 0.3s, opacity 0.3s;
+    background: linear-gradient(180deg, #6f6f6f 0%, #262626 100%);
+    box-shadow: 0px 0px 14.035px 0px rgba(0, 0, 0, 0.15);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: absolute;
+    top: 50px;
+}
+.dataTables_scrollBody{
+  max-height: 270px !important;
+}
+.dataTable thead th {
+  
+  background-color: #f2f2f2; /* Adjust background color */
+  padding: 10px; /* Optional: add padding for better spacing */
+}
+
+/* Optional: styling for the entire table */
+.dataTable {
+  border-collapse: collapse; /* Ensures borders collapse into a single border */
+  width: 100%; /* Adjust table width as needed */
+}
+
+/* Optional: styling for table cells */
+.dataTable td, .dataTable th {
+  border: 1px solid #ddd; /* Border for table cells */
+  padding: 8px; /* Padding for table cells */
+}
+
+
+
+#openTableBtn {
+  position: absolute;
+  z-index: 999;
+  top: 27vh;
+  width: auto;
+  padding: 6px;
+  right: 10px;
+  background: linear-gradient(180deg, #6f6f6f 0%, #262626 100%);
+  /* box-shadow: 0px 0px 14.035px 0px rgba(0, 0, 0, 0.15); */
+  border: none; /* Remove border */
+  border-radius: 50%; /* Make it round */
+
+  }
+  
+  .tablebtn {
+  width: 20px;
+  height: 20px;
+  }
+  
+  
+
+  #data-table tbody tr:hover {
+    background-color: #E6F1FB; 
+    cursor: pointer; 
+  }
+
+ 
+  #data-table th, #data-table td {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+  }
+
+  #data-table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  
+  #data-table thead tr {
+    background-color:#E6F1FB;
+  }
+
+

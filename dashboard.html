@@ -14,6 +14,9 @@
     <link rel="stylesheet" href="style.css">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 </head>
 
 <body>
@@ -82,77 +85,89 @@
 
                 <div class="map-controls">
                     <button class="toggle-button" id="toggleFilters">
-                        <img src="image/filter.png" alt="Search Icon" id="search-icon">
+                        <img src="image/filter.svg" alt="" id="search-icon">
                     </button>
-
+                
                 </div>
+<!-- 
+                <button class="toggle-button" id="toggleFilters">
+                    <img src="image/table.svg" alt="" id="search-icon">
+                </button> -->
 
+               
+            
+
+                <button id="openTableBtn"><img src="image/table.svg" alt="" class="tablebtn"></button>
+
+                
                 <div class="filters" id="filters">
-                    <h3>Filters <span class="close-icon" onclick="closeFilters()">×</span></h3>
-                    <div class="filter_div">
+                    <h3>Filters <span class="close" onclick="closeFilters()"></span></h3>
+                    <div class="filter_div" >
                         <div class="filter-group">
-                            <label for="village_na" onclick="toggleFilter(this)">Village <span class="icon-container"><i
-                                        class="fa-solid fa-angle-down"></i></span><span
-                                    class="selected-count"></span></label>
+                            <label for="village_na" onclick="toggleFilter(this)">
+                              Village 
+                              <span class="icon-container">
+                                <i class="fa-solid fa-angle-down"></i>
+                              </span>
+                              <span class="selected-count"></span>
+                            </label>
                             <input type="text" placeholder="Search" class="filter-input" id="villageSearch">
-                            <ul class="select2  abcscroll" multiple="multiple" id="village_na"></ul>
-                        </div>
-                        <div class="filter-group">
-                            <label for="wapplyfor" onclick="toggleFilter(this)">Apply For <span
-                                    class="icon-container"><i class="fa-solid fa-angle-down"></i></span><span
-                                    class="selected-count"></span></label>
-                            <input type="text" placeholder="Search" class="filter-input" id="widthSearch">
-                            <ul class="select2 abcscroll" multiple="multiple" id="applyfor"></ul>
-                        </div>
-                        <div class="filter-group">
-                            <label for="projecttype" onclick="toggleFilter(this)">projecttype <span
-                                    class="icon-container"><i class="fa-solid fa-angle-down"></i></span><span
-                                    class="selected-count"></span></label>
-                            <input type="text" placeholder="Search" class="filter-input" id="statusSearch">
-                            <ul class="select2" multiple="multiple" id="projecttype"></ul>
-                        </div>
-                        <div class="filter-group">
-                            <label for="casetype" onclick="toggleFilter(this)">Casetype <span class="icon-container"><i
-                                        class="fa-solid fa-angle-down"></i></span><span
-                                    class="selected-count"></span></label>
-                            <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
-                            <ul class="select2 " multiple="multiple" id="casetype"></ul>
-                        </div>
-                        <div class="filter-group">
-                            <label for="proposaltype" onclick="toggleFilter(this)">proposal type<span
-                                    class="icon-container"><i class="fa-solid fa-angle-down"></i></span><span
-                                    class="selected-count"></span></label>
-                            <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
-                            <ul class="select2 " multiple="multiple" id="proposaltype"></ul>
-                        </div>
-                        <div class="filter-group">
-                            <label for="tdrzone" onclick="toggleFilter(this)">tdrzone<span class="icon-container"><i
-                                        class="fa-solid fa-angle-down"></i></span><span
-                                    class="selected-count"></span></label>
-                            <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
-                            <ul class="select2 " multiple="multiple" id="tdrzone"></ul>
-                        </div>
-                        <div class="filter-group">
-                            <label for="grossplotarea" onclick="toggleFilter(this)">grossplotarea <span
-                                    class="icon-container"><i class="fa-solid fa-angle-down"></i></span><span
-                                    class="selected-count"></span></label>
-                            <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
-                            <ul class="select2 " multiple="multiple" id="grossplotarea"></ul>
-                        </div>
-                        <div class="filter-group">
-                            <label for="developmentzonedp" onclick="toggleFilter(this)">developmentzonedp <span
-                                    class="icon-container"><i class="fa-solid fa-angle-down"></i></span><span
-                                    class="selected-count"></span></label>
-                            <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
-                            <ul class="select2 " multiple="multiple" id="developmentzonedp"></ul>
-                        </div>
-                        <div class="filter-group">
-                            <label for="owner_det_email" onclick="toggleFilter(this)">owner_det_email <span
-                                    class="icon-container"><i class="fa-solid fa-angle-down"></i></span><span
-                                    class="selected-count"></span></label>
-                            <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
-                            <ul class="select2 " multiple="multiple" id="owner_det_email"></ul>
-                        </div>
+                            <ul class="select2 abcscroll" multiple="multiple" id="village_na"></ul>
+                          </div>
+                          
+                          
+                      <div class="filter-group">
+
+                        <label for="applyfor" onclick="toggleFilter(this)">Apply For <span class="icon-
+                            container"><i
+                              class="fa-solid fa-angle-down"></i></span><span class="selected-count"></s
+                                pan></label>
+                        <input type="text" placeholder="Search" class="filter-input" id="widthSearch">
+                        <ul class="select2 abcscroll" multiple="multiple" id="applyfor"></ul>
+                      </div>
+
+                      <div class="filter-group">
+                        <label for="projecttype" onclick="toggleFilter(this)">projecttype <span class="icon-container"><i
+                              class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
+                        <input type="text" placeholder="Search" class="filter-input" id="statusSearch">
+                        <ul class="select2" multiple="multiple" id="projecttype"></ul>
+                      </div>
+                      <div class="filter-group">
+                        <label for="casetype" onclick="toggleFilter(this)">Casetype <span class="icon-container"><i
+                              class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
+                        <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
+                        <ul class="select2 " multiple="multiple" id="casetype"></ul>
+                      </div>
+                      <div class="filter-group">
+                        <label for="proposaltype" onclick="toggleFilter(this)">proposal type<span class="icon-container"><i
+                              class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
+                        <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
+                        <ul class="select2 " multiple="multiple" id="proposaltype"></ul>
+                      </div>
+                      <div class="filter-group">
+                        <label for="tdrzone" onclick="toggleFilter(this)">tdrzone<span class="icon-container"><i
+                              class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
+                        <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
+                        <ul class="select2 " multiple="multiple" id="tdrzone"></ul>
+                      </div>
+                      <div class="filter-group">
+                        <label for="grossplotarea" onclick="toggleFilter(this)">grossplotarea <span class="icon-container"><i
+                              class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
+                        <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
+                        <ul class="select2 " multiple="multiple" id="grossplotarea"></ul>
+                      </div>
+                      <div class="filter-group">
+                        <label for="developmentzonedp" onclick="toggleFilter(this)">developmentzonedp <span class="icon-container"><i
+                              class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
+                        <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
+                        <ul class="select2 " multiple="multiple" id="developmentzonedp"></ul>
+                      </div>
+                      <div class="filter-group">
+                        <label for="owner_det_email" onclick="toggleFilter(this)">owner_det_email <span class="icon-container"><i
+                              class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
+                        <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
+                        <ul class="select2 " multiple="multiple" id="owner_det_email"></ul>
+                      </div>
                     </div>
 
                     <div class="showCount">
