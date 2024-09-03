@@ -10,48 +10,48 @@ document.getElementById('status-wise-button').addEventListener('click', function
     this.classList.toggle('btn-active');
 });
 
-document.getElementById('closeButton').addEventListener('click', function() {
-    document.querySelector('.summary-section').style.display = 'none';
-    document.querySelector('.north-arrow-container').classList.remove('move-up');
-    document.querySelector('.leaflet-top.leaflet-left .leaflet-bar').classList.remove('move-up');
-    document.querySelector('.leaflet-control-scale').classList.remove('move-up');
-    document.querySelector('.container-fluid').classList.remove('summary-section-open');
-    document.querySelector('.geopulseaname').classList.remove('move-up'); // Remove class for reverting position
+// document.getElementById('closeButton').addEventListener('click', function() {
+//     document.querySelector('.summary-section').style.display = 'none';
+//     document.querySelector('.north-arrow-container').classList.remove('move-up');
+//     document.querySelector('.leaflet-top.leaflet-left .leaflet-bar').classList.remove('move-up');
+//     document.querySelector('.leaflet-control-scale').classList.remove('move-up');
+//     document.querySelector('.container-fluid').classList.remove('summary-section-open');
+//     document.querySelector('.geopulseaname').classList.remove('move-up'); // Remove class for reverting position
 
-    const statusButton = document.getElementById('status-wise-button');
-    statusButton.classList.remove('btn-active');
-    statusButton.classList.add('btn-blue');
-});
+//     const statusButton = document.getElementById('status-wise-button');
+//     statusButton.classList.remove('btn-active');
+//     statusButton.classList.add('btn-blue');
+// });
 
     
           
-    document.addEventListener('DOMContentLoaded', () => {
-    const prevButton = document.querySelector('.prev-button');
-    const nextButton = document.querySelector('.next-button');
-    const slider = document.querySelector('.slider');
-    const sliderItems = document.querySelectorAll('.slider-item');
-    const totalItems = sliderItems.length;
-    let currentIndex = 0;
+//     document.addEventListener('DOMContentLoaded', () => {
+//     const prevButton = document.querySelector('.prev-button');
+//     const nextButton = document.querySelector('.next-button');
+//     const slider = document.querySelector('.slider');
+//     const sliderItems = document.querySelectorAll('.slider-item');
+//     const totalItems = sliderItems.length;
+//     let currentIndex = 0;
 
-    function updateSlider() {
-        const offset = -currentIndex * 100;
-        slider.style.transform = `translateX(${offset}%)`;
-    }
+//     function updateSlider() {
+//         const offset = -currentIndex * 100;
+//         slider.style.transform = `translateX(${offset}%)`;
+//     }
 
-    prevButton.addEventListener('click', () => {
-        if (currentIndex > 0) {
-            currentIndex--;
-            updateSlider();
-        }
-    });
+//     prevButton.addEventListener('click', () => {
+//         if (currentIndex > 0) {
+//             currentIndex--;
+//             updateSlider();
+//         }
+//     });
 
-    nextButton.addEventListener('click', () => {
-        if (currentIndex < totalItems - 0) {
-            currentIndex++;
-            updateSlider();
-        }
-    });
-});
+//     nextButton.addEventListener('click', () => {
+//         if (currentIndex < totalItems - 0) {
+//             currentIndex++;
+//             updateSlider();
+//         }
+//     });
+// });
 
 
 // calender
@@ -239,3 +239,4 @@ L.control.scale({
     position: 'bottomleft' // Change position to bottom right
 }).addTo(map);
 
+// new file

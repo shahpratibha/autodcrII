@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <link rel="stylesheet" href="style2.css">
   <link rel="stylesheet" href="leafletCustom.css">
+  <link rel="stylesheet" href="style1.css">
 
 </head>
 
@@ -20,7 +21,7 @@
     <div class="row top-section m-0">
       <div class="col-12 d-flex justify-content-between align-items-center p-0">
         <!-- Control Panel -->
-        <div class="control-panel">
+        <!-- <div class="control-panel">
           <a  class="logoPMC">
             <img src="image/pmcjpeg.png" alt="Button Image">
           </a>
@@ -31,10 +32,10 @@
             <button class="btn-blue btn-area">Area Wise</button>
           </div>
 
-        </div>
+        </div> -->
 
         <!-- Date Picker -->
-        <div class="date-picker">
+        <!-- <div class="date-picker">
 
           <div class="date-range" id="date-range-display">April 1, 2024 - March 31, 2025
             <div class="calendar-icon" id="calendar-icon">
@@ -44,7 +45,7 @@
 
           <button id="select-year-button">Select Year</button>
           <input type="date" id="date-input" style="display: none;">
-        </div>
+        </div> -->
       </div>
     </div>
 
@@ -60,9 +61,9 @@
     <div id="tablecontainer"></div>
 
     <!-- Map Section -->
-    <div class="north-arrow-container">
+    <!-- <div class="north-arrow-container">
       <img src="image/North.png" class="north-arrow" alt="North Arrow">
-    </div>
+    </div> -->
 
 
     <div class="row m-0">
@@ -154,231 +155,963 @@
     <!-- <div class="map-controls">
                   
                   
-              </div> -->
+              </div> --></div>
 
 
-  </div>
-
-
-
-
-  <!-- Summary Section -->
-  <div class="summary-section">
-    <div class="summary-header">
-      <h2>Summary of Commencement</h2>
-      <div class="proposal-info">
-        <span>Total number of proposals: 06</span>
-        <div class="proposal-icons">
-          <button class="btn-action"><img src="./image/Refresh.svg" alt="Refresh"></button>
-          <button class="btn-action" id="printButton"><img src="./image/Print.svg" alt="Print"></button>
-          <button class="btn-action" id="excelButton"><img src="./image/Excel.svg" alt="Export">
-          </button>
-          <div id="excelData"></div>
-        </div>
-
-        <div class="navigation-icons">
-          <button class="slider-button prev-button">&lt;</button>
-          <button class="slider-button next-button">&gt;</button>
-          <button id="closeButton">&times;</button> <!-- Close button -->
-        </div>
-      </div>
-    </div>
-
-
-
-
-    <!--card1-->
-    <div class="cards slider">
-      <div class="slider-item">
-        <div class="building-permissions">Building Permissions</div>
-        <div class="main-container">
-          <div class="text-small text-600 text-right position-total">Total</div>
-          <div class="text-small text-400 text-right position-submitted">Submitted</div>
-          <div class="text-small text-400 text-right position-approved">Approved</div>
-          <div class="text-small text-400 text-right position-process">In Process</div>
-          <div class="text-small text-400 text-right position-rejected">Rejected</div>
-          <div class="text-small text-400 text-center position-bottom-1">1500</div>
-          <div class="text-small text-400 text-center position-bottom-2">1000</div>
-          <div class="text-small text-400 text-center position-bottom-3">500</div>
-          <div class="text-small text-400 text-center position-bottom-4">0</div>
-          <div class="border-solid" style="left: 265px; top: 176px;"></div>
-          <div class="border-solid" style="left: 205px; top: 176px;"></div>
-          <div class="border-solid" style="left: 145px; top: 176px;"></div>
-          <div class="border-solid" style="left: 93px; top: 176px;"></div>
-          <div class="border-dotted-vertical"></div>
-          <div class="border-dotted-horizontal"></div>
-          <div class="bars-container">
-            <div class="bar-item">
-              <div class="bar-red"></div>
-              <div class="text-small text-400">770</div>
-            </div>
-            <div class="bar-item">
-              <div class="bar-yellow"></div>
-              <div class="text-small text-400">147</div>
-            </div>
-            <div class="bar-item">
-              <div class="bar-cyan"></div>
-              <div class="text-small text-400">397</div>
-            </div>
-            <div class="bar-item">
-              <div class="bar-green"></div>
-              <div class="text-small text-400">323</div>
-            </div>
-            <div class="bar-item" style="align-self: stretch;">
-              <div class="bar-blue"></div>
-              <div class="text-small text-400">1315</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-      <!--card2-->
-      <div class=" slider slider-item">
-        <div class="header-text">Plinth</div>
-        <div class="content-box">
-          <div class="label total">Total</div>
-          <div class="label submitted">Submitted</div>
-          <div class="label approved">Approved</div>
-          <div class="label in-process">In Process</div>
-          <div class="label rejected">Rejected</div>
-
-          <div class="number total">750</div>
-          <div class="number submitted">500</div>
-          <div class="number approved">250</div>
-          <div class="number in-process">0</div>
-
-          <div class="vertical-line vertical-line-1"></div>
-          <div class="vertical-line vertical-line-2"></div>
-          <div class="vertical-line vertical-line-3"></div>
-          <div class="vertical-line vertical-line-4"></div>
-          <div class="horizontal-dotted-line"></div>
-          <div class="bottom-dotted-line"></div>
-
-          <div class="status-bars">
-            <div class="status-bar">
-              <div class="bar bar-0"></div>
-              <div class="label">0</div>
-            </div>
-            <div class="status-bar">
-              <div class="bar bar-6-yellow"></div>
-              <div class="label">6</div>
-            </div>
-            <div class="status-bar">
-              <div class="bar bar-6-blue"></div>
-              <div class="label">6</div>
-            </div>
-            <div class="status-bar">
-              <div class="bar bar-593"></div>
-              <div class="label">593</div>
-            </div>
-            <div class="status-bar">
-              <div class="bar bar-12"></div>
-              <div class="label">12</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-      <!--card3-->
-      <div class="slider slider-item">
-
-        <div class="building-permissions">Building Permissions</div>
-        <div class="main-container">
-          <div class="text-small text-600 text-right position-total">Total</div>
-          <div class="text-small text-400 text-right position-submitted">Submitted</div>
-          <div class="text-small text-400 text-right position-approved">Approved</div>
-          <div class="text-small text-400 text-right position-process">In Process</div>
-          <div class="text-small text-400 text-right position-rejected">Rejected</div>
-          <div class="text-small text-400 text-center position-bottom-1">1500</div>
-          <div class="text-small text-400 text-center position-bottom-2">1000</div>
-          <div class="text-small text-400 text-center position-bottom-3">500</div>
-          <div class="text-small text-400 text-center position-bottom-4">0</div>
-          <div class="border-solid" style="left: 265px; top: 176px;"></div>
-          <div class="border-solid" style="left: 205px; top: 176px;"></div>
-          <div class="border-solid" style="left: 145px; top: 176px;"></div>
-          <div class="border-solid" style="left: 93px; top: 176px;"></div>
-          <div class="border-dotted-vertical"></div>
-          <div class="border-dotted-horizontal"></div>
-          <div class="bars-container">
-            <div class="bar-item">
-              <div class="bar-red"></div>
-              <div class="text-small text-400">770</div>
-            </div>
-            <div class="bar-item">
-              <div class="bar-yellow"></div>
-              <div class="text-small text-400">147</div>
-            </div>
-            <div class="bar-item">
-              <div class="bar-cyan"></div>
-              <div class="text-small text-400">397</div>
-            </div>
-            <div class="bar-item">
-              <div class="bar-green"></div>
-              <div class="text-small text-400">323</div>
-            </div>
-            <div class="bar-item" style="align-self: stretch;">
-              <div class="bar-blue"></div>
-              <div class="text-small text-400">1315</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!--card4-->
-      <div class="  slider-item">
-        <div class="header-text">Plinth</div>
-        <div class="content-box">
-          <div class="label total">Total</div>
-          <div class="label submitted">Submitted</div>
-          <div class="label approved">Approved</div>
-          <div class="label in-process">In Process</div>
-          <div class="label rejected">Rejected</div>
-
-          <div class="number total">750</div>
-          <div class="number submitted">500</div>
-          <div class="number approved">250</div>
-          <div class="number in-process">0</div>
-
-          <div class="vertical-line vertical-line-1"></div>
-          <div class="vertical-line vertical-line-2"></div>
-          <div class="vertical-line vertical-line-3"></div>
-          <div class="vertical-line vertical-line-4"></div>
-          <div class="horizontal-dotted-line"></div>
-          <div class="bottom-dotted-line"></div>
-
-          <div class="status-bars">
-            <div class="status-bar">
-              <div class="bar bar-0"></div>
-              <div class="label">0</div>
-            </div>
-            <div class="status-bar">
-              <div class="bar bar-6-yellow"></div>
-              <div class="label">6</div>
-            </div>
-            <div class="status-bar">
-              <div class="bar bar-6-blue"></div>
-              <div class="label">6</div>
-            </div>
-            <div class="status-bar">
-              <div class="bar bar-593"></div>
-              <div class="label">593</div>
-            </div>
-            <div class="status-bar">
-              <div class="bar bar-12"></div>
-              <div class="label">12</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-
-  </div>
 
   <div id="map"></div>
+  <!--.tab-section OPTION-->
+
+  
+  <div class="tab-section">
+    <div class="tab-main">
+      <div class="component-6">
+        <img class="chart-fill-icon" alt="" src="image/Chart_fill.svg" />
+        <div class="analytics">Analytics</div>
+      </div>
+      <div class="component-7" id="optionsButton">
+        <img class="ui-iconbookmarklight" alt="" src="image/light.svg" />
+        <div class="analytics">Options</div>
+      </div>
+    </div>
+
+    <!-- Options Content (Initially Hidden) -->
+    <div class="tabs-options" id="tabsOptions" style="display: none">
+      <div class="component-10-parent">
+        <div class="component-10">
+          <img class="right-icons" alt="Filter" src="image/filter.svg" onclick="toggleFilters()" />
+          <div class="component-10-child"></div>
+      </div>
+
+
+        <div class="component-11" id="toggleButton">
+          <img class="right-icons" alt="" src="image/Frame 1410126260.svg" />
+          <div class="component-11-child"></div>
+        </div>
+
+        <div class="component-11">
+          <img class="right-icons" alt="" src="image/Pie.svg" />
+          <div class="component-11-child"></div>
+        </div>
+
+        <div class="component-11">
+          <div class="right-icons3">
+            <img
+              class="vuesaxboldgrid-6-icon"
+              alt=""
+              src="image/grid-6.svg"
+            />
+          </div>
+          <div class="component-11-child"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- This div will be replaced when options are clicked -->
+    <div class="tab-parent" id="tabParent">
+      <div class="tab">
+        <div class="status">Status</div>
+      </div>
+      <div class="tab1">
+        <div class="status">Area</div>
+      </div>
+      <div class="tab1">
+        <div class="status">Explore</div>
+      </div>
+    </div>
+  </div>
+ 
+
+  
+    <!--legend -->
+    <div class="legends hidden">
+      <div class="header">
+        <div class="legends1">Legends</div>
+        </div>
+        <div class="missing-link-buffer-container-parent">
+        <div class="missing-link-buffer-container">
+        <div class="autodcr-aviation-data">AutoDCR: Aviation Data</div>
+        <div class="parent">
+        <div class="div">
+        <div class="child">
+        </div>
+        <div class="n1">N1</div>
+        </div>
+        <div class="frame-parent">
+        <div class="item">
+        </div>
+        <div class="nda-arp">N2</div>
+        </div>
+        <div class="frame-parent">
+        <div class="inner">
+        </div>
+        <div class="nda-arp">N3</div>
+        </div>
+        <div class="frame-parent">
+        <div class="rectangle-div">
+        </div>
+        <div class="nda-arp">N4</div>
+        </div>
+        <div class="frame-parent">
+        <div class="child1">
+        </div>
+        <div class="nda-arp">N5</div>
+        </div>
+        <div class="frame-parent">
+        <div class="child2">
+        </div>
+        <div class="nda-arp">N6</div>
+        </div>
+        <div class="frame-parent">
+        <div class="child3">
+        </div>
+        <div class="nda-arp">N8</div>
+        </div>
+        <div class="frame-parent">
+        <div class="child4">
+        </div>
+        <div class="nda-arp">NDA ARP</div>
+        </div>
+        <div class="frame-parent">
+        <div class="child5">
+        </div>
+        <div class="nda-arp">P1</div>
+        </div>
+        <div class="frame-parent">
+        <div class="child6">
+        </div>
+        <div class="nda-arp">P2</div>
+        </div>
+        <div class="frame-parent">
+        <div class="child7">
+        </div>
+        <div class="nda-arp">P3</div>
+        </div>
+        <div class="frame-parent">
+        <div class="child8">
+        </div>
+        <div class="nda-arp">P4</div>
+        </div>
+        <div class="frame-parent">
+        <div class="child9">
+        </div>
+        <div class="nda-arp">P5</div>
+        </div>
+        <div class="frame-parent">
+        <div class="child10">
+        </div>
+        <div class="nda-arp">P6</div>
+        </div>
+        <div class="frame-parent">
+        <div class="child11">
+        </div>
+        <div class="nda-arp">P8</div>
+        </div>
+        <div class="frame-parent">
+        <div class="child12">
+        </div>
+        <div class="nda-arp">P9</div>
+        </div>
+        <div class="frame-parent">
+        <div class="child4">
+        </div>
+        <div class="nda-arp">Pune ARP</div>
+        </div>
+        <div class="frame-parent">
+        <div class="child14">
+        </div>
+        <div class="nda-arp">Zone is “</div>
+        </div>
+        </div>
+        </div>
+        <div class="missing-link-buffer-container">
+        <div class="autodcr-aviation-data">AutoDCR: DP Ward Road</div>
+        <div class="div18">
+        <div class="frame-parent">
+        <img class="frame-child" alt="" src="image/Frame 1410126079.svg">
+        <div class="nda-arp">Single Symbol</div>
+        </div>
+        </div>
+        </div>
+        <div class="missing-link-buffer-container">
+        <div class="autodcr-aviation-data">AutoDCR: Garden</div>
+        <div class="div18">
+        <div class="frame-parent">
+        <div class="frame-item">
+        </div>
+        <div class="buffer-is">Buffer is “</div>
+        </div>
+        </div>
+        </div>
+        <div class="missing-link-buffer-container">
+        <div class="autodcr-aviation-data">AutoDCR: JE Names</div>
+        <div class="div18">
+        <div class="frame-parent">
+        <img class="frame-child" alt="" src="image/Frame 1410126079.svg">
+        <div class="buffer-is">Buffer is “</div>
+        </div>
+        </div>
+        </div>
+        <div class="missing-link-buffer-container">
+        <div class="autodcr-aviation-data">AutoDCR: Lake</div>
+        <div class="div18">
+        <div class="frame-parent">
+        <div class="frame-child1">
+        </div>
+        <div class="nda-arp">Single Symbol</div>
+        </div>
+        </div>
+        </div>
+        <div class="missing-link-buffer-container">
+        <div class="autodcr-aviation-data">AutoDCR: Monuments</div>
+        <div class="parent">
+        <div class="frame-parent">
+        <div class="frame-child2">
+        </div>
+        <div class="nda-arp">100.00000000000</div>
+        </div>
+        <div class="frame-parent">
+        <div class="frame-child3">
+        </div>
+        <div class="nda-arp">100.00000000000</div>
+        </div>
+        <div class="frame-parent">
+        <div class="frame-child4">
+        </div>
+        <div class="nda-arp">Distance is “</div>
+        </div>
+        </div>
+        </div>
+        <div class="missing-link-buffer-container">
+        <div class="autodcr-aviation-data">AutoDCR: PLU Ward</div>
+        <div class="parent">
+        <div class="frame-parent">
+        <div class="frame-child5">
+        </div>
+        <div class="nda-arp">&lt;Null&gt;</div>
+        </div>
+        <div class="frame-parent">
+        <div class="frame-child6">
+        </div>
+        <div class="commercial-zone">Commercial Zone </div>
+        </div>
+        <div class="frame-parent">
+        <div class="frame-child7">
+        </div>
+        <div class="nda-arp">Existing PSP Reservation</div>
+        </div>
+        <div class="frame-parent">
+        <div class="frame-child8">
+        </div>
+        <div class="nda-arp">Existing Recreational Reservation</div>
+        </div>
+        <div class="frame-parent">
+        <div class="frame-child9">
+        </div>
+        <div class="nda-arp">Existing Traffic & Transport Reservation</div>
+        </div>
+        <div class="frame-parent">
+        <div class="frame-child10">
+        </div>
+        <div class="nda-arp">Existing Utility Reservation</div>
+        </div>
+        <div class="frame-parent">
+        <div class="frame-child11">
+        </div>
+        <div class="nda-arp">Industrial Zone</div>
+        </div>
+        <div class="frame-parent">
+        <div class="frame-child6">
+        </div>
+        <div class="nda-arp">Proposed Commercial Reservation</div>
+        </div>
+        <div class="frame-parent">
+        <div class="frame-child7">
+        </div>
+        <div class="nda-arp">Proposed PSP Reservation</div>
+        </div>
+        <div class="frame-parent">
+        <div class="frame-child8">
+        </div>
+        <div class="nda-arp">Proposed Recreational Reservation</div>
+        </div>
+        <div class="frame-parent">
+        <div class="frame-child15">
+        </div>
+        <div class="nda-arp">Proposed Residential Reservation</div>
+        </div>
+        <div class="frame-parent">
+        <div class="frame-child9">
+        </div>
+        <div class="nda-arp">Proposed Transport Reservation</div>
+        </div>
+        <div class="frame-parent">
+        <div class="frame-child10">
+        </div>
+        <div class="nda-arp">Proposed Utility Reservation</div>
+        </div>
+        <div class="frame-parent">
+        <div class="frame-child7">
+        </div>
+        <div class="nda-arp">PSP Zone</div>
+        </div>
+        <div class="frame-parent">
+        <div class="frame-child8">
+        </div>
+        <div class="nda-arp">Recretional Zone</div>
+        </div>
+        <div class="frame-parent">
+        <div class="frame-child20">
+        </div>
+        <div class="nda-arp">Residential Zone</div>
+        </div>
+        <div class="frame-parent">
+        <div class="frame-child21">
+        </div>
+        <div class="nda-arp">Slum Zone</div>
+        </div>
+        <div class="frame-parent">
+        <div class="frame-child9">
+        </div>
+        <div class="nda-arp">Transportation Zone</div>
+        </div>
+        <div class="frame-parent">
+        <div class="frame-child23">
+        </div>
+        <div class="nda-arp">Water Body</div>
+        </div>
+        <div class="frame-parent">
+        <div class="frame-child24">
+        </div>
+        <div class="nda-arp">Broad_lu is “</div>
+        </div>
+        </div>
+        </div>
+        <div class="missing-link-buffer-container">
+        <div class="autodcr-aviation-data">AutoDCR: Boundary</div>
+        <div class="div18">
+        <div class="frame-parent">
+        <img class="frame-child" alt="" src="image/Frame 1410126079.svg">
+        <div class="buffer-is">Buffer is “</div>
+        </div>
+        </div>
+        </div>
+        <div class="missing-link-buffer-container">
+        <div class="autodcr-aviation-data">AutoDCR: PLU Ward</div>
+        <div class="parent">
+        <div class="frame-parent">
+        <div class="frame-child5">
+        </div>
+        <div class="nda-arp">Commercial Reservation</div>
+        </div>
+        <div class="frame-parent">
+        <div class="frame-child6">
+        </div>
+        <div class="nda-arp">Economically Weaker Section</div>
+        </div>
+        <div class="frame-parent">
+        <div class="frame-child7">
+        </div>
+        <div class="nda-arp">PSP Reservation</div>
+        </div>
+        <div class="frame-parent">
+        <div class="frame-child8">
+        </div>
+        <div class="nda-arp">Recretional Reservation</div>
+        </div>
+        <div class="frame-parent">
+        <div class="frame-child9">
+        </div>
+        <div class="nda-arp">Transport Reservation</div>
+        </div>
+        <div class="frame-parent">
+        <div class="frame-child10">
+        </div>
+        <div class="nda-arp">Utility Reservation</div>
+        </div>
+        <div class="frame-parent">
+        <div class="frame-child11">
+        </div>
+        <div class="nda-arp">Broad_LU is “</div>
+        </div>
+        <div class="frame-parent">
+        <div class="frame-child6">
+        </div>
+        <div class="nda-arp">Proposed Commercial Reservation</div>
+        </div>
+        <div class="frame-parent">
+        <div class="frame-child7">
+        </div>
+        <div class="nda-arp">Proposed PSP Reservation</div>
+        </div>
+        <div class="frame-parent">
+        <div class="frame-child8">
+        </div>
+        <div class="nda-arp">Proposed Recreational Reservation</div>
+        </div>
+        <div class="frame-parent">
+        <div class="frame-child15">
+        </div>
+        <div class="nda-arp">Proposed Residential Reservation</div>
+        </div>
+        <div class="frame-parent">
+        <div class="frame-child9">
+        </div>
+        <div class="nda-arp">Proposed Transport Reservation</div>
+        </div>
+        <div class="frame-parent">
+        <div class="frame-child10">
+        </div>
+        <div class="nda-arp">Proposed Utility Reservation</div>
+        </div>
+        <div class="frame-parent">
+        <div class="frame-child7">
+        </div>
+        <div class="nda-arp">PSP Zone</div>
+        </div>
+        <div class="frame-parent">
+        <div class="frame-child8">
+        </div>
+        <div class="nda-arp">Recretional Zone</div>
+        </div>
+        <div class="frame-parent">
+        <div class="frame-child20">
+        </div>
+        <div class="nda-arp">Residential Zone</div>
+        </div>
+        <div class="frame-parent">
+        <div class="frame-child21">
+        </div>
+        <div class="nda-arp">Slum Zone</div>
+        </div>
+        <div class="frame-parent">
+        <div class="frame-child9">
+        </div>
+        <div class="nda-arp">Transportation Zone</div>
+        </div>
+        <div class="frame-parent">
+        <div class="frame-child23">
+        </div>
+        <div class="nda-arp">Water Body</div>
+        </div>
+        <div class="frame-parent">
+        <div class="frame-child24">
+        </div>
+        <div class="nda-arp">Broad_lu is “</div>
+        </div>
+        </div>
+        </div>
+        <div class="missing-link-buffer-container">
+        <div class="autodcr-aviation-data">AutoDCR: Railway Buffer</div>
+        <div class="div18">
+        <div class="frame-parent">
+        <div class="frame-child45">
+        </div>
+        <div class="nda-arp">Distance is “</div>
+        </div>
+        </div>
+        </div>
+        <div class="missing-link-buffer-container">
+        <div class="autodcr-aviation-data">AutoDCR: Red_Blue</div>
+        <div class="parent">
+        <div class="frame-parent">
+        <div class="frame-child46">
+        </div>
+        <div class="nda-arp">Bank to Blue line</div>
+        </div>
+        <div class="frame-parent">
+        <div class="frame-child47">
+        </div>
+        <div class="nda-arp">Blue to Red line</div>
+        </div>
+        </div>
+        </div>
+        <div class="missing-link-buffer-container">
+        <div class="autodcr-aviation-data">AutoDCR: Revenue 1</div>
+        <div class="div18">
+        <div class="frame-parent">
+        <div class="frame-child48">
+        </div>
+        <div class="nda-arp">Single Symbol Lable Rule</div>
+        </div>
+        </div>
+        </div>
+        <div class="missing-link-buffer-container">
+        <div class="autodcr-aviation-data">AutoDCR: TDR Zones</div>
+        <div class="div18">
+        <div class="frame-parent">
+        <img class="frame-child" alt="" src="image/Frame 1410126079.svg">
+        <div class="buffer-is">Buffer is “</div>
+        </div>
+        </div>
+        </div>
+        <div class="missing-link-buffer-container">
+        <div class="autodcr-aviation-data">AutoDCR: TOD Zones</div>
+        <div class="div18">
+        <div class="frame-parent">
+        <div class="frame-child50">
+        </div>
+        <div class="buffer-is">Single Symbol Lable Rule</div>
+        </div>
+        </div>
+        </div>
+        <div class="missing-link-buffer-container">
+        <div class="autodcr-aviation-data">AutoDCR: Village Boundary</div>
+        <div class="div18">
+        <div class="frame-parent">
+        <div class="frame-child51">
+        </div>
+        <div class="nda-arp">Single Symbol</div>
+        </div>
+        </div>
+        </div>
+        <div class="missing-link-buffer-container">
+        <div class="autodcr-aviation-data">AutoDCR: Ward Boundary</div>
+        <div class="div18">
+        <div class="frame-parent">
+        <img class="frame-child" alt="" src="image/ward.svg">
+        <div class="buffer-is">Buffer is “</div>
+        </div>
+        </div>
+        </div>
+        <div class="missing-link-buffer-container">
+        <div class="autodcr-aviation-data">AutoDCR: Yerwada Jail</div>
+        <div class="parent">
+        <div class="frame-parent">
+        <div class="frame-child53">
+        </div>
+        <div class="nda-arp">150 Buffer</div>
+        </div>
+        <div class="frame-parent">
+        <div class="frame-child54">
+        </div>
+        <div class="nda-arp">100 Buffer</div>
+        </div>
+        <div class="frame-parent">
+        <div class="frame-child55">
+        </div>
+        <div class="nda-arp">50 Buffer</div>
+        </div>
+        <div class="frame-parent">
+        <div class="frame-child56">
+        </div>
+        <div class="nda-arp">0 Buffer</div>
+        </div>
+        </div>
+        </div>
+        <div class="missing-link-buffer-container">
+        <div class="autodcr-aviation-data">AutoDCR: Auto Test</div>
+        <div class="div18">
+        <div class="frame-parent">
+        <div class="frame-child57">
+        </div>
+        <div class="buffer-is">Single Symbol Lable Rule</div>
+        </div>
+        </div>
+        </div>
+        <div class="missing-link-buffer-container">
+        <div class="autodcr-aviation-data">AutoDCR: Plot Boundary</div>
+        <div class="div18">
+        <div class="frame-parent">
+        <div class="frame-child57">
+        </div>
+        <div class="buffer-is">Single Symbol Lable Rule</div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        
+      
+      <!--graphs-->
+      <div class="data-graphs">
+        <div class="summary-of-commencement">Summary of Commencement</div>
+        <div class="data-container">
+            <div class="actions">
+                <div class="proposals-count">
+                    <div class="total-number-of">Total proposals:</div>
+                    <b class="b">06</b>
+                </div>
+                <div class="icons">
+                    <img class="marketeqrefresh-round-icon" alt="" src="image/Refresh.svg "> |
+                    
+                    <!-- <img class="icons-child" alt="" src="image/Line 21.svg">
+                     -->
+                     <img class="marketeqrefresh-round-icon" alt="Print" src="image/Print.svg" onclick="printWindow()">|
+
+                    
+                    <!-- <img class="icons-child" alt="" src="image/Line 21.svg"> -->
+                    
+                    <img class="marketeqrefresh-round-icon" alt="" src="image/Excel.svg">
+                    
+                </div>
+            </div>
+            <div class="graph-container">
+                <div class="graph-dropdown">
+                    <div class="status-wise">
+                        <div class="building-permissions-parent">
+                            <div class="summary-of-commencement">Building Permissions</div>
+                            <!-- <img class="marketeqrefresh-round-icon" alt="" src="image/chevron-left.svg"> -->
+                            
+                        </div>
+                        <div class="bar-chart-container">
+                            <div class="total">Total</div>
+                            <div class="submitted">Submitted</div>
+                            <div class="approved">Approved</div>
+                            <div class="in-process">In Process</div>
+                            <div class="rejected">Rejected</div>
+                            <div class="div">1500</div>
+                            <div class="div1">1000</div>
+                            <div class="div2">500</div>
+                            <div class="div3">0</div>
+                            <div class="segment-line-4">
+                            </div>
+                            <div class="segment-line-3">
+                            </div>
+                            <div class="segment-line-2">
+                            </div>
+                            <div class="segment-line-1">
+                            </div>
+                            <img class="partition-line-middle-icon" alt="" src="Partition_line_Middle.svg">
+                            
+                            <img class="partition-line-bottom-icon" alt="" src="Partition_line_Bottom.svg">
+                            
+                            <div class="bar-graphs">
+                                <div class="bar-rejected">
+                                    <div class="bar-rejected-child">
+                                    </div>
+                                    <div class="b">770</div>
+                                </div>
+                                <div class="bar-rejected">
+                                    <div class="bar-in-process-child">
+                                    </div>
+                                    <div class="b">147</div>
+                                </div>
+                                <div class="bar-rejected">
+                                    <div class="bar-approved-child">
+                                    </div>
+                                    <div class="b">397</div>
+                                </div>
+                                <div class="bar-rejected">
+                                    <div class="bar-submitted-child">
+                                    </div>
+                                    <div class="b">323</div>
+                                </div>
+                                <div class="bar-total">
+                                    <div class="bar-total-child">
+                                    </div>
+                                    <div class="b">1315</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="graph-dropdown">
+                    <div class="status-wise1">
+                        <div class="building-permissions-parent">
+                            <div class="summary-of-commencement">Plinth</div>
+                            <img class="marketeqrefresh-round-icon" alt="" src="Chevron.svg">
+                            
+                        </div>
+                        <div class="bar-chart-container">
+                            <div class="total">Total</div>
+                            <div class="submitted">Submitted</div>
+                            <div class="approved">Approved</div>
+                            <div class="in-process">In Process</div>
+                            <div class="rejected">Rejected</div>
+                            <div class="div9">750</div>
+                            <div class="div10">500</div>
+                            <div class="div2">250</div>
+                            <div class="div3">0</div>
+                            <div class="segment-line-4">
+                            </div>
+                            <div class="segment-line-3">
+                            </div>
+                            <div class="segment-line-2">
+                            </div>
+                            <div class="segment-line-1">
+                            </div>
+                            <img class="partition-line-middle-icon" alt="" src="Partition_line_Middle.svg">
+                            
+                            <img class="partition-line-bottom-icon" alt="" src="Partition_line_Bottom.svg">
+                            
+                            <div class="bar-graphs1">
+                                <div class="bar-rejected1">
+                                    <div class="bar-rejected-item">
+                                    </div>
+                                    <div class="b">0</div>
+                                </div>
+                                <div class="bar-rejected1">
+                                    <div class="bar-in-process-item">
+                                    </div>
+                                    <div class="b">6</div>
+                                </div>
+                                <div class="bar-rejected1">
+                                    <div class="bar-approved-item">
+                                    </div>
+                                    <div class="b">6</div>
+                                </div>
+                                <div class="bar-submitted1">
+                                    <div class="bar-submitted-item">
+                                    </div>
+                                    <div class="b">593</div>
+                                </div>
+                                <div class="bar-rejected1">
+                                    <div class="bar-total-item">
+                                    </div>
+                                    <div class="b">12</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="graph-dropdown">
+                    <div class="status-wise">
+                        <div class="building-permissions-parent">
+                            <div class="summary-of-commencement">Occupancy</div>
+                            <img class="marketeqrefresh-round-icon" alt="" src="Chevron.svg">
+                            
+                        </div>
+                        <div class="bar-chart-container">
+                            <div class="total">Total</div>
+                            <div class="submitted">Submitted</div>
+                            <div class="approved">Approved</div>
+                            <div class="in-process">In Process</div>
+                            <div class="rejected">Rejected</div>
+                            <div class="div18">300</div>
+                            <div class="div19">400</div>
+                            <div class="div20">200</div>
+                            <div class="div21">100</div>
+                            <div class="div3">0</div>
+                            <div class="segment-line-42">
+                            </div>
+                            <div class="segment-line-43">
+                            </div>
+                            <div class="segment-line-32">
+                            </div>
+                            <div class="segment-line-22">
+                            </div>
+                            <div class="segment-line-1">
+                            </div>
+                            <img class="partition-line-middle-icon" alt="" src="Partition_line_Middle.svg">
+                            
+                            <img class="partition-line-bottom-icon2" alt="" src="Partition_line_Bottom.svg">
+                            
+                            <div class="bar-graphs">
+                                <div class="bar-rejected1">
+                                    <div class="bar-rejected-inner">
+                                    </div>
+                                    <div class="b">15</div>
+                                </div>
+                                <div class="bar-rejected1">
+                                    <div class="bar-in-process-inner">
+                                    </div>
+                                    <div class="b">44</div>
+                                </div>
+                                <div class="bar-rejected1">
+                                    <div class="bar-approved-inner">
+                                    </div>
+                                    <div class="b">227</div>
+                                </div>
+                                <div class="bar-rejected1">
+                                    <div class="bar-submitted-inner">
+                                    </div>
+                                    <div class="b">229</div>
+                                </div>
+                                <div class="bar-submitted1">
+                                    <div class="bar-total-inner">
+                                    </div>
+                                    <div class="b">286</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="graph-dropdown">
+                    <div class="status-wise">
+                        <div class="building-permissions-parent">
+                            <div class="summary-of-commencement">Gunthewari</div>
+                            <img class="marketeqrefresh-round-icon" alt="" src="Chevron.svg">
+                            
+                        </div>
+                        <div class="bar-chart-container">
+                            <div class="total">Total</div>
+                            <div class="submitted">Submitted</div>
+                            <div class="approved">Approved</div>
+                            <div class="in-process">In Process</div>
+                            <div class="rejected">Rejected</div>
+                            <div class="div28">7.5</div>
+                            <div class="div29">10</div>
+                            <div class="div30">5</div>
+                            <div class="div31">2.5</div>
+                            <div class="div3">0</div>
+                            <div class="segment-line-42">
+                            </div>
+                            <div class="segment-line-43">
+                            </div>
+                            <div class="segment-line-32">
+                            </div>
+                            <div class="segment-line-22">
+                            </div>
+                            <div class="segment-line-1">
+                            </div>
+                            <img class="partition-line-middle-icon" alt="" src="Partition_line_Middle.svg">
+                            
+                            <img class="partition-line-bottom-icon2" alt="" src="Partition_line_Bottom.svg">
+                            
+                            <div class="bar-graphs3">
+                                <div class="bar-rejected1">
+                                    <div class="bar-rejected-item">
+                                    </div>
+                                    <div class="b">0</div>
+                                </div>
+                                <div class="bar-submitted1">
+                                    <div class="bar-in-process-child1">
+                                    </div>
+                                    <div class="b">8</div>
+                                </div>
+                                <div class="bar-rejected1">
+                                    <div class="bar-approved-child1">
+                                    </div>
+                                    <div class="b">0</div>
+                                </div>
+                                <div class="bar-rejected1">
+                                    <div class="bar-submitted-child1">
+                                    </div>
+                                    <div class="b">2</div>
+                                </div>
+                                <div class="bar-submitted1">
+                                    <div class="bar-total-child1">
+                                    </div>
+                                    <div class="b">8</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="graph-dropdown">
+                    <div class="status-wise">
+                        <div class="building-permissions-parent">
+                            <div class="summary-of-commencement">Risk Based Approval</div>
+                            <img class="marketeqrefresh-round-icon" alt="" src="Chevron.svg">
+                            
+                        </div>
+                        <div class="bar-chart-container">
+                            <div class="total">Total</div>
+                            <div class="submitted">Submitted</div>
+                            <div class="approved">Approved</div>
+                            <div class="in-process">In Process</div>
+                            <div class="rejected">Rejected</div>
+                            <div class="div38">15</div>
+                            <div class="div39">10</div>
+                            <div class="div40">05</div>
+                            <div class="div3">0</div>
+                            <div class="segment-line-4">
+                            </div>
+                            <div class="segment-line-3">
+                            </div>
+                            <div class="segment-line-2">
+                            </div>
+                            <div class="segment-line-1">
+                            </div>
+                            <img class="partition-line-middle-icon" alt="" src="Partition_line_Middle.svg">
+                            
+                            <img class="partition-line-bottom-icon2" alt="" src="Partition_line_Bottom.svg">
+                            
+                            <div class="bar-graphs4">
+                                <div class="bar-rejected1">
+                                    <div class="bar-rejected-child1">
+                                    </div>
+                                    <div class="b">2</div>
+                                </div>
+                                <div class="bar-rejected1">
+                                    <div class="bar-in-process-child2">
+                                    </div>
+                                    <div class="b">6</div>
+                                </div>
+                                <div class="bar-rejected1">
+                                    <div class="bar-approved-child2">
+                                    </div>
+                                    <div class="b">6</div>
+                                </div>
+                                <div class="bar-rejected1">
+                                    <div class="bar-submitted-child2">
+                                    </div>
+                                    <div class="b">0</div>
+                                </div>
+                                <div class="bar-submitted1">
+                                    <div class="bar-total-child2">
+                                    </div>
+                                    <div class="b">14</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="graph-dropdown">
+                    <div class="status-wise">
+                        <div class="building-permissions-parent">
+                            <div class="summary-of-commencement">IT & ITES Approval</div>
+                            <img class="marketeqrefresh-round-icon" alt="" src="Chevron.svg">
+                            
+                        </div>
+                        <div class="bar-chart-container">
+                            <div class="total">Total</div>
+                            <div class="submitted">Submitted </div>
+                            <div class="approved">Approved</div>
+                            <div class="in-process">In Process</div>
+                            <div class="rejected">Rejected</div>
+                            <div class="div47">100</div>
+                            <div class="div48">50</div>
+                            <div class="div3">0</div>
+                            <div class="segment-line-47">
+                            </div>
+                            <div class="segment-line-35">
+                            </div>
+                            <div class="segment-line-1">
+                            </div>
+                            <img class="partition-line-middle-icon" alt="" src="Partition_line_Middle.svg">
+                            
+                            <img class="partition-line-bottom-icon2" alt="" src="Partition_line_Bottom.svg">
+                            
+                            <div class="bar-graphs5">
+                                <div class="bar-rejected1">
+                                    <div class="bar-rejected-child2">
+                                    </div>
+                                    <div class="b">14</div>
+                                </div>
+                                <div class="bar-rejected1">
+                                    <div class="bar-in-process-child3">
+                                    </div>
+                                    <div class="b">63</div>
+                                </div>
+                                <div class="bar-rejected1">
+                                    <div class="bar-approved-child3">
+                                    </div>
+                                    <div class="b">25</div>
+                                </div>
+                                <div class="bar-rejected1">
+                                    <div class="bar-submitted-child3">
+                                    </div>
+                                    <div class="b">48</div>
+                                </div>
+                                <div class="bar-submitted1">
+                                    <div class="bar-total-child3">
+                                    </div>
+                                    <div class="b">102</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    
+
+
 
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
@@ -406,10 +1139,12 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
 
 
-  <script src="legend.js"></script>
+  <!-- <script src="legend.js"></script> -->
 
 <script src="script1.js"></script>
   <script src="filter.js"></script>
+  <script src="script2.js"></script>
+
   <script>
 
   </script>
