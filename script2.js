@@ -1,25 +1,19 @@
-document.getElementById("optionsButton")
-.addEventListener("click", function () {
+// Toggle options visibility when the optionsButton is clicked
+document.getElementById("optionsButton").addEventListener("click", function () {
   var tabsOptions = document.getElementById("tabsOptions");
   var tabParent = document.getElementById("tabParent");
 
-  // Toggle visibility of tabsOptions
-  if (
-    tabsOptions.style.display === "none" ||
-    tabsOptions.style.display === ""
-  ) {
+  // Show the options and hide the tabParent, only if options are currently hidden
+  if (tabsOptions.style.display === "none" || tabsOptions.style.display === "") {
     tabsOptions.style.display = "flex"; // Show the options
     tabParent.style.display = "none"; // Hide the tab-parent
   } else {
-    tabsOptions.style.display = "none"; // Hide the options
+    // Do nothing, keeping the options visible
   }
 });
 
-
 // Add click event listener for the Analytics button
-document
-.querySelector(".component-6")
-.addEventListener("click", function () {
+document.querySelector(".component-6").addEventListener("click", function () {
   var tabParent = document.getElementById("tabParent");
   var tabsOptions = document.getElementById("tabsOptions");
 
@@ -27,6 +21,10 @@ document
   tabParent.style.display = "flex";
   tabsOptions.style.display = "none";
 });
+
+
+
+
 
 //legend
 document
@@ -133,5 +131,123 @@ document.getElementById('clear-icon').addEventListener('click', function () {
   searchInput.value = '';
   this.classList.add('hidden');
   searchInput.focus();
+});
+
+
+// Add click event listener to .component-10 elements
+document.querySelectorAll('.component-10').forEach(function (element) {
+  element.addEventListener('click', function () {
+    // Remove the 'active' class from all .component-10 elements
+    document.querySelectorAll('.component-10').forEach(function (el) {
+      el.classList.remove('active');
+    });
+
+    // Remove the 'active' class from all .component-11 elements
+    document.querySelectorAll('.component-11').forEach(function (el) {
+      el.classList.remove('active');
+    });
+
+    // Add the 'active' class to the currently clicked element
+    element.classList.add('active');
+  });
+});
+
+// Add click event listener to .component-11 elements
+document.querySelectorAll('.component-11').forEach(function (element) {
+  element.addEventListener('click', function () {
+    // Remove the 'active' class from all .component-11 elements
+    document.querySelectorAll('.component-11').forEach(function (el) {
+      el.classList.remove('active');
+    });
+
+    // Remove the 'active' class from all .component-10 elements
+    document.querySelectorAll('.component-10').forEach(function (el) {
+      el.classList.remove('active');
+    });
+
+    // Add the 'active' class to the currently clicked element
+    element.classList.add('active');
+  });
+});
+
+
+//status
+// Select all tabs within the parent
+const tabs = document.querySelectorAll('.tab');
+
+// Function to handle tab click
+tabs.forEach(tab => {
+  tab.addEventListener('click', function () {
+    // Remove 'active' class from all tabs
+    tabs.forEach(t => t.classList.remove('active'));
+
+    // Add 'active' class to the clicked tab
+    this.classList.add('active');
+  });
+});
+
+//
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  // Select all building-permissions-parent elements
+  const toggleSections = document.querySelectorAll('.building-permissions-parent');
+
+  toggleSections.forEach(section => {
+      section.addEventListener('click', function () {
+          const barChartContainer = this.nextElementSibling; // Select the next sibling which is the bar-chart-container
+
+          // Toggle active class to change the icon and show/hide content
+          this.classList.toggle('active');
+
+          // Toggle display of the bar-chart-container
+          if (barChartContainer.style.display === 'block') {
+              barChartContainer.style.display = 'none';
+              this.querySelector('.toggle-icon').classList.replace('fa-angle-up', 'fa-angle-down');
+          } else {
+              barChartContainer.style.display = 'block';
+              this.querySelector('.toggle-icon').classList.replace('fa-angle-down', 'fa-angle-up');
+          }
+      });
+  });
+});
+
+
+document.getElementById('closeLegendButton').addEventListener('click', function() {
+  document.querySelector('.legends').classList.add('hidden');
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  const component6 = document.querySelector('.component-6');
+  const component7 = document.querySelector('.component-7');
+
+  // Define colors
+  const defaultColor6 = '#f0f0f0'; // Default background color for component-6
+  const activeColor6 = 'radial-gradient(50% 50% at 50% 50%, #198038, #24a148)'; // Active background color for component-6
+  
+  const defaultColor7 = '#f0f0f0'; // Default background color for component-7
+  const activeColor7 = 'radial-gradient(50% 50% at 50% 50%, #198038, #24a148)'; // Active background color for component-7
+
+  // Click event for component-6
+  component6.addEventListener('click', function() {
+    // Set background color for component-6
+    component6.style.background = activeColor6;
+    component6.style.color = 'white'; // Change text color to white for better contrast
+
+    // Reset background color for component-7
+    component7.style.background = defaultColor7;
+    component7.style.color = 'black'; // Default text color
+  });
+
+  // Click event for component-7
+  component7.addEventListener('click', function() {
+    // Set background color for component-7
+    component7.style.background = activeColor7;
+    component7.style.color = 'white'; // Change text color to white for better contrast
+
+    // Reset background color for component-6
+    component6.style.background = defaultColor6;
+    component6.style.color = 'black'; // Default text color
+  });
 });
 

@@ -21,32 +21,7 @@
     <!-- Top Section -->
     <div class="row top-section m-0">
       <div class="col-12 d-flex justify-content-between align-items-center p-0">
-        <!-- Control Panel -->
-        <!-- <div class="control-panel">
-          <a  class="logoPMC">
-            <img src="image/pmcjpeg.png" alt="Button Image">
-          </a>
-
-         <a href="https://geopulsea.com/" class="geopulseaname">@GeoPulse Analytics</a>
-          <div class="btn-group">
-            <button class="btn-blue" id="status-wise-button">Status Wise</button>
-            <button class="btn-blue btn-area">Area Wise</button>
-          </div>
-
-        </div> 
-
-        Date Picker -->
-        <!-- <div class="date-picker">
-
-          <div class="date-range" id="date-range-display">April 1, 2024 - March 31, 2025
-            <div class="calendar-icon" id="calendar-icon">
-              <img src="image/time.png" alt="">
-            </div>
-          </div>
-
-          <button id="select-year-button">Select Year</button>
-          <input type="date" id="date-input" style="display: none;">
-        </div> -->
+        
       </div>
     </div>
 
@@ -73,12 +48,7 @@
               <span id="clear-icon" class="clear-icon hidden">&#x2715;</span> <!-- Unicode cross icon -->
           </div>
       </div>
-      
-
-          <!-- <button class="toggle-button" id="toggleFilters">
-            <img src="image/filter.svg" alt="Search Icon" id="search-icon">
-          </button> -->
-
+    
         </div>
 
         <div class="filters" id="filters" style="">  <h3 class="filter-title">Filter
@@ -150,6 +120,10 @@
     </div>
  
   </div>
+
+<!--table-->
+  <button id="openTableBtn"><img src="image/table.svg" alt="" class="tablebtn"></button>
+<!--image-->
 
 
 
@@ -380,7 +354,7 @@
   
   <div class="tab-section">
     <div class="tab-main">
-      <div class="component-6">
+      <div class="component-6"  id="analyticsButton">
         <img class="chart-fill-icon" alt="" src="image/Chart_fill.svg" />
         <div class="analytics">Analytics</div>
       </div>
@@ -409,12 +383,12 @@
           <div class="component-11-child"></div>
         </div>
 
-        <div class="component-11">
+        <div class="component-11" id="toggleButton">
           <img class="right-icons" alt="" src="image/Pie.svg" />
           <div class="component-11-child"></div>
         </div>
 
-        <div class="component-11">
+        <div class="component-11" id="toggleButton">
           <div class="right-icons3">
             <img
               class="vuesaxboldgrid-6-icon"
@@ -429,24 +403,23 @@
 
     <!-- This div will be replaced when options are clicked -->
     <div class="tab-parent" id="tabParent">
-      <div class="tab">
+      <div class="tab" data-tab="status">
         <div class="status">Status</div>
       </div>
-      <div class="tab1">
+      <div class="tab" data-tab="area">
         <div class="status">Area</div>
       </div>
-      <div class="tab1">
+      <div class="tab" data-tab="explore">
         <div class="status">Explore</div>
       </div>
     </div>
-  </div>
- 
-
+    
   
     <!--legend -->
     <div class="legends hidden">
       <div class="header">
         <div class="legends1">Legends</div>
+        <button class="close-legend-btn" id="closeLegendButton">&times;</button>
         </div>
         <div class="missing-link-buffer-container-parent">
         <div class="missing-link-buffer-container">
@@ -971,7 +944,8 @@
                     <div class="status-wise">
                         <div class="building-permissions-parent">
                             <div class="summary-of-commencement">Building Permissions</div>
-                            <!-- <img class="marketeqrefresh-round-icon" alt="" src="image/chevron-left.svg"> -->
+                            <img class="toggle-icon up-icon" alt="" src="image/up.svg"> <!-- Up arrow initially shown -->
+        <img class="toggle-icon down-icon" alt="" src="image/down.svg" style="display: none;"> <!-- Down arrow initially hidden -->
                             
                         </div>
                         <div class="bar-chart-container">
@@ -1030,7 +1004,9 @@
                     <div class="status-wise1">
                         <div class="building-permissions-parent">
                             <div class="summary-of-commencement">Plinth</div>
-                            <img class="marketeqrefresh-round-icon" alt="" src="Chevron.svg">
+                            <img class="toggle-icon up-icon" alt="" src="image/up.svg"> <!-- Up arrow initially shown -->
+        <img class="toggle-icon down-icon" alt="" src="image/down.svg" style="display: none;"> <!-- Down arrow initially hidden -->
+                            
                             
                         </div>
                         <div class="bar-chart-container">
@@ -1089,7 +1065,8 @@
                     <div class="status-wise">
                         <div class="building-permissions-parent">
                             <div class="summary-of-commencement">Occupancy</div>
-                            <img class="marketeqrefresh-round-icon" alt="" src="Chevron.svg">
+                            <img class="toggle-icon up-icon" alt="" src="image/up.svg"> <!-- Up arrow initially shown -->
+        <img class="toggle-icon down-icon" alt="" src="image/down.svg" style="display: none;"> <!-- Down arrow initially hidden -->
                             
                         </div>
                         <div class="bar-chart-container">
@@ -1151,7 +1128,10 @@
                     <div class="status-wise">
                         <div class="building-permissions-parent">
                             <div class="summary-of-commencement">Gunthewari</div>
-                            <img class="marketeqrefresh-round-icon" alt="" src="Chevron.svg">
+                            <img class="toggle-icon up-icon" alt="" src="image/up.svg"> <!-- Up arrow initially shown -->
+                            <img class="toggle-icon down-icon" alt="" src="image/down.svg" style="display: none;"> <!-- Down arrow initially hidden -->
+                                                
+
                             
                         </div>
                         <div class="bar-chart-container">
@@ -1213,8 +1193,10 @@
                     <div class="status-wise">
                         <div class="building-permissions-parent">
                             <div class="summary-of-commencement">Risk Based Approval</div>
-                            <img class="marketeqrefresh-round-icon" alt="" src="Chevron.svg">
-                            
+                            <img class="toggle-icon up-icon" alt="" src="image/up.svg"> <!-- Up arrow initially shown -->
+                            <img class="toggle-icon down-icon" alt="" src="image/down.svg" style="display: none;"> <!-- Down arrow initially hidden -->
+                                                
+
                         </div>
                         <div class="bar-chart-container">
                             <div class="total">Total</div>
@@ -1272,8 +1254,10 @@
                     <div class="status-wise">
                         <div class="building-permissions-parent">
                             <div class="summary-of-commencement">IT & ITES Approval</div>
-                            <img class="marketeqrefresh-round-icon" alt="" src="Chevron.svg">
+                            <img class="toggle-icon up-icon" alt="" src="image/up.svg"> <!-- Up arrow initially shown -->
+        <img class="toggle-icon down-icon" alt="" src="image/down.svg" style="display: none;"> <!-- Down arrow initially hidden -->
                             
+
                         </div>
                         <div class="bar-chart-container">
                             <div class="total">Total</div>

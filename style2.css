@@ -794,7 +794,7 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   background: radial-gradient(400.2% 139.23% at 0% 3.13%, rgba(0, 119, 218, 0.80) 0%, rgba(0, 84, 155, 0.80) 100%);
   box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.35);
   backdrop-filter: blur(2px);
-  border-radius: 0 0 8px 8px; /* Top corners square, bottom corners rounded */
+  border-radius: 8px 8px 0 0 ; /* Top corners square, bottom corners rounded */
   cursor: pointer; /* Pointer cursor on hover */
   display: flex; /* Center the icon */
   align-items: center;
@@ -802,7 +802,7 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   justify-content: center;
   overflow: hidden; /* Ensure smooth resizing */
   position: absolute; /* Position absolute within the container */
-  top: -202px;/* Align with container top */
+   bottom: 222px;/* Align with container top */
 }
 
 /* Full width when expanded */
@@ -1355,7 +1355,7 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
 .filters {
   display: none;                    /* Hide the filter panel by default */
   position: absolute;
-  top: 22%;
+  top: 20%;
   left: 18px;
   border-radius: 12px;
   width: 290px;
@@ -1573,3 +1573,61 @@ overflow: visible;
 /* .filters{
   display: none;
 } */
+
+/*layer 
+/* Styling for the labels */
+.leaflet-control-layers label {
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  margin: 4px 0;
+  border-radius: 6px;
+  transition: background 0.3s;
+}
+
+.leaflet-control-layers label:hover {
+  background: #f0f0f0;
+}
+
+/* Styling for checkboxes and radio buttons */
+.leaflet-control-layers-selector {
+  margin-right: 10px;
+  accent-color: #0077DA; /* Modern browsers support this property for custom checkbox and radio button color */
+}
+
+/* Separator between base layers and overlays */
+.leaflet-control-layers-separator {
+  height: 1px;
+  background: #ddd;
+  margin: 10px 0;
+}
+
+/* Styling the layer names */
+.leaflet-control-layers label span {
+  color: #333;
+  font-weight: normal;
+}
+.leaflet-control-layers-list {
+  max-height: 200px; /* Adjust the height as needed */
+  overflow-y: auto; /* Enables vertical scrolling */
+  overflow-x: hidden; /* Prevents horizontal scrolling */
+  padding-right: 10px; /* Optional: adds some padding to avoid scrollbar overlapping the content */
+}
+
+/* Optional: customize the scrollbar appearance */
+.leaflet-control-layers-list::-webkit-scrollbar {
+  width: 5px;
+}
+
+.leaflet-control-layers-list::-webkit-scrollbar-thumb {
+ background-color: gray;
+  border-radius: 4px;
+}
+
+.leaflet-control-layers-list::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.5); /* Customize the track color */
+}
+/* Ensure no border or outline on focus */
+#search-button:focus {
+    outline: none; /* Removes the focus outline */
+}
