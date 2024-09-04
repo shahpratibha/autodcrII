@@ -1,60 +1,136 @@
+var apply_for = {};
 
-var markers = L.markerClusterGroup();
+// Define gradient colors for each proposaltype
+var proposaltypeColors = {
+  "Residential": "yellow", // Yellow
+  "Commercial": "blue", // Blue
+  "Industrial": "violet", // Violet
+  "Other": "gray", // Custom Color
+  "Resi+Comm": "orange", // Orange
+  "Institutional": "pink", // Pink
+  "InfoTech": "indigo", // Indigo
+  "Assembly": "green", // Green
+  // Default gradient color if proposaltype is not defined
 
+  // "Residential": "radial-gradient(65.32% 65.32% at 50% 50%, rgba(255, 255, 0, 0.10) 0%, #FFFF00 100%)", // Yellow
+  // "Commercial": "radial-gradient(65.32% 65.32% at 50% 50%, rgba(0, 108, 198, 0.10) 0%, #006CC6 100%)", // Blue
+  // "Industrial": "radial-gradient(65.32% 65.32% at 50% 50%, rgba(238, 130, 238, 0.10) 0%, #EE82EE 100%)", // Violet
+  // "Other": "radial-gradient(65.32% 65.32% at 50% 50%, rgba(255, 255, 255, 0.10) 0%, #FFFFFF 100%)", // Custom Color
+  // "Resi+Comm": "radial-gradient(65.32% 65.32% at 50% 50%, rgba(255, 165, 0, 0.10) 0%, #FFA500 100%)", // Orange
+  // "Institutional": "radial-gradient(65.32% 65.32% at 50% 50%, rgba(255, 192, 203, 0.10) 0%, #FFC0CB 100%)", // Pink
+  // "InfoTech": "radial-gradient(65.32% 65.32% at 50% 50%, rgba(75, 0, 130, 0.10) 0%, #4B0082 100%)", // Indigo
+  // "Assembly": "radial-gradient(65.32% 65.32% at 50% 50%, rgba(0, 128, 0, 0.10) 0%, #008000 100%)", // Green
+};
+
+
+// Function to create custom cluster icons with gradients based on the proposaltype
 function createClusterIcon(cluster) {
+    var childCount = cluster.getChildCount();
+    var proposaltype = cluster.getAllChildMarkers()[0].feature.properties.proposaltype;
+    var gradient = proposaltypeColors[proposaltype] || 'radial-gradient(65.32% 65.32% at 60% 60%, rgba(0, 0, 0, 0.10) 0%, #000000 100%)'; // Default to black gradient if proposaltype color is not found
 
-  var childCount = cluster.getChildCount();
- 
-
-  
-  var size = Math.max(Math.sqrt(childCount) * 5, 20); 
-
-  return L.divIcon({
-      html: '<div class="bufferColor cluster-text" style="width: ' + size + 'px; height: ' + size + 'px; line-height: ' + size + 'px;">' + childCount + '</div>',
-      className: 'custom-cluster-icon',
-      iconSize: [size, size] // Adjust the size based on the number of markers
-  });
+    var size = Math.max(Math.sqrt(childCount) * 5, 20); // Ensure a minimum size of 20px
+    return L.divIcon({
+        html: '<div class="bufferColor cluster-text" style="background: ' + gradient + '; width: ' + size + 'px; height: ' + size + 'px; line-height: ' + size + 'px;">' + childCount + '</div>',
+        className: 'custom-cluster-icon',
+        iconSize: [size, size] // Adjust the size based on the number of markers
+    });
 }
 
-markers.options.iconCreateFunction = createClusterIcon;
+// Function to load and process GeoJSON data
+function loadAndProcessGeoJSON(main_url, layername, filter) {
+  clearClusters();  
+    const urlm = `${main_url}ows?service=WFS&version=1.0.0&request=GetFeature&typeName=${layername}&CQL_FILTER=${filter}&outputFormat=application/json`;
+    console.log(urlm,"kkekeekekeke")
 
-// Load and process GeoJSON file
-const layername = "auto_test"
-const main_url = "https://iwmsgis.pmc.gov.in/geoserver/"
-var urlm =
- main_url+"ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" +
- layername +"&outputFormat=application/json";
-      $.getJSON(urlm, function (geojsonData) {
-        // Convert polygons to points
-        var points = geojsonData.features.map(function(feature) {
-            if (feature.geometry.type === 'Polygon' || feature.geometry.type === 'MultiPolygon') {
-                var centroid = turf.centroid(feature);
-                // console.log(centroid,"centroid")
+    $.ajax({
+        url: urlm,
+        dataType: 'json',
+        success: function (geojsonData) {
+            if (!geojsonData.features || !Array.isArray(geojsonData.features)) {
+                console.error('Invalid GeoJSON data structure:', geojsonData);
+                return;
+            }
+
+            // Group features by proposaltype
+            geojsonData.features.forEach(function (feature) {
+                if (feature && feature.geometry && feature.properties && feature.properties.proposaltype) {
+                    var proposaltype = feature.properties.proposaltype;
+                    if (!apply_for[proposaltype]) {
+                        apply_for[proposaltype] = L.markerClusterGroup({
+                            iconCreateFunction: createClusterIcon
+                        });
+                    }
+
+                    var processedFeatures = processFeature(feature);
+                    if (processedFeatures.length) {
+                        L.geoJSON(processedFeatures, {
+                            pointToLayer: function (feature, latlng) {
+                                var gradient = proposaltypeColors[feature.properties.proposaltype] || 'radial-gradient(65.32% 65.32% at 50% 50%, rgba(0, 0, 0, 0.10) 0%, #000000 100%)'; // Default to black gradient if proposaltype color is not found
+                                return L.marker(latlng, {
+                                    icon: L.divIcon({
+                                        className: 'custom-marker-icon',
+                                        html: '<div style="background: ' + gradient + '; width: 10px; height: 10px; border-radius: 50%;"></div>'
+                                    })
+                                });
+                            }
+                        }).addTo(apply_for[proposaltype]);
+                    }
+                }
+            });
+
+            // Add each proposaltype's marker cluster group to the map
+            Object.keys(apply_for).forEach(function (proposaltype) {
+                map.addLayer(apply_for[proposaltype]);
+            });
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.error('Error loading GeoJSON:', textStatus, errorThrown);
+            console.log('Response Text:', jqXHR.responseText); // Log the response text to debug
+        }
+    });
+}
+
+// Function to process a single feature and return an array of processed features
+function processFeature(feature) {
+    switch (feature.geometry.type) {
+        case 'Polygon':
+        case 'MultiPolygon':
+            var centroid = turf.centroid(feature);
+            return [{
+                type: 'Feature',
+                geometry: centroid.geometry,
+                properties: feature.properties
+            }];
+        case 'Point':
+            return [feature];
+        case 'MultiPoint':
+            return feature.geometry.coordinates.map(function (coords) {
                 return {
                     type: 'Feature',
-                    geometry: centroid.geometry,
+                    geometry: {
+                        type: 'Point',
+                        coordinates: coords
+                    },
                     properties: feature.properties
                 };
-            }
-            return null;
-        }).filter(function(point) { return point !== null; });
-    
-        // Add points to the map as markers
-        L.geoJSON(points, {
-            pointToLayer: function (feature, latlng) {
-                return L.marker(latlng);
-            }
-        })
-        .addTo(markers);
-    
-        // Add marker cluster group to the map
-        map.addLayer(markers);
-    })
-    .fail(function (jqXHR, textStatus, errorThrown) {
-        // console.error('Error loading GeoJSON:', textStatus, errorThrown);
-    });
+            });
+        default:
+            console.warn('Unsupported geometry type:', feature.geometry.type);
+            return [];
+    }
+}
 
 
+function clearClusters() {
+  Object.keys(apply_for).forEach(function (proposaltype) {
+      map.removeLayer(apply_for[proposaltype]);
+      apply_for[proposaltype].clearLayers();
+  });
+  apply_for = {}; // Reset the apply_for object
+}
+
+// --------------------------------------------------------
 
 // status wise filter js
 

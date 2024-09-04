@@ -121,13 +121,13 @@ var map = L.map("map", {
   
   map.on("zoomend", function() {
     if (map.getZoom() > 17.2) {
-      if (!map.hasLayer(Esri_WorldImagery)) {
+      if (!map.hasLayer( googleSat)) {
         map.removeLayer(stamen);
-        map.addLayer(Esri_WorldImagery);
+        map.addLayer( googleSat);
       }
     } else {
       if (!map.hasLayer(stamen)) {
-        map.removeLayer(Esri_WorldImagery);
+        map.removeLayer( googleSat  );
         map.addLayer(stamen);
       }
     }

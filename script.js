@@ -1,170 +1,4 @@
-// /// Initialize the map
-// var map = L.map('map').setView([18.5204, 73.8567], 12);
-
-// // Add a tile layer
-// L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-//   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-// }).addTo(map);
-
-// // Add a marker for the specific location
-// L.marker([18.5204, 73.8567]).addTo(map)
-//   .bindPopup('Pune')
-//   .openPopup();
-
-// var googleSat = L.tileLayer(
-//   "http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}",
-//   {
-//     maxZoom: 21,
-//     subdomains: ["mt0", "mt1", "mt2", "mt3"],
-//   }
-// );
-
-// var osm = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-//   maxZoom: 19,
-// }).addTo(map);
-
-// var Esri_WorldImagery = L.tileLayer(
-//   "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
-//   {
-//     maxZoom: 19.9,
-//   }
-// );
-
-// var baseLayers = {
-//   "OSM": osm,
-//   "Esri": Esri_WorldImagery,
-//   "Satellite": googleSat,
-// };
-
-// var auto_test = L.tileLayer.wms(
-//   "http://iwmsgis.pmc.gov.in:8080/geoserver1/wms",
-//   {
-//     layers: "auto_test",
-//     format: "image/png",
-//     transparent: true,
-//     tiled: true,
-//     version: "1.1.0",
-//     maxZoom: 21,
-//     opacity: 1,
-//   }
-// ).addTo(map);
-
-// var PlotBoundary_Layer = L.tileLayer
-//   .wms("https://iwmsgis.pmc.gov.in/geoserver/AutoDCR/wms", {
-//     layers: "plotboundary",
-//     format: "image/png",
-//     transparent: true,
-//     tiled: true,
-//     version: "1.1.0",
-//     // attribution: "Revenue",
-//     opacity: 1,
-//   }).addTo(map);
-
-
-// var Revenue_Layer = L.tileLayer
-//   .wms("https://iwmsgis.pmc.gov.in/geoserver/AutoDCR/wms", {
-//     layers: "Revenue_1",
-//     format: "image/png",
-//     transparent: true,
-//     tiled: true,
-//     version: "1.1.0",
-//     // attribution: "Revenue",
-//     opacity: 1,
-//   });
-
-// // .addTo(map);
-
-
-// // for only gut showing
-// var Revenue_Layer1 = L.tileLayer
-//   .wms("https://iwmsgis.pmc.gov.in/geoserver/AutoDCR/wms", {
-//     layers: "Revenue_1",
-//     format: "image/png",
-//     transparent: true,
-//     tiled: true,
-//     version: "1.1.0",
-//     // attribution: "Revenue",
-//     opacity: 1,
-//   }).addTo(map);
-
-// var PLU_Layer = L.tileLayer
-//   .wms("https://iwmsgis.pmc.gov.in/geoserver/AutoDCR/wms", {
-//     layers: "PLU_Ward",
-//     format: "image/png",
-//     transparent: true,
-//     tiled: true,
-//     version: "1.1.0",
-//     // attribution: "Revenue",
-//     opacity: 1,
-//   });
-
-// var DPRoad_Layer = L.tileLayer
-//   .wms("https://iwmsgis.pmc.gov.in/geoserver/AutoDCR/wms", {
-//     layers: "DP_Ward_Road",
-//     format: "image/png",
-//     transparent: true,
-//     tiled: true,
-//     version: "1.1.0",
-//     // attribution: "Revenue",
-//     opacity: 1,
-//   });
-
-// var Boundary_Layer = L.tileLayer
-//   .wms("https://iwmsgis.pmc.gov.in/geoserver/AutoDCR/wms", {
-//     layers: "PMC_Boundary",
-//     format: "image/png",
-//     transparent: true,
-//     tiled: true,
-//     version: "1.1.0",
-//     // attribution: "Revenue",
-//     opacity: 1,
-//   }).addTo(map);
-
-// var Village_Boundary = L.tileLayer
-//   .wms("https://iwmsgis.pmc.gov.in/geoserver/AutoDCR/wms", {
-//     layers: "Village_Boundary",
-//     format: "image/png",
-//     transparent: true,
-//     tiled: true,
-//     version: "1.1.0",
-//     // attribution: "Revenue",
-//     opacity: 1,
-//   });
-
-// var aviation = L.tileLayer
-//   .wms("https://iwmsgis.pmc.gov.in/geoserver/AutoDCR/wms", {
-//     layers: "Aviation_data",
-//     format: "image/png",
-//     transparent: true,
-//     tiled: true,
-//     version: "1.1.0",
-//     // attribution: "Revenue",
-//     opacity: 1,
-//   });
-
-
-// function refreshWMSLayer() {
-//   // Remove the layer from the map
-//   map.removeLayer(PlotBoundary_Layer);
-//   // Add the layer again
-//   PlotBoundary_Layer.addTo(map);
-// }
-
-// var WMSlayers = {
-//   Aviation: aviation,
-//   auto_test: auto_test,
-
-//   Plot: PlotBoundary_Layer,
-//   Revenue: Revenue_Layer,
-//   PLU: PLU_Layer,
-//   DPRoad: DPRoad_Layer,
-//   Boundary: Boundary_Layer,
-//   Village: Village_Boundary,
-
-// };
-
-// // Create the layers control and add it to the map
-// var control = L.control.layers(baseLayers, WMSlayers).addTo(map);
+const main_url = "https://iwmsgis.pmc.gov.in/geoserver/";
 
 // Function to toggle layers control visibility
 function toggleLayersControl() {
@@ -175,20 +9,7 @@ function toggleLayersControl() {
   }
 }
 
-// // Add event listener to the button
-// document.getElementById('toggle-layers-button').addEventListener('click', function() {
-//     toggleLayersControl();
-// });
 
-
-// dashboard
-
-
-// var main_url = "https://iwmsgis.pmc.gov.in/geoserver/"
-// var main_url = "https://iwmsgis.pmc.gov.in/geoserver/"
-
-// html page code ......................
-// const map = L.map('map').setView([51.505, -0.09], 13);
 
 function toggleFilter(label) {
   const input = label.nextElementSibling; // Get the input element next to the label
@@ -255,19 +76,10 @@ document.addEventListener('DOMContentLoaded', function () {
   const filters = document.getElementById('filters');
   const map = document.getElementById('map');
   const searchbtn = document.getElementById('map-controls');
-  // const //tableinfo = document.getElementById('tablecontainer');
-
   const button = document.getElementById('toggleFilters');
-
-
-  // const button = document.getElementById('toggleFilters');
-
-  // Set the title attribute
   button.setAttribute('title', 'Filter');
 
-
   let filtersVisible = false;
-
   button.addEventListener('click', function () {
     if (!filtersVisible) {
       filters.style.marginLeft = '0';
@@ -284,13 +96,11 @@ document.addEventListener('DOMContentLoaded', function () {
       filters.style.opacity = '0';
       map.style.width = '100vw';
       button.style.top = "4vh";
-      // button.style.right = '40px';
       button.style.right = '10px';
       button.innerHTML = '<img src="image/filter.png" alt="Search Icon" id="search-icon">';
       searchbtn.style.right = '40px';
       searchbtn.style.top = '17vh';
       searchbtn.style.right = '10px';
-      //tableinfo.style.right = '10px'; // Adjusted position for //tableinfo
     }
     filtersVisible = !filtersVisible;
   });
@@ -307,75 +117,46 @@ function updateTableStats(stats) {
 
 
 $(document).ready(function () {
+    // Example usage of the function
+const cluster_layerName = "auto_test"; // Verify this layer name in your GeoServer
+const cluster_url = "https://iwmsgis.pmc.gov.in/geoserver/";
+// const filter = ""; // Add any additional filter if required
 
-
+// loadAndProcessGeoJSON(main_url, layername, filter);
   var cql_filter1 = '';
-
-
-  // initializeCheckboxes();
-  //   function getCheckedValuess() {
-  //     var checkedValues = [];
-  //     var checkboxes = document.querySelectorAll("#checkboxContainer input[type='checkbox']:checked");
-  //     checkboxes.forEach(function(checkbox) {
-  //         checkedValues.push("'" + checkbox.value + "'"); // Push value wrapped in single quotes
-  //     });
-
-  //     if (checkedValues.length === 0) {
-  //         checkedValues.push("''"); // Push an empty string to simulate no results
-  //     }
-
-  //     return checkedValues;
-  // }
-
-
-  // document.getElementById("checkboxContainer").addEventListener("change", function() {
-  //     var checkedValues = getCheckedValuess();
-
   var filterString1 = "";
-
+  
   loadinitialData(filterString1);
-  // FilterAndZoom(filterString1)
-
+  loadAndProcessGeoJSON(cluster_url, cluster_layerName, filterString1);
   getCheckedValues(function (filterString) {
     console.log("Filter Stringinside: ", filterString1);
     const mainfilter = combineFilters(filterString1, filterString);
     console.log("Filter Stringinside: ", mainfilter);
+    loadAndProcessGeoJSON(cluster_url, cluster_layerName, mainfilter);
+    // loadAndProcessGeoJSON(main_url, layername, mainfilter);
     FilterAndZoom(mainfilter);
     DataTableFilter(mainfilter)
 
-
-    // });
   });
 
 
-
-
-
-
-
   function loadinitialData(cql_filter) {
-
-    const filternames = ["village_na", "applyfor", "casetype", "proposaltype", "tdrzone", "grossplotarea", "developmentzonedp", "owner_det_email"];//accordn column names , if want add one more filter criteria add here
+    const filternames = ["area", "applyfor", "casetype", "proposaltype", "tdrzone", "grossplotarea", "developmentzonedp", "owner_det_email"];//accordn column names , if want add one more filter criteria add here
     var workspace = 'AutoDCR';
     var layerName = 'auto_test';
     filternames.forEach(function (filtername) {
       var url = `${main_url}${workspace}/wms?service=WFS&version=1.1.0&request=GetFeature&typeName=${layerName}&propertyName=${filtername}&outputFormat=application/json`;
-
       if (cql_filter) {
         url += `&cql_filter=${encodeURIComponent(cql_filter)}`;
-
       }
-
       $.getJSON(url, function (data) {
         var projectFiSet = new Set();
         var projectFiMap = new Map();
-
-        // Iterate through the features and add non-null values to the set
         $.each(data.features, function (index, feature) {
           var column_name = feature.properties[filtername];
           if (column_name !== null && column_name !== "#N/A") {
             if (projectFiMap.has(column_name)) {
-              // projectFiMap.set(column_name, projectFiMap.get(column_name) + 1);
+             
               projectFiMap.set(column_name, (projectFiMap.get(column_name) || 0) + 1);
             } else {
               projectFiMap.set(column_name, 1);
@@ -386,53 +167,11 @@ $(document).ready(function () {
         populateDropdown(filtername, uniqueProjectFiList);
       });
     });
-
-    // FilterAndZoom(cql_filter)
-  }
-
-  // function combineFilters(cql_filter, filterString) {
-  //   return `(${cql_filter}) AND (${filterString})`;
-  // }
-
-
+    }
+   
 });
 
 
-// function initializeCheckboxes() {
-//   var columns = { "All": "All","Haveli": "Haveli", "Mawal": "Mawal", "Bhor": "Bhor", "Purandar": "Purandar", "Mulshi": "Mulshi", "Khed": "Khed", "Shirur": "Shirur" };
-//   var checkboxContainer = document.getElementById("checkboxContainer");
-
-//   // Clear any existing checkboxes
-//   checkboxContainer.innerHTML = '';
-
-//   // Populate checkboxContainer with checkboxes
-//   for (var key in columns) {
-//     if (columns.hasOwnProperty(key)) {
-//       var checkboxDiv = document.createElement("div");
-//       checkboxDiv.classList.add("form-check", "me-2"); // Adjust classes as per your styling needs
-
-//       var checkboxInput = document.createElement("input");
-//       checkboxInput.type = "checkbox";
-//       checkboxInput.classList.add("form-check-input");
-//       checkboxInput.id = key;
-//       checkboxInput.value = key; // Use key as the value (e.g., Work_ID, Budget_Code)
-
-//       var checkboxLabel = document.createElement("label");
-//       checkboxLabel.classList.add("form-check-label");
-//       checkboxLabel.setAttribute("for", key);
-//       checkboxLabel.textContent = columns[key]; // Use columns[key] to get the column name
-
-//       checkboxDiv.appendChild(checkboxInput);
-//       checkboxDiv.appendChild(checkboxLabel);
-
-//       checkboxContainer.appendChild(checkboxDiv);
-
-//       if (key === "Work_ID") {
-//         checkboxInput.checked = true;
-//       }
-//     }
-//   }
-// }
 
 
 function DataTableFilter(cql_filter1) {
@@ -445,16 +184,9 @@ function DataTableFilter(cql_filter1) {
   if (cql_filter1 !== '') {
     geoServerURL += "&CQL_FILTER=" + encodeURIComponent(cqlFilter);
   }
-  // ;&CQL_FILTER=${encodeURIComponent(cqlFilter)}`;
-  var headers = ["village_na", "applyfor", "casetype", "proposaltype", "tdrzone", "grossplotarea", "developmentzonedp", "owner_det_email"];
-
-
+  var headers = ["area", "applyfor", "casetype", "proposaltype", "tdrzone", "grossplotarea", "developmentzonedp", "owner_det_email"];
   showtable(typeName, geoServerURL, cqlFilter, headers);
-
 }
-
-
-
 
 function populateDropdown(dropdownId, data) {
   var ul = $("#" + dropdownId);
@@ -469,28 +201,27 @@ function populateDropdown(dropdownId, data) {
 
 function getCheckedValues(callback) {
   var selectedValues = {};
-  const filternames = ["village_na", "applyfor", "casetype", "proposaltype", "tdrzone", "grossplotarea", "developmentzonedp", "owner_det_email"];
+  const filternames = ["area", "applyfor", "casetype", "proposaltype", "tdrzone", "grossplotarea", "developmentzonedp", "owner_det_email"];
 
   filternames.forEach(function (filtername) {
-    selectedValues[filtername] = []; // Initialize empty array for each filtername
+    selectedValues[filtername] = []; 
 
     $('#' + filtername).on('click', 'input[type="checkbox"]', function (event) {
       event.stopPropagation();
       var values = [];
       $('#' + filtername + ' input[type="checkbox"]:checked').each(function () {
         var single_val = $(this).val();
-        // console.log(single_val, "single_val")
+        
         if (single_val) {
-          // Remove the count from the value
+        
           var actualValue = single_val.split(' (')[0];
           values.push(actualValue);
         }
       });
 
-      // Update selectedValues for the current filtername
+      
       selectedValues[filtername] = values;
 
-      // Construct filter strings for all filter names
       var filters = [];
       for (var key in selectedValues) {
         if (selectedValues[key].length > 0) {
@@ -498,12 +229,8 @@ function getCheckedValues(callback) {
         }
       }
 
-      // Join all filter strings with "AND"
       var filterString = filters.join(" AND ");
 
-
-
-      // Update the selected count in the label
       var label = $('label[for="' + filtername + '"]');
       if (label.length > 0) {
         var selectedCount = values.length;
@@ -511,22 +238,12 @@ function getCheckedValues(callback) {
         label.find('.selected-count').text(countText);
       }
 
-
-      // Call the callback function with filterString
       if (typeof callback === 'function') {
         callback(filterString);
       }
     });
   });
 }
-
-// function FilterAndZoom(filter) {
-//   fitbouss(filter)
-
-// };
-
-
-
 
 function FilterAndZoom(filter) {
   fitbous(filter)
@@ -538,7 +255,6 @@ function FilterAndZoom(filter) {
     CQL_FILTER: filter,
     maxZoom: 19.5,
   }).addTo(map);
-
 };
 
 
@@ -610,7 +326,6 @@ function fitbouss(filter) {
     processLayer(layerName, function () {
       layersProcessed++;
       if (layersProcessed === layers.length) {
-        // Apply the combined bounds to the map after all layers are processed
         if (bounds) {
           map.fitBounds(bounds);
         }
@@ -619,12 +334,7 @@ function fitbouss(filter) {
   });
 }
 
-// for dashboard table dynamic
-
-
 function showtable(typeName, geoServerURL, cqlFilter, headers) {
-
-
   tableData(typeName, geoServerURL, cqlFilter, headers);
 
   var currentPage = 1;
@@ -638,7 +348,7 @@ function showtable(typeName, geoServerURL, cqlFilter, headers) {
     var pageCount = Math.ceil(data.length / rowsPerPage);
 
     function renderPageButtons(startPage) {
-      paginationContainer.innerHTML = ""; // Clear any existing content
+      paginationContainer.innerHTML = "";
 
       // Previous Button
       var prevButton = document.createElement('button');
@@ -735,8 +445,8 @@ function showtable(typeName, geoServerURL, cqlFilter, headers) {
     tableContainer.appendChild(tableDetail);
 
     var table = document.createElement('table');
-    table.className = 'data-table'; // Add a class for styling
-    table.id = 'data-table'; // Add an ID for DataTables initialization
+    table.className = 'data-table'; 
+    table.id = 'data-table'; 
 
     var thead = document.createElement('thead');
     var headerRow = document.createElement('tr');
@@ -766,30 +476,27 @@ function showtable(typeName, geoServerURL, cqlFilter, headers) {
       row.appendChild(serialNumberCell);
 
       // Add other data columns
-      headers.slice(1).forEach(header => { // Exclude the first header (Serial No)
+      headers.slice(1).forEach(header => {
         if (header !== 'Serial No' && header !== 'geometry') {
           var cell = document.createElement('td');
-          cell.textContent = item[header] || ''; // Handle cases where item[header] might be undefined
+          cell.textContent = item[header] || ''; 
           row.appendChild(cell);
         }
       });
 
-      // Add click listener to highlight the geometry on the map
       row.addEventListener('click', function () {
         // console.log(item);
         var boundsLayer = L.geoJSON(item.geometry, {
           style: {
-            fillColor: "blue", // Fill color
-            fillOpacity: 0.3, // Fill opacity
-            color: "blue", // Border color
-            weight: 2, // Border weight
+            fillColor: "blue",
+            fillOpacity: 0.3,
+            color: "blue", 
+            weight: 2, 
           },
-        }).addTo(map); // Add the bounds layer to the map
+        }).addTo(map); 
 
         var bounds = boundsLayer.getBounds();
         map.fitBounds(bounds);
-
-        // Remove the bounds layer after 5 seconds
         setTimeout(function () {
           map.removeLayer(boundsLayer);
         }, 5000);
@@ -804,7 +511,7 @@ function showtable(typeName, geoServerURL, cqlFilter, headers) {
     // Initialize DataTables after rendering the table
     $(document).ready(function () {
       if ($.fn.DataTable.isDataTable('#data-table')) {
-        $('#data-table').DataTable().destroy(); // Destroy existing DataTable if initialized
+        $('#data-table').DataTable().destroy(); 
       }
       $('#data-table').DataTable({
         paging: true, // Enable pagination
@@ -972,7 +679,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             auto_test.setParams({
               CQL_FILTER: cqlFilter,
               maxZoom: 19.5,
-              // styles: "Missing_Link_"
+           
             });
 
             auto_test.addTo(map).bringToFront();
@@ -980,7 +687,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             auto_test.setParams({
               CQL_FILTER: cqlFilter,
               maxZoom: 19.5,
-              // styles: "Missing_Link_"
+              
             });
 
             auto_test.addTo(map).bringToFront();
@@ -1049,12 +756,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
   }
 });
 
-
-
-
-//Pop-Up show
-
-
 function getCheckedValuess() {
   var checkedValues = [];
   var checkboxes = document.querySelectorAll("#checkboxContainer input[type='checkbox']:checked");
@@ -1071,16 +772,16 @@ function getCheckedValuess() {
 
 
 const layerDetails = {
-  "AutoDCR:auto_test": ["village_na", "applyfor", "casetype", "proposaltype", "tdrzone", "grossplotarea", "developmentzonedp", "owner_det_email"],
+  "AutoDCR:auto_test": ["area", "applyfor", "casetype", "proposaltype", "tdrzone", "grossplotarea", "developmentzonedp", "owner_det_email"],
 };
 
 function getCheckedValuesforpopuups() {
   return new Promise((resolve, reject) => {
     var selectedValues = {};
-    const filternames = ["village_na", "applyfor", "casetype", "proposaltype", "tdrzone", "grossplotarea", "developmentzonedp", "owner_det_email"];
+    const filternames = ["area", "applyfor", "casetype", "proposaltype", "tdrzone", "grossplotarea", "developmentzonedp", "owner_det_email"];
 
     filternames.forEach(function (filtername) {
-      selectedValues[filtername] = []; // Initialize empty array for each filtername
+      selectedValues[filtername] = []; 
 
       $('#' + filtername + ' input[type="checkbox"]:checked').each(function () {
         var single_val = $(this).val();
@@ -1118,39 +819,37 @@ function combineFilters(cql_filter123, filterString) {
 }
 
 // console.log("hehehe")
-
 map.on("contextmenu", async (e) => {
   let bbox = map.getBounds().toBBoxString();
   let size = map.getSize();
 
-
-  workspace = 'AutoDCR'
-  // console.log("{{{{{{================")
   let filterString = await getCheckedValuesforpopuups();
-
-  var searchtypefield = $("#search_type").val();
-  var searchtypefield1 = $("#searchInputDashboard").val();
-
   let cqlFilter123 = "";
 
-  if (searchtypefield1) {
-    cqlFilter123 = `${searchtypefield} IN ('${searchtypefield1}')`;
-  } else {
-
-    if (filterString.trim() !== "") {
-      cqlFilter123 = combineFilters(cqlFilter123, filterString);
-    }
+  if (filterString.trim() !== "") {
+    cqlFilter123 = filterString;
   }
 
-
   console.log(cqlFilter123, "cqlFilter123");
+
   for (let layer in layerDetails) {
     let selectedKeys = layerDetails[layer];
     let urrr = `${main_url}${workspace}/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&FORMAT=image%2Fpng&TRANSPARENT=true&QUERY_LAYERS=${layer}&STYLES&LAYERS=${layer}&exceptions=application%2Fvnd.ogc.se_inimage&INFO_FORMAT=application/json&FEATURE_COUNT=50&X=${Math.round(e.containerPoint.x)}&Y=${Math.round(e.containerPoint.y)}&SRS=EPSG%3A4326&WIDTH=${size.x}&HEIGHT=${size.y}&BBOX=${bbox}&CQL_FILTER=${cqlFilter123}`;
 
     try {
       let response = await fetch(urrr);
-      let html = await response.json();
+      let text = await response.text(); // Get response as text for debugging
+      console.log(text); // Log the raw response text
+
+      // Try to parse JSON only if the response is valid JSON
+      let html;
+      try {
+        html = JSON.parse(text);
+      } catch (parseError) {
+        console.error("Response is not valid JSON:", parseError);
+        return;
+      }
+
       let features = html.features;
       console.log(features, "features")
       let detaildata = "";
@@ -1177,11 +876,4 @@ map.on("contextmenu", async (e) => {
       console.error("Error fetching data:", error);
     }
   }
-
-
 });
-
-
-
-
-
