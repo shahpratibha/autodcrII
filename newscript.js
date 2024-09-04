@@ -121,9 +121,9 @@ function toggleLayersControl() {
     var filterString1 = "";
     loadinitialData(filterString1);
     getCheckedValues(function (filterString) {
-      console.log("Filter Stringinside: ", filterString1);
+      //console.log("Filter Stringinside: ", filterString1);
       const mainfilter = combineFilters(filterString1, filterString);
-      console.log("Filter Stringinside: ", mainfilter);
+      //console.log("Filter Stringinside: ", mainfilter);
       FilterAndZoom(mainfilter);
       DataTableFilter(mainfilter)
     });
@@ -180,7 +180,7 @@ function toggleLayersControl() {
     var ul = $("#" + dropdownId);
     ul.empty();
     data.forEach(function (item) {
-      // console.log(item, "items")
+      // //console.log(item, "items")
       var listItem = $('<li><label><input type="checkbox" class="select2-option-checkbox" value="' + item + '"> ' + item + '</label></li>');
       ul.append(listItem);
     });
@@ -473,7 +473,7 @@ function toggleLayersControl() {
         });
   
         row.addEventListener('click', function () {
-          // console.log(item);
+          // //console.log(item);
           var boundsLayer = L.geoJSON(item.geometry, {
             style: {
               fillColor: "blue",
@@ -557,7 +557,7 @@ function toggleLayersControl() {
           return sum + feature.properties.length_m;
         }, 0);
         let uniqueCount = new Set(work_id).size;
-        console.log(work_id.length, "lllllllllllll", work_id, uniqueCount)
+        //console.log(work_id.length, "lllllllllllll", work_id, uniqueCount)
         document.getElementById('tablestats').innerHTML = `
         <div class="stat-button">
           <div class="stat-label">Total Length (In Meter):</div>
@@ -609,7 +609,7 @@ function toggleLayersControl() {
       var workspace = 'AutoDCR'
       function getValues(callback) {
         var geoServerURL = `${main_url}${workspace}/wms?service=WFS&version=1.1.0&request=GetFeature&typeName=${layerName}&propertyName=${selectedValue}&outputFormat=application/json`;
-        // console.log(geoServerURL, "geoServerURLsearch");
+        // //console.log(geoServerURL, "geoServerURLsearch");
   
         $.getJSON(geoServerURL, function (data) {
           var workTypeSet = new Set();
@@ -776,7 +776,7 @@ function toggleLayersControl() {
           if (single_val) {
             var actualValue = single_val.split(' (')[0];
             selectedValues[filtername].push(actualValue);
-            console.log(selectedValues, "lllllllllll99999999999999")
+            //console.log(selectedValues, "lllllllllll99999999999999")
           }
         });
       });
@@ -806,7 +806,7 @@ function toggleLayersControl() {
     }
   }
   
-  // console.log("hehehe")
+  // //console.log("hehehe")
   
   map.on("contextmenu", async (e) => {
     let bbox = map.getBounds().toBBoxString();
@@ -814,7 +814,7 @@ function toggleLayersControl() {
   
   
     workspace = 'AutoDCR'
-    // console.log("{{{{{{================")
+    // //console.log("{{{{{{================")
     let filterString = await getCheckedValuesforpopuups();
   
     var searchtypefield = $("#search_type").val();
@@ -832,7 +832,7 @@ function toggleLayersControl() {
     }
   
   
-    console.log(cqlFilter123, "cqlFilter123");
+    //console.log(cqlFilter123, "cqlFilter123");
     for (let layer in layerDetails) {
       let selectedKeys = layerDetails[layer];
       let urrr = `${main_url}${workspace}/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&FORMAT=image%2Fpng&TRANSPARENT=true&QUERY_LAYERS=${layer}&STYLES&LAYERS=${layer}&exceptions=application%2Fvnd.ogc.se_inimage&INFO_FORMAT=application/json&FEATURE_COUNT=50&X=${Math.round(e.containerPoint.x)}&Y=${Math.round(e.containerPoint.y)}&SRS=EPSG%3A4326&WIDTH=${size.x}&HEIGHT=${size.y}&BBOX=${bbox}&CQL_FILTER=${cqlFilter123}`;
@@ -841,7 +841,7 @@ function toggleLayersControl() {
         let response = await fetch(urrr);
         let html = await response.json();
         let features = html.features;
-        console.log(features, "features")
+        //console.log(features, "features")
         let detaildata = "";
   
         features.forEach((feature, index) => {

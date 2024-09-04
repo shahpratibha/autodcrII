@@ -41,7 +41,7 @@ function createClusterIcon(cluster) {
 function loadAndProcessGeoJSON(main_url, layername, filter) {
   clearClusters();  
     const urlm = `${main_url}ows?service=WFS&version=1.0.0&request=GetFeature&typeName=${layername}&CQL_FILTER=${filter}&outputFormat=application/json`;
-    console.log(urlm,"kkekeekekeke")
+    //console.log(urlm,"kkekeekekeke")
 
     $.ajax({
         url: urlm,
@@ -86,7 +86,7 @@ function loadAndProcessGeoJSON(main_url, layername, filter) {
         },
         error: function (jqXHR, textStatus, errorThrown) {
             console.error('Error loading GeoJSON:', textStatus, errorThrown);
-            console.log('Response Text:', jqXHR.responseText); // Log the response text to debug
+            //console.log('Response Text:', jqXHR.responseText); // Log the response text to debug
         }
     });
 }
