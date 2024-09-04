@@ -1,14 +1,14 @@
-//click on status-wise open the summary section 
-document.getElementById('status-wise-button').addEventListener('click', function () {
-    document.querySelector('.summary-section').style.display = 'block';
-    document.querySelector('.north-arrow-container').classList.add('move-up');
-    document.querySelector('.leaflet-top.leaflet-left .leaflet-bar').classList.add('move-up');
-    document.querySelector('.leaflet-control-scale').classList.add('move-up');
-    document.querySelector('.container-fluid').classList.add('summary-section-open');
-    document.querySelector('.geopulseaname').classList.add('move-up'); // Add class for moving up
+// //click on status-wise open the summary section 
+// document.getElementById('status-wise-button').addEventListener('click', function () {
+//     document.querySelector('.summary-section').style.display = 'block';
+//     document.querySelector('.north-arrow-container').classList.add('move-up');
+//     document.querySelector('.leaflet-top.leaflet-left .leaflet-bar').classList.add('move-up');
+//     document.querySelector('.leaflet-control-scale').classList.add('move-up');
+//     document.querySelector('.container-fluid').classList.add('summary-section-open');
+//     document.querySelector('.geopulseaname').classList.add('move-up'); // Add class for moving up
 
-    this.classList.toggle('btn-active');
-});
+//     this.classList.toggle('btn-active');
+// });
 
 // document.getElementById('closeButton').addEventListener('click', function() {
 //     document.querySelector('.summary-section').style.display = 'none';
@@ -233,10 +233,5 @@ document.getElementById('excelButton').addEventListener('click', function () {
 });
 
 
-
-// Add scale control
-L.control.scale({
-    position: 'bottomleft' // Change position to bottom right
-}).addTo(map);
 
 // new file

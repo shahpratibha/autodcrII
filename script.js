@@ -70,44 +70,33 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 });
-
-
-document.addEventListener('DOMContentLoaded', function () {
-  const filters = document.getElementById('filters');
-  const map = document.getElementById('map');
-  const searchbtn = document.getElementById('map-controls');
-  const button = document.getElementById('toggleFilters');
-  button.setAttribute('title', 'Filter');
-
-  let filtersVisible = false;
-  button.addEventListener('click', function () {
-    if (!filtersVisible) {
-      filters.style.marginLeft = '0';
-      filters.style.opacity = '1';
-      map.style.width = '81vw';
-      button.style.top = "4vh";
-      button.style.right = 'calc(19.8vw)';
-      button.innerHTML = '<img src="image/filter.png" alt="Search Icon" id="search-icon">';
-      searchbtn.style.right = 'calc(0.8vw)';
-      searchbtn.style.top = '17vh';
-      searchbtn.style.right = 'calc(20vw - 1px)';
-    } else {
-      filters.style.marginLeft = '-35vw';
-      filters.style.opacity = '0';
-      map.style.width = '100vw';
-      button.style.top = "4vh";
-      button.style.right = '10px';
-      button.innerHTML = '<img src="image/filter.png" alt="Search Icon" id="search-icon">';
-      searchbtn.style.right = '40px';
-      searchbtn.style.top = '17vh';
-      searchbtn.style.right = '10px';
-    }
-    filtersVisible = !filtersVisible;
-  });
   // -------------------------------------------------------------------------
+  document.addEventListener('DOMContentLoaded', function () {
+    const button = document.getElementById('toggleFilters');
+    const filters = document.getElementById('filters');
+    let filtersVisible = false;
+  
+    // Set the title attribute for the button
+    button.setAttribute('title', 'Filter');
+  
+    button.addEventListener('click', function () {
+      if (!filtersVisible) {
+        filters.style.display = 'block';       // Show the filter panel
+        filters.style.opacity = '1';           // Make it visible
+        filters.style.visibility = 'visible';  // Ensure it is visible
+      } else {
+        filters.style.opacity = '0';           // Hide it with fade effect
+        filters.style.visibility = 'hidden';   // Hide it visually
+        setTimeout(() => {
+          filters.style.display = 'none';      // Remove from layout after fade
+        }, 300); // Match this time with the opacity transition duration
+      }
+      filtersVisible = !filtersVisible;
+    });
+  });
+  
 
 
-});
 
 
 function updateTableStats(stats) {

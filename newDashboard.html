@@ -6,7 +6,8 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">\
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="style2.css">
   <link rel="stylesheet" href="leafletCustom.css">
   <link rel="stylesheet" href="style1.css">
@@ -26,15 +27,15 @@
             <img src="image/pmcjpeg.png" alt="Button Image">
           </a>
 
-          <a href="https://geopulsea.com/" class="geopulseaname">@GeoPulse Analytics</a>
+         <a href="https://geopulsea.com/" class="geopulseaname">@GeoPulse Analytics</a>
           <div class="btn-group">
             <button class="btn-blue" id="status-wise-button">Status Wise</button>
             <button class="btn-blue btn-area">Area Wise</button>
           </div>
 
-        </div> -->
+        </div> 
 
-        <!-- Date Picker -->
+        Date Picker -->
         <!-- <div class="date-picker">
 
           <div class="date-range" id="date-range-display">April 1, 2024 - March 31, 2025
@@ -53,33 +54,35 @@
     <div id="tablecontainer"></div>
 
     <!-- Map Section -->
-    <!-- <div class="north-arrow-container">
-      <img src="image/North.png" class="north-arrow" alt="North Arrow">
-    </div> -->
+    <div class="north-arrow-container">
+      <img src="image/North New.png" class="north-arrow" alt="North Arrow">
+    </div>
 
 
     <div class="row m-0">
       <div class="col-12 p-0">
         <div id="map"></div>
+
         <div class="map-controls" id="map-controls">
           <button id="search-button" class="search-button">
-            <img src="image/Search.svg" alt="Search Icon" id="search-icon">
+              <img src="image/Search.svg" alt="Search Icon" id="search-icon">
           </button>
-          <div class="search-wrapper">
-            <input type="text" id="searchInputDashboard" placeholder="search...">
-            <img src="image/Close.svg" alt="Close Icon" id="close-icon" class="close-icon">
+          <div id="search-container" class="search-container hidden">
+              <input type="text" id="search-input" class="search-input" placeholder="Search here">
+              <img src="image/Arrow.svg" id="search-arrow" class="search-arrow" alt="">
+              <span id="clear-icon" class="clear-icon hidden">&#x2715;</span> <!-- Unicode cross icon -->
           </div>
+      </div>
+      
+
+          <!-- <button class="toggle-button" id="toggleFilters">
+            <img src="image/filter.svg" alt="Search Icon" id="search-icon">
+          </button> -->
+
         </div>
 
-        <div class="map-controls">
-          <button class="toggle-button" id="toggleFilters">
-            <img src="image/filter.png" alt="Search Icon" id="search-icon">
-          </button>
-
-        </div>
-
-        <div class="filters" id="filters">
-          <h3>Filters <span class="close-icon" onclick="closeFilters()">×</span></h3>
+        <div class="filters" id="filters" style="">  <h3 class="filter-title">Filter
+         <span class="close-icon" onclick="closeFilters()">×</span></h3>
           <div class="filter_div">
             <div class="filter-group">
               <label for="area" onclick="toggleFilter(this)">Village <span class="icon-container"><i
@@ -367,6 +370,10 @@
   </div>
 
   <div id="map"></div>
+  <a href="https://geopulsea.com/" class="geopulseaname">@GeoPulse Analytics</a>
+  <a  class="logoPMC">
+    <img src="image/pmcjpeg.png" alt="Button Image">
+  </a>
   <!--.tab-section OPTION-->
 
   
@@ -385,10 +392,15 @@
     <!-- Options Content (Initially Hidden) -->
     <div class="tabs-options" id="tabsOptions" style="display: none">
       <div class="component-10-parent">
-        <div class="component-10">
-          <img class="right-icons" alt="Filter" src="image/filter.svg" onclick="toggleFilters()" />
-          <div class="component-10-child"></div>
-      </div>
+        <!-- This is the existing component with the icon -->
+        
+<div class="component-10"  id="toggleFilters">
+       
+          <img class="right-icons" src="image/filter.svg" alt="Search Icon" id="search-icon">
+        </button>
+        <div class="component-10-child"></div>
+      </div> 
+
 
 
         <div class="component-11" id="toggleButton">
@@ -1316,6 +1328,8 @@
     </div>
 
     
+
+    
     
 
 
@@ -1346,9 +1360,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
 
 
-  <!-- <script src="legend.js"></script> -->
-
-<!-- <script src="script1.js"></script> -->
   <script src="legend.js"></script>
 <script src="map.js"></script>
 <script src="filter.js"></script>
