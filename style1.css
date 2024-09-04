@@ -2,8 +2,11 @@ body {
     margin: 0;
     line-height: normal;
     overflow: hidden;
-    font-family: "Plus Jakarta Sans";
+   
   }
+  /* #filters{
+    display: none;
+  } */
   #map {
       width: 100%;
       height: 100vh;
@@ -152,7 +155,7 @@ body {
   .tab-section {
       width: 290px;
       position: absolute; /* Positioning the tab-section absolutely */
-      top: 20px; /* Adjust the position as needed */
+      top: 34px; /* Adjust the position as needed */
       left: 20px; /* Adjust the position as needed */
       border-radius: 20px;
       background-color: #fff;
@@ -247,7 +250,7 @@ body {
   .tabs-options {
     width: 100%;
     position: relative;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
+    /* box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3); */
     border-radius: 16px;
     background-color: #fff;
     display: flex;
@@ -783,6 +786,7 @@ body {
     overflow-y: auto;
     flex-shrink: 0;
     display: flex;
+    overflow-x: hidden;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
@@ -1538,3 +1542,531 @@ body {
     /* Add any additional styling you need */
   }
   
+
+
+  /* General container styles */
+.container {
+    width: 100%;
+    height: 100%;
+    padding: 16px;
+    background: white;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.30);
+    border-radius: 20px;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 16px;
+    display: inline-flex;
+}
+
+/* Title styles */
+.title {
+    text-align: center;
+    color: #00325C;
+    font-size: 20px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 600;
+    word-wrap: break-word;
+}
+
+/* Content section styles */
+.content {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+    display: flex;
+}
+
+/* Item box styles */
+.item {
+    /* width: 227px;
+    padding-top: 35px; */
+    justify-content: center;
+    align-items: center;
+    display: inline-flex;
+}
+
+/* Box styles */
+.box {
+    width: 227px;
+    height: 145px;
+    position: relative;
+}
+
+/* Horizontal line styles */
+.horizontal-line {
+    width: 16px;
+    height: 16px;
+    left: 28px;
+    top: 0px;
+    position: absolute;
+}
+
+.horizontal-line::before,
+.horizontal-line::after {
+    content: '';
+    width: 0;
+    height: 16px;
+    position: absolute;
+    border: 3px #262626 solid;
+}
+
+.horizontal-line::before {
+    left: 8px;
+}
+
+.horizontal-line::after {
+    left: 16px;
+    transform: rotate(90deg);
+    transform-origin: 0 0;
+}
+
+/* Small box styles */
+.small-box {
+    width: 12px;
+    height: 12px;
+    left: 16px;
+    top: 96px;
+    position: absolute;
+}
+
+.small-box::before,
+.small-box::after {
+    content: '';
+    width: 0;
+    height: 12px;
+    position: absolute;
+    border: 2px #262626 solid;
+}
+
+.small-box::before {
+    left: 6px;
+}
+
+.small-box::after {
+    left: 12px;
+    transform: rotate(90deg);
+    transform-origin: 0 0;
+}
+
+/* Small box 2 styles */
+.small-box-2 {
+    width: 10px;
+    height: 10px;
+    left: 217px;
+    top: 86px;
+    position: absolute;
+}
+
+.small-box-2::before,
+.small-box-2::after {
+    content: '';
+    width: 0;
+    height: 10px;
+    position: absolute;
+    border: 2px #262626 solid;
+}
+
+.small-box-2::before {
+    left: 5px;
+}
+
+.small-box-2::after {
+    left: 10px;
+    transform: rotate(90deg);
+    transform-origin: 0 0;
+}
+
+/* Long line styles */
+.long-line,
+.medium-line,
+.long-line-2 {
+    width: 0;
+    position: absolute;
+    border: 3px #262626 solid;
+}
+
+.long-line {
+    height: 34px;
+    left: 103px;
+    top: 46px;
+    transform: rotate(90deg);
+    transform-origin: 0 0;
+}
+
+.medium-line {
+    height: 21px;
+    left: 46px;
+    top: 145px;
+    transform: rotate(90deg);
+    transform-origin: 0 0;
+}
+
+.long-line-2 {
+    height: 115px;
+    left: 171px;
+    top: 145px;
+    transform: rotate(90deg);
+    transform-origin: 0 0;
+}
+
+/* Short line styles */
+.diagonal-line {
+    width: 0;
+    height: 23px;
+    left: 92px;
+    top: 75px;
+    position: absolute;
+    transform: rotate(90deg);
+    transform-origin: 0 0;
+    border: 3px #262626 solid;
+}
+
+/* Rectangle styles */
+.rectangle {
+    width: 96px;
+    height: 110px;
+    left: 49px;
+    top: 27px;
+    position: absolute;
+    border-radius: 8px;
+    border: 3px #262626 solid;
+}
+
+.rectangle img {
+    width: 96px;
+    height: 110px;
+    left: 71px;
+    top: 11px;
+    position: absolute;
+}
+
+/* Overlay styles */
+.overlay {
+    width: 54px;
+    height: 54px;
+    left: 63px;
+    top: 81px;
+    position: absolute;
+}
+
+.inner-circle,
+.inner-small-circle {
+    border: 3px #262626 solid;
+}
+
+.inner-circle {
+    width: 36px;
+    height: 36px;
+    left: 6.75px;
+    top: 6.75px;
+}
+
+.inner-small-circle {
+    width: 9.67px;
+    height: 9.67px;
+    left: 37.58px;
+    top: 37.58px;
+}
+
+/* Message styles */
+.message {
+    height: 90px;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+    display: flex;
+}
+
+.no-data {
+    align-self: stretch;
+    opacity: 0.70;
+    text-align: center;
+    color: #00325C;
+    font-size: 24px;
+  
+    font-weight: 600;
+    word-wrap: break-word;
+}
+
+.suggestion {
+    align-self: stretch;
+    opacity: 0.50;
+    text-align: center;
+    color: #262626;
+    font-size: 16px;
+   
+    font-weight: 400;
+    word-wrap: break-word;
+}
+
+/* Refresh button styles */
+.refresh-button {
+    align-self: stretch;
+    height: 44px;
+    padding: 12px;
+    background: radial-gradient(50.00% 50.00% at 50.00% 75.00%, #54A4E6 0%, #3392E1 100%);
+    border-radius: 12px;
+    backdrop-filter: blur(4px);
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    display: inline-flex;
+}
+
+.refresh-text {
+    color: white;
+    font-size: 16px;
+  
+    font-weight: 500;
+    word-wrap: break-word;
+}
+
+.refresh-icon {
+    width: 24px;
+    height: 24px;
+    padding: 4px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.icon-inner {
+    width: 16px;
+    height: 16px;
+    border: 2px white solid;
+}
+
+
+/* Style for the container div */
+
+.tablestats {
+  margin-top: 24px;
+
+  color: #262626;
+  font-weight: bold;
+  text-shadow: black;
+}
+.stat-button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--Blue-50, #e6f1fb);
+  /* border: 1px solid #ccc;  */
+  border-radius: 5px;
+  padding: 10px;
+  color: #0077da;
+  font-size: 14px;
+}
+
+.stat-label {
+  margin-right: 10px;
+  font-weight: bold;
+  color: #0077da;
+}
+
+.stat-value {
+  background-color: #8ac0ee;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px 10px;
+  min-width: 85px;
+  text-align: center;
+  color: black;
+  font-weight: bold;
+}
+
+.table{
+  right: 1px;
+    width: 30px;
+    height: 30px;
+    transition: width 0.3s, height 0.3s, background-color 0.3s, opacity 0.3s;
+    background: linear-gradient(180deg, #6f6f6f 0%, #262626 100%);
+    box-shadow: 0px 0px 14.035px 0px rgba(0, 0, 0, 0.15);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: absolute;
+    top: 50px;
+}
+.dataTables_scrollBody{
+  max-height: 270px !important;
+}
+.dataTable thead th {
+  
+  background-color: #f2f2f2; /* Adjust background color */
+  padding: 10px; /* Optional: add padding for better spacing */
+}
+
+/* Optional: styling for the entire table */
+.dataTable {
+  border-collapse: collapse; /* Ensures borders collapse into a single border */
+  width: 100%; /* Adjust table width as needed */
+}
+
+/* Optional: styling for table cells */
+.dataTable td, .dataTable th {
+  border: 1px solid #ddd; /* Border for table cells */
+  padding: 8px; /* Padding for table cells */
+}
+
+
+
+#openTableBtn {
+  position: absolute;
+  z-index: 999;
+  top: 27vh;
+  width: auto;
+  padding: 6px;
+  right: 10px;
+  background: linear-gradient(180deg, #6f6f6f 0%, #262626 100%);
+  /* box-shadow: 0px 0px 14.035px 0px rgba(0, 0, 0, 0.15); */
+  border: none; /* Remove border */
+  border-radius: 50%; /* Make it round */
+
+  }
+  
+  .tablebtn {
+  width: 20px;
+  height: 20px;
+  }
+  
+  
+
+  #data-table tbody tr:hover {
+    background-color: #E6F1FB; 
+    cursor: pointer; 
+  }
+
+ 
+  #data-table th, #data-table td {
+    /* padding: 8px 12px; */
+    border: 1px solid #ddd;
+  }
+
+  #data-table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  
+  #data-table thead tr {
+    background-color:#E6F1FB;
+  }
+  
+.filter-title{
+  color: var(--Blue-900, #00325C);
+text-align: center;
+leading-trim: both;
+text-edge: cap;
+font-family: "Plus Jakarta Sans";
+font-size: 20px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+}
+
+.logoPMC img {
+  width: 46.164px;
+  height: 44px;
+  margin-bottom: 13px;
+  object-fit: contain;
+  z-index: 9;
+  position: absolute;
+  top: 39px ;
+  right: 12px ;
+
+}
+.search-container {
+  display: flex;
+  align-items: center;
+  border-radius: 12px;
+  background: var(--Basic-Colors-White, #FFF);
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
+  transition: opacity 0.3s ease;
+  /* padding: 4px 8px; */
+  position: fixed; /* Fixes the container at the top */
+  top: 16px; /* Positions the container 10px from the top */
+  left: 50%; /* Aligns the center horizontally */
+  transform: translateX(-50%); /* Adjusts to perfectly center */
+  width: 300px; /* Adjust width as needed */
+  z-index: 1000; /* Keeps the container above other content */
+}
+
+
+.search-input {
+  border: none;
+  outline: none;
+  padding: 8px;
+  border-radius: 24px 0 0 24px;
+  flex-grow: 1;
+}
+.search-arrow {
+  background: #54A4E6;
+  padding: 10px;
+  border-radius: 0 24px 24px 0;
+  color: white;
+  cursor: pointer;
+  /* border-radius: 12px; */
+  background: linear-gradient(180deg, #54A4E6 0%, #3392E1 100%);
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.30), 0px 2px 6px 2px rgba(0, 0, 0, 0.15);
+}
+.clear-icon {
+  position: absolute;
+  right: 50px; /* Adjust based on input length */
+  cursor: pointer;
+  font-size: 16px;
+  color: #888; /* Adjust color as needed */
+}
+
+.hidden {
+  display: none;
+}
+
+.search-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.leaflet-left .leaflet-control-scale {
+  margin-left: 15px;
+}
+.component-7:hover {
+  background: radial-gradient(100% 100% at 0% 50%, #DEFBE6 0%, #A7F0BA 100%);
+  backdrop-filter: blur(2px);
+}
+
+  /* Click or Active Effect */
+  .component-7:active {
+    border-radius: 12px;
+    background: radial-gradient(100% 100% at 0% 50%, #24A148 0%, #198038 100%);
+    backdrop-filter: blur(2px);
+    color: #fff; /* Change text color on click */
+  }
+
+
+  
+.component-10 img {
+  width: 24px; /* Adjust as needed */
+  height: 24px; /* Adjust as needed */
+  transition: filter 0.3s; /* Smooth transition for icon color change */
+}
+
+/* Hover state styles */
+.component-10:hover {
+  border-radius: 12px;
+background: linear-gradient(180deg, #0077DA 0%, #54A4E6 100%);
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+/* Optional: Change icon color on hover state */
+.component-10:hover img {
+  filter: brightness(0) invert(1); /* Makes the icon white */
+}

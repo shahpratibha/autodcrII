@@ -78,7 +78,6 @@ backdrop-filter: blur(2px); */
   color: var(--Grey-800, #262626);
   leading-trim: both;
   text-edge: cap;
-  /*  /* font-family: "Plus Jakarta Sans"; */
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -268,7 +267,7 @@ backdrop-filter: blur(2px); */
 
 .map-controls {
   position: absolute;
-  top: 18vh;
+  top: 40vh;
   right: 11px;
   z-index: 1000;
   display: flex;
@@ -784,14 +783,18 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
 
 /* Initial button styling */
 #search-button {
-  right: 9px;
-  width: 30px; /* Initial width */
-  height: 30px; /* Initial height */
-  transition: width 0.3s, height 0.3s, background-color 0.3s, opacity 0.3s; /* Smooth transition */
+  right: 2px;
+  width: 35px; /* Initial width */
+  height: 35px; /* Initial height */
+  /* transition: width 0.3s, height 0.3s, background-color 0.3s, opacity 0.3s; /* Smooth transition */
   background: linear-gradient(180deg, #6f6f6f 0%, #262626 100%);
-  box-shadow: 0px 0px 14.035px 0px rgba(0, 0, 0, 0.15);
-  border: none; /* Remove border */
-  border-radius: 50%; /* Make it round */
+  box-shadow: 0px 0px 14.035px 0px rgba(0, 0, 0, 0.15); 
+ border: none;
+  border: 1px solid rgba(255, 255, 255, 0.50);
+  background: radial-gradient(400.2% 139.23% at 0% 3.13%, rgba(0, 119, 218, 0.80) 0%, rgba(0, 84, 155, 0.80) 100%);
+  box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(2px);
+  border-radius: 0 0 8px 8px; /* Top corners square, bottom corners rounded */
   cursor: pointer; /* Pointer cursor on hover */
   display: flex; /* Center the icon */
   align-items: center;
@@ -799,7 +802,7 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   justify-content: center;
   overflow: hidden; /* Ensure smooth resizing */
   position: absolute; /* Position absolute within the container */
-  top: -87px;/* Align with container top */
+  top: -202px;/* Align with container top */
 }
 
 /* Full width when expanded */
@@ -891,39 +894,22 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   margin-top: 50px; /* Added margin for better visual placement */
   position: relative; /* Position relative for the button and search input */
 }
-
-/* Initial button styling */
-#toggleFilters {
-  right: 9px;
-  width: 30px; /* Initial width */
-  height: 30px; /* Initial height */
-  transition: width 0.3s, height 0.3s, background-color 0.3s, opacity 0.3s; /* Smooth transition */
-  background: linear-gradient(180deg, #6f6f6f 0%, #262626 100%);
-  box-shadow: 0px 0px 14.035px 0px rgba(0, 0, 0, 0.15);
-  border: none; /* Remove border */
-  border-radius: 50%; /* Make it round */
-  cursor: pointer; /* Pointer cursor on hover */
-  display: flex; /* Center the icon */
+/* #toggleFilters {
+  right: -7px;
+  width: 30px;
+  height: 30px;
+  left: 49px;
+  border: none ;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  position: fixed;
   align-items: center;
-
   justify-content: center;
-  overflow: hidden; /* Ensure smooth resizing */
-  position: absolute; /* Position absolute within the container */
-  top: -42px; /* Align with container top */
-}
-
-
-
-/* Search icon inside the button */
-#toggleFilters img {
-  width: 19px; /* Icon size */
-  height: auto; /* Maintain aspect ratio */
-  transition: opacity 0.3s; /* Smooth transition for opacity */
-  position: absolute; /* Fix the icon in place */
-  top: 55%;
-  left: 52%;
-  transform: translate(-50%, -50%); /* Center the icon */
-}
+  overflow: hidden;
+  position: absolute;
+  top: -1px;
+} */
 
 
 
@@ -1202,7 +1188,6 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   text-align: center;
   color: #262626;
   font-size: 12px;
-   /* font-family: "Plus Jakarta Sans"; */
   font-weight: 400;
   word-wrap: break-word;
 }
@@ -1327,7 +1312,7 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
 
 .filter_div{
   height: auto; 
-  max-height: 65vh;
+  max-height: 55vh;
   overflow: hidden;
   transition: overflow 0.3s ease;
 
@@ -1340,7 +1325,7 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
 }
 .toggle-button {
   position: relative;
-  top: 14vh;
+  top: 20vh;
   right: 49px;
   z-index: 1000;
   border: none;
@@ -1367,43 +1352,52 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   object-fit: contain; /* Ensure image scales properly */
 }
 
-
 .filters {
-  margin-bottom: 20px;
-  margin-top: 20px;
+  display: none;                    /* Hide the filter panel by default */
   position: absolute;
-  top: 20px;
-  right: 18px;
-  width:250px;
-
+  top: 22%;
+  left: 18px;
+  border-radius: 12px;
+  width: 290px;
+  background-color: white;
+  border: 1px solid #ddd;
+  z-index: 1000;
+  padding: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  opacity: 0;                      /* Initially hidden */
+  transition: opacity 0.3s ease;   /* Smooth transition for opacity */
 }
-
 
 .filter-group {
   margin-bottom: 5px;
-  padding: 10px;
-  border: 1px solid gray;
+  padding: 8px;
+  border-radius: 8px;
+background: var(--Blue-50, #E6F1FB);
   font-size: 10px;
 }
 .filter-group label {
-  display: block;
-  font-weight: bold;
+  display: block; 
   margin-bottom: 5px;
-  font-size: 12px;
+  color: var(--Basic-Colors-Black, #000);
+
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
   cursor: pointer;
   position: relative;
-  background: aliceblue;
+  /* background: aliceblue; */
 }
 
-.filter-group input[type="text"] {
-width: 80%;
-padding: 5px;
-margin-bottom: 10px;
-font-size: 12px;
-font-weight: bold;
-display: none;
-border-radius: 8px;
-border: 2px solid #bbb;
+  .filter-group input[type="text"] {
+    width: 97%;
+    padding: 6px;
+    margin-bottom: 10px;
+    font-size: 12px;
+    font-weight: bold;
+    display: none;
+    border-radius: 8px;
+    border: 2px solid #bbb;
 }
 .filter-group ul {
 list-style-type: none;
@@ -1424,11 +1418,11 @@ position:absolute;
 right:1%; 
 top:0%;
 font-size: 15px;
-}
+} */
 
 /* Style the icon */
-.icon-container i {
-color: black; /* Default color */
+ .icon-container i {
+color: black; 
 }
 
 .abcscroll {
@@ -1576,3 +1570,6 @@ overflow: visible;
  
 
  */
+/* .filters{
+  display: none;
+} */

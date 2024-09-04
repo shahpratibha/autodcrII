@@ -61,34 +61,6 @@ document
     });
 
 
-    //filter
-    function toggleFilters() {
-        const filters = document.getElementById('filters');
-        // Toggle the display property between 'block' and 'none'
-        if (filters.style.display === 'none' || filters.style.display === '') {
-            filters.style.display = 'block';  // Show the filters
-        } else {
-            filters.style.display = 'none';   // Hide the filters
-        }
-    }
-    
-    function closeFilters() {
-        // Hide the filters when the close button is clicked
-        document.getElementById('filters').style.display = 'none';
-    }
-    
-    function toggleFilter(labelElement) {
-        // Toggle the dropdown list for each filter group when the label is clicked
-        const ul = labelElement.nextElementSibling.nextElementSibling; // Assumes ul follows the input
-        if (ul.style.display === 'none' || ul.style.display === '') {
-            ul.style.display = 'block';
-        } else {
-            ul.style.display = 'none';
-        }
-    }
-    
-
-
 
     
 // Toggle arrow direction
@@ -124,12 +96,42 @@ function printWindow() {
     window.print();
 }
 
-//input cross sign
-function clearInput(inputId) {
-    const inputElement = document.getElementById(inputId);
-    inputElement.value = ''; // Clear the input value
-    inputElement.focus(); // Optionally refocus the input field
-}
 
 
+
+
+// Add scale control
+L.control.scale({
+  position: 'bottomleft' // Change position to bottom right
+}).addTo(map);
+
+
+//search
+document.getElementById('search-button').addEventListener('click', function () {
+  // Toggle the search container visibility
+  const searchContainer = document.getElementById('search-container');
+  searchContainer.classList.toggle('hidden');
+  
+  // Focus the search input when shown
+  if (!searchContainer.classList.contains('hidden')) {
+      document.getElementById('search-input').focus();
+  }
+});
+
+document.getElementById('search-input').addEventListener('input', function () {
+  const clearIcon = document.getElementById('clear-icon');
+  if (this.value.trim() !== '') {
+      clearIcon.classList.remove('hidden');
+  } else {
+      clearIcon.classList.add('hidden');
+  }
+});
+
+// Clear the search input when the clear icon is clicked
+document.getElementById('clear-icon').addEventListener('click', function () {
+  const searchInput = document.getElementById('search-input');
+  searchInput.value = '';
+  this.classList.add('hidden');
+  searchInput.focus();
+});
 
