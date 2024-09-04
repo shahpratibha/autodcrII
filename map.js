@@ -102,6 +102,18 @@ var map = L.map("map", {
     opacity: 1,
   }
 ).addTo(map);
+var Zone_layer = L.tileLayer.wms(
+  "https://iwmsgis.pmc.gov.in/geoserver/wms",
+  {
+    layers: "Zone_layer",
+    format: "image/png",
+    transparent: true,
+    tiled: true,
+    version: "1.1.0",
+    maxZoom: 21,
+    opacity: 1,
+  }
+).addTo(map);
   
   var baseLayers = {
     "OSM": osm,
@@ -114,6 +126,7 @@ var map = L.map("map", {
     "Plot": PlotBoundary_Layer,
     "Boundary": Boundary_Layer,
     "Village": Village_Boundary,
+    "Zone_layer":Zone_layer,
     "auto_test":auto_test,
   };
   

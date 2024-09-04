@@ -10,7 +10,6 @@ function toggleLayersControl() {
 }
 
 
-
 function toggleFilter(label) {
   const input = label.nextElementSibling; // Get the input element next to the label
   const ul = input.nextElementSibling; // Get the ul element next to the input
@@ -161,8 +160,6 @@ const cluster_url = "https://iwmsgis.pmc.gov.in/geoserver/";
 });
 
 
-
-
 function DataTableFilter(cql_filter1) {
   var layers = ["AutoDCR:auto_test"];
   var typeName = layers.join(',');
@@ -276,7 +273,6 @@ function fitbous(filter) {
     processLayer(layerName, function () {
       layersProcessed++;
       if (layersProcessed === layers.length) {
-        // Apply the combined bounds to the map after all layers are processed
         if (bounds) {
           map.fitBounds(bounds);
         }
