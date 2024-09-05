@@ -107,7 +107,7 @@
     width: 35px;
     height: 35px;
     border-radius: 0 0 8px 8px; /* Applies border radius only to the bottom corners */
-   background-color: red;
+    background: radial-gradient(400.2% 139.23% at 0% 3.13%, rgba(0, 119, 218, 0.80) 0%, rgba(0, 84, 155, 0.80) 100%);
 /*     
     border: 1px solid rgba(255, 255, 255, 0.50);
     background: radial-gradient(400.2% 139.23% at 0% 3.13%, rgba(0, 119, 218, 0.80) 0%, rgba(0, 84, 155, 0.80) 100%);
