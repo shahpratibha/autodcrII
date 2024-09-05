@@ -13,7 +13,6 @@
   <link rel="stylesheet" href="style1.css">
 
 </head>
-
 <body>
 
 
@@ -55,10 +54,11 @@
          <span class="close-icon" onclick="closeFilters()">×</span></h3>
           <div class="filter_div">
             <div class="filter-group">
-              <label for="area" onclick="toggleFilter(this)">Village <span class="icon-container"><i
+              <label for="village_na" onclick="toggleFilter(this)">Village <span class="icon-container"><i
                     class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
               <input type="text" placeholder="Search" class="filter-input" id="villageSearch">
-              <ul class="select2  abcscroll" multiple="multiple" id="area"></ul>
+              <!-- <img src="image/searchfilter.svg"> -->
+              <ul class="select2  abcscroll" multiple="multiple" id="village_na"></ul>
             </div>
             <div class="filter-group">
               <label for="wapplyfor" onclick="toggleFilter(this)">Apply For <span class="icon-container"><i
@@ -1346,9 +1346,8 @@
 
   <script src="legend.js"></script>
 <script src="map.js"></script>
-<script src="filter.js"></script>
 <script src="script.js"></script>
-  
+  <script src="filter.js"></script>
   <script src="script2.js"></script>
 
   <script>
