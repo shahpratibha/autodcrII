@@ -157,8 +157,8 @@
     border-radius: 8px;
 }
 .north-arrow {
-  height: 75px;
-  width: 40px;
+  height: 65px;
+  width: 35px;
   margin-left: -14px;
   color: white;
   border-radius: 8px;
@@ -234,7 +234,7 @@
 }
 .leaflet-right .leaflet-control {
   float: left;
-  top: 24vh;
+  top: 21vh;
   right: 3px;
   border: none;
 }
