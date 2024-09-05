@@ -1,5 +1,4 @@
 
-
 .geopulseaname {
   position: fixed;
   z-index: 99999;
@@ -12,7 +11,7 @@
   font-style: normal;
   font-weight: bold;
   line-height: normal;
-  transition: transform 0.3s ease; /* Smooth transition */
+  transition: transform 0.3s ease; 
 }
 
 .legend-item {
@@ -116,18 +115,7 @@
     backdrop-filter: blur(2px); */
 }
 
-  
-/* .leaflet-right .leaflet-control {
-    float: left;
-    position: relative;
-    top: 8vh;
-    left: 96.5vw;
-    border-radius: 50%;
-    background: #6f6f6f;
-    height: 31px;
-    width: 31px;
-    border: #6f6f6f;
-  } */
+
   .leaflet-touch .geocoder-control {
     width: 30px;
     height: 30px;
@@ -213,13 +201,6 @@
   text-decoration: none;
   background: transparent;
 }
-/* .leaflet-marker-pane {
-  z-index: 600;
-  display: none;
-}
-.leaflet-container a {
-  color: #0078a8;
-} */
 
 
 .leaflet-bar {
