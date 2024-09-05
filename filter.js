@@ -1,373 +1,136 @@
-var map = L.map("map", {
-  center: [18.52, 73.89],
-  zoom: 12,
-  minZoom: 11,
-  maxZoom: 18,
-  boxZoom: true,
-  trackResize: true,
-  wheelPxPerZoomLevel: 40,
-  zoomAnimation: true
-});
+var apply_for = {};
 
-var googleSat = L.tileLayer(
-  "http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}",
-  {
-      maxZoom: 20,
-      subdomains: ["mt0", "mt1", "mt2", "mt3"]
-  }
-);
+// Define gradient colors for each proposaltype
+var proposaltypeColors = {
+  "Residential": "yellow", // Yellow
+  "Commercial": "blue", // Blue
+  "Industrial": "violet", // Violet
+  "Other": "gray", // Custom Color
+  "Resi+Comm": "orange", // Orange
+  "Institutional": "pink", // Pink
+  "InfoTech": "indigo", // Indigo
+  "Assembly": "green", // Green
+  // Default gradient color if proposaltype is not defined
 
-var stamen = L.tileLayer(
-'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}'
-, ).addTo(map);
-
-
-
-
-var osm = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png");
-
-var Esri_WorldImagery = L.tileLayer(
-  "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
-);
-
-var PlotBoundary_Layer = L.tileLayer.wms("https://iwmsgis.pmc.gov.in/geoserver/AutoDCR/wms", {
-  layers: "auto_test",
-  format: "image/png",
-  transparent: true,
-  tiled: true,
-  version: "1.1.0",
-  opacity: 1
-}).addTo(map);
-
-var Revenue_Layer = L.tileLayer.wms("https://iwmsgis.pmc.gov.in/geoserver/AutoDCR/wms", {
-  layers: "Revenue_1",
-  format: "image/png",
-  transparent: true,
-  tiled: true,
-  version: "1.1.0",
-  opacity: 1
-});
-
-var Revenue_Layer1 = L.tileLayer.wms("https://iwmsgis.pmc.gov.in/geoserver/AutoDCR/wms", {
-  layers: "Revenue_1",
-  format: "image/png",
-  transparent: true,
-  tiled: true,
-  version: "1.1.0",
-  opacity: 1
-});
-document.addEventListener('DOMContentLoaded', function () {
-  const filters = document.getElementById('filters');
-  const map = document.getElementById('map');
-  const searchbtn = document.getElementById('map-controls');
-  const button = document.getElementById('toggleFilters');
-  const leafletControlLayers = document.querySelector('.leaflet-control-layers');
-  const leafletControlLayersToggle = document.querySelector('.leaflet-control-layers-toggle');
-  const leafletControlZoom = document.querySelector('.leaflet-control-zoom');
-  const geopulseaname = document.querySelector('.geopulseaname');
-  const legendControl = document.querySelector('.collapse-button');
-  const datePicker = document.querySelector('.date-picker');
-  const summarySection = document.querySelector('.summary-section');
-  const cardsContainer = document.querySelector('.cards');
-
-  // Check if all elements are available
-  if (!filters || !map || !button || !searchbtn || !leafletControlLayers || !leafletControlLayersToggle || !leafletControlZoom || !geopulseaname || !legendControl || !datePicker || !summarySection || !cardsContainer) {
-    console.error('One or more elements are not found in the DOM.');
-    return;
-  }
-
-  button.setAttribute('title', 'Filter');
-
-  let filtersVisible = false;
-
-  button.addEventListener('click', function () {
-    if (!filtersVisible) {
-      console.log('Showing filters');
-
-      filters.style.marginLeft = '0';
-      filters.style.opacity = '1';
-      map.style.width = '81vw';
-      summarySection.style.position = 'absolute';
-      summarySection.style.right = '0';
-      summarySection.style.marginRight = '0';
-      summarySection.style.transform = 'translateX(-19vw)';
-      button.style.top = "15vh";
-      button.style.right = '20vw';
-      button.innerHTML = '<img src="image/filter.png" alt="Filter Icon" id="search-icon">';
-      searchbtn.style.right = 'calc(20vw - 1px)';
-      searchbtn.style.top = '22vh';
-      leafletControlLayers.style.right = '35vw';
-      leafletControlLayersToggle.style.right = '30vw'; // Move layers toggle button
-      leafletControlZoom.style.right = '21vw';
-      geopulseaname.style.right = '21vw';
-      legendControl.style.right = '40vw';
-      datePicker.style.right = '20vw';
-
-      cardsContainer.style.width = 'calc(100% - 1vw)';
-      cardsContainer.style.overflowX = 'auto';
-    } else {
-      console.log('Hiding filters');
-
-      filters.style.marginLeft = '-35vw';
-      filters.style.opacity = '0';
-      map.style.width = '100vw';
-      summarySection.style.position = 'absolute';
-      summarySection.style.marginRight = '1vw';
-      summarySection.style.transform = 'translateX(0)';
-      button.style.top = "15vh";
-      button.style.right = '10px';
-      button.innerHTML = '<img src="image/filter.png" alt="Filter Icon" id="search-icon">';
-      searchbtn.style.right = '10px';
-      searchbtn.style.top = '22vh';
-      leafletControlLayers.style.right = '10px';
-      leafletControlLayersToggle.style.right = '10px'; // Reset layers toggle button position
-      leafletControlZoom.style.right = '10px';
-      geopulseaname.style.right = '10px';
-      legendControl.style.right = '10px';
-      datePicker.style.right = '10px';
-
-      cardsContainer.style.width = '100%';
-      cardsContainer.style.overflowX = 'hidden';
-    }
-
-    filtersVisible = !filtersVisible;
-  });
-});
-
-
-
-
-
-  // Optional: Add a click event listener to cards or status items if needed
-  // For example, adjust the card size or position on status item click
-
-
-
-function updateTableStats(stats) {
-  document.getElementById('tablestats').innerText = stats;
-}
-
-
-
-$(document).ready(function () {
-
-
-  var cql_filter1 ='';
-
-
-  initializeCheckboxes();
-  function getCheckedValuess() {
-    var checkedValues = [];
-    var checkboxes = document.querySelectorAll("#checkboxContainer input[type='checkbox']:checked");
-    checkboxes.forEach(function(checkbox) {
-        checkedValues.push("'" + checkbox.value + "'"); // Push value wrapped in single quotes
-    });
-
-    if (checkedValues.length === 0) {
-        checkedValues.push("''"); // Push an empty string to simulate no results
-    }
-
-    return checkedValues;
-}
-});
-
-document.getElementById("checkboxContainer").addEventListener("change", function() {
-    var checkedValues = getCheckedValuess();
-   
-    var filterString1 = "";
- 
-    loadinitialData(filterString1);
-    // FilterAndZoom(filterString1)
- 
-  getCheckedValues(function (filterString) {
-    console.log("Filter Stringinside: ", filterString1);
-    const mainfilter = combineFilters(filterString1, filterString);
-    console.log("Filter Stringinside: ", mainfilter);
-    FilterAndZoom(mainfilter);
-    DataTableFilter(mainfilter)
-   
- 
-  });
-});
-
-var Boundary_Layer = L.tileLayer.wms("https://iwmsgis.pmc.gov.in/geoserver/AutoDCR/wms", {
-  layers: "PMC_Boundary",
-  format: "image/png",
-  transparent: true,
-  tiled: true,
-  version: "1.1.0",
-  opacity: 1
-}).addTo(map);
-
-var Village_Boundary = L.tileLayer.wms("https://iwmsgis.pmc.gov.in/geoserver/AutoDCR/wms", {
-  layers: "Village_Boundary",
-  format: "image/png",
-  transparent: true,
-  tiled: true,
-  version: "1.1.0",
-  opacity: 1
-});
-
-var baseLayers = {
-  "OSM": osm,
-  "Esri": Esri_WorldImagery,
-  "Satellite": googleSat,
-  "stamen": stamen,
+  // "Residential": "radial-gradient(65.32% 65.32% at 50% 50%, rgba(255, 255, 0, 0.10) 0%, #FFFF00 100%)", // Yellow
+  // "Commercial": "radial-gradient(65.32% 65.32% at 50% 50%, rgba(0, 108, 198, 0.10) 0%, #006CC6 100%)", // Blue
+  // "Industrial": "radial-gradient(65.32% 65.32% at 50% 50%, rgba(238, 130, 238, 0.10) 0%, #EE82EE 100%)", // Violet
+  // "Other": "radial-gradient(65.32% 65.32% at 50% 50%, rgba(255, 255, 255, 0.10) 0%, #FFFFFF 100%)", // Custom Color
+  // "Resi+Comm": "radial-gradient(65.32% 65.32% at 50% 50%, rgba(255, 165, 0, 0.10) 0%, #FFA500 100%)", // Orange
+  // "Institutional": "radial-gradient(65.32% 65.32% at 50% 50%, rgba(255, 192, 203, 0.10) 0%, #FFC0CB 100%)", // Pink
+  // "InfoTech": "radial-gradient(65.32% 65.32% at 50% 50%, rgba(75, 0, 130, 0.10) 0%, #4B0082 100%)", // Indigo
+  // "Assembly": "radial-gradient(65.32% 65.32% at 50% 50%, rgba(0, 128, 0, 0.10) 0%, #008000 100%)", // Green
 };
 
-var overlayLayers = {
-  "Plot": PlotBoundary_Layer,
-  // "Revenue": Revenue_Layer,
-  // "PLU": PLU_Layer,
-  // "DPRoad": DPRoad_Layer,
-  "Boundary": Boundary_Layer,
-  "Village": Village_Boundary
-};
 
-L.control.layers(baseLayers, overlayLayers).addTo(map);
-// Add clustering functionality
-// var markers = L.markerClusterGroup();
-
-// function createClusterIcon(cluster) {
-//   console.log(cluster)
-//   var childCount = cluster.getChildCount();
-//   console.log(childCount, "childCount");
-
-//   // Calculate the size based on the number of markers, but ensure a minimum size
-//   var size = Math.max(Math.sqrt(childCount) * 5, 20); // Ensure a minimum size of 20px
-// // console.log(size)
-//   return L.divIcon({
-//       html: '<div class="bufferColor cluster-text" style="width: ' + size + 'px; height: ' + size + 'px; line-height: ' + size + 'px;">' + childCount + '</div>',
-//       className: 'custom-cluster-icon',
-//       iconSize: [size, size] // Adjust the size based on the number of markers
-//   });
-// }
-
-// markers.options.iconCreateFunction = createClusterIcon;
-
-// // Load and process GeoJSON file
-// fetch('Auto_test.geojson')
-//   .then(response => response.json())
-//   .then(geojsonData => {
-//       // Convert polygons to points
-//       var points = geojsonData.features.map(function(feature) {
-//           if (feature.geometry.type === 'Polygon' || feature.geometry.type === 'MultiPolygon') {
-//               var centroid = turf.centroid(feature);
-//               return {
-//                   type: 'Feature',
-//                   geometry: centroid.geometry,
-//                   properties: feature.properties
-//               };
-//           }
-//           return null;
-//       }).filter(function(point) { return point !== null; });
-
-//       // Add points to the map as markers
-//       L.geoJSON(points, {
-//           pointToLayer: function (feature, latlng) {
-//               return L.marker(latlng);
-//           }
-//       })
-//       .addTo(markers);
-
-//       map.addLayer(markers);
-//   })
-//   .catch(error => console.error('Error loading GeoJSON:', error));  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-var markers = L.markerClusterGroup();
-
+// Function to create custom cluster icons with gradients based on the proposaltype
 function createClusterIcon(cluster) {
-  console.log(cluster)
-  var childCount = cluster.getChildCount();
-  console.log(childCount, "childCount");
+    var childCount = cluster.getChildCount();
+    var proposaltype = cluster.getAllChildMarkers()[0].feature.properties.proposaltype;
+    var gradient = proposaltypeColors[proposaltype] || 'radial-gradient(65.32% 65.32% at 60% 60%, rgba(0, 0, 0, 0.10) 0%, #000000 100%)'; // Default to black gradient if proposaltype color is not found
 
-  // Calculate the size based on the number of markers, but ensure a minimum size
-  var size = Math.max(Math.sqrt(childCount) * 5, 20); // Ensure a minimum size of 20px
-// console.log(size)
-  return L.divIcon({
-      html: '<div class="bufferColor cluster-text" style="width: ' + size + 'px; height: ' + size + 'px; line-height: ' + size + 'px;">' + childCount + '</div>',
-      className: 'custom-cluster-icon',
-      iconSize: [size, size] // Adjust the size based on the number of markers
-  });
+    var size = Math.max(Math.sqrt(childCount) * 5, 20); // Ensure a minimum size of 20px
+    return L.divIcon({
+        html: '<div class="bufferColor cluster-text" style="background: ' + gradient + '; width: ' + size + 'px; height: ' + size + 'px; line-height: ' + size + 'px;">' + childCount + '</div>',
+        className: 'custom-cluster-icon',
+        iconSize: [size, size] // Adjust the size based on the number of markers
+    });
 }
 
-function combineFilters(cql_filter123, filterString) {
-  if (cql_filter123) {
-    return `${cql_filter123} AND ${filterString}`;
-  } else {
-    return filterString;
-  }
-}
-function closeFilters() {
-  const filters = document.getElementById('filters');
-  filters.style.display = 'none'; // Hide the entire filter section
+// Function to load and process GeoJSON data
+function loadAndProcessGeoJSON(main_url, layername, filter) {
+  clearClusters();  
+    const urlm = `${main_url}ows?service=WFS&version=1.0.0&request=GetFeature&typeName=${layername}&CQL_FILTER=${filter}&outputFormat=application/json`;
+    //console.log(urlm,"kkekeekekeke")
+
+    $.ajax({
+        url: urlm,
+        dataType: 'json',
+        success: function (geojsonData) {
+            if (!geojsonData.features || !Array.isArray(geojsonData.features)) {
+                console.error('Invalid GeoJSON data structure:', geojsonData);
+                return;
+            }
+
+            // Group features by proposaltype
+            geojsonData.features.forEach(function (feature) {
+                if (feature && feature.geometry && feature.properties && feature.properties.proposaltype) {
+                    var proposaltype = feature.properties.proposaltype;
+                    if (!apply_for[proposaltype]) {
+                        apply_for[proposaltype] = L.markerClusterGroup({
+                            iconCreateFunction: createClusterIcon
+                        });
+                    }
+
+                    var processedFeatures = processFeature(feature);
+                    if (processedFeatures.length) {
+                        L.geoJSON(processedFeatures, {
+                            pointToLayer: function (feature, latlng) {
+                                var gradient = proposaltypeColors[feature.properties.proposaltype] || 'radial-gradient(65.32% 65.32% at 50% 50%, rgba(0, 0, 0, 0.10) 0%, #000000 100%)'; // Default to black gradient if proposaltype color is not found
+                                return L.marker(latlng, {
+                                    icon: L.divIcon({
+                                        className: 'custom-marker-icon',
+                                        html: '<div style="background: ' + gradient + '; width: 10px; height: 10px; border-radius: 50%;"></div>'
+                                    })
+                                });
+                            }
+                        }).addTo(apply_for[proposaltype]);
+                    }
+                }
+            });
+
+            // Add each proposaltype's marker cluster group to the map
+            Object.keys(apply_for).forEach(function (proposaltype) {
+                map.addLayer(apply_for[proposaltype]);
+            });
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.error('Error loading GeoJSON:', textStatus, errorThrown);
+            //console.log('Response Text:', jqXHR.responseText); // Log the response text to debug
+        }
+    });
 }
 
-// Load and process GeoJSON file
-const layername = "auto_test"
-const main_url = "https://iwmsgis.pmc.gov.in/geoserver/"
-var urlm =
- main_url+"ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" +
- layername +"&outputFormat=application/json";
-      $.getJSON(urlm, function (geojsonData) {
-        // Convert polygons to points
-        var points = geojsonData.features.map(function(feature) {
-            if (feature.geometry.type === 'Polygon' || feature.geometry.type === 'MultiPolygon') {
-                var centroid = turf.centroid(feature);
-                console.log(centroid,"centroid")
+// Function to process a single feature and return an array of processed features
+function processFeature(feature) {
+    switch (feature.geometry.type) {
+        case 'Polygon':
+        case 'MultiPolygon':
+            var centroid = turf.centroid(feature);
+            return [{
+                type: 'Feature',
+                geometry: centroid.geometry,
+                properties: feature.properties
+            }];
+        case 'Point':
+            return [feature];
+        case 'MultiPoint':
+            return feature.geometry.coordinates.map(function (coords) {
                 return {
                     type: 'Feature',
-                    geometry: centroid.geometry,
+                    geometry: {
+                        type: 'Point',
+                        coordinates: coords
+                    },
                     properties: feature.properties
                 };
-            }
-            return null;
-        }).filter(function(point) { return point !== null; });
-    
-        // Add points to the map as markers
-        L.geoJSON(points, {
-            pointToLayer: function (feature, latlng) {
-                return L.marker(latlng);
-            }
-        })
-        .addTo(markers);
-    
-        // Add marker cluster group to the map
-        map.addLayer(markers);
-    })
-    .fail(function (jqXHR, textStatus, errorThrown) {
-        console.error('Error loading GeoJSON:', textStatus, errorThrown);
-    });
+            });
+        default:
+            console.warn('Unsupported geometry type:', feature.geometry.type);
+            return [];
+    }
+}
 
 
+function clearClusters() {
+  Object.keys(apply_for).forEach(function (proposaltype) {
+      map.removeLayer(apply_for[proposaltype]);
+      apply_for[proposaltype].clearLayers();
+  });
+  apply_for = {}; // Reset the apply_for object
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// --------------------------------------------------------
 
 // status wise filter js
 

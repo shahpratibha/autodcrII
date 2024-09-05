@@ -5,7 +5,7 @@
   z-index: 1;
   flex-shrink: 0;
   padding: 5px;
-  transition: all 0.5s ease; /* Smooth transition for map resizing */
+  transition: all 0.5s ease;
 }
 
 .geopulseaname {
@@ -20,18 +20,7 @@
   font-style: normal;
   font-weight: bold;
   line-height: normal;
-  transition: transform 0.3s ease; /* Smooth transition */
-}
-
-.logoPMC img {
-  width: 46.164px; 
-  height: 44px; 
-  margin-bottom: 13px;
-  object-fit: contain; 
-z-index: 9;
-  position: absolute;
-  top: 10px;
-  left: 12px;
+  transition: transform 0.3s ease; 
 }
 
 .legend-item {
@@ -120,29 +109,28 @@ z-index: 9;
   }
   
   
-  .leaflet-retina .leaflet-control-layers-toggle {
-    background-image: url("image/Group 93.svg");
-    background-size: 17px 24px;
-  }
   .leaflet-touch .leaflet-control-layers-toggle {
-    background-color: #373737;
-    border-radius:50% ;
-    width: 30px;
-    height: 30px;
-  }
+    background-image: url("image/Group 93.svg");
+    background-size: 24px 24px;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 35px;
+    height: 35px;
+}
 
-  
-/* .leaflet-right .leaflet-control {
-    float: left;
-    position: relative;
-    top: 8vh;
-    left: 96.5vw;
-    border-radius: 50%;
-    background: #6f6f6f;
-    height: 31px;
-    width: 31px;
-    border: #6f6f6f;
-  } */
+  .leaflet-touch .leaflet-control-layers-toggle {
+    /* background-color: #373737; */
+ 
+    border-radius: 8px 8px 0 0; /* Apply border radius only to the top corners */
+    border: 1px solid rgba(255, 255, 255, 0.50);
+    background: radial-gradient(400.2% 139.23% at 0% 3.13%, rgba(0, 119, 218, 0.80) 0%, rgba(0, 84, 155, 0.80) 100%);
+    box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(2px);
+    width: 35px;
+    height: 35px;
+}
+
+
   .leaflet-touch .geocoder-control {
     width: 30px;
     height: 30px;
@@ -164,30 +152,26 @@ z-index: 9;
     overflow: auto;
     scrollbar-width: thin;
   } */
-/*   
-  .leaflet-right {
-    left: 10px;
-  }
-   */
-.north-arrow-container {
-  position: absolute;
-  bottom: 38px;
-  left: 7px;
-  z-index: 1000;
+  .leaflet-top {
+    top: -80px;
+}
+  /* .leaflet-right {
+    left: -4px;
+  } */
+  .north-arrow-container {
+    position: absolute;
+    bottom: 20px;
+    left: 25px;
+    width: 36px;
+    z-index: 1000;
+    border-radius: 8px;
 }
 .north-arrow {
-  height: 50px;
-  width: 32px;
-  margin-left: 10px;
-  color: white; 
+  height: 75px;
+  width: 40px;
+  margin-left: -14px;
+  color: white;
   border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.5); 
-  background: linear-gradient(
-    180deg,
-    #6f6f6f 0%,
-    #262626 100%
-  ); 
-  box-shadow: 0px 0px 14.035px 0px rgba(0, 0, 0, 0.15); 
 }
 
 .leaflet-container {
@@ -198,9 +182,9 @@ z-index: 9;
 }
 
 .leaflet-touch .leaflet-bar a {
-  width: 18px; 
-  height: auto; 
-  line-height: 28px;
+  width: 30px; 
+  height: 35px; 
+  /* line-height: 28px; */
   display: flex;
   border: none;
   background-color: transparent;
@@ -210,6 +194,7 @@ z-index: 9;
   font-size: 20px; 
   text-decoration: none;
 }
+
 .leaflet-popup-content-wrapper,
 .leaflet-popup-tip {
   background: white;
@@ -231,21 +216,14 @@ z-index: 9;
   text-decoration: none;
   background: transparent;
 }
-/* .leaflet-marker-pane {
-  z-index: 600;
-  display: none;
-}
-.leaflet-container a {
-  color: #0078a8;
-} */
 
 
 .leaflet-bar {
-  background: linear-gradient(180deg, #6f6f6f 0%, #262626 100%);
-  border-radius: 10px;
-
-  padding: 5px;
-  box-shadow: 0px 0px 14.035px 0px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.50);
+  background: radial-gradient(400.2% 139.23% at 0% 3.13%, rgba(0, 119, 218, 0.80) 0%, rgba(0, 84, 155, 0.80) 100%);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(2px);
   display: inline-block;
 }
 
@@ -267,7 +245,7 @@ z-index: 9;
 .leaflet-right .leaflet-control {
   float: left;
   top: 20vh;
-  right: 10px;
+  right: 3px;
   border: none;
 }
 
