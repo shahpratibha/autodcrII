@@ -100,14 +100,19 @@
   }
   
   .leaflet-touch .leaflet-control-layers-toggle {
-    background-image: url("image/Group 93.svg");
-    background-size: 17px 24px;
+    background-image: url("../image/Group 93.png");
+    position: relative;
+    top: 4px;
+    background-size: 17px 17px;
     background-repeat: no-repeat;
     background-position: center;
     width: 35px;
-    height: 35px;
+    height: 37px;
     border-radius: 0 0 8px 8px; /* Applies border radius only to the bottom corners */
-    background: radial-gradient(400.2% 139.23% at 0% 3.13%, rgba(0, 119, 218, 0.80) 0%, rgba(0, 84, 155, 0.80) 100%);
+    /* background: radial-gradient(400.2% 139.23% at 0% 3.13%, rgba(0, 119, 218, 0.80) 0%, rgba(0, 84, 155, 0.80) 100%); */
+    background-color: #0077DA;
+
+   
 /*     
     border: 1px solid rgba(255, 255, 255, 0.50);
     background: radial-gradient(400.2% 139.23% at 0% 3.13%, rgba(0, 119, 218, 0.80) 0%, rgba(0, 84, 155, 0.80) 100%);
