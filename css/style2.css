@@ -794,7 +794,7 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   background: radial-gradient(400.2% 139.23% at 0% 3.13%, rgba(0, 119, 218, 0.80) 0%, rgba(0, 84, 155, 0.80) 100%);
   box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.35);
   backdrop-filter: blur(2px);
-  border-radius: 8px 8px 0 0 ; /* Top corners square, bottom corners rounded */
+  border-radius: 8px; /* Top corners square, bottom corners rounded */
   cursor: pointer; /* Pointer cursor on hover */
   display: flex; /* Center the icon */
   align-items: center;
@@ -836,16 +836,17 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
 #searchInputDashboard {
   padding-right: 40px; /* Add padding to make room for the close icon */
 }
-
 .close-icon {
   position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(60%); /* Center vertically */
+  right: -3px; /* Positioning the ico3n */
+  transform: translateY(-77%); /* Center the icon vertically */
   cursor: pointer;
-  display: none; /* Initially hidden */
-  width: 18px; /* Adjust size as needed */
-  height: 18px; /* Adjust size as needed */
+  width: 50px; /* Increase width */
+  height: 70px; /* Increase height */
+  font-size: 26px; /* Adjust font size if necessary */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* When search input is shown */
@@ -1355,8 +1356,10 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
 .filters {
   display: none;                    /* Hide the filter panel by default */
   position: absolute;
-  top: 20%;
+  top: 19%;
   left: 18px;
+  overflow-x: hidden;
+  height: 100vh;
   border-radius: 12px;
   width: 290px;
   background-color: white;
@@ -1631,3 +1634,31 @@ overflow: visible;
 #search-button:focus {
     outline: none; /* Removes the focus outline */
 }
+
+/* Styling the scrollbar for the table */
+.dataTables_scrollBody::-webkit-scrollbar {
+  width: 8px; /* Adjust the width for vertical scrollbar */
+  height: 8px; /* Adjust the height for horizontal scrollbar */
+}
+
+/* Styling the track of the scrollbar */
+.dataTables_scrollBody::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Track color */
+  border-radius: 10px; /* Rounded corners for the track */
+}
+
+/* Styling the thumb (the draggable part) of the scrollbar */
+.dataTables_scrollBody::-webkit-scrollbar-thumb {
+  background-color: #888; /* Color of the scrollbar thumb */
+  border-radius: 10px; /* Rounded corners for the thumb */
+  border: 2px solid #f1f1f1; /* Space between thumb and track */
+}
+
+/* Adding hover effect for the thumb */
+.dataTables_scrollBody::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Darker color on hover */
+}
+
+
+
+

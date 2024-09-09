@@ -1520,7 +1520,7 @@ body {
   .data-graphs {
     width: 300px;
     position: absolute; /* Position absolutely within the map */
-    top: 144px; /* Adjust the top position as needed */
+    top: 130px; /* Adjust the top position as needed */
     left: -5px; /* Adjust the left position as needed */
     border-radius: 20px;
     background-color: #fff;
@@ -2198,18 +2198,6 @@ margin-right: 203px;
 }
 
 
-.close-legend-btn {
-  background: none;
-  border: none;
-  font-size: 25px;
-  color: #333; /* Change color as needed */
-  cursor: pointer;
-  position: absolute; /* Position it according to your layout */
-  top: 10px; /* Adjust as needed */
-  right: 10px; /* Adjust as needed */
-  z-index: 10; /* Make sure it appears above other elements */
-}
-
 
 /* Remove border and outline on focus and active states */
 .close-legend-btn:focus,
@@ -2219,3 +2207,23 @@ margin-right: 203px;
     box-shadow: none; /* Remove any box shadow */
 }
 
+.close-legend-btn {
+  position: absolute; /* Position it relative to the container */
+  right: 10px; /* Adjust as needed */
+  top: 10px; /* Adjust as needed */
+  font-size: 20px; /* Increase size of the icon */
+  width: 30px; /* Increase the size of the button */
+  height: 30px; /* Increase the size of the button */
+  cursor: pointer; /* Change cursor to pointer on hover */
+  background: none; /* Remove default button background */
+  border: none; /* Remove default button border */
+  color: #000; /* Change the color of the icon */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* CSS to move the map section to the right */
+.move-right {
+  transform: translateX(43vh); /* Adjust the value as needed */
+  transition: transform 0.3s ease; /* Smooth transition */
+}

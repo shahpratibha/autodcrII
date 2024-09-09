@@ -70,29 +70,29 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
   // -------------------------------------------------------------------------
-  document.addEventListener('DOMContentLoaded', function () {
-    const button = document.getElementById('toggleFilters');
-    const filters = document.getElementById('filters');
-    let filtersVisible = false;
+  // document.addEventListener('DOMContentLoaded', function () {
+  //   const button = document.getElementById('toggleFilters');
+  //   const filters = document.getElementById('filters');
+  //   let filtersVisible = false;
   
-    // Set the title attribute for the button
-    button.setAttribute('title', 'Filter');
+  //   // Set the title attribute for the button
+  //   button.setAttribute('title', 'Filter');
   
-    button.addEventListener('click', function () {
-      if (!filtersVisible) {
-        filters.style.display = 'block';       // Show the filter panel
-        filters.style.opacity = '1';           // Make it visible
-        filters.style.visibility = 'visible';  // Ensure it is visible
-      } else {
-        filters.style.opacity = '0';           // Hide it with fade effect
-        filters.style.visibility = 'hidden';   // Hide it visually
-        setTimeout(() => {
-          filters.style.display = 'none';      // Remove from layout after fade
-        }, 300); // Match this time with the opacity transition duration
-      }
-      filtersVisible = !filtersVisible;
-    });
-  });
+  //   button.addEventListener('click', function () {
+  //     if (!filtersVisible) {
+  //       filters.style.display = 'block';       // Show the filter panel
+  //       filters.style.opacity = '1';           // Make it visible
+  //       filters.style.visibility = 'visible';  // Ensure it is visible
+  //     } else {
+  //       filters.style.opacity = '0';           // Hide it with fade effect
+  //       filters.style.visibility = 'hidden';   // Hide it visually
+  //       setTimeout(() => {
+  //         filters.style.display = 'none';      // Remove from layout after fade
+  //       }, 300); // Match this time with the opacity transition duration
+  //     }
+  //     filtersVisible = !filtersVisible;
+  //   });
+  // });
   
 
 

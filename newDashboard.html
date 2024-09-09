@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
-
 <head>
+
   <title>Dashboard</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
@@ -50,8 +50,8 @@
     
         </div>
 
-        <div class="filters" id="filters" style="">  <h3 class="filter-title">Filter
-         <span class="close-icon" onclick="closeFilters()">×</span></h3>
+        <div class="filters" id="filters" style="">  <h3 class="filter-title">Filter</h3>
+          <span class="close-icon" onclick="closeFilters()">&#215;</span>
           <div class="filter_div">
             <div class="filter-group">
               <label for="village_na" onclick="toggleFilter(this)">Village <span class="icon-container"><i
@@ -130,7 +130,9 @@
   <!-- Summary Section -->
   <div class="summary-section">
     <div class="summary-header">
-      <h2>Summary of Commencement</h2>
+      <h2 class="">Summary of Commencement</h2>
+      <!-- <button class="close-legend-btn" id="closeLegendButton">&#215;</button> -->
+        <button id="closeSummaryButton" class="close-summary-btn">&times;</button> <!-- Close button -->
       <div class="proposal-info">
         <span>Total number of proposals: 06</span>
         <div class="proposal-icons">
@@ -402,7 +404,7 @@
 
     <!-- This div will be replaced when options are clicked -->
     <div class="tab-parent" id="tabParent">
-      <div class="tab" data-tab="status">
+      <div class="tab" data-tab="status" i>
         <div class="status">Status</div>
       </div>
       <div class="tab" data-tab="area">
@@ -927,14 +929,10 @@
                 <div class="icons">
                     <img class="marketeqrefresh-round-icon" alt="" src="image/Refresh.svg "> |
                     
-                    <!-- <img class="icons-child" alt="" src="image/Line 21.svg">
-                     -->
-                     <img class="marketeqrefresh-round-icon" alt="Print" src="image/Print.svg" onclick="printWindow()">|
-
+                   
+                     <img class="marketeqrefresh-round-icon" alt="Print" src="image/Print.svg" onclick="printWindow()">
                     
-                    <!-- <img class="icons-child" alt="" src="image/Line 21.svg"> -->
-                    
-                    <img class="marketeqrefresh-round-icon" alt="" src="image/Excel.svg">
+<img class="marketeqrefresh-round-icon" alt="" src="image/Excel.svg">
                     
                 </div>
             </div>
@@ -1336,24 +1334,16 @@
 
 
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
-
-
-  <script type="text/javascript" charset="utf8"
-    src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+  <script type="text/javascript" charset="utf8"src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
 
 
-  <script src="js/legend.js"></script>
+<script src="js/legend.js"></script>
 <script src="js/map.js"></script>
 <script src="js/filter.js"></script>
 <script src="js/script.js"></script>
-  
-  <script src="js/script2.js"></script>
+<script src="js/script2.js"></script>
 
-  <script>
-
-  </script>
 </body>
-
 </html>
