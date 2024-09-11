@@ -281,13 +281,13 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-document.getElementById('closeLegendButton').addEventListener('click', function() {
-  document.querySelector('.legends').classList.add('hidden');
-});
-
+// document.getElementById('closeLegendButton').addEventListener('click', function() {
+//   document.querySelector('.legends').classList.add('hidden');
+// });
 document.addEventListener('DOMContentLoaded', function() {
   const component6 = document.querySelector('.component-6');
   const component7 = document.querySelector('.component-7');
+  const images = document.querySelectorAll('.ui-iconbookmarklight'); // Select all images
 
   // Define colors
   const defaultColor6 = '#f0f0f0'; // Default background color for component-6
@@ -296,28 +296,40 @@ document.addEventListener('DOMContentLoaded', function() {
   const defaultColor7 = '#f0f0f0'; // Default background color for component-7
   const activeColor7 = 'radial-gradient(50% 50% at 50% 50%, #198038, #24a148)'; // Active background color for component-7
 
+  // Set initial active state for component-6
+  component6.style.background = activeColor6;
+  component6.style.color = 'white'; // Set initial text color for better contrast
+
   // Click event for component-6
   component6.addEventListener('click', function() {
-    // Set background color for component-6
+    // Keep component-6 active when clicked
     component6.style.background = activeColor6;
-    component6.style.color = 'white'; // Change text color to white for better contrast
+    component6.style.color = 'white'; // Maintain text color for better contrast
 
     // Reset background color for component-7
     component7.style.background = defaultColor7;
     component7.style.color = 'black'; // Default text color
+
+    // Remove white filter from images
+    images.forEach(img => img.classList.remove('white-filter'));
   });
 
   // Click event for component-7
   component7.addEventListener('click', function() {
-    // Set background color for component-7
+    // Set background color for component-7 to active
     component7.style.background = activeColor7;
     component7.style.color = 'white'; // Change text color to white for better contrast
 
     // Reset background color for component-6
     component6.style.background = defaultColor6;
     component6.style.color = 'black'; // Default text color
+
+    // Add white filter to images
+    images.forEach(img => img.classList.add('white-filter'));
   });
 });
+
+
 function closeFilters() {
 
   var filterElement = document.getElementById('filters');
