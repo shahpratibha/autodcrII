@@ -32,6 +32,8 @@ document.addEventListener('DOMContentLoaded', function () {
   const filters = document.getElementById('filters');
   const filterCloseIcon = document.querySelector('.close-icon');
   const northArrowContainer = document.querySelector('.north-arrow-container'); // The map section to move
+  const closeLegendButton = document.getElementById('closeLegendButton');
+
 
   // // Add scale control
   // const scaleControl = L.control.scale({
