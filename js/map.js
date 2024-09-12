@@ -28,7 +28,7 @@ var map = L.map("map", {
   );
   
   var PlotBoundary_Layer = L.tileLayer.wms("https://iwmsgis.pmc.gov.in/geoserver/AutoDCR/wms", {
-    layers: "auto_test",
+    layers: "Plot_Layout",
     // layers: "plotboundary",
     format: "image/png",
     transparent: true,
@@ -91,10 +91,10 @@ var map = L.map("map", {
     opacity: 1
   });
 
-  var auto_test = L.tileLayer.wms(
+  var Plot_Layout = L.tileLayer.wms(
   "https://iwmsgis.pmc.gov.in/geoserver/wms",
   {
-    layers: "auto_test",
+    layers: "Plot_Layout",
     format: "image/png",
     transparent: true,
     tiled: true,
@@ -128,7 +128,7 @@ var Zone_layer = L.tileLayer.wms(
     "Boundary": Boundary_Layer,
     "Village": Village_Boundary,
     "Zone_layer":Zone_layer,
-    "auto_test":auto_test,
+    "Plot_Layout":Plot_Layout,
     "Revenue":Revenue_Layer1,
   };
   
