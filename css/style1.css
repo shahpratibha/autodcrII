@@ -23,7 +23,6 @@ body {
       right: 9px;
       text-decoration: none;
       color: black;
-      font-family: Roboto;
       font-size: 13px;
       font-style: normal;
       font-weight: bold;
@@ -73,7 +72,7 @@ body {
   }
   .component-6 {
     flex: 1;
-    backdrop-filter: blur(4px);
+    /* backdrop-filter: blur(4px); */
     border-radius: 12px;
     /* background: radial-gradient(50% 50% at 50% 50%, #24a148, #198038); */
     display: flex;
@@ -1565,7 +1564,6 @@ body {
     text-align: center;
     color: #00325C;
     font-size: 20px;
-    font-family: 'Plus Jakarta Sans', sans-serif;
     font-weight: 600;
     word-wrap: break-word;
 }
@@ -1979,9 +1977,9 @@ margin-right: 203px;
   /* padding: 4px 8px; */
   position: fixed; /* Fixes the container at the top */
   top: 16px; /* Positions the container 10px from the top */
-  left: 50%; /* Aligns the center horizontally */
+  left: 53%; /* Aligns the center horizontally */
   transform: translateX(-50%); /* Adjusts to perfectly center */
-  width: 300px; /* Adjust width as needed */
+  width: 242px; /* Adjust width as needed */
   z-index: 1000; /* Keeps the container above other content */
 }
 
@@ -1991,7 +1989,7 @@ margin-right: 203px;
   outline: none;
   padding: 8px;
   border-radius: 24px 0 0 24px;
-  flex-grow: 1;
+  /* flex-grow: 1; */
 }
 .search-arrow {
   background: #54A4E6;
@@ -2226,4 +2224,8 @@ margin-right: 203px;
 .move-right {
   transform: translateX(43vh); /* Adjust the value as needed */
   transition: transform 0.3s ease; /* Smooth transition */
+}
+
+.white-filter {
+  filter: invert(1) brightness(2);
 }
