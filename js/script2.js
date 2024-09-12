@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const northArrowContainer = document.querySelector('.north-arrow-container');
   const closeLegendButton = document.getElementById('closeLegendButton');
   const summaryCloseIcon = document.querySelector('.summary-close');
+  const toggleButtons = document.querySelectorAll('.toggle-button'); // Select all toggle-button elements
 
   setTimeout(() => {
     const scaleControlElement = document.querySelector('.leaflet-control-scale');
@@ -251,6 +252,10 @@ tabs.forEach(tab => {
   });
 });
 
+
+
+
+
 //
 
 
@@ -354,8 +359,103 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 });
+////
+document.addEventListener('DOMContentLoaded', function () {
+  const dataGraphsElement = document.querySelector('.data-graphs');
+  const tabElements = document.querySelectorAll('.tab'); // Select all tab elements
+  const summaryCloseIcon = document.querySelector('.summary-close');
+  const northArrowContainer = document.querySelector('.north-arrow-container'); // Select the north arrow container
+  const scaleControlElement = document.querySelector('.leaflet-control-scale'); // Select the scale control
+  const optionsButton = document.getElementById('optionsButton'); // Select the options button
 
-//legend close 
-// document.getElementById('closeLegendButton').addEventListener('click', function() {
-//   document.querySelector('.legends').classList.add('hidden');
-// });
+  function closeDataGraphs() {
+    dataGraphsElement.style.display = 'none';
+    northArrowContainer.classList.remove('move-right'); // Reset the position of the north-arrow-container
+    scaleControlElement.classList.remove('move-right'); // Reset the position of the scale control
+  }
+
+  function openDataGraphs() {
+    dataGraphsElement.style.display = 'block';
+    northArrowContainer.classList.add('move-right'); // Move the north-arrow-container to the right
+    scaleControlElement.classList.add('move-right'); // Move the scale control to the right
+  }
+
+  // Add event listeners to each tab
+  tabElements.forEach(tab => {
+    tab.addEventListener('click', function () {
+      const tabType = tab.getAttribute('data-tab'); // Get the data-tab attribute
+
+      if (tabType === 'status') {
+        // Open the data-graphs div when "Status" is clicked
+        openDataGraphs();
+      } else {
+        // Close the data-graphs div for "Area" or "Explore"
+        closeDataGraphs();
+      }
+    });
+  });
+
+  // Add event listener for closing the data-graphs when clicking the close icon
+  summaryCloseIcon.addEventListener('click', function () {
+    closeDataGraphs();
+  });
+
+  // Add event listener for the options button to close data-graphs
+  optionsButton.addEventListener('click', function () {
+    closeDataGraphs();
+  });
+});
+
+////
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  const filters = document.getElementById('filters');
+  const legendsDiv = document.querySelector('.legends');
+  const northArrowContainer = document.querySelector('.north-arrow-container');
+  const scaleControlElement = document.querySelector('.leaflet-control-scale');
+  const analyticsButton = document.getElementById('analyticsButton'); // Select the analytics button
+
+  function closeFilterAndLegend() {
+    console.log('Closing filter and legend'); // Debugging message
+
+    // Hide filters
+    filters.style.display = 'none';
+    filters.style.opacity = '0';
+    filters.style.visibility = 'hidden';
+
+    // Hide legends
+    legendsDiv.classList.add('hidden');
+
+    // Reset positions of north container and scale
+    resetScaleControlPosition();
+    northArrowContainer.classList.remove('move-right');
+  }
+
+  function resetScaleControlPosition() {
+    if (scaleControlElement) {
+      scaleControlElement.classList.remove('move-right');
+    }
+  }
+
+  // Attach click events to component-10 and component-11
+  document.querySelectorAll('.component-10').forEach(function (element) {
+    element.addEventListener('click', function () {
+      console.log('Component 10 clicked'); // Debugging message
+      closeFilterAndLegend();
+    });
+  });
+
+  document.querySelectorAll('.component-11').forEach(function (element) {
+    element.addEventListener('click', function () {
+      console.log('Component 11 clicked'); // Debugging message
+      closeFilterAndLegend();
+    });
+  });
+
+  // Attach click event to analytics button
+  analyticsButton.addEventListener('click', function () {
+    console.log('Analytics button clicked'); // Debugging message
+    closeFilterAndLegend();
+  });
+});
