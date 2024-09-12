@@ -23,6 +23,35 @@ var proposaltypeColors = {
 };
 
 
+   // Get the legend container
+   var legendContainer = document.getElementById('cluster_legend');
+
+   // Loop through the proposaltype colors and create the legend items
+   for (var proposaltype in proposaltypeColors) {
+       if (proposaltypeColors.hasOwnProperty(proposaltype)) {
+           // Create a new div for the legend item
+           var legendItem = document.createElement('div');
+           legendItem.className = 'cluster_legend-item';
+
+           // Create the color box
+           var colorBox = document.createElement('div');
+           colorBox.className = 'cluster_legend-color';
+           colorBox.style.backgroundColor = proposaltypeColors[proposaltype];
+
+           // Create the label
+           var label = document.createElement('span');
+           label.textContent = proposaltype;
+
+           // Append the color box and label to the legend item
+           legendItem.appendChild(colorBox);
+           legendItem.appendChild(label);
+
+           // Append the legend item to the legend container
+           legendContainer.appendChild(legendItem);
+       }
+   }
+
+
 // Function to create custom cluster icons with gradients based on the proposaltype
 function createClusterIcon(cluster) {
     var childCount = cluster.getChildCount();
