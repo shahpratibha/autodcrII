@@ -22,8 +22,8 @@ document.querySelector(".component-6").addEventListener("click", function () {
   tabsOptions.style.display = "none";
 });
 
+//move the north arrow container 
 document.addEventListener('DOMContentLoaded', function () {
-  // Get elements by their IDs and classes
   const statusElement = document.querySelector('.status');
   const dataGraphsElement = document.querySelector('.data-graphs');
   const legendsDiv = document.querySelector('.legends');
@@ -31,101 +31,98 @@ document.addEventListener('DOMContentLoaded', function () {
   const toggleFiltersButton = document.getElementById('toggleFilters');
   const filters = document.getElementById('filters');
   const filterCloseIcon = document.querySelector('.close-icon');
-  const northArrowContainer = document.querySelector('.north-arrow-container'); // The map section to move
+  const northArrowContainer = document.querySelector('.north-arrow-container');
   const closeLegendButton = document.getElementById('closeLegendButton');
+  const summaryCloseIcon = document.querySelector('.summary-close');
 
-
-  // // Add scale control
-  // const scaleControl = L.control.scale({
-  //   position: 'bottomleft' // Initially at bottom left
-  // }).addTo(map);
-
-  // Select the scale control element (add some delay to ensure it's created)
   setTimeout(() => {
     const scaleControlElement = document.querySelector('.leaflet-control-scale');
-    
-    // Helper function to move the scale control to the right
+
     function moveScaleControlRight() {
       if (scaleControlElement) {
         scaleControlElement.classList.add('move-right');
       }
     }
 
-    // Helper function to reset the scale control position
     function resetScaleControlPosition() {
       if (scaleControlElement) {
         scaleControlElement.classList.remove('move-right');
       }
     }
 
-    // Helper function to close all sections and reset the map position
     function closeAllSections() {
       dataGraphsElement.style.display = 'none';
       legendsDiv.classList.add('hidden');
       filters.style.display = 'none';
       filters.style.opacity = '0';
       filters.style.visibility = 'hidden';
-      northArrowContainer.classList.remove('move-right'); // Reset the map position
-      resetScaleControlPosition(); // Reset the scale control position
+      northArrowContainer.classList.remove('move-right');
+      resetScaleControlPosition();
     }
 
-    // Helper function to move the map section to the right
     function moveMapSectionRight() {
       northArrowContainer.classList.add('move-right');
-      moveScaleControlRight(); // Move the scale control
+      moveScaleControlRight();
     }
 
-    // Toggle the status section
     statusElement.addEventListener('click', function () {
       if (dataGraphsElement.style.display === 'none' || dataGraphsElement.style.display === '') {
         closeAllSections();
         dataGraphsElement.style.display = 'block';
-        moveMapSectionRight(); // Move the map section
+        moveMapSectionRight();
       } else {
         closeAllSections();
       }
     });
 
-    // Toggle the legend section
     toggleButton.addEventListener('click', function () {
       if (legendsDiv.classList.contains('hidden')) {
         closeAllSections();
         legendsDiv.classList.remove('hidden');
-        moveMapSectionRight(); // Move the map section
+        moveMapSectionRight();
       } else {
         closeAllSections();
       }
     });
 
-    // Toggle the filter section
+    closeLegendButton.addEventListener('click', function () {
+      legendsDiv.classList.add('hidden');
+      resetScaleControlPosition();
+      northArrowContainer.classList.remove('move-right');
+    });
+
     toggleFiltersButton.addEventListener('click', function () {
       if (filters.style.display === 'none' || filters.style.display === '') {
         closeAllSections();
         filters.style.display = 'block';
         filters.style.opacity = '1';
         filters.style.visibility = 'visible';
-        moveMapSectionRight(); // Move the map section
+        moveMapSectionRight();
       } else {
         closeAllSections();
       }
     });
 
-    // Prevent filter close when clicking inside the filter, like on the close icon
     filters.addEventListener('click', function (event) {
       event.stopPropagation();
     });
 
-    // Close the filter section when clicking the close icon inside filters
     filterCloseIcon.addEventListener('click', function () {
       filters.style.opacity = '0';
       filters.style.visibility = 'hidden';
+      resetScaleControlPosition();
+      northArrowContainer.classList.remove('move-right');
+
       setTimeout(() => {
         filters.style.display = 'none';
-        northArrowContainer.classList.remove('move-right'); // Reset the map position
-        resetScaleControlPosition(); // Reset the scale control position
-      }, 300); // Match this time with the opacity transition duration
+      }, 300);
     });
-  }, 100); // Delay to ensure scale control is available
+
+    // Add event listener for closing the data-graphs section
+    summaryCloseIcon.addEventListener('click', function () {
+      closeAllSections();
+    });
+  }, 100);
 });
 
     
@@ -280,10 +277,6 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
-
-// document.getElementById('closeLegendButton').addEventListener('click', function() {
-//   document.querySelector('.legends').classList.add('hidden');
-// });
 document.addEventListener('DOMContentLoaded', function() {
   const component6 = document.querySelector('.component-6');
   const component7 = document.querySelector('.component-7');
@@ -335,15 +328,34 @@ function closeFilters() {
   var filterElement = document.getElementById('filters');
   filterElement.style.display = 'none';
 }
+
+//cluster legend 
 document.addEventListener('DOMContentLoaded', function() {
   const clusterLegend = document.getElementById('cluster_legend');
   const toggleButton = document.getElementById('toggleClusterLegend');
+  const map = document.getElementById('map'); // Assuming your map has an id of 'map'
 
-  toggleButton.addEventListener('click', function() {
+  toggleButton.addEventListener('click', function(event) {
     // Toggle the 'no-border' class to remove or add border
     this.classList.toggle('no-border');
-    
+
     // Toggle the visibility of the cluster legend
     clusterLegend.classList.toggle('hidden');
+    
+    // Prevent click event from bubbling up to the map
+    event.stopPropagation();
+  });
+
+  // Close the cluster legend when clicking on the map
+  map.addEventListener('click', function() {
+    // Add the 'hidden' class to close the legend if it's visible
+    if (!clusterLegend.classList.contains('hidden')) {
+      clusterLegend.classList.add('hidden');
+    }
   });
 });
+
+//legend close 
+// document.getElementById('closeLegendButton').addEventListener('click', function() {
+//   document.querySelector('.legends').classList.add('hidden');
+// });
