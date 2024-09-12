@@ -82,7 +82,7 @@ backdrop-filter: blur(2px); */
   POSITION: absolute;
   bottom: 122px;
   z-index: 999;
-  left: 10px;
+  left: 32px;
   height: 300px;
   overflow-y: scroll; 
   scrollbar-width: thin;
