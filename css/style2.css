@@ -68,25 +68,21 @@ backdrop-filter: blur(2px); */
   line-height: normal;
 } */
 
-
-
-
 .cluster_legend {
-  /* font-family: Arial, sans-serif; */
-  font-size: 14px;
-  background: #fff;
+  background-color:#e6f1fb;
   padding: 10px;
-  border-radius: 5px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-  max-width: 300px;
-  POSITION: absolute;
-  bottom: 122px;
-  z-index: 999;
-  left: 32px;
-  height: 300px;
-  overflow-y: scroll; 
-  scrollbar-width: thin;
+  border: none !important;
+  border-radius: 8px;
+  position: absolute;
+  top: 121px;
+  /* background: green; */
+  /* left: 20px; */
+  right: 53px;
+  width: 146px;
+  z-index: 1000;
 }
+
+
       .cluster_legend-title {
           font-size: 16px;
           font-weight: bold;
@@ -1395,7 +1391,8 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   top: 19%;
   left: 18px;
   overflow-x: hidden;
-  height: 100vh;
+  overflow-y: hidden;
+  height: 79vh;
   border-radius: 12px;
   width: 290px;
   background-color: white;
@@ -1650,7 +1647,9 @@ overflow: visible;
   max-height: 200px; /* Adjust the height as needed */
   overflow-y: auto; /* Enables vertical scrolling */
   overflow-x: hidden; /* Prevents horizontal scrolling */
+  border-radius: 8px;
   padding-right: 10px; /* Optional: adds some padding to avoid scrollbar overlapping the content */
+  background: #e6f1fb;
 }
 
 /* Optional: customize the scrollbar appearance */
@@ -1696,5 +1695,34 @@ overflow: visible;
 }
 
 
+.hidden {
+  display: none; /* Class to hide the element */
+}
+.toggle-button {
+  margin-top: 10px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.50);
+  background: radial-gradient(400.2% 139.23% at 0% 3.13%, rgba(0, 119, 218, 0.80) 0%, rgba(0, 84, 155, 0.80) 100%);
+  box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(2px);
+  height: 34px;
+  width: 34px;
+  cursor: pointer;
+  display: inline-block; /* Ensure button is displayed */
+  z-index: 1000; /* Ensure it appears above other content */
+  top: 15vh;
+  right: 13px; /* Position button 10px from the left */
+  position: absolute; /* Absolute positioning to move the button */
+}
+.no-border {
+  border: none !important;
+}
 
-
+.toggle-icon {
+  width: 24px; /* Adjust icon size */
+  height: 24px;
+  margin-left: -5px; /* Centering adjustments */
+  margin-top: -7px; /* Centering adjustments */
+ 
+}

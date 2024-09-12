@@ -335,3 +335,15 @@ function closeFilters() {
   var filterElement = document.getElementById('filters');
   filterElement.style.display = 'none';
 }
+document.addEventListener('DOMContentLoaded', function() {
+  const clusterLegend = document.getElementById('cluster_legend');
+  const toggleButton = document.getElementById('toggleClusterLegend');
+
+  toggleButton.addEventListener('click', function() {
+    // Toggle the 'no-border' class to remove or add border
+    this.classList.toggle('no-border');
+    
+    // Toggle the visibility of the cluster legend
+    clusterLegend.classList.toggle('hidden');
+  });
+});
