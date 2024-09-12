@@ -29,6 +29,7 @@ var map = L.map("map", {
   
   var PlotBoundary_Layer = L.tileLayer.wms("https://iwmsgis.pmc.gov.in/geoserver/AutoDCR/wms", {
     layers: "auto_test",
+    // layers: "plotboundary",
     format: "image/png",
     transparent: true,
     tiled: true,
@@ -52,7 +53,7 @@ var map = L.map("map", {
     tiled: true,
     version: "1.1.0",
     opacity: 1
-  });
+  }).addTo(map);
   
   var PLU_Layer = L.tileLayer.wms("https://iwmsgis.pmc.gov.in/geoserver/AutoDCR/wms", {
     layers: "PLU_Ward",
@@ -128,6 +129,7 @@ var Zone_layer = L.tileLayer.wms(
     "Village": Village_Boundary,
     "Zone_layer":Zone_layer,
     "auto_test":auto_test,
+    "Revenue":Revenue_Layer1,
   };
   
   L.control.layers(baseLayers, overlayLayers).addTo(map);

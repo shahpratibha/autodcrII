@@ -69,34 +69,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 });
-  // -------------------------------------------------------------------------
-  // document.addEventListener('DOMContentLoaded', function () {
-  //   const button = document.getElementById('toggleFilters');
-  //   const filters = document.getElementById('filters');
-  //   let filtersVisible = false;
-  
-  //   // Set the title attribute for the button
-  //   button.setAttribute('title', 'Filter');
-  
-  //   button.addEventListener('click', function () {
-  //     if (!filtersVisible) {
-  //       filters.style.display = 'block';       // Show the filter panel
-  //       filters.style.opacity = '1';           // Make it visible
-  //       filters.style.visibility = 'visible';  // Ensure it is visible
-  //     } else {
-  //       filters.style.opacity = '0';           // Hide it with fade effect
-  //       filters.style.visibility = 'hidden';   // Hide it visually
-  //       setTimeout(() => {
-  //         filters.style.display = 'none';      // Remove from layout after fade
-  //       }, 300); // Match this time with the opacity transition duration
-  //     }
-  //     filtersVisible = !filtersVisible;
-  //   });
-  // });
-  
-
-
-
 
 function updateTableStats(stats) {
   document.getElementById('tablestats').innerText = stats;
@@ -129,7 +101,7 @@ const cluster_url = "https://iwmsgis.pmc.gov.in/geoserver/";
 
 
   function loadinitialData(cql_filter) {
-    const filternames = ["area", "applyfor", "casetype", "proposaltype", "tdrzone", "grossplotarea", "developmentzonedp", "owner_det_email"];//accordn column names , if want add one more filter criteria add here
+    const filternames = ["area", "applyfor","surveyno", "casetype", "proposaltype", "tdrzone", "grossplotarea", "developmentzonedp", "owner_det_email"];//accordn column names , if want add one more filter criteria add here
     var workspace = 'AutoDCR';
     var layerName = 'auto_test';
     filternames.forEach(function (filtername) {
@@ -170,11 +142,12 @@ function DataTableFilter(cql_filter1) {
   if (cql_filter1 !== '') {
     geoServerURL += "&CQL_FILTER=" + encodeURIComponent(cqlFilter);
   }
-  var headers = ["area", "applyfor", "casetype", "proposaltype", "tdrzone", "grossplotarea", "developmentzonedp", "owner_det_email"];
+  var headers = ["area", "applyfor", "casetype","surveyno", "proposaltype", "tdrzone", "grossplotarea", "developmentzonedp", "owner_det_email"];
   showtable(typeName, geoServerURL, cqlFilter, headers);
 }
 
 function populateDropdown(dropdownId, data) {
+
   var ul = $("#" + dropdownId);
   ul.empty();
   data.forEach(function (item) {
@@ -182,17 +155,56 @@ function populateDropdown(dropdownId, data) {
     var listItem = $('<li><label><input type="checkbox" class="select2-option-checkbox" value="' + item + '"> ' + item + '</label></li>');
     ul.append(listItem);
   });
+
+
 }
+
+// new 12/9
+// function updateDependentFilters() {
+//   getCheckedValues(function (filterString) {
+//     // Fetch and update dropdowns based on the current filter string
+//     const activeFilters = Object.keys(selectedValues).reduce((acc, filterName) => {
+//       if (selectedValues[filterName].length > 0) {
+//         acc[filterName] = selectedValues[filterName];
+//       }
+//       return acc;
+//     }, {});
+
+//     Object.keys(layerDetails["AutoDCR:auto_test"]).forEach(function (filterName) {
+//       if (!activeFilters[filterName]) {
+//         var url = `${main_url}${workspace}/wms?service=WFS&version=1.1.0&request=GetFeature&typeName=${layerName}&propertyName=${filterName}&outputFormat=application/json&cql_filter=${encodeURIComponent(filterString)}`;
+//         $.getJSON(url, function (data) {
+//           var filteredData = data.features.map(feature => feature.properties[filterName]).filter(value => value);
+//           var uniqueFilteredData = [...new Set(filteredData)];
+//           populateDropdown(filterName, uniqueFilteredData);
+//         });
+//       }
+//     });
+//   });
+// }
+// new end 12/9
 
 
 function getCheckedValues(callback) {
   var selectedValues = {};
-  const filternames = ["area", "applyfor", "casetype", "proposaltype", "tdrzone", "grossplotarea", "developmentzonedp", "owner_det_email"];
+  const filternames = ["area", "applyfor", "casetype", "proposaltype","surveyno", "tdrzone", "grossplotarea", "developmentzonedp", "owner_det_email"];
 
   filternames.forEach(function (filtername) {
     selectedValues[filtername] = []; 
 
+  //    // new 12/9
+  //    $('#' + filtername + ' input[type="checkbox"]:checked').each(function () {
+  //     var single_val = $(this).val();
+  //     if (single_val) {
+  //       var actualValue = single_val.split(' (')[0];
+  //       selectedValues[filtername].push(actualValue);
+  //     }
+  //   });
+  // });
+      // new end 12/9
+
     $('#' + filtername).on('click', 'input[type="checkbox"]', function (event) {
+     
       event.stopPropagation();
       var values = [];
       $('#' + filtername + ' input[type="checkbox"]:checked').each(function () {
@@ -229,6 +241,16 @@ function getCheckedValues(callback) {
       }
     });
   });
+  // new 12/9
+
+    // Update dependent filters
+    // updateDependentFilters();
+
+    // if (typeof callback === 'function') {
+    //   callback(filterString);
+    // }
+
+  // new end 12/9
 }
 
 function FilterAndZoom(filter) {
@@ -237,10 +259,10 @@ function FilterAndZoom(filter) {
     CQL_FILTER: filter,
     maxZoom: 19.5,
   }).addTo(map);
-  auto_test.setParams({
-    CQL_FILTER: filter,
-    maxZoom: 19.5,
-  }).addTo(map);
+  // auto_test.setParams({
+  //   CQL_FILTER: filter,
+  //   maxZoom: 19.5,
+  // }).addTo(map);
 };
 
 
@@ -555,13 +577,20 @@ function showtable(typeName, geoServerURL, cqlFilter, headers) {
       }, 0);
       let uniqueCount = new Set(work_id).size;
       // //console.log(work_id.length, "lllllllllllll", work_id, uniqueCount)
-      document.getElementById('tablestats').innerHTML = `
+    //   document.getElementById('tablestats').innerHTML = `
+    //   // <div class="stat-button">
+    //   //   <div class="stat-label">Total Length (In Meter):</div>
+    //   //   <div class="stat-value" id="totalLength">${shapeAreaSum.toFixed(2)}</div>
+    //   // </div>
+    //   <div class="stat-button">
+    //     <div class="stat-label">Total Links:</div>
+    //     <div class="stat-value" id="totalLinks">${uniqueCount}</div>
+    //   </div>
+    // `;
+        document.getElementById('tablestats').innerHTML = `
+    
       <div class="stat-button">
-        <div class="stat-label">Total Length (In Meter):</div>
-        <div class="stat-value" id="totalLength">${shapeAreaSum.toFixed(2)}</div>
-      </div>
-      <div class="stat-button">
-        <div class="stat-label">Total Links:</div>
+        <div class="stat-label">Total Plot count:</div>
         <div class="stat-value" id="totalLinks">${uniqueCount}</div>
       </div>
     `;
@@ -757,13 +786,13 @@ function getCheckedValuess() {
 
 
 const layerDetails = {
-  "AutoDCR:auto_test": ["area", "applyfor", "casetype", "proposaltype", "tdrzone", "grossplotarea", "developmentzonedp", "owner_det_email"],
+  "AutoDCR:auto_test": ["area", "applyfor", "casetype", "proposaltype","surveyno", "tdrzone", "grossplotarea", "developmentzonedp", "owner_det_email"],
 };
 
 function getCheckedValuesforpopuups() {
   return new Promise((resolve, reject) => {
     var selectedValues = {};
-    const filternames = ["area", "applyfor", "casetype", "proposaltype", "tdrzone", "grossplotarea", "developmentzonedp", "owner_det_email"];
+    const filternames = ["area", "applyfor", "casetype", "surveyno","proposaltype", "tdrzone", "grossplotarea", "developmentzonedp", "owner_det_email"];
 
     filternames.forEach(function (filtername) {
       selectedValues[filtername] = []; 
@@ -803,65 +832,6 @@ function combineFilters(cql_filter123, filterString) {
   }
 }
 
-// //console.log("hehehe")
-// map.on("contextmenu", async (e) => {
-//   let bbox = map.getBounds().toBBoxString();
-//   let size = map.getSize();
-
-//   let filterString = await getCheckedValuesforpopuups();
-//   let cqlFilter123 = "";
-
-//   if (filterString.trim() !== "") {
-//     cqlFilter123 = filterString;
-//   }
-
-//   // //console.log(cqlFilter123, "cqlFilter123");
-
-//   for (let layer in layerDetails) {
-//     let selectedKeys = layerDetails[layer];
-//     let urrr = `${main_url}${workspace}/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&FORMAT=image%2Fpng&TRANSPARENT=true&QUERY_LAYERS=${layer}&STYLES&LAYERS=${layer}&exceptions=application%2Fvnd.ogc.se_inimage&INFO_FORMAT=application/json&FEATURE_COUNT=50&X=${Math.round(e.containerPoint.x)}&Y=${Math.round(e.containerPoint.y)}&SRS=EPSG%3A4326&WIDTH=${size.x}&HEIGHT=${size.y}&BBOX=${bbox}&CQL_FILTER=${cqlFilter123}`;
-
-//     try {
-//       let response = await fetch(urrr);
-//       let text = await response.text(); // Get response as text for debugging
-//       // //console.log(text); // Log the raw response text
-
-//       // Try to parse JSON only if the response is valid JSON
-//       let html;
-//       try {
-//         html = JSON.parse(text);
-//       } catch (parseError) {
-//         console.error("Response is not valid JSON:", parseError);
-//         return;
-//       }
-
-//       let features = html.features;
-//       console.log(features, "features")
-//       let detaildata = "";
-
-//       features.forEach((feature, index) => {
-//         let htmldata = feature.properties;
-//         let txtk1 = "";
-
-//         for (let key of selectedKeys) {
-//           if (htmldata.hasOwnProperty(key)) {
-//             let value = htmldata[key];
-//             txtk1 += "<tr><td>" + key + "</td><td>" + value + "</td></tr>";
-//           }
-//         }
-
-//         detaildata += `<div style='max-height: 350px; max-height: 250px;'><table style='width:110%;' class='popup-table'>
-//                       <tr><td colspan="2">Feature ${index + 1}</td></tr>${txtk1}
-//                       <tr><td>Co-Ordinates</td><td>${e.latlng}</td></tr>
-//                     </table></div>`;
-//       });
-
-//       L.popup().setLatLng(e.latlng).setContent(detaildata).openOn(map);
-//     } catch (error) {
-//       console.error("Error fetching data:", error);
-//     }
-//   }
-// });
 
 map.on("contextmenu", async (e) => {
   let bbox = map.getBounds().toBBoxString();
