@@ -1,7 +1,7 @@
 var apply_for = {};
 
-// Define gradient colors for each proposaltype
-var proposaltypeColors = {
+// Define gradient colors for each caseinformation_proposaltype
+var caseinformation_proposaltypeColors = {
   "Residential": "yellow", // Yellow
   "Commercial": "blue", // Blue
   "Industrial": "violet", // Violet
@@ -27,8 +27,8 @@ var proposaltypeColors = {
    var legendContainer = document.getElementById('cluster_legend');
 
    // Loop through the proposaltype colors and create the legend items
-   for (var proposaltype in proposaltypeColors) {
-       if (proposaltypeColors.hasOwnProperty(proposaltype)) {
+   for (var caseinformation_proposaltype in caseinformation_proposaltypeColors) {
+       if (caseinformation_proposaltypeColors.hasOwnProperty(caseinformation_proposaltype)) {
            // Create a new div for the legend item
            var legendItem = document.createElement('div');
            legendItem.className = 'cluster_legend-item';
@@ -36,11 +36,11 @@ var proposaltypeColors = {
            // Create the color box
            var colorBox = document.createElement('div');
            colorBox.className = 'cluster_legend-color';
-           colorBox.style.backgroundColor = proposaltypeColors[proposaltype];
+           colorBox.style.backgroundColor = caseinformation_proposaltypeColors[caseinformation_proposaltype];
 
            // Create the label
            var label = document.createElement('span');
-           label.textContent = proposaltype;
+           label.textContent = caseinformation_proposaltype;
 
            // Append the color box and label to the legend item
            legendItem.appendChild(colorBox);
@@ -52,11 +52,11 @@ var proposaltypeColors = {
    }
 
 
-// Function to create custom cluster icons with gradients based on the proposaltype
+// Function to create custom cluster icons with gradients based on the caseinformation_proposaltype
 function createClusterIcon(cluster) {
     var childCount = cluster.getChildCount();
-    var proposaltype = cluster.getAllChildMarkers()[0].feature.properties.proposaltype;
-    var gradient = proposaltypeColors[proposaltype] || 'radial-gradient(65.32% 65.32% at 60% 60%, rgba(0, 0, 0, 0.10) 0%, #000000 100%)'; // Default to black gradient if proposaltype color is not found
+    var caseinformation_proposaltype = cluster.getAllChildMarkers()[0].feature.properties.caseinformation_proposaltype;
+    var gradient = caseinformation_proposaltypeColors[caseinformation_proposaltype] || 'radial-gradient(65.32% 65.32% at 60% 60%, rgba(0, 0, 0, 0.10) 0%, #000000 100%)'; // Default to black gradient if caseinformation_proposaltype color is not found
 
     var size = Math.max(Math.sqrt(childCount) * 5, 20); // Ensure a minimum size of 20px
     return L.divIcon({
@@ -81,12 +81,12 @@ function loadAndProcessGeoJSON(main_url, layername, filter) {
                 return;
             }
 
-            // Group features by proposaltype
+            // Group features by caseinformation_proposaltype
             geojsonData.features.forEach(function (feature) {
-                if (feature && feature.geometry && feature.properties && feature.properties.proposaltype) {
-                    var proposaltype = feature.properties.proposaltype;
-                    if (!apply_for[proposaltype]) {
-                        apply_for[proposaltype] = L.markerClusterGroup({
+                if (feature && feature.geometry && feature.properties && feature.properties.caseinformation_proposaltype) {
+                    var caseinformation_proposaltype = feature.properties.caseinformation_proposaltype;
+                    if (!apply_for[caseinformation_proposaltype]) {
+                        apply_for[caseinformation_proposaltype] = L.markerClusterGroup({
                             iconCreateFunction: createClusterIcon
                         });
                     }
@@ -95,7 +95,7 @@ function loadAndProcessGeoJSON(main_url, layername, filter) {
                     if (processedFeatures.length) {
                         L.geoJSON(processedFeatures, {
                             pointToLayer: function (feature, latlng) {
-                                var gradient = proposaltypeColors[feature.properties.proposaltype] || 'radial-gradient(65.32% 65.32% at 50% 50%, rgba(0, 0, 0, 0.10) 0%, #000000 100%)'; // Default to black gradient if proposaltype color is not found
+                                var gradient = caseinformation_proposaltypeColors[feature.properties.caseinformation_proposaltype] || 'radial-gradient(65.32% 65.32% at 50% 50%, rgba(0, 0, 0, 0.10) 0%, #000000 100%)'; // Default to black gradient if caseinformation_proposaltype color is not found
                                 return L.marker(latlng, {
                                     icon: L.divIcon({
                                         className: 'custom-marker-icon',
@@ -103,14 +103,14 @@ function loadAndProcessGeoJSON(main_url, layername, filter) {
                                     })
                                 });
                             }
-                        }).addTo(apply_for[proposaltype]);
+                        }).addTo(apply_for[caseinformation_proposaltype]);
                     }
                 }
             });
 
-            // Add each proposaltype's marker cluster group to the map
-            Object.keys(apply_for).forEach(function (proposaltype) {
-                map.addLayer(apply_for[proposaltype]);
+            // Add each caseinformation_proposaltype's marker cluster group to the map
+            Object.keys(apply_for).forEach(function (caseinformation_proposaltype) {
+                map.addLayer(apply_for[caseinformation_proposaltype]);
             });
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -152,9 +152,9 @@ function processFeature(feature) {
 
 
 function clearClusters() {
-  Object.keys(apply_for).forEach(function (proposaltype) {
-      map.removeLayer(apply_for[proposaltype]);
-      apply_for[proposaltype].clearLayers();
+  Object.keys(apply_for).forEach(function (caseinformation_proposaltype) {
+      map.removeLayer(apply_for[caseinformation_proposaltype]);
+      apply_for[caseinformation_proposaltype].clearLayers();
   });
   apply_for = {}; // Reset the apply_for object
 }

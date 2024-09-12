@@ -78,7 +78,7 @@ function updateTableStats(stats) {
 
 $(document).ready(function () {
     // Example usage of the function
-const cluster_layerName = "auto_test"; // Verify this layer name in your GeoServer
+const cluster_layerName = "Plot_Layout"; // Verify this layer name in your GeoServer
 const cluster_url = "https://iwmsgis.pmc.gov.in/geoserver/";
 // const filter = ""; // Add any additional filter if required
 
@@ -101,9 +101,9 @@ const cluster_url = "https://iwmsgis.pmc.gov.in/geoserver/";
 
 
   function loadinitialData(cql_filter) {
-    const filternames = ["area", "applyfor","surveyno", "casetype", "proposaltype", "tdrzone", "grossplotarea", "developmentzonedp", "owner_det_email"];//accordn column names , if want add one more filter criteria add here
+    const filternames = ["siteaddress_area", "caseinformation_applyfor","siteaddress_surveyno", "caseinformation_casetype", "caseinformation_proposaltype", "caseinformation_tdrzone", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "ownerinformation_firstname"];//accordn column names , if want add one more filter criteria add here
     var workspace = 'AutoDCR';
-    var layerName = 'auto_test';
+    var layerName = 'Plot_Layout';
     filternames.forEach(function (filtername) {
       var url = `${main_url}${workspace}/wms?service=WFS&version=1.1.0&request=GetFeature&typeName=${layerName}&propertyName=${filtername}&outputFormat=application/json`;
       if (cql_filter) {
@@ -133,7 +133,7 @@ const cluster_url = "https://iwmsgis.pmc.gov.in/geoserver/";
 
 
 function DataTableFilter(cql_filter1) {
-  var layers = ["AutoDCR:auto_test"];
+  var layers = ["AutoDCR:Plot_Layout"];
   var typeName = layers.join(',');
   var cqlFilter = cql_filter1;
   var workspace = 'AutoDCR'
@@ -142,7 +142,7 @@ function DataTableFilter(cql_filter1) {
   if (cql_filter1 !== '') {
     geoServerURL += "&CQL_FILTER=" + encodeURIComponent(cqlFilter);
   }
-  var headers = ["area", "applyfor", "casetype","surveyno", "proposaltype", "tdrzone", "grossplotarea", "developmentzonedp", "owner_det_email"];
+  var headers = ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype","siteaddress_surveyno", "caseinformation_proposaltype", "caseinformation_tdrzone", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "ownerinformation_firstname"];
   showtable(typeName, geoServerURL, cqlFilter, headers);
 }
 
@@ -170,7 +170,7 @@ function populateDropdown(dropdownId, data) {
 //       return acc;
 //     }, {});
 
-//     Object.keys(layerDetails["AutoDCR:auto_test"]).forEach(function (filterName) {
+//     Object.keys(layerDetails["AutoDCR:Plot_Layout"]).forEach(function (filterName) {
 //       if (!activeFilters[filterName]) {
 //         var url = `${main_url}${workspace}/wms?service=WFS&version=1.1.0&request=GetFeature&typeName=${layerName}&propertyName=${filterName}&outputFormat=application/json&cql_filter=${encodeURIComponent(filterString)}`;
 //         $.getJSON(url, function (data) {
@@ -187,7 +187,7 @@ function populateDropdown(dropdownId, data) {
 
 function getCheckedValues(callback) {
   var selectedValues = {};
-  const filternames = ["area", "applyfor", "casetype", "proposaltype","surveyno", "tdrzone", "grossplotarea", "developmentzonedp", "owner_det_email"];
+  const filternames = ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype", "caseinformation_proposaltype","siteaddress_surveyno", "caseinformation_tdrzone", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "ownerinformation_firstname"];
 
   filternames.forEach(function (filtername) {
     selectedValues[filtername] = []; 
@@ -255,11 +255,11 @@ function getCheckedValues(callback) {
 
 function FilterAndZoom(filter) {
   fitbous(filter)
-  auto_test.setParams({
+  Plot_Layout.setParams({
     CQL_FILTER: filter,
     maxZoom: 19.5,
   }).addTo(map);
-  // auto_test.setParams({
+  // Plot_Layout.setParams({
   //   CQL_FILTER: filter,
   //   maxZoom: 19.5,
   // }).addTo(map);
@@ -267,7 +267,7 @@ function FilterAndZoom(filter) {
 
 
 function fitbous(filter) {
-  var layers = ["AutoDCR:auto_test"];
+  var layers = ["AutoDCR:Plot_Layout"];
   var bounds = null;
 
   var processLayer = function (layerName, callback) {
@@ -587,15 +587,8 @@ function showtable(typeName, geoServerURL, cqlFilter, headers) {
     //     <div class="stat-value" id="totalLinks">${uniqueCount}</div>
     //   </div>
     // `;
-        document.getElementById('tablestats').innerHTML = `
-    
-      <div class="stat-button">
-        <div class="stat-label">Total Plot count:</div>
-        <div class="stat-value" id="totalLinks">${uniqueCount}</div>
-      </div>
-    `;
+  
 
-      createTable(exampleData, headers);
     });
   }
 
@@ -611,7 +604,7 @@ $(document).ready(function () {
 
 
 document.addEventListener('DOMContentLoaded', (event) => {
-  var columns = { "name": "Road Name", "applyfor": "applyfor", "width": "Road width", "link_no": "Link_number" };
+  var columns = { "name": "Road Name", "caseinformation_applyfor": "caseinformation_applyfor", "width": "Road width", "link_no": "Link_number" };
   var select = document.getElementById("search_type");
 
   // Populate dropdown with column names
@@ -631,7 +624,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     var selectedValue = $(this).val();
     var selectedText = $("#search_type option:selected").text(); // Get the selected option text
     $("#searchInputDashboard").attr("placeholder", "Search " + selectedText); // Set the input placeholder
-    var layerName = 'auto_test'
+    var layerName = 'Plot_Layout'
     var workspace = 'AutoDCR'
     function getValues(callback) {
       var geoServerURL = `${main_url}${workspace}/wms?service=WFS&version=1.1.0&request=GetFeature&typeName=${layerName}&propertyName=${selectedValue}&outputFormat=application/json`;
@@ -690,21 +683,21 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
             cqlFilter = `${searchtypefield} IN ('${selectedValue}')`;
 
-            auto_test.setParams({
+            Plot_Layout.setParams({
               CQL_FILTER: cqlFilter,
               maxZoom: 19.5,
            
             });
 
-            auto_test.addTo(map).bringToFront();
+            Plot_Layout.addTo(map).bringToFront();
 
-            auto_test.setParams({
+            Plot_Layout.setParams({
               CQL_FILTER: cqlFilter,
               maxZoom: 19.5,
               
             });
 
-            auto_test.addTo(map).bringToFront();
+            Plot_Layout.addTo(map).bringToFront();
 
             fitbous(cqlFilter);
 
@@ -786,13 +779,13 @@ function getCheckedValuess() {
 
 
 const layerDetails = {
-  "AutoDCR:auto_test": ["area", "applyfor", "casetype", "proposaltype","surveyno", "tdrzone", "grossplotarea", "developmentzonedp", "owner_det_email"],
+  "AutoDCR:Plot_Layout": ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype", "caseinformation_proposaltype","siteaddress_surveyno", "caseinformation_tdrzone", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "ownerinformation_firstname"],
 };
 
 function getCheckedValuesforpopuups() {
   return new Promise((resolve, reject) => {
     var selectedValues = {};
-    const filternames = ["area", "applyfor", "casetype", "surveyno","proposaltype", "tdrzone", "grossplotarea", "developmentzonedp", "owner_det_email"];
+    const filternames = ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype", "siteaddress_surveyno","caseinformation_proposaltype", "caseinformation_tdrzone", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "ownerinformation_firstname"];
 
     filternames.forEach(function (filtername) {
       selectedValues[filtername] = []; 
