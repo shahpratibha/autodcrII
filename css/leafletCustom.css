@@ -242,4 +242,8 @@
   border: none;
 }
 
+/* .leaflet-popup {
+  z-index: 10000 !important;
+} */
+
 

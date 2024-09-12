@@ -1744,3 +1744,23 @@ overflow: visible;
 .summary-of-commencement{
   font-size: 16px;
 } 
+
+.leaflet-popup-pane, .leaflet-control {
+  cursor: pointer;
+}
+
+.leaflet-popup-content {
+  /* width: 181px; */
+}
+
+.popup-table {
+  width: 100%;
+  border-collapse: collapse;
+  position: absolute;
+  z-index: 9999 !important;
+}
+
+.popup-table td {
+  border: 1px solid #dee2e6;
+  padding: 8px;
+}

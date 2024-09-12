@@ -833,74 +833,145 @@ function combineFilters(cql_filter123, filterString) {
 }
 
 
-map.on("contextmenu", async (e) => {
-  let bbox = map.getBounds().toBBoxString();
-  let size = map.getSize();
+  // map.on("contextmenu", async (e) => {
+  //   let bbox = map.getBounds().toBBoxString();
+  //   let size = map.getSize();
 
-  let filterString = await getCheckedValuesforpopuups();
-  let cqlFilter123 = filterString.trim() !== "" ? encodeURIComponent(filterString) : "";
+  //   let filterString = await getCheckedValuesforpopuups();
+  //   let cqlFilter123 = filterString.trim() !== "" ? encodeURIComponent(filterString) : "";
 
-  for (let layer in layerDetails) {
-    let selectedKeys = layerDetails[layer];
-    let urrr = `${main_url}${workspace}/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&FORMAT=image%2Fpng&TRANSPARENT=true&QUERY_LAYERS=${layer}&STYLES&LAYERS=${layer}&exceptions=application%2Fvnd.ogc.se_inimage&INFO_FORMAT=application/json&FEATURE_COUNT=50&X=${Math.round(e.containerPoint.x)}&Y=${Math.round(e.containerPoint.y)}&SRS=EPSG%3A4326&WIDTH=${size.x}&HEIGHT=${size.y}&BBOX=${bbox}&CQL_FILTER=${cqlFilter123}`;
+  //   for (let layer in layerDetails) {
+  //     let selectedKeys = layerDetails[layer];
+  //     var workspace = 'AutoDCR';
+  //     let urrr = `${main_url}${workspace}/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&FORMAT=image%2Fpng&TRANSPARENT=true&QUERY_LAYERS=${layer}&STYLES&LAYERS=${layer}&exceptions=application%2Fvnd.ogc.se_inimage&INFO_FORMAT=application/json&FEATURE_COUNT=50&X=${Math.round(e.containerPoint.x)}&Y=${Math.round(e.containerPoint.y)}&SRS=EPSG%3A4326&WIDTH=${size.x}&HEIGHT=${size.y}&BBOX=${bbox}&CQL_FILTER=${cqlFilter123}`;
 
-    try {
-      let response = await fetch(urrr);
-      let text = await response.text();
-      let jsonResponse;
+  //     try {
+  //       let response = await fetch(urrr);
+  //       let text = await response.text();
+  //       let jsonResponse;
 
-      try {
-        jsonResponse = JSON.parse(text);
-      } catch (parseError) {
-        console.error("Response is not valid JSON:", parseError);
-        return;
-      }
+  //       try {
+  //         jsonResponse = JSON.parse(text);
+  //       } catch (parseError) {
+  //         console.error("Response is not valid JSON:", parseError);
+  //         return;
+  //       }
 
-      if (!jsonResponse.features) {
-        console.error("Features not found in response:", jsonResponse);
-        return;
-      }
+  //       if (!jsonResponse.features) {
+  //         console.error("Features not found in response:", jsonResponse);
+  //         return;
+  //       }
 
-      let features = jsonResponse.features;
-      console.log(features, "features");
+  //       let features = jsonResponse.features;
+  //       console.log(features, "features");
 
-      let detaildata = "";
+  //       let detaildata = "";
 
-      features.forEach((feature, index) => {
-        let htmldata = feature.properties;
-        let token = htmldata.token || 'N/A';
-        let gutNo = htmldata.gut_no || 'N/A';
-        let ownerName = htmldata.owner_det_email || 'N/A';
-        let plotType = htmldata.plottype || 'N/A';
-        let caseInfoArea = htmldata.case_info_area || 'N/A';
-        let plotNo = htmldata.plotno || 'N/A';
-        let pincode = htmldata.pincode || 'N/A';
+  //       features.forEach((feature, index) => {
+  //         let htmldata = feature.properties;
+  //         let token = htmldata.token || 'N/A';
+  //         let gutNo = htmldata.gut_no || 'N/A';
+  //         let ownerName = htmldata.owner_det_email || 'N/A';
+  //         let plotType = htmldata.plottype || 'N/A';
+  //         let caseInfoArea = htmldata.case_info_area || 'N/A';
+  //         let plotNo = htmldata.plotno || 'N/A';
+  //         let pincode = htmldata.pincode || 'N/A';
 
-        detaildata += `<div style='max-height: 350px; max-height: 250px;'>
-          <table style='width:110%;' class='popup-table'>
-            <tr><td colspan="2">Feature ${index + 1}</td></tr>
-            <tr><td>Token No</td><td>${token}</td></tr>
-            <tr><td>Gut No</td><td>${gutNo}</td></tr>
-            <tr><td>Owner Email</td><td>${ownerName}</td></tr>
-            <tr><td>Plot Type</td><td>${plotType}</td></tr>
-            <tr><td>Case Info Area</td><td>${caseInfoArea}</td></tr>
-            <tr><td>Plot No</td><td>${plotNo}</td></tr>
-            <tr><td>Pincode</td><td>${pincode}</td></tr>
-            <tr><td>Co-Ordinates</td><td>${e.latlng}</td></tr>
-          </table>
-        </div>`;
-      });
+  //         detaildata += `<div style='max-height: 350px; max-height: 250px; position:absolute; z-index:9999'>
+  //           <table style='width:110%;' class='popup-table'>
+  //             <tr><td colspan="2">Feature ${index + 1}</td></tr>
+  //             <tr><td>Token No</td><td>${token}</td></tr>
+  //             <tr><td>Gut No</td><td>${gutNo}</td></tr>
+  //             <tr><td>Owner Email</td><td>${ownerName}</td></tr>
+  //             <tr><td>Plot Type</td><td>${plotType}</td></tr>
+  //             <tr><td>Case Info Area</td><td>${caseInfoArea}</td></tr>
+  //             <tr><td>Plot No</td><td>${plotNo}</td></tr>
+  //             <tr><td>Pincode</td><td>${pincode}</td></tr>
+  //             <tr><td>Co-Ordinates</td><td>${e.latlng}</td></tr>
+  //           </table>
+  //         </div>`;
+  //       });
 
-      console.log("Popup content:", detaildata); // Log content to verify
+  //       console.log("Popup content:", detaildata); // Log content to verify
 
-      L.popup()
-        .setLatLng(e.latlng)
-        .setContent(detaildata)
-        .openOn(map);
-    } catch (error) {
-      console.error("Error fetching data:", error);
+  //       L.popup()
+  //         .setLatLng(e.latlng)
+  //         .setContent(detaildata)
+  //         .openOn(map);
+  //     } catch (error) {
+  //       console.error("Error fetching data:", error);
+  //     }
+  //   }
+  // });
+
+  map.on("contextmenu", async (e) => {
+    let bbox = map.getBounds().toBBoxString();
+    let size = map.getSize();
+
+    let filterString = await getCheckedValuesforpopuups();
+    let cqlFilter123 = filterString.trim() !== "" ? encodeURIComponent(filterString) : "";
+
+    for (let layer in layerDetails) {
+        let selectedKeys = layerDetails[layer];
+        var workspace = 'AutoDCR';
+        let urrr = `${main_url}${workspace}/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&FORMAT=image%2Fpng&TRANSPARENT=true&QUERY_LAYERS=${layer}&STYLES&LAYERS=${layer}&exceptions=application%2Fvnd.ogc.se_inimage&INFO_FORMAT=application/json&FEATURE_COUNT=50&X=${Math.round(e.containerPoint.x)}&Y=${Math.round(e.containerPoint.y)}&SRS=EPSG%3A4326&WIDTH=${size.x}&HEIGHT=${size.y}&BBOX=${bbox}&CQL_FILTER=${cqlFilter123}`;
+
+        try {
+            let response = await fetch(urrr);
+            let text = await response.text();
+            let jsonResponse;
+
+            try {
+                jsonResponse = JSON.parse(text);
+            } catch (parseError) {
+                console.error("Response is not valid JSON:", parseError);
+                return;
+            }
+
+            if (!jsonResponse.features) {
+                console.error("Features not found in response:", jsonResponse);
+                return;
+            }
+
+            let features = jsonResponse.features;
+            console.log(features, "features");
+
+            let detaildata = "";
+
+            features.forEach((feature, index) => {
+                // let htmldata = feature.properties;
+                let token = htmldata.token || 'N/A';
+                let gutNo = htmldata.gut_no || 'N/A';
+                let ownerName = htmldata.owner_det_email || 'N/A';
+                let plotType = htmldata.plottype || 'N/A';
+                let caseInfoArea = htmldata.case_info_area || 'N/A';
+                let plotNo = htmldata.plotno || 'N/A';
+                let pincode = htmldata.pincode || 'N/A';
+
+                detaildata += `<div style='max-height: 250px;   position: absolute;
+  z-index: 9999 !important; overflow-y: auto;'>
+                  <table style='width:100%;' class='popup-table'>
+                    <tr><td colspan="2">Feature ${index + 1}</td></tr>
+                    <tr><td>Token No</td><td>${token}</td></tr>
+                    <tr><td>Gut No</td><td>${gutNo}</td></tr>
+                    <tr><td>Owner Email</td><td>${ownerName}</td></tr>
+                    <tr><td>Plot Type</td><td>${plotType}</td></tr>
+                    <tr><td>Case Info Area</td><td>${caseInfoArea}</td></tr>
+                    <tr><td>Plot No</td><td>${plotNo}</td></tr>
+                    <tr><td>Pincode</td><td>${pincode}</td></tr>
+                    <tr><td>Co-Ordinates</td><td>${e.latlng}</td></tr>
+                  </table>
+                </div>`;
+            });
+
+            console.log("Popup content:", detaildata); // Log content to verify
+
+            L.popup()
+              .setLatLng(e.latlng)
+              .setContent(detaildata)
+              .openOn(map);
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        }
     }
-  }
 });
-
-
