@@ -589,7 +589,15 @@ function showtable(typeName, geoServerURL, cqlFilter, headers) {
     //     <div class="stat-value" id="totalLinks">${uniqueCount}</div>
     //   </div>
     // `;
-  
+    document.getElementById('tablestats').innerHTML = `
+    
+      <div class="stat-button">
+        <div class="stat-label">Total Plot count:</div>
+        <div class="stat-value" id="totalLinks">${uniqueCount}</div>
+      </div>
+    `;
+
+      createTable(exampleData, headers);
 
     });
   }
@@ -899,74 +907,139 @@ function combineFilters(cql_filter123, filterString) {
   //   }
   // });
 
-  map.on("contextmenu", async (e) => {
-    let bbox = map.getBounds().toBBoxString();
-    let size = map.getSize();
+//   map.on("contextmenu", async (e) => {
+//     let bbox = map.getBounds().toBBoxString();
+//     let size = map.getSize();
 
-    let filterString = await getCheckedValuesforpopuups();
-    let cqlFilter123 = filterString.trim() !== "" ? encodeURIComponent(filterString) : "";
+//     let filterString = await getCheckedValuesforpopuups();
+//     let cqlFilter123 = filterString.trim() !== "" ? encodeURIComponent(filterString) : "";
 
-    for (let layer in layerDetails) {
-        let selectedKeys = layerDetails[layer];
-        var workspace = 'AutoDCR';
-        let urrr = `${main_url}${workspace}/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&FORMAT=image%2Fpng&TRANSPARENT=true&QUERY_LAYERS=${layer}&STYLES&LAYERS=${layer}&exceptions=application%2Fvnd.ogc.se_inimage&INFO_FORMAT=application/json&FEATURE_COUNT=50&X=${Math.round(e.containerPoint.x)}&Y=${Math.round(e.containerPoint.y)}&SRS=EPSG%3A4326&WIDTH=${size.x}&HEIGHT=${size.y}&BBOX=${bbox}&CQL_FILTER=${cqlFilter123}`;
+//     for (let layer in layerDetails) {
+//         let selectedKeys = layerDetails[layer];
+//         var workspace = 'AutoDCR';
+//         let urrr = `${main_url}${workspace}/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&FORMAT=image%2Fpng&TRANSPARENT=true&QUERY_LAYERS=${layer}&STYLES&LAYERS=${layer}&exceptions=application%2Fvnd.ogc.se_inimage&INFO_FORMAT=application/json&FEATURE_COUNT=50&X=${Math.round(e.containerPoint.x)}&Y=${Math.round(e.containerPoint.y)}&SRS=EPSG%3A4326&WIDTH=${size.x}&HEIGHT=${size.y}&BBOX=${bbox}&CQL_FILTER=${cqlFilter123}`;
 
-        try {
-            let response = await fetch(urrr);
-            let text = await response.text();
-            let jsonResponse;
+//         try {
+//             let response = await fetch(urrr);
+//             let text = await response.text();
+//             let jsonResponse;
 
-            try {
-                jsonResponse = JSON.parse(text);
-            } catch (parseError) {
-                console.error("Response is not valid JSON:", parseError);
-                return;
-            }
+//             try {
+//                 jsonResponse = JSON.parse(text);
+//             } catch (parseError) {
+//                 console.error("Response is not valid JSON:", parseError);
+//                 return;
+//             }
 
-            if (!jsonResponse.features) {
-                console.error("Features not found in response:", jsonResponse);
-                return;
-            }
+//             if (!jsonResponse.features) {
+//                 console.error("Features not found in response:", jsonResponse);
+//                 return;
+//             }
 
-            let features = jsonResponse.features;
-            console.log(features, "features");
+//             let features = jsonResponse.features;
+//             console.log(features, "features");
 
-            let detaildata = "";
+//             let detaildata = "";
 
-            features.forEach((feature, index) => {
-                // let htmldata = feature.properties;
-                let token = htmldata.token || 'N/A';
-                let gutNo = htmldata.gut_no || 'N/A';
-                let ownerName = htmldata.owner_det_email || 'N/A';
-                let plotType = htmldata.plottype || 'N/A';
-                let caseInfoArea = htmldata.case_info_area || 'N/A';
-                let plotNo = htmldata.plotno || 'N/A';
-                let pincode = htmldata.pincode || 'N/A';
+//             features.forEach((feature, index) => {
+//                 // let htmldata = feature.properties;
+//                 let token = htmldata.token || 'N/A';
+//                 let gutNo = htmldata.gut_no || 'N/A';
+//                 let ownerName = htmldata.owner_det_email || 'N/A';
+//                 let plotType = htmldata.plottype || 'N/A';
+//                 let caseInfoArea = htmldata.case_info_area || 'N/A';
+//                 let plotNo = htmldata.plotno || 'N/A';
+//                 let pincode = htmldata.pincode || 'N/A';
 
-                detaildata += `<div style='max-height: 250px;   position: absolute;
-  z-index: 9999 !important; overflow-y: auto;'>
-                  <table style='width:100%;' class='popup-table'>
-                    <tr><td colspan="2">Feature ${index + 1}</td></tr>
-                    <tr><td>Token No</td><td>${token}</td></tr>
-                    <tr><td>Gut No</td><td>${gutNo}</td></tr>
-                    <tr><td>Owner Email</td><td>${ownerName}</td></tr>
-                    <tr><td>Plot Type</td><td>${plotType}</td></tr>
-                    <tr><td>Case Info Area</td><td>${caseInfoArea}</td></tr>
-                    <tr><td>Plot No</td><td>${plotNo}</td></tr>
-                    <tr><td>Pincode</td><td>${pincode}</td></tr>
-                    <tr><td>Co-Ordinates</td><td>${e.latlng}</td></tr>
-                  </table>
-                </div>`;
-            });
+//                 detaildata += `<div style='max-height: 250px;   position: absolute;
+//   z-index: 9999 !important; overflow-y: auto;'>
+//                   <table style='width:100%;' class='popup-table'>
+//                     <tr><td colspan="2">Feature ${index + 1}</td></tr>
+//                     <tr><td>Token No</td><td>${token}</td></tr>
+//                     <tr><td>Gut No</td><td>${gutNo}</td></tr>
+//                     <tr><td>Owner Email</td><td>${ownerName}</td></tr>
+//                     <tr><td>Plot Type</td><td>${plotType}</td></tr>
+//                     <tr><td>Case Info Area</td><td>${caseInfoArea}</td></tr>
+//                     <tr><td>Plot No</td><td>${plotNo}</td></tr>
+//                     <tr><td>Pincode</td><td>${pincode}</td></tr>
+//                     <tr><td>Co-Ordinates</td><td>${e.latlng}</td></tr>
+//                   </table>
+//                 </div>`;
+//             });
 
-            console.log("Popup content:", detaildata); // Log content to verify
+//             console.log("Popup content:", detaildata); // Log content to verify
 
-            L.popup()
-              .setLatLng(e.latlng)
-              .setContent(detaildata)
-              .openOn(map);
-        } catch (error) {
-            console.error("Error fetching data:", error);
+//             L.popup()
+//               .setLatLng(e.latlng)
+//               .setContent(detaildata)
+//               .openOn(map);
+//         } catch (error) {
+//             console.error("Error fetching data:", error);
+//         }
+//     }
+// });
+ 
+map.on("click", async (e) => {
+  console.log("Click event:", e);
+ 
+  let bbox = map.getBounds().toBBoxString();
+  let size = map.getSize();
+ 
+  let filterString = await getCheckedValuesforpopuups();
+  let cqlFilter123 = filterString.trim() !== "" ? encodeURIComponent(filterString) : "";
+ 
+  for (let layer in layerDetails) {
+    let selectedKeys = layerDetails[layer];
+    let workspace = "AutoDCR";
+    let urrr = `https://iwmsgis.pmc.gov.in/geoserver/${workspace}/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&FORMAT=image%2Fpng&TRANSPARENT=true&QUERY_LAYERS=${layer}&STYLES&LAYERS=${layer}&exceptions=application%2Fvnd.ogc.se_inimage&INFO_FORMAT=application/json&FEATURE_COUNT=50&X=${Math.round(e.containerPoint.x)}&Y=${Math.round(e.containerPoint.y)}&SRS=EPSG%3A4326&WIDTH=${size.x}&HEIGHT=${size.y}&BBOX=${bbox}`;
+    console.log("WMS Request URL:", urrr);
+ 
+    try {
+      let response = await fetch(urrr);
+      if (!response.ok) {
+        throw new Error(`Network response was not ok: ${response.statusText}`);
+      }
+      let json = await response.json();
+      console.log("WMS Response JSON:", json);
+ 
+      if (json.features.length > 0) {
+        let htmldata = json.features[0].properties;
+        console.log("Feature Properties:", htmldata);
+ 
+        let txtk1 = "";
+        for (let key of selectedKeys) {
+          if (htmldata.hasOwnProperty(key)) {
+            let value = htmldata[key];
+            txtk1 += `<tr><td>${key}</td><td>${value}</td></tr>`;
+          }
         }
+ 
+        let detaildata1 = `<table style='width:100%;' class='popup-table'>${txtk1}<tr><td>Coordinates</td><td>${e.latlng}</td></tr></table>`;
+        console.log("Modal Content:", detaildata1);
+ 
+        // Update the modal content
+        document.getElementById("modalContent").innerHTML = detaildata1;
+ 
+        // Set modal position to clicked position
+        let modal = document.getElementById("infoModal");
+        modal.style.display = "block"; // Show the modal
+        modal.style.left = `${e.containerPoint.x + 10}px`; // Adjust 10px to avoid cursor overlap
+        modal.style.top = `${e.containerPoint.y + 10}px`; // Adjust 10px to avoid cursor overlap
+ 
+      } else {
+        console.log("No features found for this location.");
+        closeModal(); // Close the modal if no features are found
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      closeModal(); // Close the modal on error
     }
+  }
 });
+ 
+// Function to close the modal
+function closeModal() {
+  document.getElementById("infoModal").style.display = "none";
+}
+ 
+ 
