@@ -587,7 +587,15 @@ function showtable(typeName, geoServerURL, cqlFilter, headers) {
     //     <div class="stat-value" id="totalLinks">${uniqueCount}</div>
     //   </div>
     // `;
-  
+    document.getElementById('tablestats').innerHTML = `
+    
+      <div class="stat-button">
+        <div class="stat-label">Total Plot count:</div>
+        <div class="stat-value" id="totalLinks">${uniqueCount}</div>
+      </div>
+    `;
+
+      createTable(exampleData, headers);
 
     });
   }

@@ -1536,7 +1536,7 @@ color: black;
 
 
 #tablecontainer {
-  /* z-index: 9999;
+  z-index: 9999;
   position: absolute;
   width: 30%;
   bottom: 24%;
@@ -1544,22 +1544,11 @@ color: black;
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  max-height: 200px;
+  max-height: 150px;
   font-size: 12px;
-  transition: all 0.3s ease; */
+  transition: all 0.3s ease;
 
-  z-index: 9;
-    position: absolute;
-    width: 30%;
-    bottom: 0%;
-    right: 4%;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    max-height: 200px;
-    font-size: 12px;
-    transition: all 0.3s ease;
-    top: 73vh;
+
 }
 
 
