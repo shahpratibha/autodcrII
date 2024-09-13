@@ -1842,7 +1842,7 @@ body {
 /* Style for the container div */
 
 .tablestats {
-  margin-top: 13px;
+  margin-top: 5px;
 
   color: #262626;
   font-weight: bold;
@@ -1969,30 +1969,9 @@ margin-right: 203px;
   right: 12px ;
 
 }
-.search-container {
-  display: flex;
-  align-items: center;
-  border-radius: 12px;
-  background: var(--Basic-Colors-White, #FFF);
-  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
-  transition: opacity 0.3s ease;
-  /* padding: 4px 8px; */
-  position: fixed; /* Fixes the container at the top */
-  top: 16px; /* Positions the container 10px from the top */
-  left: 53%; /* Aligns the center horizontally */
-  transform: translateX(-50%); /* Adjusts to perfectly center */
-  width: 242px; /* Adjust width as needed */
-  z-index: 1000; /* Keeps the container above other content */
-}
 
 
-.search-input {
-  border: none;
-  outline: none;
-  padding: 8px;
-  border-radius: 24px 0 0 24px;
-  /* flex-grow: 1; */
-}
+
 .search-arrow {
   background: #54A4E6;
   padding: 4px;
@@ -2005,7 +1984,7 @@ margin-right: 203px;
 }
 .clear-icon {
   position: absolute;
-  right: 50px; /* Adjust based on input length */
+  right:20px; /* Adjust based on input length */
   cursor: pointer;
   font-size: 16px;
   color: #888; /* Adjust color as needed */
@@ -2231,3 +2210,4 @@ margin-right: 203px;
 .white-filter {
   filter: invert(1) brightness(2);
 }
+

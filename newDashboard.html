@@ -51,12 +51,16 @@
           <button id="search-button" class="search-button">
               <img src="image/Search.svg" alt="Search Icon" id="search-icon">
           </button>
+
+
           <div id="search-container" class="search-container hidden">
-              <input type="text" id="search-input" class="search-input" placeholder="Search here">
-              <img src="image/Arrow.svg" id="search-arrow" class="search-arrow" alt="">
-              <span id="clear-icon" class="clear-icon hidden">&#x2715;</span> <!-- Unicode cross icon -->
-          </div>
-      </div>
+            <span class="search-icon">&#9660;</span> <!-- Down arrow using HTML entity -->
+            <input type="text" id="search-input" class="search-input" placeholder="Search">
+            <!-- Uncomment if you prefer to use an image for the arrow instead of HTML entity -->
+            <!-- <img src="image/Arrow.svg" id="search-arrow" class="search-arrow" alt=""> -->
+            <span id="clear-icon" class="clear-icon hidden">&#x2715;</span> <!-- Unicode cross icon -->
+        </div>
+        
 
 
     
