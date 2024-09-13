@@ -1390,7 +1390,7 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
 .filters {
   display: none;                    /* Hide the filter panel by default */
   position: absolute;
-  top: 19%;
+  top: 14%;
   left: 18px;
   overflow-x: hidden;
   overflow-y: hidden;
