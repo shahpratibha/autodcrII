@@ -435,6 +435,8 @@ function showtable(typeName, geoServerURL, cqlFilter, headers) {
         document.getElementById('openTableBtn').style.display = 'block'; // Show the show button
       }
     });
+
+    
     tableContainer.appendChild(minimizeButton);
     // Create pagination controls
     var paginationContainer = document.createElement('div');
