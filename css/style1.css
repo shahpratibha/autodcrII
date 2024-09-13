@@ -14,6 +14,7 @@ body {
       z-index: 1;
       flex-shrink: 0;
       margin: 0;
+      top: -40px;
     }
     .geopulseaname {
       position: fixed;
@@ -22,7 +23,6 @@ body {
       right: 9px;
       text-decoration: none;
       color: black;
-      font-family: Roboto;
       font-size: 13px;
       font-style: normal;
       font-weight: bold;
@@ -72,9 +72,9 @@ body {
   }
   .component-6 {
     flex: 1;
-    backdrop-filter: blur(4px);
+    /* backdrop-filter: blur(4px); */
     border-radius: 12px;
-    background: radial-gradient(50% 50% at 50% 50%, #24a148, #198038);
+    /* background: radial-gradient(50% 50% at 50% 50%, #24a148, #198038); */
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -97,7 +97,7 @@ body {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    padding: 12px;
+    padding: 7px;
     gap: 8px;
     color: #044317;
     cursor: pointer; /* Add pointer cursor to indicate clickability */
@@ -155,7 +155,7 @@ body {
   .tab-section {
       width: 290px;
       position: absolute; /* Positioning the tab-section absolutely */
-      top: 34px; /* Adjust the position as needed */
+      top: 17px; /* Adjust the position as needed */
       left: 20px; /* Adjust the position as needed */
       border-radius: 20px;
       background-color: #fff;
@@ -269,7 +269,7 @@ body {
   .legends1 {
     position: relative;
     font-weight: 600;
-    left: 73px;
+    /* left: 73px; */
   }
   .evacollapse-fill-icon {
     width: 24px;
@@ -797,11 +797,11 @@ body {
   .legends {
       width: 276px;
       position: absolute; /* Position it absolutely */
-      top:20%; /* Adjust position on top of the map */
-      left: 23px;
+      top:110%; /* Adjust position on top of the map */
+      /* left: 23px; */
       border-radius: 16px;
       background-color: #fff;
-      height: 550px;
+      height: 580px;
       overflow: hidden;
       flex-shrink: 0;
       display: flex;
@@ -863,8 +863,7 @@ body {
   .actions {
     align-self: stretch;
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    margin-top: 10px;
     justify-content: flex-start;
     gap: 8px;
   }
@@ -1494,9 +1493,10 @@ body {
   }
   .graph-container {
     align-self: stretch;
-    height: 679px;
+    height: 458px;
     overflow-y: auto;
     flex-shrink: 0;
+    overflow-x: hidden;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -1504,7 +1504,7 @@ body {
     gap: 12px;
     text-align: right;
     font-size: 14px;
-  }
+}
   .data-container {
     align-self: stretch;
     height: 743px;
@@ -1517,13 +1517,13 @@ body {
     color: #262626;
   }
   .data-graphs {
-    width: 300px;
+    width: 290px;
     position: absolute; /* Position absolutely within the map */
-    top: 152px; /* Adjust the top position as needed */
-    left: 18px; /* Adjust the left position as needed */
+    top: 130px; /* Adjust the top position as needed */
+    left: -5px; /* Adjust the left position as needed */
     border-radius: 20px;
     background-color: #fff;
-    height: 816px;
+    height: 78vh;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -1564,7 +1564,6 @@ body {
     text-align: center;
     color: #00325C;
     font-size: 20px;
-    font-family: 'Plus Jakarta Sans', sans-serif;
     font-weight: 600;
     word-wrap: break-word;
 }
@@ -1843,7 +1842,7 @@ body {
 /* Style for the container div */
 
 .tablestats {
-  margin-top: 24px;
+  margin-top: 13px;
 
   color: #262626;
   font-weight: bold;
@@ -1916,21 +1915,6 @@ body {
   padding: 8px; /* Padding for table cells */
 }
 
-
-
-#openTableBtn {
-  position: absolute;
-  z-index: 999;
-  top: 27vh;
-  width: auto;
-  padding: 6px;
-  right: 10px;
-  background: linear-gradient(180deg, #6f6f6f 0%, #262626 100%);
-  /* box-shadow: 0px 0px 14.035px 0px rgba(0, 0, 0, 0.15); */
-  border: none; /* Remove border */
-  border-radius: 50%; /* Make it round */
-
-  }
   
   .tablebtn {
   width: 20px;
@@ -1965,11 +1949,11 @@ body {
 text-align: center;
 leading-trim: both;
 text-edge: cap;
-font-family: "Plus Jakarta Sans";
 font-size: 20px;
 font-style: normal;
 font-weight: 600;
 line-height: normal;
+margin-right: 203px;
 }
 
 .logoPMC img {
@@ -1979,7 +1963,7 @@ line-height: normal;
   object-fit: contain;
   z-index: 9;
   position: absolute;
-  top: 39px ;
+  top: 18px ;
   right: 12px ;
 
 }
@@ -1993,9 +1977,9 @@ line-height: normal;
   /* padding: 4px 8px; */
   position: fixed; /* Fixes the container at the top */
   top: 16px; /* Positions the container 10px from the top */
-  left: 50%; /* Aligns the center horizontally */
+  left: 53%; /* Aligns the center horizontally */
   transform: translateX(-50%); /* Adjusts to perfectly center */
-  width: 300px; /* Adjust width as needed */
+  width: 242px; /* Adjust width as needed */
   z-index: 1000; /* Keeps the container above other content */
 }
 
@@ -2005,12 +1989,12 @@ line-height: normal;
   outline: none;
   padding: 8px;
   border-radius: 24px 0 0 24px;
-  flex-grow: 1;
+  /* flex-grow: 1; */
 }
 .search-arrow {
   background: #54A4E6;
-  padding: 10px;
-  border-radius: 0 24px 24px 0;
+  padding: 4px;
+  border-radius: 12px;
   color: white;
   cursor: pointer;
   /* border-radius: 12px; */
@@ -2038,35 +2022,210 @@ line-height: normal;
 .leaflet-left .leaflet-control-scale {
   margin-left: 15px;
 }
-.component-7:hover {
-  background: radial-gradient(100% 100% at 0% 50%, #DEFBE6 0%, #A7F0BA 100%);
-  backdrop-filter: blur(2px);
-}
 
-  /* Click or Active Effect */
-  .component-7:active {
-    border-radius: 12px;
-    background: radial-gradient(100% 100% at 0% 50%, #24A148 0%, #198038 100%);
+
+
+
+ #openTableBtn {
+    position: absolute;
+    z-index: 999;
+    /* margin-right: -230px; */
+    top: 77vh;
+    display: none;
+    width: auto;
+    padding: 6px; 
+    right: 16px;
+    border-radius: 8px;
+    
+    border: 1px solid rgba(255, 255, 255, 0.50);
+    background: radial-gradient(400.2% 139.23% at 0% 3.13%, rgba(0, 119, 218, 0.80) 0%, rgba(0, 84, 155, 0.80) 100%);
+    box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.35);
     backdrop-filter: blur(2px);
-    color: #fff; /* Change text color on click */
+/*    
+    background-color: white;
+    border-radius: 5px;
+    border: 2px solid #383899; */
+} 
+.tablebtn {
+  width: 20px;
+  height: 20px;
+
   }
 
+/* llllllllllllllllllll
 
-  
-.component-10 img {
-  width: 24px; /* Adjust as needed */
-  height: 24px; /* Adjust as needed */
+/* Active or clicked state */
+
+
+
+
+/* Styling for .component-10 and its img element */
+.component-10img {
+  width: 24px;
+  height: 24px;
   transition: filter 0.3s; /* Smooth transition for icon color change */
 }
 
-/* Hover state styles */
-.component-10:hover {
+/* Active state styles - applied when clicked */
+.component-10.active {
   border-radius: 12px;
-background: linear-gradient(180deg, #0077DA 0%, #54A4E6 100%);
+  background: linear-gradient(180deg, #0077DA 0%, #54A4E6 100%); /* Desired click color */
   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+  cursor: pointer; /* Change cursor to pointer */
 }
 
-/* Optional: Change icon color on hover state */
-.component-10:hover img {
-  filter: brightness(0) invert(1); /* Makes the icon white */
+/* Active state icon color */
+.component-10.active img {
+  filter: brightness(0) invert(1); /* Keeps the icon white */
+}
+
+
+/* Styling for .component-11 and its img element */
+.component-11 img {
+  width: 24px;
+  height: 24px;
+  transition: filter 0.3s; /* Smooth transition for icon color change */
+}
+
+/* Active state styles - applied when clicked */
+.component-11.active {
+  border-radius: 12px;
+  background: linear-gradient(180deg, #0077DA 0%, #54A4E6 100%); /* Desired click color */
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+  cursor: pointer; /* Change cursor to pointer */
+}
+
+/* Active state icon color */
+.component-11.active img {
+  filter: brightness(0) invert(1); /* Keeps the icon white */
+}
+/* Styling for .component-11 and its img element */
+.component-11 img {
+  width: 24px;
+  height: 24px;
+  transition: filter 0.3s; /* Smooth transition for icon color change */
+}
+
+/* Hover state styles - applied when hovering */
+.component-11:hover .right-icons3 {
+  background: linear-gradient(180deg, #0077DA 0%, #54A4E6 100%); /* Hover effect color */
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 12px;
+}
+
+/* Active state styles - applied when clicked */
+.component-11.active .right-icons3 {
+  background: linear-gradient(180deg, #0077DA 0%, #54A4E6 100%); /* Desired click color */
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 12px;
+}
+
+/* Active state icon color */
+.component-11.active img {
+  filter: brightness(0) invert(1); /* Keeps the icon white */
+}
+
+/* Specific styling for .right-icons3 */
+.right-icons3 {
+  display: inline-block; /* Ensure it acts as a block-level element for styling */
+  padding: 8px; /* Adjust padding as needed */
+  transition: all 0.3s ease; /* Smooth transition for hover and click effects */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+/* Base styling for tabs */
+.tab {
+  display: inline-block;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s; /* Smooth transition */
+}
+
+/* Inactive tab */
+.tab .status {
+  background-color: transparent; /* Default background */
+}
+
+.tab.active .status {
+  background: radial-gradient(100% 100% at 0% 50%, #0077DA 0%, #00549B 100%);
+
+  backdrop-filter: blur(2px);
+  color: white;
+  padding: 6px;
+  border-radius: 7px;
+}
+
+
+/* For WebKit browsers (Chrome, Safari, Edge) */
+.graph-container::-webkit-scrollbar {
+  width: 5px; /* Scrollbar width */
+}
+
+.graph-container::-webkit-scrollbar-thumb {
+  background-color: #888; /* Scrollbar thumb color */
+  border-radius: 5px; /* Rounded scrollbar thumb */
+}
+
+.graph-container::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* Darker color on hover */
+}
+
+.graph-container::-webkit-scrollbar-track {
+  background: transparent; /* Scrollbar track color */
+}
+
+
+.bar-chart-container {
+  display: none; /* Initially hidden */
+}
+
+.building-permissions-parent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.toggle-icon {
+  font-size: 16px; /* Adjust size as needed */
+  transition: transform 0.3s; /* Smooth transition for rotation */
+}
+
+.building-permissions-parent.active .toggle-icon {
+  transform: rotate(180deg); /* Rotate the icon when active */
+}
+
+
+
+/* Remove border and outline on focus and active states */
+.close-legend-btn:focus,
+.close-legend-btn:active {
+    outline: none; /* Remove focus outline */
+    border: none;  /* Ensure no border on click */
+    box-shadow: none; /* Remove any box shadow */
+}
+
+.close-legend-btn {
+  position: absolute; /* Position it relative to the container */
+  right: 10px; /* Adjust as needed */
+  top: 10px; /* Adjust as needed */
+  font-size: 20px; /* Increase size of the icon */
+  width: 30px; /* Increase the size of the button */
+  height: 30px; /* Increase the size of the button */
+  cursor: pointer; /* Change cursor to pointer on hover */
+  background: none; /* Remove default button background */
+  border: none; /* Remove default button border */
+  color: #000; /* Change the color of the icon */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* CSS to move the map section to the right */
+.move-right {
+  transform: translateX(43vh); /* Adjust the value as needed */
+  transition: transform 0.1s ease; /* Smooth transition */
+}
+
+.white-filter {
+  filter: invert(1) brightness(2);
 }

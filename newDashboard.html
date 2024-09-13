@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html>
-
 <head>
+
   <title>Dashboard</title>
+  <link rel="icon" href="image/pmcjpeg.png" type="image/x-icon">
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">\
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link rel="stylesheet" href="style2.css">
-  <link rel="stylesheet" href="leafletCustom.css">
-  <link rel="stylesheet" href="style1.css">
+  <link rel="stylesheet" href="css/style2.css">
+
+  <link rel="stylesheet" href="css/style1.css">
+  <link rel="stylesheet" href="css/leafletCustom.css">
+
 
 </head>
-
 <body>
 
 
@@ -21,37 +23,19 @@
     <!-- Top Section -->
     <div class="row top-section m-0">
       <div class="col-12 d-flex justify-content-between align-items-center p-0">
-        <!-- Control Panel -->
-        <!-- <div class="control-panel">
-          <a  class="logoPMC">
-            <img src="image/pmcjpeg.png" alt="Button Image">
-          </a>
-
-         <a href="https://geopulsea.com/" class="geopulseaname">@GeoPulse Analytics</a>
-          <div class="btn-group">
-            <button class="btn-blue" id="status-wise-button">Status Wise</button>
-            <button class="btn-blue btn-area">Area Wise</button>
-          </div>
-
-        </div> 
-
-        Date Picker -->
-        <!-- <div class="date-picker">
-
-          <div class="date-range" id="date-range-display">April 1, 2024 - March 31, 2025
-            <div class="calendar-icon" id="calendar-icon">
-              <img src="image/time.png" alt="">
-            </div>
-          </div>
-
-          <button id="select-year-button">Select Year</button>
-          <input type="date" id="date-input" style="display: none;">
-        </div> -->
+     
       </div>
     </div>
 
     <!-- <button id="printTableBtn">Download CSV</button> -->
     <div id="tablecontainer"></div>
+<!-- popup -->
+    <div id="infoModal" style="display: none; position: absolute; background-color: white; border: 1px solid #ddd; padding: 10px; z-index: 9999; max-width: 300px;">
+      <h4>Feature Information</h4>
+      <div id="modalContent"></div>
+      <button onclick="closeModal()">Close</button>
+    </div>
+ 
 
     <!-- Map Section -->
     <div class="north-arrow-container">
@@ -73,71 +57,69 @@
               <span id="clear-icon" class="clear-icon hidden">&#x2715;</span> <!-- Unicode cross icon -->
           </div>
       </div>
-      
 
-          <!-- <button class="toggle-button" id="toggleFilters">
-            <img src="image/filter.svg" alt="Search Icon" id="search-icon">
-          </button> -->
 
+    
         </div>
 
-        <div class="filters" id="filters" style="">  <h3 class="filter-title">Filter
-         <span class="close-icon" onclick="closeFilters()">×</span></h3>
+        <div class="filters" id="filters" style="">  <h3 class="filter-title">Filter</h3>
+          <span class="close-icon" onclick="closeFilters()">&#215;</span>
           <div class="filter_div">
             <div class="filter-group">
-              <label for="area" onclick="toggleFilter(this)">Village <span class="icon-container"><i
+              <label for="siteaddress_area" onclick="toggleFilter(this)">Village <span class="icon-container"><i
                     class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
               <input type="text" placeholder="Search" class="filter-input" id="villageSearch">
-              <ul class="select2  abcscroll" multiple="multiple" id="area"></ul>
+              <!-- <img src="image/searchfilter.svg"> -->
+              <ul class="select2  abcscroll" multiple="multiple" id="siteaddress_area"></ul>
             </div>
             <div class="filter-group">
-              <label for="wapplyfor" onclick="toggleFilter(this)">Apply For <span class="icon-container"><i
+              <label for="caseinformation_applyfor" onclick="toggleFilter(this)">Apply For <span class="icon-container"><i
                     class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
               <input type="text" placeholder="Search" class="filter-input" id="widthSearch">
-              <ul class="select2 abcscroll" multiple="multiple" id="applyfor"></ul>
+              <ul class="select2 abcscroll" multiple="multiple" id="caseinformation_applyfor"></ul>
             </div>
             <div class="filter-group">
-              <label for="projecttype" onclick="toggleFilter(this)">projecttype <span class="icon-container"><i
+              <label for="siteaddress_surveyno" onclick="toggleFilter(this)">Survey No <span class="icon-container"><i
                     class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
               <input type="text" placeholder="Search" class="filter-input" id="statusSearch">
-              <ul class="select2" multiple="multiple" id="projecttype"></ul>
+              <ul class="select2" multiple="multiple" id="siteaddress_surveyno"></ul>
             </div>
             <div class="filter-group">
-              <label for="casetype" onclick="toggleFilter(this)">Casetype <span class="icon-container"><i
+              <label for="caseinformation_casetype" onclick="toggleFilter(this)">Casetype <span class="icon-container"><i
                     class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
               <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
-              <ul class="select2 " multiple="multiple" id="casetype"></ul>
+              <ul class="select2 " multiple="multiple" id="caseinformation_casetype"></ul>
             </div>
             <div class="filter-group">
-              <label for="proposaltype" onclick="toggleFilter(this)">proposal type<span class="icon-container"><i
+              <label for="caseinformation_proposaltype" onclick="toggleFilter(this)">proposal type<span class="icon-container"><i
                     class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
               <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
-              <ul class="select2 " multiple="multiple" id="proposaltype"></ul>
+              <ul class="select2 " multiple="multiple" id="caseinformation_proposaltype"></ul>
             </div>
             <div class="filter-group">
-              <label for="tdrzone" onclick="toggleFilter(this)">tdrzone<span class="icon-container"><i
+              <label for="caseinformation_tdrzone" onclick="toggleFilter(this)">tdrzone<span class="icon-container"><i
                     class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
               <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
-              <ul class="select2 " multiple="multiple" id="tdrzone"></ul>
+              <ul class="select2 " multiple="multiple" id="caseinformation_tdrzone"></ul>
             </div>
             <div class="filter-group">
-              <label for="grossplotarea" onclick="toggleFilter(this)">grossplotarea <span class="icon-container"><i
+              <label for="caseinformation_grossplotarea" onclick="toggleFilter(this)">grossplotarea <span class="icon-container"><i
                     class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
               <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
-              <ul class="select2 " multiple="multiple" id="grossplotarea"></ul>
+              <ul class="select2 " multiple="multiple" id="caseinformation_grossplotarea"></ul>
             </div>
             <div class="filter-group">
-              <label for="developmentzonedp" onclick="toggleFilter(this)">developmentzonedp <span
+              <label for="plotdetails_developmentzonedp" onclick="toggleFilter(this)">developmentzonedp <span
                   class="icon-container"><i class="fa-solid fa-angle-down"></i></span><span
                   class="selected-count"></span></label>
               <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
-              <ul class="select2 " multiple="multiple" id="developmentzonedp"></ul>
+              <ul class="select2 " multiple="multiple" id="plotdetails_developmentzonedp"></ul>
             </div>
             <div class="filter-group">
-              <label for="owner_det_email" onclick="toggleFilter(this)">owner_det_email <span class="icon-container"><i
+              <label for="ownerinformation_firstname" onclick="toggleFilter(this)">owner_det_email <span class="icon-container"><i
                     class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
               <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
-              <ul class="select2 " multiple="multiple" id="owner_det_email"></ul>
+              <ul class="select2 " multiple="multiple" id="ownerinformation_firstname"></ul>
             </div>
           </div>
 
@@ -150,13 +132,19 @@
  
   </div>
 
+<!--table-->
+  <button id="openTableBtn"><img src="image/table.svg" alt="" class="tablebtn"></button>
+<!--image-->
+
 
 
 
   <!-- Summary Section -->
   <div class="summary-section">
     <div class="summary-header">
-      <h2>Summary of Commencement</h2>
+      <h2 class="">Summary of Commencement</h2>
+      <!-- <button class="close-legend-btn" id="closeLegendButton">&#215;</button> -->
+        <button id="closeSummaryButton" class="close-summary-btn">&times;</button> <!-- Close button -->
       <div class="proposal-info">
         <span>Total number of proposals: 06</span>
         <div class="proposal-icons">
@@ -370,6 +358,24 @@
   </div>
 
   <div id="map"></div>
+
+  
+<!-- Toggle Button -->
+<button id="toggleClusterLegend" class="toggle-legend">
+  <img src="image/legendbottom.svg"  alt="" class="toggle-icon">
+</button>
+
+
+   
+  <div id="cluster_legend" class="cluster_legend hidden ">
+    <div class="cluster_legend-title">Cluster Legend</div>
+    <hr>
+</div>
+  
+
+
+
+
   <a href="https://geopulsea.com/" class="geopulseaname">@GeoPulse Analytics</a>
   <a  class="logoPMC">
     <img src="image/pmcjpeg.png" alt="Button Image">
@@ -379,7 +385,7 @@
   
   <div class="tab-section">
     <div class="tab-main">
-      <div class="component-6">
+      <div class="component-6"  id="analyticsButton">
         <img class="chart-fill-icon" alt="" src="image/Chart_fill.svg" />
         <div class="analytics">Analytics</div>
       </div>
@@ -403,17 +409,17 @@
 
 
 
-        <div class="component-11" id="toggleButton">
+        <div class="component-11  toggle" id="toggleButton">
           <img class="right-icons" alt="" src="image/Frame 1410126260.svg" />
           <div class="component-11-child"></div>
         </div>
 
-        <div class="component-11">
+        <div class="component-11 toggle" id="toggleButton ">
           <img class="right-icons" alt="" src="image/Pie.svg" />
           <div class="component-11-child"></div>
         </div>
 
-        <div class="component-11">
+        <div class="component-11 toggle" id="toggleButton">
           <div class="right-icons3">
             <img
               class="vuesaxboldgrid-6-icon"
@@ -428,24 +434,23 @@
 
     <!-- This div will be replaced when options are clicked -->
     <div class="tab-parent" id="tabParent">
-      <div class="tab">
+      <div class="tab" data-tab="status" i>
         <div class="status">Status</div>
       </div>
-      <div class="tab1">
+      <div class="tab" data-tab="area">
         <div class="status">Area</div>
       </div>
-      <div class="tab1">
+      <div class="tab" data-tab="explore">
         <div class="status">Explore</div>
       </div>
     </div>
-  </div>
- 
-
-  
+   
     <!--legend -->
     <div class="legends hidden">
       <div class="header">
         <div class="legends1">Legends</div>
+        <button class="close-legend-btn" id="closeLegendButton">&times;</button>
+
         </div>
         <div class="missing-link-buffer-container-parent">
         <div class="missing-link-buffer-container">
@@ -944,7 +949,10 @@
       
       <!--graphs-->
       <div class="data-graphs">
-        <div class="summary-of-commencement">Summary of Commencement</div>
+        <div class="summary-of-commencement">
+          Summary of Commencement
+          <div class="summary-close">&times;</div>
+      </div>
         <div class="data-container">
             <div class="actions">
                 <div class="proposals-count">
@@ -954,14 +962,10 @@
                 <div class="icons">
                     <img class="marketeqrefresh-round-icon" alt="" src="image/Refresh.svg "> |
                     
-                    <!-- <img class="icons-child" alt="" src="image/Line 21.svg">
-                     -->
-                     <img class="marketeqrefresh-round-icon" alt="Print" src="image/Print.svg" onclick="printWindow()">|
-
+                   
+                     <img class="marketeqrefresh-round-icon" alt="Print" src="image/Print.svg" onclick="printWindow()">
                     
-                    <!-- <img class="icons-child" alt="" src="image/Line 21.svg"> -->
-                    
-                    <img class="marketeqrefresh-round-icon" alt="" src="image/Excel.svg">
+<img class="marketeqrefresh-round-icon" alt="" src="image/Excel.svg">
                     
                 </div>
             </div>
@@ -970,7 +974,8 @@
                     <div class="status-wise">
                         <div class="building-permissions-parent">
                             <div class="summary-of-commencement">Building Permissions</div>
-                            <!-- <img class="marketeqrefresh-round-icon" alt="" src="image/chevron-left.svg"> -->
+                            <img class="toggle-icon up-icon" alt="" src="image/up.svg"> <!-- Up arrow initially shown -->
+        <img class="toggle-icon down-icon" alt="" src="image/down.svg" style="display: none;"> <!-- Down arrow initially hidden -->
                             
                         </div>
                         <div class="bar-chart-container">
@@ -1029,7 +1034,9 @@
                     <div class="status-wise1">
                         <div class="building-permissions-parent">
                             <div class="summary-of-commencement">Plinth</div>
-                            <img class="marketeqrefresh-round-icon" alt="" src="Chevron.svg">
+                            <img class="toggle-icon up-icon" alt="" src="image/up.svg"> <!-- Up arrow initially shown -->
+        <img class="toggle-icon down-icon" alt="" src="image/down.svg" style="display: none;"> <!-- Down arrow initially hidden -->
+                            
                             
                         </div>
                         <div class="bar-chart-container">
@@ -1088,7 +1095,8 @@
                     <div class="status-wise">
                         <div class="building-permissions-parent">
                             <div class="summary-of-commencement">Occupancy</div>
-                            <img class="marketeqrefresh-round-icon" alt="" src="Chevron.svg">
+                            <img class="toggle-icon up-icon" alt="" src="image/up.svg"> <!-- Up arrow initially shown -->
+        <img class="toggle-icon down-icon" alt="" src="image/down.svg" style="display: none;"> <!-- Down arrow initially hidden -->
                             
                         </div>
                         <div class="bar-chart-container">
@@ -1150,7 +1158,10 @@
                     <div class="status-wise">
                         <div class="building-permissions-parent">
                             <div class="summary-of-commencement">Gunthewari</div>
-                            <img class="marketeqrefresh-round-icon" alt="" src="Chevron.svg">
+                            <img class="toggle-icon up-icon" alt="" src="image/up.svg"> <!-- Up arrow initially shown -->
+                            <img class="toggle-icon down-icon" alt="" src="image/down.svg" style="display: none;"> <!-- Down arrow initially hidden -->
+                                                
+
                             
                         </div>
                         <div class="bar-chart-container">
@@ -1212,8 +1223,10 @@
                     <div class="status-wise">
                         <div class="building-permissions-parent">
                             <div class="summary-of-commencement">Risk Based Approval</div>
-                            <img class="marketeqrefresh-round-icon" alt="" src="Chevron.svg">
-                            
+                            <img class="toggle-icon up-icon" alt="" src="image/up.svg"> <!-- Up arrow initially shown -->
+                            <img class="toggle-icon down-icon" alt="" src="image/down.svg" style="display: none;"> <!-- Down arrow initially hidden -->
+                                                
+
                         </div>
                         <div class="bar-chart-container">
                             <div class="total">Total</div>
@@ -1271,8 +1284,10 @@
                     <div class="status-wise">
                         <div class="building-permissions-parent">
                             <div class="summary-of-commencement">IT & ITES Approval</div>
-                            <img class="marketeqrefresh-round-icon" alt="" src="Chevron.svg">
+                            <img class="toggle-icon up-icon" alt="" src="image/up.svg"> <!-- Up arrow initially shown -->
+        <img class="toggle-icon down-icon" alt="" src="image/down.svg" style="display: none;"> <!-- Down arrow initially hidden -->
                             
+
                         </div>
                         <div class="bar-chart-container">
                             <div class="total">Total</div>
@@ -1328,8 +1343,7 @@
     </div>
 
     
-
-    
+   
     
 
 
@@ -1352,24 +1366,16 @@
 
 
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
-
-
-  <script type="text/javascript" charset="utf8"
-    src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+  <script type="text/javascript" charset="utf8"src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
 
 
-  <script src="legend.js"></script>
-<script src="map.js"></script>
-<script src="filter.js"></script>
-<script src="script.js"></script>
-  
-  <script src="script2.js"></script>
+<!-- <script src="js/legend.js"></script> -->
+<script src="js/map.js"></script>
+<script src="js/filter.js"></script>
+<script src="js/script.js"></script>
+<script src="js/script2.js"></script>
 
-  <script>
-
-  </script>
 </body>
-
 </html>

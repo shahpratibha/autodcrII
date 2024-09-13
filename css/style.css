@@ -1,45 +1,78 @@
 body,
 html {
-  padding: 0;
-  box-sizing: border-box;
   margin: 0;
-   font-family: "Plus Jakarta Sans";
-   overflow-y: hidden;
+  font-family: "Plus Jakarta Sans";
+  font-size: 12px;
+  overflow-y: hidden;
 }
 
+#map {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+  margin: 0;
+  transition: all 0.5s ease; /* Smooth transition for map resizing */
+}
+.leaflet-container .leaflet-control-attribution {
+  display: none;
+}
 
+.leaflet-retina .leaflet-control-layers-toggle {
+  background-image: url("image/Group 93.svg");
+  background-size: 17px 24px;
+}
+.leaflet-touch .leaflet-control-layers-toggle {
+  width: 30px;
+  height: 30px;
+}
 
-/* cluster */
-.bufferColor {
-
-  padding: 10px;
+.leaflet-right .leaflet-control {
+  float: left;
+  position: relative;
+  top: 12vh !important;
+  left: 96.5vw;
   border-radius: 50%;
-  text-align: center;
-  font-weight: bold;
-  font-weight: bold;
-  color: white;
-
-  transform: translate();
-  transition: 6ms ease-in;
-   /* background: radial-gradient(65.32% 65.32% at 50% 50%, rgba(0, 108, 198, 0.10) 0%, #006CC6  100% ); */
-   
+  background: #6f6f6f;
+  height: 31px;
+  width: 31px;
+  border: #6f6f6f;
+}
+.leaflet-touch .geocoder-control {
+  width: 30px;
+  height: 30px;
 }
 
-
-.cluster-text {
- 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-color: #fff;
-text-shadow: 2px 2px 4px darkblue; 
-  font-size: 14px; 
- 
+.leaflet-control-layers-list,
+.leaflet-control-layers-expanded .leaflet-control-layers-toggle {
+  display: none;
+  padding: 10px;
+  background: white !important;
+  width: 120px !important;
+  position: absolute;
+  right: 97px;
+  z-index: 1000;
+  border-radius: 5px;
+  border: 1px solid #0077da;
+  top: -5px;
+  height: 213px !important;
+  overflow: auto;
+  scrollbar-width: thin;
 }
-/* summery section */
+/* image/Group 93.svg */
 
-/* .summary-header {
+.summary-section {
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  padding: 20px;
+
+  z-index: 1000; /* Ensures it stays above the map */
+}
+
+.summary-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -52,9 +85,9 @@ text-shadow: 2px 2px 4px darkblue;
   font-size: 17px;
   font-style: normal;
   font-weight: 600;
-
+  /* margin-top: -35px; */
   line-height: normal;
-} */
+}
 
 .proposal-info {
   display: flex;
@@ -91,6 +124,47 @@ text-shadow: 2px 2px 4px darkblue;
   height: 24px;
 }
 
+.slider-title {
+  text-align: right;
+  color: #262626;
+  font-size: 14px;
+ 
+  font-weight: 600;
+  word-wrap: break-word;
+}
+
+.slider-content {
+  width: 311px;
+  height: 202px;
+  position: relative;
+  background: white;
+  border-radius: 8px;
+}
+
+.slider-label {
+  position: absolute;
+  text-align: right;
+  color: #262626;
+  font-size: 12px;
+ 
+  font-weight: 400;
+  word-wrap: break-word;
+}
+
+.slider-value {
+  position: absolute;
+  text-align: center;
+  color: #262626;
+  font-size: 12px;
+ 
+  font-weight: 400;
+  word-wrap: break-word;
+}
+ .slider-line {
+  position: absolute;
+  border: 1px #e0e0e0 solid;
+}
+
 .vertical {
   width: 168px;
   height: 0px;
@@ -104,11 +178,44 @@ text-shadow: 2px 2px 4px darkblue;
   border: 1px #a8a8a8 dotted;
 }
 
-
 .dotted {
   border-style: dotted;
 }
 
+.slider-legend {
+  height: 148px;
+  position: absolute;
+  left: 93px;
+  top: 20px;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.legend-item {
+  justify-content: flex-start;
+  align-items: center;
+  gap: 4px;
+  display: inline-flex;
+}
+
+.legend-color {
+  width: 20px;
+  height: 20px;
+}
+
+.legend-text {
+  color: #262626;
+  font-size: 12px;
+  font-weight: 400;
+  word-wrap: break-word;
+}
+
+.stretch .legend-color {
+  width: 132px;
+}
 /* Container for scrolling horizontally */
 .cards {
   display: flex;
@@ -126,7 +233,7 @@ text-shadow: 2px 2px 4px darkblue;
 
   background-color: rgba(255, 255, 255, 0.9);
   border-radius: 8px;
- 
+
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
   padding: 15px; /* Add padding inside the card */
@@ -145,7 +252,6 @@ text-shadow: 2px 2px 4px darkblue;
 .cards::-webkit-scrollbar-thumb:hover {
   background-color: #555;
 }
-
 
 .navigation-icons button {
   font-size: 20px;
@@ -255,7 +361,7 @@ text-shadow: 2px 2px 4px darkblue;
 
 .map-controls {
   position: absolute;
-  top: 40vh;
+  top: 16vh;
   right: 11px;
   z-index: 1000;
   display: flex;
@@ -273,18 +379,19 @@ text-shadow: 2px 2px 4px darkblue;
 
 .top-section {
   padding: 10px;
-  /* background-color: #f8f9fa;
+  background-color: #f8f9fa;
   z-index: 1000;
-  position: relative; */
+  position: relative;
 }
 
 .control-panel {
   position: absolute;
-  top: 1px;
+  top: 15px;
   left: 10px;
   z-index: 999;
+  gap: 25px;
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   align-items: flex-start;
 }
 
@@ -293,7 +400,17 @@ text-shadow: 2px 2px 4px darkblue;
   flex-direction: row;
   gap: 10px;
 }
+.toggle-button {
+  background: none; /* Remove background color */
+  border: none; /* Remove button border */
+  padding: 0; /* Remove padding */
+  cursor: pointer; /* Change cursor to pointer */
+  display: flex; /* Center the image */
+  align-items: center;
+  margin-top: -8px;
 
+  justify-content: center;
+}
 
 .btn-group {
   display: flex;
@@ -319,110 +436,20 @@ text-shadow: 2px 2px 4px darkblue;
   justify-content: center;
   width: 20vh;
   align-self: stretch;
-  margin-top: 13px;
-  margin-left: 5vw;
+
   text-align: center;
   white-space: nowrap;
 }
-
-
-/* summery section */
-
-
-.summary-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.summary-header h2 {
-  margin: 0;
-  color: var(--Grey-800, #262626);
-  font-size: 17px;
-  font-style: normal;
-  font-weight: 600;
-  /* margin-top: -35px; */
-  line-height: normal;
-}
-
-.proposal-info {
-  display: flex;
-  align-items: center;
-}
-
-.proposal-info span {
-  margin-right: 20px;
-  color: var(--Grey-800, #262626);
-  leading-trim: both;
-  text-edge: cap;
-   /* font-family: "Plus Jakarta Sans"; */
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-}
-
-.proposal-icons,
-.navigation-icons {
-  display: flex;
-  align-items: center;
-}
-
-.proposal-icons button,
-.navigation-icons button {
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-.proposal-icons img,
-.navigation-icons img {
-  width: 24px;
-  height: 24px;
-}
-
-
-.btn-active {
-  background: #0077da70 !important;
-  color: white; /* Active text color */
-  border: #0077da70 !important;
-}
-/* CSS for moving elements */
-.move-up {
-  transform: translateY(-312px);
-  transition: transform 0.3s ease-in-out;
-}
-
-.summary-section {
-  display: none;
-  position: absolute;
-  bottom: -15px;
-  overflow-x: hidden;
-  width: 100%;
-  background: rgba(246, 246, 242, 0.47); /* Converted RGB to RGBA */
-  backdrop-filter: blur(2px);
-  transition: display 0.3s ease-in-out;
-  
-  padding: 20px;
-
-  z-index: 1000; /* Ensures it stays above the map */
-}
-/* Define how the .move-up class affects the elements */
-.move-up {
-  transform: translateY(-315px); /* Adjust value based on how much you want to move up */
-  transition: transform 0.3s ease; /* Smooth transition */
-}
-
 
 /* Your existing CSS styles */
 
 .date-picker {
   position: absolute;
-  top: 11px;
-  right: 20px;
+  top: 4px;
+  right: 5px;
   z-index: 999;
   color: var(--Grey-700, #393939);
+
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -455,11 +482,8 @@ text-shadow: 2px 2px 4px darkblue;
   align-items: center; /* Align items vertically centered */
 }
 
-
-
 .calendar-icon {
   margin-left: 10px; /* Space between date range and icon */
-
 }
 
 .calendar-icon img {
@@ -485,6 +509,115 @@ text-shadow: 2px 2px 4px darkblue;
   cursor: pointer;
 }
 
+.leaflet-right {
+  left: 10px;
+}
+
+.north-arrow-container {
+  position: absolute;
+  bottom: 38px;
+  left: 7px;
+  z-index: 1000;
+}
+.north-arrow {
+  height: 50px;
+  width: 32px;
+  margin-left: 10px;
+  color: white; /* Ensures the arrow itself is white */
+  /* border-radius: 8px;
+border: 1px solid rgba(255, 255, 255, 0.50);
+background: radial-gradient(400.2% 139.23% at 0% 3.13%, rgba(0, 119, 218, 0.80) 0%, rgba(0, 84, 155, 0.80) 100%);
+box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+backdrop-filter: blur(2px);
+  */
+  
+}
+/* 
+.top-section {
+  padding: 10px;
+  background-color: rgba(248, 249, 250, 0);
+  z-index: 1000;
+  position: relative;
+} */
+
+.leaflet-container {
+  font-size: 12px;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  top: -18px;
+}
+/* Styling the leaflet bar */
+.leaflet-touch .leaflet-bar a {
+  width: 18px; /* Adjust width for larger buttons */
+  height: auto; /* Adjust height for larger buttons */
+  line-height: 28px;
+  display: flex;
+  border: none;
+  background-color: transparent;
+  color: white;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px; /* Size of the plus and minus symbols */
+  text-decoration: none;
+}
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+  background: white;
+  color: #333;
+  display: none;
+  box-shadow: 0 3px 14px rgba(0, 0, 0, 0.4);
+}
+.leaflet-container a.leaflet-popup-close-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: none;
+  display: none;
+  text-align: center;
+  width: 24px;
+  height: 24px;
+  font: 16px / 24px Tahoma, Verdana, sans-serif;
+  color: #757575;
+  text-decoration: none;
+  background: transparent;
+}
+.leaflet-marker-pane {
+  z-index: 600;
+  display: none;
+}
+.leaflet-container a {
+  color: #0078a8;
+}
+
+/* Styling the leaflet control container */
+.leaflet-bar {
+  background: linear-gradient(180deg, #6f6f6f 0%, #262626 100%);
+  border-radius: 10px; /* Rounded corners for the container */
+
+  padding: 5px; /* Add some padding */
+  box-shadow: 0px 0px 14.035px 0px rgba(0, 0, 0, 0.15);
+  display: inline-block;
+}
+
+/* Fixing the position on the map */
+.leaflet-top.leaflet-left .leaflet-bar {
+  position: fixed; /* Keep it fixed */
+  bottom: 3vh; /* Center vertically on the viewport */
+  right: 2vh; /* Adjust the position from the left */
+  z-index: 1000; /* Ensure it stays on top */
+}
+
+.leaflet-control.scale {
+  position: absolute;
+  top: 60%; /* Position scale control at 60% from the top */
+  right: 10px; /* Position it 10px from the right */
+
+  transform: translateY(-90%); /* Center the scale vertically at the 60% mark */
+  z-index: 1000; /* Ensure it appears above other map elements */
+}
+.leaflet-right .leaflet-control {
+  float: left;
+}
 
 .btn-active {
   background: #0077da70 !important;
@@ -503,6 +636,11 @@ text-shadow: 2px 2px 4px darkblue;
   transition: transform 0.3s ease-in-out;
 }
 
+/* Adjust the leaflet control scale to prevent it from moving too much */
+.leaflet-control-scale.move-up {
+  transform: translateY(-320px); /* Adjust the value as needed */
+  transition: transform 0.3s ease-in-out;
+}
 .summary-section {
   display: none;
   position: absolute;
@@ -518,50 +656,45 @@ text-shadow: 2px 2px 4px darkblue;
   z-index: 1000; /* Ensures it stays above the map */
 }
 
+#map {
 
+}
 
 /* Define how the .move-up class affects the elements */
 .move-up {
-  transform: translateY(-315px); /* Adjust value based on how much you want to move up */
+  transform: translateY(
+    -315px
+  ); /* Adjust value based on how much you want to move up */
   transition: transform 0.3s ease; /* Smooth transition */
 }
 
+/* Ensure .geopulseaname has the same transition behavior */
+.geopulseaname {
+  position: fixed;
+  z-index: 99999;
+  bottom: 1vh;
+  right: 9px;
+  text-decoration: none;
+  color: black;
+  font-family: Roboto;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: bold;
+  line-height: normal;
+  transition: transform 0.3s ease; /* Smooth transition */
+}
 
 /* Style for the calendar popup */
 /* Style for the selected date range boxes */
-day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRange.endRange {
-  border-radius:8px !important;
-}
-.flatpickr-current-month input.cur-year {
-  background: transparent;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  color: inherit;
-  cursor: text;
-  padding: 0 17px 0px 0.5ch;
-  margin: 0;
-  line-height: inherit;
-  height: auto;
-  border: 0;
-  border-radius: 0;
-  vertical-align: initial;
-  -webkit-appearance: textfield;
-  -moz-appearance: textfield;
-  appearance: textfield;
-  font-size: 15px;
-  text-align: right;
+day.selected.endRange,
+.flatpickr-day.startRange.endRange,
+.flatpickr-day.endRange.endRange {
+  border-radius: 8px !important;
 }
 
-.flatpickr-monthDropdown-month{
-
-  font-size: 10px;
-  overflow: scroll;
-  scrollbar-width: thin;
-  height: 100px;
-
-}
-
-.flatpickr-day.selected.startRange, .flatpickr-day.startRange.startRange, .flatpickr-day.endRange.startRange {
+.flatpickr-day.selected.startRange,
+.flatpickr-day.startRange.startRange,
+.flatpickr-day.endRange.startRange {
   border-radius: 8px !important;
 }
 .flatpickr-day.selected.startRange {
@@ -596,11 +729,21 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   /* -webkit-box-shadow: -5px 0 0 #e6e6e6, 5px 0 0 #e6e6e6; */
   /* box-shadow: -5px 0 0 #e6e6e6, 5px 0 0 #e6e6e6; */
 }
-.flatpickr-day.inRange, .flatpickr-day.prevMonthDay.inRange, .flatpickr-day.nextMonthDay.inRange, .flatpickr-day.today.inRange, .flatpickr-day.prevMonthDay.today.inRange, .flatpickr-day.nextMonthDay.today.inRange, .flatpickr-day:hover, .flatpickr-day.prevMonthDay:hover, .flatpickr-day.nextMonthDay:hover, .flatpickr-day:focus, .flatpickr-day.prevMonthDay:focus, .flatpickr-day.nextMonthDay:focus {
+.flatpickr-day.inRange,
+.flatpickr-day.prevMonthDay.inRange,
+.flatpickr-day.nextMonthDay.inRange,
+.flatpickr-day.today.inRange,
+.flatpickr-day.prevMonthDay.today.inRange,
+.flatpickr-day.nextMonthDay.today.inRange,
+.flatpickr-day:hover,
+.flatpickr-day.prevMonthDay:hover,
+.flatpickr-day.nextMonthDay:hover,
+.flatpickr-day:focus,
+.flatpickr-day.prevMonthDay:focus,
+.flatpickr-day.nextMonthDay:focus {
   cursor: pointer;
   outline: 0;
   background: #e6e6e6 !important;
-
 }
 
 .flatpickr-day.inRange {
@@ -614,7 +757,7 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   display: inline !important;
   top: 40px !important;
   width: 280px;
- right: 38px !important;
+  right: 38px !important;
   position: absolute !important;
 }
 
@@ -690,11 +833,11 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
 }
 
 #apply-button {
-  background-color: #888; /* Blue background for apply button */;
+  background-color: #888; /* Blue background for apply button */
 }
 
 #cancel-button {
-  background-color: #007bff /* Gray background for cancel button */
+  background-color: #007bff; /* Gray background for cancel button */
 }
 
 .flatpickr-calendar {
@@ -711,10 +854,10 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   color: inherit;
   cursor: pointer;
   font-size: inherit;
-  /* font-family: inherit; */
+  font-family: inherit;
   font-weight: 300;
   height: auto;
-  font-size: 17.5px !important;
+  font-size: 15px !important;
   line-height: inherit;
   margin: -1px 0 0 0;
   outline: none;
@@ -725,7 +868,6 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   -webkit-appearance: menulist;
   -moz-appearance: menulist;
   width: auto;
-  text-align:left;
 }
 .flatpickr-calendar {
   background: transparent;
@@ -748,8 +890,10 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   -ms-touch-action: manipulation;
   touch-action: manipulation;
   background: #fff;
-  -webkit-box-shadow: 1px 0 0 #e6e6e6, -1px 0 0 #e6e6e6, 0 1px 0 #e6e6e6, 0 -1px 0 #e6e6e6, 0 3px 13px rgba(0, 0, 0, 0.08);
-  box-shadow: 1px 0 0 #e6e6e6, -1px 0 0 #e6e6e6, 0 1px 0 #e6e6e6, 0 -1px 0 #e6e6e6, 0 3px 13px rgba(0, 0, 0, 0.08);
+  -webkit-box-shadow: 1px 0 0 #e6e6e6, -1px 0 0 #e6e6e6, 0 1px 0 #e6e6e6,
+    0 -1px 0 #e6e6e6, 0 3px 13px rgba(0, 0, 0, 0.08);
+  box-shadow: 1px 0 0 #e6e6e6, -1px 0 0 #e6e6e6, 0 1px 0 #e6e6e6,
+    0 -1px 0 #e6e6e6, 0 3px 13px rgba(0, 0, 0, 0.08);
 }
 
 /* Search icon inside the button */
@@ -771,26 +915,21 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
 
 /* Initial button styling */
 #search-button {
-  right: 2px;
-  width: 35px; /* Initial width */
-  height: 35px; /* Initial height */
-  /* transition: width 0.3s, height 0.3s, background-color 0.3s, opacity 0.3s; /* Smooth transition */
+  right: 9px;
+  width: 30px; /* Initial width */
+  height: 30px; /* Initial height */
+  transition: width 0.3s, height 0.3s, background-color 0.3s, opacity 0.3s; /* Smooth transition */
   background: linear-gradient(180deg, #6f6f6f 0%, #262626 100%);
-  box-shadow: 0px 0px 14.035px 0px rgba(0, 0, 0, 0.15); 
- border: none;
-  border: 1px solid rgba(255, 255, 255, 0.50);
-  background: radial-gradient(400.2% 139.23% at 0% 3.13%, rgba(0, 119, 218, 0.80) 0%, rgba(0, 84, 155, 0.80) 100%);
-  box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.35);
-  backdrop-filter: blur(2px);
-  border-radius: 0 0 8px 8px; /* Top corners square, bottom corners rounded */
+  box-shadow: 0px 0px 14.035px 0px rgba(0, 0, 0, 0.15);
+  border: none; /* Remove border */
+  
   cursor: pointer; /* Pointer cursor on hover */
   display: flex; /* Center the icon */
   align-items: center;
-
+  bottom: 52px;
   justify-content: center;
   overflow: hidden; /* Ensure smooth resizing */
   position: absolute; /* Position absolute within the container */
-  top: -202px;/* Align with container top */
 }
 
 /* Full width when expanded */
@@ -825,17 +964,6 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   padding-right: 40px; /* Add padding to make room for the close icon */
 }
 
-.close-icon {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(60%); /* Center vertically */
-  cursor: pointer;
-  display: none; /* Initially hidden */
-  width: 18px; /* Adjust size as needed */
-  height: 18px; /* Adjust size as needed */
-}
-
 /* When search input is shown */
 .full-width #searchInputDashboard {
   display: block;
@@ -844,8 +972,6 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
 .full-width #search-icon {
   display: none;
 }
-
-
 
 /* Hide the icon when button is expanded */
 #search-button.full-width img {
@@ -861,7 +987,7 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   border: 1px solid #ccc; /* Border color */
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Box shadow */
   position: absolute; /* Position absolute within the container */
-  top: -88px; /* Align with container top */
+  bottom: 45px;
   right: 0;
   transition: opacity 0.3s, width 0.3s; /* Smooth transition */
 }
@@ -870,9 +996,26 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
 #search-button.full-width ~ #searchInputDashboard {
   display: block; /* Show the input field */
 }
+/* CSS to hide filters initially */
+#filters {
+  margin-left: -35vw; /* Hide off-screen */
+  opacity: 0; /* Invisible */
+  transition: margin-left 0.3s, opacity 0.3s; /* Smooth transition */
+}
+*/
 
 /* filter */
+/* .filters{
+  display: none ;
+} */
 
+/* Search icon inside the button */
+/* #toggleFilters img {
+  width: 19px;
+  height: auto;
+  margin-top: -1px;
+  margin-left: 0px;
+} */
 /* Container to hold the button and search input */
 .button-container {
   width: 100%; /* Full width container */
@@ -882,23 +1025,6 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   margin-top: 50px; /* Added margin for better visual placement */
   position: relative; /* Position relative for the button and search input */
 }
-/* #toggleFilters {
-  right: -7px;
-  width: 30px;
-  height: 30px;
-  left: 49px;
-  border: none ;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  position: fixed;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  position: absolute;
-  top: -1px;
-} */
-
 
 
 
@@ -925,7 +1051,6 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   /* text-align: right; */
   color: #262626;
   font-size: 14px;
-   /* font-family: "Plus Jakarta Sans"; */
   font-weight: 600;
   word-wrap: break-word;
 }
@@ -943,7 +1068,7 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
 .text-small {
   color: #262626;
   font-size: 12px;
-   /* font-family: "Plus Jakarta Sans"; */
+ 
   word-wrap: break-word;
 }
 
@@ -1120,7 +1245,6 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   text-align: right;
   color: #262626;
   font-size: 14px;
-   /* font-family: "Plus Jakarta Sans"; */
   font-weight: 600;
   word-wrap: break-word;
 }
@@ -1140,7 +1264,6 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   left: 6px;
 
   font-size: 12px;
-   /* font-family: "Plus Jakarta Sans"; */
   font-weight: 400;
   word-wrap: break-word;
 }
@@ -1298,27 +1421,25 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   background: #0077da;
 }
 
-.filter_div{
-  height: auto; 
-  max-height: 55vh;
+.filter_div {
+  height: auto;
+  max-height: 65vh;
   overflow: hidden;
   transition: overflow 0.3s ease;
-
 }
 .filter_div:hover {
   overflow: auto;
   scrollbar-width: thin;
   scrollbar-color: #888 #f1f1f1;
-
 }
 .toggle-button {
   position: relative;
-  top: 20vh;
+  top: 14vh;
   right: 49px;
   z-index: 1000;
   border: none;
   background: none;
-  color:#8AC0EE;
+  color: #8ac0ee;
   font-size: 21px;
   border-radius: 5px;
 }
@@ -1340,224 +1461,4 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   object-fit: contain; /* Ensure image scales properly */
 }
 
-.filters {
-  display: none;                    /* Hide the filter panel by default */
-  position: absolute;
-  top: 22%;
-  left: 18px;
-  border-radius: 12px;
-  width: 290px;
-  background-color: white;
-  border: 1px solid #ddd;
-  z-index: 1000;
-  padding: 10px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  opacity: 0;                      /* Initially hidden */
-  transition: opacity 0.3s ease;   /* Smooth transition for opacity */
-}
 
-.filter-group {
-  margin-bottom: 5px;
-  padding: 8px;
-  border-radius: 8px;
-background: var(--Blue-50, #E6F1FB);
-  font-size: 10px;
-}
-.filter-group label {
-  display: block; 
-  margin-bottom: 5px;
-  color: var(--Basic-Colors-Black, #000);
-
-font-size: 14px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
-  cursor: pointer;
-  position: relative;
-  /* background: aliceblue; */
-}
-
-  .filter-group input[type="text"] {
-    width: 97%;
-    padding: 6px;
-    margin-bottom: 10px;
-    font-size: 12px;
-    font-weight: bold;
-    display: none;
-    border-radius: 8px;
-    border: 2px solid #bbb;
-}
-.filter-group ul {
-list-style-type: none;
-padding: 0;
-display: none;
-}
-.filter-group ul.active,
-.filter-group input[type="text"].active {
-display: block;
-forced-color-adjust: blue;
-}
-.filter-group li {
-  margin-bottom: 5px;
-}
-
-.icon-container {
-position:absolute;
-right:1%; 
-top:0%;
-font-size: 15px;
-} */
-
-/* Style the icon */
- .icon-container i {
-color: black; 
-}
-
-.abcscroll {
-  height: auto;
-  max-height: 200px;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  scrollbar-width: thin; /* For Firefox */
-  scrollbar-color: #888 #f1f1f1; /* For Firefox */
-}
-
-/* WebKit (Safari, older Chrome) */
-.abcscroll::-webkit-scrollbar {
-  width: 10px; /* Makes scrollbars thinner */
-}
-
-.abcscroll::-webkit-scrollbar-track {
-  background: #f1f1f1; /* Color of scrollbar track */
-  border-radius: 10px; /* Rounded corners for scrollbar track */
-}
-
-.abcscroll::-webkit-scrollbar-thumb {
-  background: #888; /* Color of scrollbar handle */
-  border-radius: 10px; /* Rounded corners for scrollbar handle */
-}
-
-.abcscroll::-webkit-scrollbar-thumb:hover {
-  background: #555; /* Darker color on hover state for visibility */
-}
-
-
-
-
-
-
-#tablecontainer {
-  z-index: 9999;
-  position: absolute;
-  width: 53%;
-  bottom: 24%;
-  right: 4%;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  max-height: 200px;
-  font-size: 12px;
-  transition: all 0.3s ease;
-}
-
-
-.tableDetail {
-max-height: 550px; 
-overflow-y: auto; 
-/* margin-top: 10px;  */
-border: 1px solid #ccc; 
-background-color: #f9f9f9; 
-
-}
-
-.minimize-button {
-background-color:#8AC0EE;
-color: red;
-border: none;
-padding: 5px;
-cursor: pointer;
-font-size: 15px;
-/* border-radius: 50%; */
-position: absolute;
-right: 0%;
-top:0%;
-z-index: 1000;
-width: 27px;
-height:28px;
-display: flex;
-justify-content: center;
-align-items: center;
-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
-} 
-/* 
-
-.download-button
- {
-  
-  background-color: darkblue;
-  color: white;
-  border: none;
-  padding: 5px;
-  cursor: pointer;
-  font-size: 15px;
-  
-  position: absolute;
-  right: 5%;
-  top:0%;
-  z-index: 1000;
-  width: 27px;
-  height:28px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  
-  } 
-
-.data-table {
-width: 100%;
-border-collapse: collapse;
-}
-
-
-.data-table th {
-
-background-color:#E6F1FB;
-color: var(--Blue-500, #0077DA);
-
-font-size: 10px;
-font-style: normal;
-font-weight: 500;
-line-height: normal;
-text-align: center;
-
-text-transform: uppercase;
-font-weight: bold;
-
-
-
-}
-
-
-
-.dataTables_wrapper .dataTables_scrollHead {
-overflow: visible;
-}
-
-.dataTables_wrapper .dataTables_scrollBody {
-overflow: auto;
-scrollbar-width: thin;
-text-align: center;
-height: 248px;
-max-height: 248px; }
-
-.dataTables_wrapper .dataTables_scrollFoot {
-overflow: visible;
-}
- 
-
- */
-/* .filters{
-  display: none;
-} */

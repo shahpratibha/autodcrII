@@ -69,36 +69,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 });
-  // -------------------------------------------------------------------------
-  document.addEventListener('DOMContentLoaded', function () {
-    const button = document.getElementById('toggleFilters');
-    const filters = document.getElementById('filters');
-    let filtersVisible = false;
-  
-    // Set the title attribute for the button
-    button.setAttribute('title', 'Filter');
-  
-    button.addEventListener('click', function () {
-      if (!filtersVisible) {
-        filters.style.display = 'block';       // Show the filter panel
-        filters.style.opacity = '1';           // Make it visible
-        filters.style.visibility = 'visible';  // Ensure it is visible
-      } else {
-        filters.style.opacity = '0';           // Hide it with fade effect
-        filters.style.visibility = 'hidden';   // Hide it visually
-        setTimeout(() => {
-          filters.style.display = 'none';      // Remove from layout after fade
-        }, 300); // Match this time with the opacity transition duration
-      }
-      filtersVisible = !filtersVisible;
-    });
-  });
-  
-
-    button.setAttribute('title', 'Filter');
-
-
-
 
 function updateTableStats(stats) {
   document.getElementById('tablestats').innerText = stats;
@@ -108,7 +78,7 @@ function updateTableStats(stats) {
 
 $(document).ready(function () {
     // Example usage of the function
-const cluster_layerName = "auto_test"; // Verify this layer name in your GeoServer
+const cluster_layerName = "Plot_Layout"; // Verify this layer name in your GeoServer
 const cluster_url = "https://iwmsgis.pmc.gov.in/geoserver/";
 // const filter = ""; // Add any additional filter if required
 
@@ -131,9 +101,9 @@ const cluster_url = "https://iwmsgis.pmc.gov.in/geoserver/";
 
 
   function loadinitialData(cql_filter) {
-    const filternames = ["area", "applyfor", "casetype", "proposaltype", "tdrzone", "grossplotarea", "developmentzonedp", "owner_det_email"];//accordn column names , if want add one more filter criteria add here
+    const filternames = ["siteaddress_area", "caseinformation_applyfor","siteaddress_surveyno", "caseinformation_casetype", "caseinformation_proposaltype", "caseinformation_tdrzone", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "ownerinformation_firstname"];//accordn column names , if want add one more filter criteria add here
     var workspace = 'AutoDCR';
-    var layerName = 'auto_test';
+    var layerName = 'Plot_Layout';
     filternames.forEach(function (filtername) {
       var url = `${main_url}${workspace}/wms?service=WFS&version=1.1.0&request=GetFeature&typeName=${layerName}&propertyName=${filtername}&outputFormat=application/json`;
       if (cql_filter) {
@@ -163,7 +133,7 @@ const cluster_url = "https://iwmsgis.pmc.gov.in/geoserver/";
 
 
 function DataTableFilter(cql_filter1) {
-  var layers = ["AutoDCR:auto_test"];
+  var layers = ["AutoDCR:Plot_Layout"];
   var typeName = layers.join(',');
   var cqlFilter = cql_filter1;
   var workspace = 'AutoDCR'
@@ -172,11 +142,12 @@ function DataTableFilter(cql_filter1) {
   if (cql_filter1 !== '') {
     geoServerURL += "&CQL_FILTER=" + encodeURIComponent(cqlFilter);
   }
-  var headers = ["area", "applyfor", "casetype", "proposaltype", "tdrzone", "grossplotarea", "developmentzonedp", "owner_det_email"];
+  var headers = ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype","siteaddress_surveyno", "caseinformation_proposaltype", "caseinformation_tdrzone", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "ownerinformation_firstname"];
   showtable(typeName, geoServerURL, cqlFilter, headers);
 }
 
 function populateDropdown(dropdownId, data) {
+
   var ul = $("#" + dropdownId);
   ul.empty();
   data.forEach(function (item) {
@@ -184,17 +155,56 @@ function populateDropdown(dropdownId, data) {
     var listItem = $('<li><label><input type="checkbox" class="select2-option-checkbox" value="' + item + '"> ' + item + '</label></li>');
     ul.append(listItem);
   });
+
+
 }
+
+// new 12/9
+// function updateDependentFilters() {
+//   getCheckedValues(function (filterString) {
+//     // Fetch and update dropdowns based on the current filter string
+//     const activeFilters = Object.keys(selectedValues).reduce((acc, filterName) => {
+//       if (selectedValues[filterName].length > 0) {
+//         acc[filterName] = selectedValues[filterName];
+//       }
+//       return acc;
+//     }, {});
+
+//     Object.keys(layerDetails["AutoDCR:Plot_Layout"]).forEach(function (filterName) {
+//       if (!activeFilters[filterName]) {
+//         var url = `${main_url}${workspace}/wms?service=WFS&version=1.1.0&request=GetFeature&typeName=${layerName}&propertyName=${filterName}&outputFormat=application/json&cql_filter=${encodeURIComponent(filterString)}`;
+//         $.getJSON(url, function (data) {
+//           var filteredData = data.features.map(feature => feature.properties[filterName]).filter(value => value);
+//           var uniqueFilteredData = [...new Set(filteredData)];
+//           populateDropdown(filterName, uniqueFilteredData);
+//         });
+//       }
+//     });
+//   });
+// }
+// new end 12/9
 
 
 function getCheckedValues(callback) {
   var selectedValues = {};
-  const filternames = ["area", "applyfor", "casetype", "proposaltype", "tdrzone", "grossplotarea", "developmentzonedp", "owner_det_email"];
+  const filternames = ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype", "caseinformation_proposaltype","siteaddress_surveyno", "caseinformation_tdrzone", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "ownerinformation_firstname"];
 
   filternames.forEach(function (filtername) {
     selectedValues[filtername] = []; 
 
+  //    // new 12/9
+  //    $('#' + filtername + ' input[type="checkbox"]:checked').each(function () {
+  //     var single_val = $(this).val();
+  //     if (single_val) {
+  //       var actualValue = single_val.split(' (')[0];
+  //       selectedValues[filtername].push(actualValue);
+  //     }
+  //   });
+  // });
+      // new end 12/9
+
     $('#' + filtername).on('click', 'input[type="checkbox"]', function (event) {
+     
       event.stopPropagation();
       var values = [];
       $('#' + filtername + ' input[type="checkbox"]:checked').each(function () {
@@ -231,23 +241,33 @@ function getCheckedValues(callback) {
       }
     });
   });
+  // new 12/9
+
+    // Update dependent filters
+    // updateDependentFilters();
+
+    // if (typeof callback === 'function') {
+    //   callback(filterString);
+    // }
+
+  // new end 12/9
 }
 
 function FilterAndZoom(filter) {
   fitbous(filter)
-  auto_test.setParams({
+  Plot_Layout.setParams({
     CQL_FILTER: filter,
     maxZoom: 19.5,
   }).addTo(map);
-  auto_test.setParams({
-    CQL_FILTER: filter,
-    maxZoom: 19.5,
-  }).addTo(map);
+  // Plot_Layout.setParams({
+  //   CQL_FILTER: filter,
+  //   maxZoom: 19.5,
+  // }).addTo(map);
 };
 
 
 function fitbous(filter) {
-  var layers = ["AutoDCR:auto_test"];
+  var layers = ["AutoDCR:Plot_Layout"];
   var bounds = null;
 
   var processLayer = function (layerName, callback) {
@@ -557,18 +577,26 @@ function showtable(typeName, geoServerURL, cqlFilter, headers) {
       }, 0);
       let uniqueCount = new Set(work_id).size;
       // //console.log(work_id.length, "lllllllllllll", work_id, uniqueCount)
-      document.getElementById('tablestats').innerHTML = `
+    //   document.getElementById('tablestats').innerHTML = `
+    //   // <div class="stat-button">
+    //   //   <div class="stat-label">Total Length (In Meter):</div>
+    //   //   <div class="stat-value" id="totalLength">${shapeAreaSum.toFixed(2)}</div>
+    //   // </div>
+    //   <div class="stat-button">
+    //     <div class="stat-label">Total Links:</div>
+    //     <div class="stat-value" id="totalLinks">${uniqueCount}</div>
+    //   </div>
+    // `;
+    document.getElementById('tablestats').innerHTML = `
+    
       <div class="stat-button">
-        <div class="stat-label">Total Length (In Meter):</div>
-        <div class="stat-value" id="totalLength">${shapeAreaSum.toFixed(2)}</div>
-      </div>
-      <div class="stat-button">
-        <div class="stat-label">Total Links:</div>
+        <div class="stat-label">Total Plot count:</div>
         <div class="stat-value" id="totalLinks">${uniqueCount}</div>
       </div>
     `;
 
       createTable(exampleData, headers);
+
     });
   }
 
@@ -584,7 +612,7 @@ $(document).ready(function () {
 
 
 document.addEventListener('DOMContentLoaded', (event) => {
-  var columns = { "name": "Road Name", "applyfor": "applyfor", "width": "Road width", "link_no": "Link_number" };
+  var columns = { "name": "Road Name", "caseinformation_applyfor": "caseinformation_applyfor", "width": "Road width", "link_no": "Link_number" };
   var select = document.getElementById("search_type");
 
   // Populate dropdown with column names
@@ -604,7 +632,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     var selectedValue = $(this).val();
     var selectedText = $("#search_type option:selected").text(); // Get the selected option text
     $("#searchInputDashboard").attr("placeholder", "Search " + selectedText); // Set the input placeholder
-    var layerName = 'auto_test'
+    var layerName = 'Plot_Layout'
     var workspace = 'AutoDCR'
     function getValues(callback) {
       var geoServerURL = `${main_url}${workspace}/wms?service=WFS&version=1.1.0&request=GetFeature&typeName=${layerName}&propertyName=${selectedValue}&outputFormat=application/json`;
@@ -663,21 +691,21 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
             cqlFilter = `${searchtypefield} IN ('${selectedValue}')`;
 
-            auto_test.setParams({
+            Plot_Layout.setParams({
               CQL_FILTER: cqlFilter,
               maxZoom: 19.5,
            
             });
 
-            auto_test.addTo(map).bringToFront();
+            Plot_Layout.addTo(map).bringToFront();
 
-            auto_test.setParams({
+            Plot_Layout.setParams({
               CQL_FILTER: cqlFilter,
               maxZoom: 19.5,
               
             });
 
-            auto_test.addTo(map).bringToFront();
+            Plot_Layout.addTo(map).bringToFront();
 
             fitbous(cqlFilter);
 
@@ -759,13 +787,13 @@ function getCheckedValuess() {
 
 
 const layerDetails = {
-  "AutoDCR:auto_test": ["area", "applyfor", "casetype", "proposaltype", "tdrzone", "grossplotarea", "developmentzonedp", "owner_det_email"],
+  "AutoDCR:Plot_Layout": ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype", "caseinformation_proposaltype","siteaddress_surveyno", "caseinformation_tdrzone", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "ownerinformation_firstname"],
 };
 
 function getCheckedValuesforpopuups() {
   return new Promise((resolve, reject) => {
     var selectedValues = {};
-    const filternames = ["area", "applyfor", "casetype", "proposaltype", "tdrzone", "grossplotarea", "developmentzonedp", "owner_det_email"];
+    const filternames = ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype", "siteaddress_surveyno","caseinformation_proposaltype", "caseinformation_tdrzone", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "ownerinformation_firstname"];
 
     filternames.forEach(function (filtername) {
       selectedValues[filtername] = []; 
@@ -805,134 +833,211 @@ function combineFilters(cql_filter123, filterString) {
   }
 }
 
-// //console.log("hehehe")
-// map.on("contextmenu", async (e) => {
-//   let bbox = map.getBounds().toBBoxString();
-//   let size = map.getSize();
 
-//   let filterString = await getCheckedValuesforpopuups();
-//   let cqlFilter123 = "";
+  // map.on("contextmenu", async (e) => {
+  //   let bbox = map.getBounds().toBBoxString();
+  //   let size = map.getSize();
 
-//   if (filterString.trim() !== "") {
-//     cqlFilter123 = filterString;
-//   }
+  //   let filterString = await getCheckedValuesforpopuups();
+  //   let cqlFilter123 = filterString.trim() !== "" ? encodeURIComponent(filterString) : "";
 
-//   // //console.log(cqlFilter123, "cqlFilter123");
+  //   for (let layer in layerDetails) {
+  //     let selectedKeys = layerDetails[layer];
+  //     var workspace = 'AutoDCR';
+  //     let urrr = `${main_url}${workspace}/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&FORMAT=image%2Fpng&TRANSPARENT=true&QUERY_LAYERS=${layer}&STYLES&LAYERS=${layer}&exceptions=application%2Fvnd.ogc.se_inimage&INFO_FORMAT=application/json&FEATURE_COUNT=50&X=${Math.round(e.containerPoint.x)}&Y=${Math.round(e.containerPoint.y)}&SRS=EPSG%3A4326&WIDTH=${size.x}&HEIGHT=${size.y}&BBOX=${bbox}&CQL_FILTER=${cqlFilter123}`;
 
-//   for (let layer in layerDetails) {
-//     let selectedKeys = layerDetails[layer];
-//     let urrr = `${main_url}${workspace}/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&FORMAT=image%2Fpng&TRANSPARENT=true&QUERY_LAYERS=${layer}&STYLES&LAYERS=${layer}&exceptions=application%2Fvnd.ogc.se_inimage&INFO_FORMAT=application/json&FEATURE_COUNT=50&X=${Math.round(e.containerPoint.x)}&Y=${Math.round(e.containerPoint.y)}&SRS=EPSG%3A4326&WIDTH=${size.x}&HEIGHT=${size.y}&BBOX=${bbox}&CQL_FILTER=${cqlFilter123}`;
+  //     try {
+  //       let response = await fetch(urrr);
+  //       let text = await response.text();
+  //       let jsonResponse;
 
-//     try {
-//       let response = await fetch(urrr);
-//       let text = await response.text(); // Get response as text for debugging
-//       // //console.log(text); // Log the raw response text
+  //       try {
+  //         jsonResponse = JSON.parse(text);
+  //       } catch (parseError) {
+  //         console.error("Response is not valid JSON:", parseError);
+  //         return;
+  //       }
 
-//       // Try to parse JSON only if the response is valid JSON
-//       let html;
-//       try {
-//         html = JSON.parse(text);
-//       } catch (parseError) {
-//         console.error("Response is not valid JSON:", parseError);
-//         return;
-//       }
+  //       if (!jsonResponse.features) {
+  //         console.error("Features not found in response:", jsonResponse);
+  //         return;
+  //       }
 
-//       let features = html.features;
-//       console.log(features, "features")
-//       let detaildata = "";
+  //       let features = jsonResponse.features;
+  //       console.log(features, "features");
 
-//       features.forEach((feature, index) => {
-//         let htmldata = feature.properties;
-//         let txtk1 = "";
+  //       let detaildata = "";
 
-//         for (let key of selectedKeys) {
-//           if (htmldata.hasOwnProperty(key)) {
-//             let value = htmldata[key];
-//             txtk1 += "<tr><td>" + key + "</td><td>" + value + "</td></tr>";
-//           }
+  //       features.forEach((feature, index) => {
+  //         let htmldata = feature.properties;
+  //         let token = htmldata.token || 'N/A';
+  //         let gutNo = htmldata.gut_no || 'N/A';
+  //         let ownerName = htmldata.owner_det_email || 'N/A';
+  //         let plotType = htmldata.plottype || 'N/A';
+  //         let caseInfoArea = htmldata.case_info_area || 'N/A';
+  //         let plotNo = htmldata.plotno || 'N/A';
+  //         let pincode = htmldata.pincode || 'N/A';
+
+  //         detaildata += `<div style='max-height: 350px; max-height: 250px; position:absolute; z-index:9999'>
+  //           <table style='width:110%;' class='popup-table'>
+  //             <tr><td colspan="2">Feature ${index + 1}</td></tr>
+  //             <tr><td>Token No</td><td>${token}</td></tr>
+  //             <tr><td>Gut No</td><td>${gutNo}</td></tr>
+  //             <tr><td>Owner Email</td><td>${ownerName}</td></tr>
+  //             <tr><td>Plot Type</td><td>${plotType}</td></tr>
+  //             <tr><td>Case Info Area</td><td>${caseInfoArea}</td></tr>
+  //             <tr><td>Plot No</td><td>${plotNo}</td></tr>
+  //             <tr><td>Pincode</td><td>${pincode}</td></tr>
+  //             <tr><td>Co-Ordinates</td><td>${e.latlng}</td></tr>
+  //           </table>
+  //         </div>`;
+  //       });
+
+  //       console.log("Popup content:", detaildata); // Log content to verify
+
+  //       L.popup()
+  //         .setLatLng(e.latlng)
+  //         .setContent(detaildata)
+  //         .openOn(map);
+  //     } catch (error) {
+  //       console.error("Error fetching data:", error);
+  //     }
+  //   }
+  // });
+
+//   map.on("contextmenu", async (e) => {
+//     let bbox = map.getBounds().toBBoxString();
+//     let size = map.getSize();
+
+//     let filterString = await getCheckedValuesforpopuups();
+//     let cqlFilter123 = filterString.trim() !== "" ? encodeURIComponent(filterString) : "";
+
+//     for (let layer in layerDetails) {
+//         let selectedKeys = layerDetails[layer];
+//         var workspace = 'AutoDCR';
+//         let urrr = `${main_url}${workspace}/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&FORMAT=image%2Fpng&TRANSPARENT=true&QUERY_LAYERS=${layer}&STYLES&LAYERS=${layer}&exceptions=application%2Fvnd.ogc.se_inimage&INFO_FORMAT=application/json&FEATURE_COUNT=50&X=${Math.round(e.containerPoint.x)}&Y=${Math.round(e.containerPoint.y)}&SRS=EPSG%3A4326&WIDTH=${size.x}&HEIGHT=${size.y}&BBOX=${bbox}&CQL_FILTER=${cqlFilter123}`;
+
+//         try {
+//             let response = await fetch(urrr);
+//             let text = await response.text();
+//             let jsonResponse;
+
+//             try {
+//                 jsonResponse = JSON.parse(text);
+//             } catch (parseError) {
+//                 console.error("Response is not valid JSON:", parseError);
+//                 return;
+//             }
+
+//             if (!jsonResponse.features) {
+//                 console.error("Features not found in response:", jsonResponse);
+//                 return;
+//             }
+
+//             let features = jsonResponse.features;
+//             console.log(features, "features");
+
+//             let detaildata = "";
+
+//             features.forEach((feature, index) => {
+//                 // let htmldata = feature.properties;
+//                 let token = htmldata.token || 'N/A';
+//                 let gutNo = htmldata.gut_no || 'N/A';
+//                 let ownerName = htmldata.owner_det_email || 'N/A';
+//                 let plotType = htmldata.plottype || 'N/A';
+//                 let caseInfoArea = htmldata.case_info_area || 'N/A';
+//                 let plotNo = htmldata.plotno || 'N/A';
+//                 let pincode = htmldata.pincode || 'N/A';
+
+//                 detaildata += `<div style='max-height: 250px;   position: absolute;
+//   z-index: 9999 !important; overflow-y: auto;'>
+//                   <table style='width:100%;' class='popup-table'>
+//                     <tr><td colspan="2">Feature ${index + 1}</td></tr>
+//                     <tr><td>Token No</td><td>${token}</td></tr>
+//                     <tr><td>Gut No</td><td>${gutNo}</td></tr>
+//                     <tr><td>Owner Email</td><td>${ownerName}</td></tr>
+//                     <tr><td>Plot Type</td><td>${plotType}</td></tr>
+//                     <tr><td>Case Info Area</td><td>${caseInfoArea}</td></tr>
+//                     <tr><td>Plot No</td><td>${plotNo}</td></tr>
+//                     <tr><td>Pincode</td><td>${pincode}</td></tr>
+//                     <tr><td>Co-Ordinates</td><td>${e.latlng}</td></tr>
+//                   </table>
+//                 </div>`;
+//             });
+
+//             console.log("Popup content:", detaildata); // Log content to verify
+
+//             L.popup()
+//               .setLatLng(e.latlng)
+//               .setContent(detaildata)
+//               .openOn(map);
+//         } catch (error) {
+//             console.error("Error fetching data:", error);
 //         }
-
-//         detaildata += `<div style='max-height: 350px; max-height: 250px;'><table style='width:110%;' class='popup-table'>
-//                       <tr><td colspan="2">Feature ${index + 1}</td></tr>${txtk1}
-//                       <tr><td>Co-Ordinates</td><td>${e.latlng}</td></tr>
-//                     </table></div>`;
-//       });
-
-//       L.popup().setLatLng(e.latlng).setContent(detaildata).openOn(map);
-//     } catch (error) {
-//       console.error("Error fetching data:", error);
 //     }
-//   }
 // });
-
-map.on("contextmenu", async (e) => {
+ 
+map.on("click", async (e) => {
+  console.log("Click event:", e);
+ 
   let bbox = map.getBounds().toBBoxString();
   let size = map.getSize();
-
+ 
   let filterString = await getCheckedValuesforpopuups();
   let cqlFilter123 = filterString.trim() !== "" ? encodeURIComponent(filterString) : "";
-
+ 
   for (let layer in layerDetails) {
     let selectedKeys = layerDetails[layer];
-    let urrr = `${main_url}${workspace}/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&FORMAT=image%2Fpng&TRANSPARENT=true&QUERY_LAYERS=${layer}&STYLES&LAYERS=${layer}&exceptions=application%2Fvnd.ogc.se_inimage&INFO_FORMAT=application/json&FEATURE_COUNT=50&X=${Math.round(e.containerPoint.x)}&Y=${Math.round(e.containerPoint.y)}&SRS=EPSG%3A4326&WIDTH=${size.x}&HEIGHT=${size.y}&BBOX=${bbox}&CQL_FILTER=${cqlFilter123}`;
-
+    let workspace = "AutoDCR";
+    let urrr = `https://iwmsgis.pmc.gov.in/geoserver/${workspace}/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&FORMAT=image%2Fpng&TRANSPARENT=true&QUERY_LAYERS=${layer}&STYLES&LAYERS=${layer}&exceptions=application%2Fvnd.ogc.se_inimage&INFO_FORMAT=application/json&FEATURE_COUNT=50&X=${Math.round(e.containerPoint.x)}&Y=${Math.round(e.containerPoint.y)}&SRS=EPSG%3A4326&WIDTH=${size.x}&HEIGHT=${size.y}&BBOX=${bbox}`;
+    console.log("WMS Request URL:", urrr);
+ 
     try {
       let response = await fetch(urrr);
-      let text = await response.text();
-      let jsonResponse;
-
-      try {
-        jsonResponse = JSON.parse(text);
-      } catch (parseError) {
-        console.error("Response is not valid JSON:", parseError);
-        return;
+      if (!response.ok) {
+        throw new Error(`Network response was not ok: ${response.statusText}`);
       }
-
-      if (!jsonResponse.features) {
-        console.error("Features not found in response:", jsonResponse);
-        return;
+      let json = await response.json();
+      console.log("WMS Response JSON:", json);
+ 
+      if (json.features.length > 0) {
+        let htmldata = json.features[0].properties;
+        console.log("Feature Properties:", htmldata);
+ 
+        let txtk1 = "";
+        for (let key of selectedKeys) {
+          if (htmldata.hasOwnProperty(key)) {
+            let value = htmldata[key];
+            txtk1 += `<tr><td>${key}</td><td>${value}</td></tr>`;
+          }
+        }
+ 
+        let detaildata1 = `<table style='width:100%;' class='popup-table'>${txtk1}<tr><td>Coordinates</td><td>${e.latlng}</td></tr></table>`;
+        console.log("Modal Content:", detaildata1);
+ 
+        // Update the modal content
+        document.getElementById("modalContent").innerHTML = detaildata1;
+ 
+        // Set modal position to clicked position
+        let modal = document.getElementById("infoModal");
+        modal.style.display = "block"; // Show the modal
+        modal.style.left = `${e.containerPoint.x + 10}px`; // Adjust 10px to avoid cursor overlap
+        modal.style.top = `${e.containerPoint.y + 10}px`; // Adjust 10px to avoid cursor overlap
+ 
+      } else {
+        console.log("No features found for this location.");
+        closeModal(); // Close the modal if no features are found
       }
-
-      let features = jsonResponse.features;
-      console.log(features, "features");
-
-      let detaildata = "";
-
-      features.forEach((feature, index) => {
-        let htmldata = feature.properties;
-        let token = htmldata.token || 'N/A';
-        let gutNo = htmldata.gut_no || 'N/A';
-        let ownerName = htmldata.owner_det_email || 'N/A';
-        let plotType = htmldata.plottype || 'N/A';
-        let caseInfoArea = htmldata.case_info_area || 'N/A';
-        let plotNo = htmldata.plotno || 'N/A';
-        let pincode = htmldata.pincode || 'N/A';
-
-        detaildata += `<div style='max-height: 350px; max-height: 250px;'>
-          <table style='width:110%;' class='popup-table'>
-            <tr><td colspan="2">Feature ${index + 1}</td></tr>
-            <tr><td>Token No</td><td>${token}</td></tr>
-            <tr><td>Gut No</td><td>${gutNo}</td></tr>
-            <tr><td>Owner Email</td><td>${ownerName}</td></tr>
-            <tr><td>Plot Type</td><td>${plotType}</td></tr>
-            <tr><td>Case Info Area</td><td>${caseInfoArea}</td></tr>
-            <tr><td>Plot No</td><td>${plotNo}</td></tr>
-            <tr><td>Pincode</td><td>${pincode}</td></tr>
-            <tr><td>Co-Ordinates</td><td>${e.latlng}</td></tr>
-          </table>
-        </div>`;
-      });
-
-      console.log("Popup content:", detaildata); // Log content to verify
-
-      L.popup()
-        .setLatLng(e.latlng)
-        .setContent(detaildata)
-        .openOn(map);
     } catch (error) {
       console.error("Error fetching data:", error);
+      closeModal(); // Close the modal on error
     }
   }
 });
-
-
+ 
+// Function to close the modal
+function closeModal() {
+  document.getElementById("infoModal").style.display = "none";
+}
+ 
+ 
