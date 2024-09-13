@@ -964,27 +964,6 @@ day.selected.endRange,
   padding-right: 40px; /* Add padding to make room for the close icon */
 }
 
-.close-icon {
-  position: absolute;
-  right: 10px;
-  bottom: 66px;
-  transform: translateY(60%); /* Center vertically */
-  cursor: pointer;
-  display: none; /* Initially hidden */
-  width: 18px; /* Adjust size as needed */
-  height: 18px; /* Adjust size as needed */
-}
-.close {
-  position: absolute;
-  right: -6px;
-  top: 6px;
-  /* bottom: 66px; */
-  cursor: pointer;
-  /* display: none; */
-  width: 20px;
-  height: 20px;
-}
-
 /* When search input is shown */
 .full-width #searchInputDashboard {
   display: block;
@@ -1481,3 +1460,6 @@ day.selected.endRange,
   margin-bottom: 13px;
   object-fit: contain; /* Ensure image scales properly */
 }
+
+
+

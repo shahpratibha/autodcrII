@@ -11,31 +11,43 @@ html {
 
 /* cluster */
 .bufferColor {
-
+  /* background-color: #0876ff69; */
   padding: 10px;
   border-radius: 50%;
   text-align: center;
   font-weight: bold;
   font-weight: bold;
   color: white;
-
+  /* border: 4px solid #0876ff; */
+  /* box-shadow: #0876ff; */
   transform: translate();
   transition: 6ms ease-in;
-   /* background: radial-gradient(65.32% 65.32% at 50% 50%, rgba(0, 108, 198, 0.10) 0%, #006CC6  100% ); */
-   
+   background: radial-gradient(65.32% 65.32% at 50% 50%, rgba(0, 108, 198, 0.10) 0%, #006CC6  100% );
+   /* linear-gradient(133deg, rgba(0, 108, 198, 0.10) 2.35%, #006CC6 89.11%); */
+/* radial-gradient(#0876ff 5%,  #0876ff69) 
+  50% calc(50% + 2em); 
+
+&:nth-child(2) {
+background-size: 175% 175%;
+}  */
+  /* box-shadow: rgba(8, 118, 255, 0.412) 0px 30px 60px -12px inset,
+    rgb(8, 118, 255) 0px 18px 36px -18px inset; */
 }
 
 
 .cluster-text {
- 
+  /* Styles for the text inside the cluster */
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
 color: #fff;
-text-shadow: 2px 2px 4px darkblue; 
-  font-size: 14px; 
- 
+text-shadow: 2px 2px 4px darkblue; /* Adjust the values to control the shadow */
+  font-size: 14px; /* Default font size */
+  /* border-radius: 4px; */
+/* background: rgba(255, 255, 255, 0.20);
+box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
+backdrop-filter: blur(2px); */
 }
 /* summery section */
 
@@ -55,6 +67,40 @@ text-shadow: 2px 2px 4px darkblue;
 
   line-height: normal;
 } */
+
+.cluster_legend {
+  background-color:white;
+  padding: 10px;
+  border: none !important;
+  border-radius: 8px;
+  position: absolute;
+  bottom: 26px;
+  /* background: green; */
+  /* left: 20px; */
+  right: 50px;
+  width: 146px;
+  z-index: 1000;
+}
+
+
+      .cluster_legend-title {
+          font-size: 16px;
+          font-weight: bold;
+          margin-bottom: 10px;
+      }
+      .cluster_legend-item {
+          display: flex;
+          align-items: center;
+          padding: 2px;
+          /* margin-bottom: 5px; */
+          background: #e6f1fb;
+      }
+      .cluster_legend-color {
+          width: 20px;
+          height: 20px;
+          margin-right: 10px;
+          border-radius: 3px;
+      }
 
 .proposal-info {
   display: flex;
@@ -782,7 +828,7 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   background: radial-gradient(400.2% 139.23% at 0% 3.13%, rgba(0, 119, 218, 0.80) 0%, rgba(0, 84, 155, 0.80) 100%);
   box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.35);
   backdrop-filter: blur(2px);
-  border-radius: 0 0 8px 8px; /* Top corners square, bottom corners rounded */
+  border-radius: 8px; /* Top corners square, bottom corners rounded */
   cursor: pointer; /* Pointer cursor on hover */
   display: flex; /* Center the icon */
   align-items: center;
@@ -790,7 +836,7 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   justify-content: center;
   overflow: hidden; /* Ensure smooth resizing */
   position: absolute; /* Position absolute within the container */
-  top: -202px;/* Align with container top */
+   bottom: 222px;/* Align with container top */
 }
 
 /* Full width when expanded */
@@ -824,16 +870,17 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
 #searchInputDashboard {
   padding-right: 40px; /* Add padding to make room for the close icon */
 }
-
 .close-icon {
   position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(60%); /* Center vertically */
+  right: -3px; /* Positioning the ico3n */
+  transform: translateY(-77%); /* Center the icon vertically */
   cursor: pointer;
-  display: none; /* Initially hidden */
-  width: 18px; /* Adjust size as needed */
-  height: 18px; /* Adjust size as needed */
+  width: 50px; /* Increase width */
+  height: 70px; /* Increase height */
+  font-size: 26px; /* Adjust font size if necessary */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* When search input is shown */
@@ -1300,7 +1347,7 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
 
 .filter_div{
   height: auto; 
-  max-height: 55vh;
+  max-height: 63vh;
   overflow: hidden;
   transition: overflow 0.3s ease;
 
@@ -1343,8 +1390,11 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
 .filters {
   display: none;                    /* Hide the filter panel by default */
   position: absolute;
-  top: 22%;
+  top: 19%;
   left: 18px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  height: 85vh;
   border-radius: 12px;
   width: 290px;
   background-color: white;
@@ -1442,28 +1492,82 @@ color: black;
 }
 
 
+#infoModal {
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  border-radius: 5px;
+  display: block;
+    position: absolute;
+    background-color: white;
+    border: 1px solid rgb(221, 221, 221);
+    /* padding: 10px; */
+    z-index: 9999;
+    max-width: 500px;
+    /* left: 674.153px; */
+    /* top: 259.127px; */
+    width: 400px;
+    height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    font-size: 10px;
+    scrollbar-width: thin;
 
+}
+#infoModal td{
+  font-weight: bold;
+}
+#infoModal h4 {
+  margin: 0 0 10px 0;
+  font-size: 12px;
+  font-weight: bold;
+  position: sticky;
+}
+#infoModal button {
+  margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 10px;
+}
 
 
 
 #tablecontainer {
   z-index: 9999;
   position: absolute;
-  width: 53%;
-  bottom: 24%;
+  width: 30%;
+  bottom: 2%;
   right: 4%;
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  max-height: 200px;
+  max-height: 350px;
   font-size: 12px;
   transition: all 0.3s ease;
+
+
 }
 
+.dataTables_scrollhead{
+
+  
+  font-size: 12px;
+}
+.dataTables_scrollBody{
+
+  height: 196px;
+  font-size: 10px;
+}
 
 .tableDetail {
-max-height: 550px; 
+  max-height: 500px;
 overflow-y: auto; 
+height: 296px;
+font-size: 10px;
 /* margin-top: 10px;  */
 border: 1px solid #ccc; 
 background-color: #f9f9f9; 
@@ -1561,3 +1665,155 @@ overflow: visible;
 /* .filters{
   display: none;
 } */
+
+/*layer 
+/* Styling for the labels */
+.leaflet-control-layers label {
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  margin: 4px 0;
+  border-radius: 6px;
+  transition: background 0.3s;
+}
+
+.leaflet-control-layers label:hover {
+  background: #f0f0f0;
+}
+
+/* Styling for checkboxes and radio buttons */
+.leaflet-control-layers-selector {
+  margin-right: 10px;
+  accent-color: #0077DA; /* Modern browsers support this property for custom checkbox and radio button color */
+}
+
+/* Separator between base layers and overlays */
+.leaflet-control-layers-separator {
+  height: 1px;
+  background: #ddd;
+  margin: 10px 0;
+}
+
+/* Styling the layer names */
+.leaflet-control-layers label span {
+  color: #333;
+  font-weight: normal;
+}
+.leaflet-control-layers-list {
+  max-height: 200px; /* Adjust the height as needed */
+  overflow-y: auto; /* Enables vertical scrolling */
+  overflow-x: hidden; /* Prevents horizontal scrolling */
+  border-radius: 8px;
+  padding-right: 10px; /* Optional: adds some padding to avoid scrollbar overlapping the content */
+  background: #e6f1fb;
+}
+
+/* Optional: customize the scrollbar appearance */
+.leaflet-control-layers-list::-webkit-scrollbar {
+  width: 5px;
+}
+
+.leaflet-control-layers-list::-webkit-scrollbar-thumb {
+ background-color: gray;
+  border-radius: 4px;
+}
+
+.leaflet-control-layers-list::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.5); /* Customize the track color */
+}
+/* Ensure no border or outline on focus */
+#search-button:focus {
+    outline: none; /* Removes the focus outline */
+}
+
+/* Styling the scrollbar for the table */
+.dataTables_scrollBody::-webkit-scrollbar {
+  width: 8px; /* Adjust the width for vertical scrollbar */
+  height: 8px; /* Adjust the height for horizontal scrollbar */
+}
+
+/* Styling the track of the scrollbar */
+.dataTables_scrollBody::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Track color */
+  border-radius: 10px; /* Rounded corners for the track */
+}
+
+/* Styling the thumb (the draggable part) of the scrollbar */
+.dataTables_scrollBody::-webkit-scrollbar-thumb {
+  background-color: #888; /* Color of the scrollbar thumb */
+  border-radius: 10px; /* Rounded corners for the thumb */
+  border: 2px solid #f1f1f1; /* Space between thumb and track */
+}
+
+/* Adding hover effect for the thumb */
+.dataTables_scrollBody::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Darker color on hover */
+}
+
+
+.hidden {
+  display: none; /* Class to hide the element */
+}
+
+.toggle-legend {
+  margin-top: 10px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.50);
+  background: radial-gradient(400.2% 139.23% at 0% 3.13%, rgba(0, 119, 218, 0.80) 0%, rgba(0, 84, 155, 0.80) 100%);
+  box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(2px);
+  height: 34px;
+  width: 34px;
+  cursor: pointer;
+  display: inline-block;
+  z-index: 1000;
+  position: absolute;
+  bottom: 98px;
+  right: 15px;
+}
+
+.no-border {
+  border: none !important;
+}
+
+.toggle-icon {
+  width: 19px;
+  height: 24px;
+  margin-left: -3px;
+  margin-top: -7px;
+}
+
+
+.summary-close{
+  position: absolute;
+  top: -1px; /* Adjust positioning as needed */
+  right: 8px; /* Adjust positioning as needed */
+  font-size: 24px;
+  cursor: pointer;
+  color: #262626; /* Adjust color as needed */
+  transition: color 0.3s;
+ }
+.summary-of-commencement{
+  font-size: 16px;
+} 
+
+.leaflet-popup-pane, .leaflet-control {
+  cursor: pointer;
+}
+
+.leaflet-popup-content {
+  /* width: 181px; */
+}
+
+.popup-table {
+  width: 100%;
+  border-collapse: collapse;
+  position: absolute;
+  z-index: 9999 !important;
+}
+
+.popup-table td {
+  border: 1px solid #dee2e6;
+  padding: 8px;
+}
