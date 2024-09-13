@@ -31,7 +31,7 @@ html {
 .leaflet-right .leaflet-control {
   float: left;
   position: relative;
-  top: 8vh;
+  top: 12vh !important;
   left: 96.5vw;
   border-radius: 50%;
   background: #6f6f6f;
@@ -54,7 +54,7 @@ html {
   right: 97px;
   z-index: 1000;
   border-radius: 5px;
-  border: 1px solid #0077DA;
+  border: 1px solid #0077da;
   top: -5px;
   height: 213px !important;
   overflow: auto;
@@ -123,7 +123,6 @@ html {
   width: 24px;
   height: 24px;
 }
-
 
 .slider-title {
   text-align: right;
@@ -234,7 +233,7 @@ html {
 
   background-color: rgba(255, 255, 255, 0.9);
   border-radius: 8px;
- 
+
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
   padding: 15px; /* Add padding inside the card */
@@ -253,7 +252,6 @@ html {
 .cards::-webkit-scrollbar-thumb:hover {
   background-color: #555;
 }
-
 
 .navigation-icons button {
   font-size: 20px;
@@ -363,7 +361,7 @@ html {
 
 .map-controls {
   position: absolute;
-  top: 18vh;
+  top: 16vh;
   right: 11px;
   z-index: 1000;
   display: flex;
@@ -388,11 +386,12 @@ html {
 
 .control-panel {
   position: absolute;
-  top: 1px;
+  top: 15px;
   left: 10px;
   z-index: 999;
+  gap: 25px;
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   align-items: flex-start;
 }
 
@@ -401,7 +400,17 @@ html {
   flex-direction: row;
   gap: 10px;
 }
+.toggle-button {
+  background: none; /* Remove background color */
+  border: none; /* Remove button border */
+  padding: 0; /* Remove padding */
+  cursor: pointer; /* Change cursor to pointer */
+  display: flex; /* Center the image */
+  align-items: center;
+  margin-top: -8px;
 
+  justify-content: center;
+}
 
 .btn-group {
   display: flex;
@@ -473,11 +482,8 @@ html {
   align-items: center; /* Align items vertically centered */
 }
 
-
-
 .calendar-icon {
   margin-left: 10px; /* Space between date range and icon */
-
 }
 
 .calendar-icon img {
@@ -654,10 +660,11 @@ backdrop-filter: blur(2px);
 
 }
 
-
 /* Define how the .move-up class affects the elements */
 .move-up {
-  transform: translateY(-315px); /* Adjust value based on how much you want to move up */
+  transform: translateY(
+    -315px
+  ); /* Adjust value based on how much you want to move up */
   transition: transform 0.3s ease; /* Smooth transition */
 }
 
@@ -679,11 +686,15 @@ backdrop-filter: blur(2px);
 
 /* Style for the calendar popup */
 /* Style for the selected date range boxes */
-day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRange.endRange {
-  border-radius:8px !important;
+day.selected.endRange,
+.flatpickr-day.startRange.endRange,
+.flatpickr-day.endRange.endRange {
+  border-radius: 8px !important;
 }
 
-.flatpickr-day.selected.startRange, .flatpickr-day.startRange.startRange, .flatpickr-day.endRange.startRange {
+.flatpickr-day.selected.startRange,
+.flatpickr-day.startRange.startRange,
+.flatpickr-day.endRange.startRange {
   border-radius: 8px !important;
 }
 .flatpickr-day.selected.startRange {
@@ -718,11 +729,21 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   /* -webkit-box-shadow: -5px 0 0 #e6e6e6, 5px 0 0 #e6e6e6; */
   /* box-shadow: -5px 0 0 #e6e6e6, 5px 0 0 #e6e6e6; */
 }
-.flatpickr-day.inRange, .flatpickr-day.prevMonthDay.inRange, .flatpickr-day.nextMonthDay.inRange, .flatpickr-day.today.inRange, .flatpickr-day.prevMonthDay.today.inRange, .flatpickr-day.nextMonthDay.today.inRange, .flatpickr-day:hover, .flatpickr-day.prevMonthDay:hover, .flatpickr-day.nextMonthDay:hover, .flatpickr-day:focus, .flatpickr-day.prevMonthDay:focus, .flatpickr-day.nextMonthDay:focus {
+.flatpickr-day.inRange,
+.flatpickr-day.prevMonthDay.inRange,
+.flatpickr-day.nextMonthDay.inRange,
+.flatpickr-day.today.inRange,
+.flatpickr-day.prevMonthDay.today.inRange,
+.flatpickr-day.nextMonthDay.today.inRange,
+.flatpickr-day:hover,
+.flatpickr-day.prevMonthDay:hover,
+.flatpickr-day.nextMonthDay:hover,
+.flatpickr-day:focus,
+.flatpickr-day.prevMonthDay:focus,
+.flatpickr-day.nextMonthDay:focus {
   cursor: pointer;
   outline: 0;
   background: #e6e6e6 !important;
-
 }
 
 .flatpickr-day.inRange {
@@ -736,7 +757,7 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   display: inline !important;
   top: 40px !important;
   width: 280px;
- right: 38px !important;
+  right: 38px !important;
   position: absolute !important;
 }
 
@@ -812,11 +833,11 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
 }
 
 #apply-button {
-  background-color: #888; /* Blue background for apply button */;
+  background-color: #888; /* Blue background for apply button */
 }
 
 #cancel-button {
-  background-color: #007bff /* Gray background for cancel button */
+  background-color: #007bff; /* Gray background for cancel button */
 }
 
 .flatpickr-calendar {
@@ -836,7 +857,7 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   font-family: inherit;
   font-weight: 300;
   height: auto;
-  font-size: 17.5px !important;
+  font-size: 15px !important;
   line-height: inherit;
   margin: -1px 0 0 0;
   outline: none;
@@ -869,8 +890,10 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   -ms-touch-action: manipulation;
   touch-action: manipulation;
   background: #fff;
-  -webkit-box-shadow: 1px 0 0 #e6e6e6, -1px 0 0 #e6e6e6, 0 1px 0 #e6e6e6, 0 -1px 0 #e6e6e6, 0 3px 13px rgba(0, 0, 0, 0.08);
-  box-shadow: 1px 0 0 #e6e6e6, -1px 0 0 #e6e6e6, 0 1px 0 #e6e6e6, 0 -1px 0 #e6e6e6, 0 3px 13px rgba(0, 0, 0, 0.08);
+  -webkit-box-shadow: 1px 0 0 #e6e6e6, -1px 0 0 #e6e6e6, 0 1px 0 #e6e6e6,
+    0 -1px 0 #e6e6e6, 0 3px 13px rgba(0, 0, 0, 0.08);
+  box-shadow: 1px 0 0 #e6e6e6, -1px 0 0 #e6e6e6, 0 1px 0 #e6e6e6,
+    0 -1px 0 #e6e6e6, 0 3px 13px rgba(0, 0, 0, 0.08);
 }
 
 /* Search icon inside the button */
@@ -903,11 +926,10 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   cursor: pointer; /* Pointer cursor on hover */
   display: flex; /* Center the icon */
   align-items: center;
-
+  bottom: 52px;
   justify-content: center;
   overflow: hidden; /* Ensure smooth resizing */
   position: absolute; /* Position absolute within the container */
-  top: 0; /* Align with container top */
 }
 
 /* Full width when expanded */
@@ -951,8 +973,6 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   display: none;
 }
 
-
-
 /* Hide the icon when button is expanded */
 #search-button.full-width img {
   opacity: 0; /* Hide the icon */
@@ -967,7 +987,7 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   border: 1px solid #ccc; /* Border color */
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Box shadow */
   position: absolute; /* Position absolute within the container */
-  top: 0; /* Align with container top */
+  bottom: 45px;
   right: 0;
   transition: opacity 0.3s, width 0.3s; /* Smooth transition */
 }
@@ -976,8 +996,18 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
 #search-button.full-width ~ #searchInputDashboard {
   display: block; /* Show the input field */
 }
+/* CSS to hide filters initially */
+#filters {
+  margin-left: -35vw; /* Hide off-screen */
+  opacity: 0; /* Invisible */
+  transition: margin-left 0.3s, opacity 0.3s; /* Smooth transition */
+}
+*/
 
 /* filter */
+/* .filters{
+  display: none ;
+} */
 
 /* Search icon inside the button */
 /* #toggleFilters img {
@@ -1391,18 +1421,16 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   background: #0077da;
 }
 
-.filter_div{
-  height: auto; 
+.filter_div {
+  height: auto;
   max-height: 65vh;
   overflow: hidden;
   transition: overflow 0.3s ease;
-
 }
 .filter_div:hover {
   overflow: auto;
   scrollbar-width: thin;
   scrollbar-color: #888 #f1f1f1;
-
 }
 .toggle-button {
   position: relative;
@@ -1411,7 +1439,7 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   z-index: 1000;
   border: none;
   background: none;
-  color:#8AC0EE;
+  color: #8ac0ee;
   font-size: 21px;
   border-radius: 5px;
 }
@@ -1432,5 +1460,6 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   margin-bottom: 13px;
   object-fit: contain; /* Ensure image scales properly */
 }
+
 
 

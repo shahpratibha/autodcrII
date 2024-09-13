@@ -1502,11 +1502,12 @@ color: black;
     /* padding: 10px; */
     z-index: 9999;
     max-width: 500px;
-    left: 674.153px;
+    /* left: 674.153px; */
     /* top: 259.127px; */
     width: 400px;
     height: 300px;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
     font-size: 10px;
     scrollbar-width: thin;
 
@@ -1539,22 +1540,34 @@ color: black;
   z-index: 9999;
   position: absolute;
   width: 30%;
-  bottom: 24%;
+  bottom: 2%;
   right: 4%;
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  max-height: 150px;
+  max-height: 350px;
   font-size: 12px;
   transition: all 0.3s ease;
 
 
 }
 
+.dataTables_scrollhead{
+
+  
+  font-size: 12px;
+}
+.dataTables_scrollBody{
+
+  height: 196px;
+  font-size: 10px;
+}
 
 .tableDetail {
-max-height: 550px; 
+  max-height: 500px;
 overflow-y: auto; 
+height: 296px;
+font-size: 10px;
 /* margin-top: 10px;  */
 border: 1px solid #ccc; 
 background-color: #f9f9f9; 
@@ -1764,9 +1777,9 @@ overflow: visible;
   border: none !important;
 }
 .toggle-icon {
-  width: 20px !important;
+  width: 19px;
   height: 24px;
-  margin-left: -4px;
+  margin-left: -3px;
   margin-top: -7px;
 }
 
