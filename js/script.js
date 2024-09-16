@@ -101,7 +101,7 @@ const cluster_url = "https://iwmsgis.pmc.gov.in/geoserver/";
 
 
   function loadinitialData(cql_filter) {
-    const filternames = ["siteaddress_area", "caseinformation_applyfor","siteaddress_surveyno", "caseinformation_casetype", "caseinformation_proposaltype", "caseinformation_tdrzone", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "Owner_Name"];//accordn column names , if want add one more filter criteria add here
+    const filternames = ["siteaddress_area", "caseinformation_applyfor","siteaddress_surveyno", "caseinformation_casetype", "caseinformation_proposaltype", "caseinformation_tdrzone", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "ownerinformation_firstname"];//accordn column names , if want add one more filter criteria add here
     var workspace = 'AutoDCR';
     var layerName = 'Plot_Layout';
     filternames.forEach(function (filtername) {
@@ -142,7 +142,7 @@ function DataTableFilter(cql_filter1) {
   if (cql_filter1 !== '') {
     geoServerURL += "&CQL_FILTER=" + encodeURIComponent(cqlFilter);
   }
-  var headers = ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype","siteaddress_surveyno", "caseinformation_proposaltype", "caseinformation_tdrzone", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "Owner_Name"];
+  var headers = ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype","siteaddress_surveyno", "caseinformation_proposaltype", "caseinformation_tdrzone", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "ownerinformation_firstname"];
   showtable(typeName, geoServerURL, cqlFilter, headers);
 }
 
@@ -187,7 +187,7 @@ function populateDropdown(dropdownId, data) {
 
 function getCheckedValues(callback) {
   var selectedValues = {};
-  const filternames = ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype", "caseinformation_proposaltype","siteaddress_surveyno", "caseinformation_tdrzone", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "Owner_Name"];
+  const filternames = ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype", "caseinformation_proposaltype","siteaddress_surveyno", "caseinformation_tdrzone", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "ownerinformation_firstname"];
 
   filternames.forEach(function (filtername) {
     selectedValues[filtername] = []; 
@@ -789,13 +789,13 @@ function getCheckedValuess() {
 
 
 // const layerDetails = {
-//   "AutoDCR:Plot_Layout": ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype", "caseinformation_proposaltype","siteaddress_surveyno", "caseinformation_tdrzone", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "Owner_Name"],
+//   "AutoDCR:Plot_Layout": ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype", "caseinformation_proposaltype","siteaddress_surveyno", "caseinformation_tdrzone", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "ownerinformation_firstname"],
 // };
 
 // function getCheckedValuesforpopuups() {
 //   return new Promise((resolve, reject) => {
 //     var selectedValues = {};
-//     const filternames = ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype", "siteaddress_surveyno","caseinformation_proposaltype", "caseinformation_tdrzone", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "Owner_Name"];
+//     const filternames = ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype", "siteaddress_surveyno","caseinformation_proposaltype", "caseinformation_tdrzone", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "ownerinformation_firstname"];
 
 //     filternames.forEach(function (filtername) {
 //       selectedValues[filtername] = []; 
@@ -900,7 +900,7 @@ function getCheckedValuess() {
 // }
  
 const layerDetails = {
-  "AutoDCR:Plot_Layout": ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype", "caseinformation_proposaltype", "siteaddress_surveyno", "caseinformation_tdrzone", "caseinformation_grossplotarea", "plotdetails_developmentzonedp", "Owner_Name"],
+  "AutoDCR:Plot_Layout": ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype", "caseinformation_proposaltype", "siteaddress_surveyno", "caseinformation_tdrzone", "caseinformation_grossplotarea", "plotdetails_developmentzonedp", "ownerinformation_firstname"],
 };
 
 // Mapping of field names to display names
@@ -913,13 +913,13 @@ const fieldDisplayNames = {
   "caseinformation_tdrzone": "TDR Zone",
   "caseinformation_grossplotarea": "Gross Plot Area",
   "plotdetails_developmentzonedp": "Development Zone",
-  "Owner_Name": "Owner Name",
+  "ownerinformation_firstname": "Owner Name",
 };
 
 function getCheckedValuesforpopuups() {
   return new Promise((resolve, reject) => {
     var selectedValues = {};
-    const filternames = ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype", "siteaddress_surveyno", "caseinformation_proposaltype", "caseinformation_tdrzone", "caseinformation_grossplotarea", "plotdetails_developmentzonedp", "Owner_Name"];
+    const filternames = ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype", "siteaddress_surveyno", "caseinformation_proposaltype", "caseinformation_tdrzone", "caseinformation_grossplotarea", "plotdetails_developmentzonedp", "ownerinformation_firstname"];
 
     filternames.forEach(function (filtername) {
       selectedValues[filtername] = []; 
