@@ -782,7 +782,7 @@ body {
   .missing-link-buffer-container-parent {
     align-self: stretch;
     border-radius: 8px;
-    height: 500px;
+    height: 50.500vh;
     overflow-y: auto;
     flex-shrink: 0;
     display: flex;
@@ -801,7 +801,7 @@ body {
       /* left: 23px; */
       border-radius: 16px;
       background-color: #fff;
-      height: 580px;
+      height: 61vh;
       overflow: hidden;
       flex-shrink: 0;
       display: flex;
@@ -1493,7 +1493,7 @@ body {
   }
   .graph-container {
     align-self: stretch;
-    height: 458px;
+    height: 43vh;
     overflow-y: auto;
     flex-shrink: 0;
     overflow-x: hidden;
@@ -1523,7 +1523,7 @@ body {
     left: -5px; /* Adjust the left position as needed */
     border-radius: 20px;
     background-color: #fff;
-    height: 78vh;
+    height: 61vh;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -1978,13 +1978,14 @@ margin-right: 203px;
   border-radius: 12px;
   color: white;
   cursor: pointer;
+  margin-left: -26px;
   /* border-radius: 12px; */
   background: linear-gradient(180deg, #54A4E6 0%, #3392E1 100%);
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.30), 0px 2px 6px 2px rgba(0, 0, 0, 0.15);
 }
 .clear-icon {
   position: absolute;
-  right:20px; /* Adjust based on input length */
+  right:40px; /* Adjust based on input length */
   cursor: pointer;
   font-size: 16px;
   color: #888; /* Adjust color as needed */
@@ -2202,10 +2203,10 @@ margin-right: 203px;
   justify-content: center;
 }
 /* CSS to move the map section to the right */
-.move-right {
-  transform: translateX(43vh); /* Adjust the value as needed */
-  transition: transform 0.1s ease; /* Smooth transition */
-}
+/* .move-right {
+  transform: translateX(43vh); 
+  transition: transform 0.1s ease;
+} */
 
 .white-filter {
   filter: invert(1) brightness(2);

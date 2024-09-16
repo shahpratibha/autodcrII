@@ -1347,7 +1347,7 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
 
 .filter_div{
   height: auto; 
-  max-height: 63vh;
+  max-height: 61vh;
   overflow: hidden;
   transition: overflow 0.3s ease;
 
@@ -1390,11 +1390,11 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
 .filters {
   display: none;                    /* Hide the filter panel by default */
   position: absolute;
-  top: 12%;
+  top: 14%;
   left: 18px;
   overflow-x: hidden;
   overflow-y: hidden;
-  height: auto;
+  height: 61vh;
   border-radius: 12px;
   width: 290px;
   background-color: white;
@@ -1856,3 +1856,6 @@ overflow: visible;
   padding-right: 8px; /* Adjust padding as needed */
   margin-right: 8px; /* Adjust margin as needed */
 }
+
+
+
