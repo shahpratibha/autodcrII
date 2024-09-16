@@ -576,17 +576,14 @@ function showtable(typeName, geoServerURL, cqlFilter, headers) {
         return sum + feature.properties.length_m;
       }, 0);
       let uniqueCount = new Set(work_id).size;
-      // //console.log(work_id.length, "lllllllllllll", work_id, uniqueCount)
-    //   document.getElementById('tablestats').innerHTML = `
-    //   // <div class="stat-button">
-    //   //   <div class="stat-label">Total Length (In Meter):</div>
-    //   //   <div class="stat-value" id="totalLength">${shapeAreaSum.toFixed(2)}</div>
-    //   // </div>
-    //   <div class="stat-button">
-    //     <div class="stat-label">Total Links:</div>
-    //     <div class="stat-value" id="totalLinks">${uniqueCount}</div>
-    //   </div>
-    // `;
+      //console.log(work_id.length, "lllllllllllll", work_id, uniqueCount)
+      document.getElementById('tablestats').innerHTML = `
+      
+      <div class="stat-button">
+        <div class="stat-label">Total Links:</div>
+        <div class="stat-value" id="totalLinks">${uniqueCount}</div>
+      </div>
+    `;
   
 
     });
