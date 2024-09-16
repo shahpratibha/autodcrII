@@ -775,14 +775,138 @@ function getCheckedValuess() {
 }
 
 
+// const layerDetails = {
+//   "AutoDCR:Plot_Layout": ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype", "caseinformation_proposaltype","siteaddress_surveyno", "caseinformation_tdrzone", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "ownerinformation_firstname"],
+// };
+
+// function getCheckedValuesforpopuups() {
+//   return new Promise((resolve, reject) => {
+//     var selectedValues = {};
+//     const filternames = ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype", "siteaddress_surveyno","caseinformation_proposaltype", "caseinformation_tdrzone", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "ownerinformation_firstname"];
+
+//     filternames.forEach(function (filtername) {
+//       selectedValues[filtername] = []; 
+
+//       $('#' + filtername + ' input[type="checkbox"]:checked').each(function () {
+//         var single_val = $(this).val();
+//         if (single_val) {
+//           var actualValue = single_val.split(' (')[0];
+//           selectedValues[filtername].push(actualValue);
+//           // //console.log(selectedValues, "lllllllllll99999999999999")
+//         }
+//       });
+//     });
+
+//     var filters = [];
+//     for (var key in selectedValues) {
+//       if (selectedValues[key].length > 0) {
+//         filters.push(`${key} IN ('${selectedValues[key].join("','")}')`);
+//       }
+//     }
+//     var checkedValues = getCheckedValuess();
+
+
+//     if (checkedValues) {
+//       var filterString = filters.join(" AND ");
+//     }
+
+//     resolve(filterString);
+//   });
+// }
+
+// function combineFilters(cql_filter123, filterString) {
+//   if (cql_filter123) {
+//     return `${cql_filter123} AND ${filterString}`;
+//   } else {
+//     return filterString;
+//   }
+// }
+
+ 
+// map.on("click", async (e) => {
+//   console.log("Click event:", e);
+ 
+//   let bbox = map.getBounds().toBBoxString();
+//   let size = map.getSize();
+ 
+//   let filterString = await getCheckedValuesforpopuups();
+//   let cqlFilter123 = filterString.trim() !== "" ? encodeURIComponent(filterString) : "";
+ 
+//   for (let layer in layerDetails) {
+//     let selectedKeys = layerDetails[layer];
+//     let workspace = "AutoDCR";
+//     let urrr = `https://iwmsgis.pmc.gov.in/geoserver/${workspace}/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&FORMAT=image%2Fpng&TRANSPARENT=true&QUERY_LAYERS=${layer}&STYLES&LAYERS=${layer}&exceptions=application%2Fvnd.ogc.se_inimage&INFO_FORMAT=application/json&FEATURE_COUNT=50&X=${Math.round(e.containerPoint.x)}&Y=${Math.round(e.containerPoint.y)}&SRS=EPSG%3A4326&WIDTH=${size.x}&HEIGHT=${size.y}&BBOX=${bbox}`;
+//     console.log("WMS Request URL:", urrr);
+ 
+//     try {
+//       let response = await fetch(urrr);
+//       if (!response.ok) {
+//         throw new Error(`Network response was not ok: ${response.statusText}`);
+//       }
+//       let json = await response.json();
+//       console.log("WMS Response JSON:", json);
+ 
+//       if (json.features.length > 0) {
+//         let htmldata = json.features[0].properties;
+//         console.log("Feature Properties:", htmldata);
+ 
+//         let txtk1 = "";
+//         for (let key of selectedKeys) {
+//           if (htmldata.hasOwnProperty(key)) {
+//             let value = htmldata[key];
+//             txtk1 += `<tr><td>${key}</td><td>${value}</td></tr>`;
+//           }
+//         }
+ 
+//         let detaildata1 = `<table style='width:100%;' class='popup-table'>${txtk1}<tr><td>Coordinates</td><td>${e.latlng}</td></tr></table>`;
+//         console.log("Modal Content:", detaildata1);
+ 
+//         // Update the modal content
+//         document.getElementById("modalContent").innerHTML = detaildata1;
+ 
+//         // Set modal position to clicked position
+//         let modal = document.getElementById("infoModal");
+//         modal.style.display = "block"; // Show the modal
+//         modal.style.left = `${e.containerPoint.x + 10}px`; // Adjust 10px to avoid cursor overlap
+//         modal.style.top = `${e.containerPoint.y + 10}px`; // Adjust 10px to avoid cursor overlap
+ 
+//       } else {
+//         console.log("No features found for this location.");
+//         closeModal(); // Close the modal if no features are found
+//       }
+//     } catch (error) {
+//       console.error("Error fetching data:", error);
+//       closeModal(); // Close the modal on error
+//     }
+//   }
+// });
+ 
+// // Function to close the modal
+// function closeModal() {
+//   document.getElementById("infoModal").style.display = "none";
+// }
+ 
 const layerDetails = {
-  "AutoDCR:Plot_Layout": ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype", "caseinformation_proposaltype","siteaddress_surveyno", "caseinformation_tdrzone", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "ownerinformation_firstname"],
+  "AutoDCR:Plot_Layout": ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype", "caseinformation_proposaltype", "siteaddress_surveyno", "caseinformation_tdrzone", "caseinformation_grossplotarea", "plotdetails_developmentzonedp", "ownerinformation_firstname"],
+};
+
+// Mapping of field names to display names
+const fieldDisplayNames = {
+  "siteaddress_area": "Village Name",
+  "caseinformation_applyfor": "Apply For",
+  "caseinformation_casetype": "Case Type",
+  "caseinformation_proposaltype": "Proposal Type",
+  "siteaddress_surveyno": "Survey No",
+  "caseinformation_tdrzone": "TDR Zone",
+  "caseinformation_grossplotarea": "Gross Plot Area",
+  "plotdetails_developmentzonedp": "Development Zone",
+  "ownerinformation_firstname": "Owner Name",
 };
 
 function getCheckedValuesforpopuups() {
   return new Promise((resolve, reject) => {
     var selectedValues = {};
-    const filternames = ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype", "siteaddress_surveyno","caseinformation_proposaltype", "caseinformation_tdrzone", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "ownerinformation_firstname"];
+    const filternames = ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype", "siteaddress_surveyno", "caseinformation_proposaltype", "caseinformation_tdrzone", "caseinformation_grossplotarea", "plotdetails_developmentzonedp", "ownerinformation_firstname"];
 
     filternames.forEach(function (filtername) {
       selectedValues[filtername] = []; 
