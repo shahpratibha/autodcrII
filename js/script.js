@@ -14,7 +14,7 @@ function toggleFilter(label) {
   const input = label.nextElementSibling; // Get the input element next to the label
   const ul = input.nextElementSibling; // Get the ul element next to the input
 
-  // Toggle 'active' class for the clicked filter input and its associated ul
+  // Toggle 'active' class for the clicked filter input and its associated ul  
   input.classList.toggle('active');
   ul.classList.toggle('active');
 }
