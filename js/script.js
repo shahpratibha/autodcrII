@@ -101,7 +101,7 @@ const cluster_url = "https://iwmsgis.pmc.gov.in/geoserver/";
 
 
   function loadinitialData(cql_filter) {
-    const filternames = ["siteaddress_area", "caseinformation_applyfor","siteaddress_surveyno", "caseinformation_casetype", "caseinformation_proposaltype", "caseinformation_tdrzone", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "Owner_Name"];//accordn column names , if want add one more filter criteria add here
+    const filternames = ["siteaddress_area", "caseinformation_applyfor","siteaddress_surveyno", "caseinformation_casetype", "caseinformation_proposaltype", "caseinformation_tdrzone", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "ownerinformation_firstname"];//accordn column names , if want add one more filter criteria add here
     var workspace = 'AutoDCR';
     var layerName = 'Plot_Layout';
     filternames.forEach(function (filtername) {
@@ -142,7 +142,7 @@ function DataTableFilter(cql_filter1) {
   if (cql_filter1 !== '') {
     geoServerURL += "&CQL_FILTER=" + encodeURIComponent(cqlFilter);
   }
-  var headers = ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype","siteaddress_surveyno", "caseinformation_proposaltype", "caseinformation_tdrzone", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "Owner_Name"];
+  var headers = ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype","siteaddress_surveyno", "caseinformation_proposaltype", "caseinformation_tdrzone", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "ownerinformation_firstname"];
   showtable(typeName, geoServerURL, cqlFilter, headers);
 }
 
@@ -187,7 +187,7 @@ function populateDropdown(dropdownId, data) {
 
 function getCheckedValues(callback) {
   var selectedValues = {};
-  const filternames = ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype", "caseinformation_proposaltype","siteaddress_surveyno", "caseinformation_tdrzone", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "Owner_Name"];
+  const filternames = ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype", "caseinformation_proposaltype","siteaddress_surveyno", "caseinformation_tdrzone", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "ownerinformation_firstname"];
 
   filternames.forEach(function (filtername) {
     selectedValues[filtername] = []; 
@@ -435,8 +435,6 @@ function showtable(typeName, geoServerURL, cqlFilter, headers) {
         document.getElementById('openTableBtn').style.display = 'block'; // Show the show button
       }
     });
-
-    
     tableContainer.appendChild(minimizeButton);
     // Create pagination controls
     var paginationContainer = document.createElement('div');
@@ -589,15 +587,7 @@ function showtable(typeName, geoServerURL, cqlFilter, headers) {
     //     <div class="stat-value" id="totalLinks">${uniqueCount}</div>
     //   </div>
     // `;
-    document.getElementById('tablestats').innerHTML = `
-    
-      <div class="stat-button">
-        <div class="stat-label">Total Plot count:</div>
-        <div class="stat-value" id="totalLinks">${uniqueCount}</div>
-      </div>
-    `;
-
-      createTable(exampleData, headers);
+  
 
     });
   }
@@ -788,138 +778,14 @@ function getCheckedValuess() {
 }
 
 
-// const layerDetails = {
-//   "AutoDCR:Plot_Layout": ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype", "caseinformation_proposaltype","siteaddress_surveyno", "caseinformation_tdrzone", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "Owner_Name"],
-// };
-
-// function getCheckedValuesforpopuups() {
-//   return new Promise((resolve, reject) => {
-//     var selectedValues = {};
-//     const filternames = ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype", "siteaddress_surveyno","caseinformation_proposaltype", "caseinformation_tdrzone", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "Owner_Name"];
-
-//     filternames.forEach(function (filtername) {
-//       selectedValues[filtername] = []; 
-
-//       $('#' + filtername + ' input[type="checkbox"]:checked').each(function () {
-//         var single_val = $(this).val();
-//         if (single_val) {
-//           var actualValue = single_val.split(' (')[0];
-//           selectedValues[filtername].push(actualValue);
-//           // //console.log(selectedValues, "lllllllllll99999999999999")
-//         }
-//       });
-//     });
-
-//     var filters = [];
-//     for (var key in selectedValues) {
-//       if (selectedValues[key].length > 0) {
-//         filters.push(`${key} IN ('${selectedValues[key].join("','")}')`);
-//       }
-//     }
-//     var checkedValues = getCheckedValuess();
-
-
-//     if (checkedValues) {
-//       var filterString = filters.join(" AND ");
-//     }
-
-//     resolve(filterString);
-//   });
-// }
-
-// function combineFilters(cql_filter123, filterString) {
-//   if (cql_filter123) {
-//     return `${cql_filter123} AND ${filterString}`;
-//   } else {
-//     return filterString;
-//   }
-// }
-
- 
-// map.on("click", async (e) => {
-//   console.log("Click event:", e);
- 
-//   let bbox = map.getBounds().toBBoxString();
-//   let size = map.getSize();
- 
-//   let filterString = await getCheckedValuesforpopuups();
-//   let cqlFilter123 = filterString.trim() !== "" ? encodeURIComponent(filterString) : "";
- 
-//   for (let layer in layerDetails) {
-//     let selectedKeys = layerDetails[layer];
-//     let workspace = "AutoDCR";
-//     let urrr = `https://iwmsgis.pmc.gov.in/geoserver/${workspace}/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&FORMAT=image%2Fpng&TRANSPARENT=true&QUERY_LAYERS=${layer}&STYLES&LAYERS=${layer}&exceptions=application%2Fvnd.ogc.se_inimage&INFO_FORMAT=application/json&FEATURE_COUNT=50&X=${Math.round(e.containerPoint.x)}&Y=${Math.round(e.containerPoint.y)}&SRS=EPSG%3A4326&WIDTH=${size.x}&HEIGHT=${size.y}&BBOX=${bbox}`;
-//     console.log("WMS Request URL:", urrr);
- 
-//     try {
-//       let response = await fetch(urrr);
-//       if (!response.ok) {
-//         throw new Error(`Network response was not ok: ${response.statusText}`);
-//       }
-//       let json = await response.json();
-//       console.log("WMS Response JSON:", json);
- 
-//       if (json.features.length > 0) {
-//         let htmldata = json.features[0].properties;
-//         console.log("Feature Properties:", htmldata);
- 
-//         let txtk1 = "";
-//         for (let key of selectedKeys) {
-//           if (htmldata.hasOwnProperty(key)) {
-//             let value = htmldata[key];
-//             txtk1 += `<tr><td>${key}</td><td>${value}</td></tr>`;
-//           }
-//         }
- 
-//         let detaildata1 = `<table style='width:100%;' class='popup-table'>${txtk1}<tr><td>Coordinates</td><td>${e.latlng}</td></tr></table>`;
-//         console.log("Modal Content:", detaildata1);
- 
-//         // Update the modal content
-//         document.getElementById("modalContent").innerHTML = detaildata1;
- 
-//         // Set modal position to clicked position
-//         let modal = document.getElementById("infoModal");
-//         modal.style.display = "block"; // Show the modal
-//         modal.style.left = `${e.containerPoint.x + 10}px`; // Adjust 10px to avoid cursor overlap
-//         modal.style.top = `${e.containerPoint.y + 10}px`; // Adjust 10px to avoid cursor overlap
- 
-//       } else {
-//         console.log("No features found for this location.");
-//         closeModal(); // Close the modal if no features are found
-//       }
-//     } catch (error) {
-//       console.error("Error fetching data:", error);
-//       closeModal(); // Close the modal on error
-//     }
-//   }
-// });
- 
-// // Function to close the modal
-// function closeModal() {
-//   document.getElementById("infoModal").style.display = "none";
-// }
- 
 const layerDetails = {
-  "AutoDCR:Plot_Layout": ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype", "caseinformation_proposaltype", "siteaddress_surveyno", "caseinformation_tdrzone", "caseinformation_grossplotarea", "plotdetails_developmentzonedp", "Owner_Name"],
-};
-
-// Mapping of field names to display names
-const fieldDisplayNames = {
-  "siteaddress_area": "Village Name",
-  "caseinformation_applyfor": "Apply For",
-  "caseinformation_casetype": "Case Type",
-  "caseinformation_proposaltype": "Proposal Type",
-  "siteaddress_surveyno": "Survey No",
-  "caseinformation_tdrzone": "TDR Zone",
-  "caseinformation_grossplotarea": "Gross Plot Area",
-  "plotdetails_developmentzonedp": "Development Zone",
-  "Owner_Name": "Owner Name",
+  "AutoDCR:Plot_Layout": ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype", "caseinformation_proposaltype","siteaddress_surveyno", "caseinformation_tdrzone", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "ownerinformation_firstname"],
 };
 
 function getCheckedValuesforpopuups() {
   return new Promise((resolve, reject) => {
     var selectedValues = {};
-    const filternames = ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype", "siteaddress_surveyno", "caseinformation_proposaltype", "caseinformation_tdrzone", "caseinformation_grossplotarea", "plotdetails_developmentzonedp", "Owner_Name"];
+    const filternames = ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype", "siteaddress_surveyno","caseinformation_proposaltype", "caseinformation_tdrzone", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "ownerinformation_firstname"];
 
     filternames.forEach(function (filtername) {
       selectedValues[filtername] = []; 
@@ -929,6 +795,7 @@ function getCheckedValuesforpopuups() {
         if (single_val) {
           var actualValue = single_val.split(' (')[0];
           selectedValues[filtername].push(actualValue);
+          // //console.log(selectedValues, "lllllllllll99999999999999")
         }
       });
     });
@@ -939,8 +806,13 @@ function getCheckedValuesforpopuups() {
         filters.push(`${key} IN ('${selectedValues[key].join("','")}')`);
       }
     }
+    var checkedValues = getCheckedValuess();
 
-    var filterString = filters.join(" AND ");
+
+    if (checkedValues) {
+      var filterString = filters.join(" AND ");
+    }
+
     resolve(filterString);
   });
 }
@@ -953,133 +825,146 @@ function combineFilters(cql_filter123, filterString) {
   }
 }
 
-// Function to close the modal
 
-// Function to handle the click event and show the popup
-// Function to handle the click event and show the popup
-async function handleMapClick(e) {
-  console.log("Click event:", e);
+  // map.on("contextmenu", async (e) => {
+  //   let bbox = map.getBounds().toBBoxString();
+  //   let size = map.getSize();
 
-  let bbox = map.getBounds().toBBoxString();
-  let size = map.getSize();
+  //   let filterString = await getCheckedValuesforpopuups();
+  //   let cqlFilter123 = filterString.trim() !== "" ? encodeURIComponent(filterString) : "";
 
-  let filterString = await getCheckedValuesforpopuups();
-  let cqlFilter123 = filterString.trim() !== "" ? encodeURIComponent(filterString) : "";
+  //   for (let layer in layerDetails) {
+  //     let selectedKeys = layerDetails[layer];
+  //     var workspace = 'AutoDCR';
+  //     let urrr = `${main_url}${workspace}/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&FORMAT=image%2Fpng&TRANSPARENT=true&QUERY_LAYERS=${layer}&STYLES&LAYERS=${layer}&exceptions=application%2Fvnd.ogc.se_inimage&INFO_FORMAT=application/json&FEATURE_COUNT=50&X=${Math.round(e.containerPoint.x)}&Y=${Math.round(e.containerPoint.y)}&SRS=EPSG%3A4326&WIDTH=${size.x}&HEIGHT=${size.y}&BBOX=${bbox}&CQL_FILTER=${cqlFilter123}`;
 
-  for (let layer in layerDetails) {
-    let selectedKeys = layerDetails[layer];
-    let workspace = "AutoDCR";
-    let urrr = `https://iwmsgis.pmc.gov.in/geoserver/${workspace}/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&FORMAT=image%2Fpng&TRANSPARENT=true&QUERY_LAYERS=${layer}&STYLES&LAYERS=${layer}&exceptions=application%2Fvnd.ogc.se_inimage&INFO_FORMAT=application/json&FEATURE_COUNT=50&X=${Math.round(e.containerPoint.x)}&Y=${Math.round(e.containerPoint.y)}&SRS=EPSG%3A4326&WIDTH=${size.x}&HEIGHT=${size.y}&BBOX=${bbox}`;
-    console.log("WMS Request URL:", urrr);
+  //     try {
+  //       let response = await fetch(urrr);
+  //       let text = await response.text();
+  //       let jsonResponse;
 
-    try {
-      let response = await fetch(urrr);
-      if (!response.ok) {
-        throw new Error(`Network response was not ok: ${response.statusText}`);
-      }
-      let json = await response.json();
-      if (json.features.length > 0) {
-        let htmldata = json.features[0].properties;
-        let txtk1 = "";
-        for (let key of selectedKeys) {
-          if (htmldata.hasOwnProperty(key)) {
-            let value = htmldata[key];
-            let displayName = fieldDisplayNames[key] || key; // Use the mapping or default to key
-            txtk1 += `<tr><td>${displayName}</td><td>${value}</td></tr>`;
-          }
+  //       try {
+  //         jsonResponse = JSON.parse(text);
+  //       } catch (parseError) {
+  //         console.error("Response is not valid JSON:", parseError);
+  //         return;
+  //       }
+
+  //       if (!jsonResponse.features) {
+  //         console.error("Features not found in response:", jsonResponse);
+  //         return;
+  //       }
+
+  //       let features = jsonResponse.features;
+  //       console.log(features, "features");
+
+  //       let detaildata = "";
+
+  //       features.forEach((feature, index) => {
+  //         let htmldata = feature.properties;
+  //         let token = htmldata.token || 'N/A';
+  //         let gutNo = htmldata.gut_no || 'N/A';
+  //         let ownerName = htmldata.owner_det_email || 'N/A';
+  //         let plotType = htmldata.plottype || 'N/A';
+  //         let caseInfoArea = htmldata.case_info_area || 'N/A';
+  //         let plotNo = htmldata.plotno || 'N/A';
+  //         let pincode = htmldata.pincode || 'N/A';
+
+  //         detaildata += `<div style='max-height: 350px; max-height: 250px; position:absolute; z-index:9999'>
+  //           <table style='width:110%;' class='popup-table'>
+  //             <tr><td colspan="2">Feature ${index + 1}</td></tr>
+  //             <tr><td>Token No</td><td>${token}</td></tr>
+  //             <tr><td>Gut No</td><td>${gutNo}</td></tr>
+  //             <tr><td>Owner Email</td><td>${ownerName}</td></tr>
+  //             <tr><td>Plot Type</td><td>${plotType}</td></tr>
+  //             <tr><td>Case Info Area</td><td>${caseInfoArea}</td></tr>
+  //             <tr><td>Plot No</td><td>${plotNo}</td></tr>
+  //             <tr><td>Pincode</td><td>${pincode}</td></tr>
+  //             <tr><td>Co-Ordinates</td><td>${e.latlng}</td></tr>
+  //           </table>
+  //         </div>`;
+  //       });
+
+  //       console.log("Popup content:", detaildata); // Log content to verify
+
+  //       L.popup()
+  //         .setLatLng(e.latlng)
+  //         .setContent(detaildata)
+  //         .openOn(map);
+  //     } catch (error) {
+  //       console.error("Error fetching data:", error);
+  //     }
+  //   }
+  // });
+
+  map.on("contextmenu", async (e) => {
+    let bbox = map.getBounds().toBBoxString();
+    let size = map.getSize();
+
+    let filterString = await getCheckedValuesforpopuups();
+    let cqlFilter123 = filterString.trim() !== "" ? encodeURIComponent(filterString) : "";
+
+    for (let layer in layerDetails) {
+        let selectedKeys = layerDetails[layer];
+        var workspace = 'AutoDCR';
+        let urrr = `${main_url}${workspace}/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&FORMAT=image%2Fpng&TRANSPARENT=true&QUERY_LAYERS=${layer}&STYLES&LAYERS=${layer}&exceptions=application%2Fvnd.ogc.se_inimage&INFO_FORMAT=application/json&FEATURE_COUNT=50&X=${Math.round(e.containerPoint.x)}&Y=${Math.round(e.containerPoint.y)}&SRS=EPSG%3A4326&WIDTH=${size.x}&HEIGHT=${size.y}&BBOX=${bbox}&CQL_FILTER=${cqlFilter123}`;
+
+        try {
+            let response = await fetch(urrr);
+            let text = await response.text();
+            let jsonResponse;
+
+            try {
+                jsonResponse = JSON.parse(text);
+            } catch (parseError) {
+                console.error("Response is not valid JSON:", parseError);
+                return;
+            }
+
+            if (!jsonResponse.features) {
+                console.error("Features not found in response:", jsonResponse);
+                return;
+            }
+
+            let features = jsonResponse.features;
+            console.log(features, "features");
+
+            let detaildata = "";
+
+            features.forEach((feature, index) => {
+                // let htmldata = feature.properties;
+                let token = htmldata.token || 'N/A';
+                let gutNo = htmldata.gut_no || 'N/A';
+                let ownerName = htmldata.owner_det_email || 'N/A';
+                let plotType = htmldata.plottype || 'N/A';
+                let caseInfoArea = htmldata.case_info_area || 'N/A';
+                let plotNo = htmldata.plotno || 'N/A';
+                let pincode = htmldata.pincode || 'N/A';
+
+                detaildata += `<div style='max-height: 250px;   position: absolute;
+  z-index: 9999 !important; overflow-y: auto;'>
+                  <table style='width:100%;' class='popup-table'>
+                    <tr><td colspan="2">Feature ${index + 1}</td></tr>
+                    <tr><td>Token No</td><td>${token}</td></tr>
+                    <tr><td>Gut No</td><td>${gutNo}</td></tr>
+                    <tr><td>Owner Email</td><td>${ownerName}</td></tr>
+                    <tr><td>Plot Type</td><td>${plotType}</td></tr>
+                    <tr><td>Case Info Area</td><td>${caseInfoArea}</td></tr>
+                    <tr><td>Plot No</td><td>${plotNo}</td></tr>
+                    <tr><td>Pincode</td><td>${pincode}</td></tr>
+                    <tr><td>Co-Ordinates</td><td>${e.latlng}</td></tr>
+                  </table>
+                </div>`;
+            });
+
+            console.log("Popup content:", detaildata); // Log content to verify
+
+            L.popup()
+              .setLatLng(e.latlng)
+              .setContent(detaildata)
+              .openOn(map);
+        } catch (error) {
+            console.error("Error fetching data:", error);
         }
-        let detaildata1 = `<table style='width:100%;' class='popup-table'>${txtk1}<tr><td>Coordinates</td><td>${e.latlng}</td></tr></table>`;
-        console.log("Modal Content:", detaildata1);
-
-        // Update the modal content
-        document.getElementById("modalContent").innerHTML = detaildata1;
-        // Set modal position to clicked position
-        updatePopupPosition(e);
-      } else {
-        console.log("No features found for this location.");
-        closeModal(); // Close the modal if no features are found
-      }
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      closeModal(); // Close the modal on error
     }
-  }
-}
-
-// Function to update the popup position
-function updatePopupPosition(e) {
-  let modal = document.getElementById("infoModal");
-  if (!modal) return;
-
-  modal.style.display = "block"; // Show the modal
-  const modalWidth = modal.offsetWidth;
-  const modalHeight = modal.offsetHeight;
-
-  console.log(`Popup position: x=${e.containerPoint.x}, y=${e.containerPoint.y}`);
-  console.log(`Modal size: width=${modalWidth}, height=${modalHeight}`);
-
-  modal.style.left = `${e.containerPoint.x - modalWidth / 2}px`; // Center horizontally
-  modal.style.top = `${e.containerPoint.y - modalHeight}px`; // Position above the click point
-}
-
-// Function to close the modal
-function closeModal() {
-  document.getElementById("infoModal").style.display = "none";
-}
-
-// Event listener for map click
-map.on("click", (e) => {
-  lastClickEvent = e;
-  handleMapClick(e);
 });
-
-// Event listener for map move and zoom to update the popup position
-map.on("moveend", () => {
-  if (lastClickEvent) {
-    updatePopupPosition(lastClickEvent);
-  }
-});
-
-
-// Function to update the popup position
-function updatePopupPosition(e) {
-  let modal = document.getElementById("infoModal");
-  if (!modal) return;
-
-  modal.style.display = "block"; // Show the modal
-  const modalWidth = modal.offsetWidth;
-  const modalHeight = modal.offsetHeight;
- 
-  // Calculate the position to center bottom
-  modal.style.left = `${e.containerPoint.x - modalWidth / 2}px`; // Center horizontally
-  modal.style.top = `${e.containerPoint.y - modalHeight}px`; // Position above the click point
-}
-
-// Function to close the modal
-function closeModal() {
-  document.getElementById("infoModal").style.display = "none";
-}
-
-// Event listener for map click
-map.on("click", handleMapClick);
-
-// Event listener for map move and zoom to update the popup position
-map.on("moveend", () => {
-  let modal = document.getElementById("infoModal");
-  if (modal.style.display === "block") {
-    // Recalculate the position based on the map's new view
-    // You may need to store and pass the last click event coordinates to update the popup position.
-    updatePopupPosition(lastClickEvent);
-  }
-});
-
-// Store the last click event to use when the map moves
-let lastClickEvent;
-map.on("click", (e) => {
-  lastClickEvent = e;
-  handleMapClick(e);
-});
-
-function closeModal() {
-  document.getElementById("infoModal").style.display = "none";
-}
