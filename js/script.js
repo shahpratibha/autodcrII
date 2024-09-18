@@ -746,85 +746,179 @@ $(document).ready(function () {
 });
 
 
-document.addEventListener('DOMContentLoaded', (event) => {
-  // Columns to populate
-  var columns = { "name": "Village", "caseinformation_applyfor": "Survey No", "width": "Owner Name",  };
 
-  // Dynamically populate #column-list (using div elements)
-  var columnList = document.getElementById("column-list");
+
+
+
+
+
+
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', (event) => {
+
+  // alert("heheeheh")
+  // var columns = {"Work_ID":"Work ID", "Budget_Code":"Budget Code", "Name_of_Work":"Name of Work", "Scope_of_Work":"Scope of Work", "Name_of_JE":"Name of JE", "Agency":"Agency"};
+  var columns =  {"token": "Token No", "siteaddress_area": "Village Name", "gut_no": "Survey No", "ownerinformation_firstname": "Owner Name"  };
+
+  var select = document.getElementById("search_type");
+
+  // Populate dropdown with column names
   for (var key in columns) {
     if (columns.hasOwnProperty(key)) {
-      var optionDiv = document.createElement("div");
-      optionDiv.textContent = columns[key];
-      optionDiv.dataset.value = key; // Store value in a data attribute
-      columnList.appendChild(optionDiv);
+      var option = document.createElement("option");
+      option.text = columns[key];
+      option.value = key;
+
+
+
+      select.appendChild(option);
+
     }
   }
 
-  // Handle search icon click to show/hide column list
-  document.getElementById("toggle-select").addEventListener("click", function() {
-    var columnList = document.getElementById("column-list");
-    columnList.classList.toggle("hidden");
-  });
 
-  // Handle option click to populate search input
-  columnList.addEventListener("click", function(event) {
-    var target = event.target;
-    if (target.tagName.toLowerCase() === "div") {
-      var selectedValue = target.dataset.value;
-      var selectedText = target.textContent;
-      document.getElementById("search-input").setAttribute("placeholder", "Search " + selectedText);
-      
-      var layerName = 'Plot_Layout';
-      var workspace = 'AutoDCR';
-      var main_url = ''; // Ensure you set this to your actual URL
 
-      // Function to fetch dynamic data
-      function getValues(callback) {
-        var geoServerURL = `${main_url}${workspace}/wms?service=WFS&version=1.1.0&request=GetFeature&typeName=${layerName}&propertyName=${selectedValue}&outputFormat=application/json`;
 
-        $.getJSON(geoServerURL, function (data) {
-          var workTypeSet = new Set();
-          $.each(data.features, function (index, feature) {
-            var workType = feature.properties[selectedValue];
-            if (typeof workType === 'number') workType = workType.toString();
-            if (workType !== null) workTypeSet.add(workType);
-          });
-          var uniqueWorkTypes = Array.from(workTypeSet);
-          callback(uniqueWorkTypes); // Pass data to autocomplete function
-        });
-      }
+  // Initialize selected value variable
+  let selectedValue;
 
-      // Fetch dynamic data and pass it to the autocomplete function
+
+
+
+
+  // Event listener for dropdown change
+  $("#search_type").change(function () {
+    // alert("ooooooooooooo")
+    var selectedValue = $(this).val();
+    var selectedText = columns[selectedValue]; // Get corresponding label from columns object
+    var input = document.getElementById("searchInputDashboard");
+    // Update input placeholder and clear input value
+    var selectedValue = select.value;
+    input.placeholder = "Search " + selectedText;
+    input.value = "";
+
+
+    // Call autocomplete with empty array and selected column
+    autocomplete(input, [], selectedValue);
+
+    // Trigger search based on the selected column immediately after selecting
+    if (selectedValue) {
       getValues(function (data) {
-        autocomplete(document.getElementById("search-input"), data);
+        autocomplete(input, data, selectedValue); // Call autocomplete with fetched data and selected column
       });
-
-      columnList.classList.add("hidden"); // Hide the list after selection
     }
+
+    function getValues(callback) {
+      var geoServerURL = `${main_url}AutoDCR/wms?service=WFS&version=1.1.0&request=GetFeature&typeName=Plot_Layout&propertyName=${selectedValue}&outputFormat=application/json`;
+      console.log(geoServerURL, "geoServerURLsearch");
+
+      $.getJSON(geoServerURL, function (data) {
+        var workTypeSet = new Set();
+
+        // Populate the Set with work types
+        $.each(data.features, function (index, feature) {
+          var workType = feature.properties[selectedValue];
+
+          // Convert number (double) values to strings
+          if (typeof workType === 'number') {
+            workType = workType.toString();
+          }
+          if (workType !== null) {
+            workTypeSet.add(workType);
+          }
+        });
+
+        // Convert the Set to an array
+        var uniqueWorkTypes = Array.from(workTypeSet);
+        console.log(uniqueWorkTypes, "uniqueWorkTypes");
+
+        // Call the callback function with the uniqueWorkTypes array
+        callback(uniqueWorkTypes);
+      });
+    }
+
+    // Call getValues function and initialize autocomplete
+    getValues(function (data) {
+      // console.log("heheheh", data);
+      console.log(selectedValue, "LLLLLLLLLLLLLLLLLLLLLL")
+      // Initialize autocomplete with fetched data
+      autocomplete(document.getElementById("searchInputDashboard"), data);
+    });
   });
 
-  // Autocomplete functionality
-  function autocomplete(input, arr) {
+  // autocomplete function
+  function autocomplete(input, arr, selectedColumn) {
     let currentFocus;
-    input.addEventListener("input", function() {
-      let list, item, i, val = this.value.toLowerCase();
+    input.addEventListener("input", function () {
+      let list, item, i, val = this.value.toLowerCase(); // Convert input value to lowercase for case-insensitive comparison
       closeAllLists();
       if (!val) return false;
       currentFocus = -1;
-
       list = document.createElement("ul");
       list.setAttribute("id", "autocomplete-list");
       list.setAttribute("class", "autocomplete-items");
-      document.body.appendChild(list);
-
+      document.getElementById("autocompleteSuggestions").appendChild(list);
       for (i = 0; i < arr.length; i++) {
-        if (arr[i].toLowerCase().includes(val)) {
+        if (arr[i].toLowerCase().includes(val)) { // Check if the suggestion contains the input value
           item = document.createElement("li");
-          item.innerHTML = arr[i].replace(new RegExp(val, 'gi'), (match) => `<strong>${match}</strong>`);
+          item.innerHTML = arr[i].replace(new RegExp(val, 'gi'), (match) => `<strong>${match}</strong>`); // Highlight matching letters
           item.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
-          item.addEventListener("click", function() {
-            input.value = this.getElementsByTagName("input")[0].value;
+          item.addEventListener("click", function () {
+            selectedValue = this.getElementsByTagName("input")[0].value; // Store the selected value
+            console.log(selectedValue, "ppppppppppppppppp")
+
+
+            var searchtypefield = $("#search_type").val();
+            console.log(searchtypefield, "ppppppppppppppppp99999999")
+            let cqlFilter;
+
+            cqlFilter = `${searchtypefield} IN ('${selectedValue}')`;
+
+            console.log(cqlFilter, "cqlFilter")
+
+
+
+
+            Plot_Layout.setParams({
+              CQL_FILTER: cqlFilter,
+              maxZoom: 19.5,
+              // styles: "IWMS_points"
+            });
+
+            // IWMS_line.setParams({
+            //   CQL_FILTER: cqlFilter,
+            //   maxZoom: 19.5,
+            //   styles: "IWMS_line"
+            // });
+
+            // IWMS_polygon.setParams({
+            //   CQL_FILTER: cqlFilter,
+            //   maxZoom: 19.5,
+            //   styles: "IWMS_polygon"
+            // });
+            // GIS_Ward_Layer.setParams({
+            //   CQL_FILTER: cqlFilter,
+            //   maxZoom: 19.5,
+            //   styles: "IWMS_polygon"
+            // });
+
+
+            console.log("Adding IWMS_point, IWMS_line, and IWMS_polygon layers with filter:", cqlFilter);
+            Plot_Layout.addTo(map).bringToFront();
+            // IWMS_line.addTo(map).bringToFront();
+            // IWMS_polygon.addTo(map).bringToFront();
+            // GIS_Ward_Layer.addTo(map).bringToFront();
+            fitbous(cqlFilter);
+
+            DataTableFilter(cqlFilter)
+
+
+
+            input.value = selectedValue;
             closeAllLists();
           });
           list.appendChild(item);
@@ -832,19 +926,23 @@ document.addEventListener('DOMContentLoaded', (event) => {
       }
     });
 
-    input.addEventListener("keydown", function(e) {
+    input.addEventListener("keydown", function (e) {
       let x = document.getElementById("autocomplete-list");
       if (x) x = x.getElementsByTagName("li");
       if (e.keyCode === 40) {
         currentFocus++;
         addActive(x);
-      } else if (e.keyCode === 38) {
+      } else if (e.keyCode === 38) { //up
         currentFocus--;
         addActive(x);
       } else if (e.keyCode === 13) {
         e.preventDefault();
         if (currentFocus > -1) {
-          if (x) x[currentFocus].click();
+          if (x) {
+            selectedValue = x[currentFocus].getElementsByTagName("input")[0].value; // Store the selected value
+            input.value = selectedValue;
+            closeAllLists();
+          }
         }
       }
     });
@@ -853,7 +951,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
       if (!x) return false;
       removeActive(x);
       if (currentFocus >= x.length) currentFocus = 0;
-      if (currentFocus < 0) currentFocus = x.length - 1;
+      if (currentFocus < 0) currentFocus = (x.length - 1);
       x[currentFocus].classList.add("autocomplete-active");
     }
 
@@ -872,123 +970,238 @@ document.addEventListener('DOMContentLoaded', (event) => {
       }
     }
 
-    document.addEventListener("click", function(e) {
+    document.addEventListener("click", function (e) {
       closeAllLists(e.target);
     });
   }
 });
 
 
-// const layerDetails = {
-//   "AutoDCR:Plot_Layout": ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype", "caseinformation_proposaltype","gut_no", "caseinformation_tdrzone", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "ownerinformation_firstname"],
-// };
 
-// function getCheckedValuesforpopuups() {
-//   return new Promise((resolve, reject) => {
-//     var selectedValues = {};
-//     const filternames = ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype", "gut_no","caseinformation_proposaltype", "caseinformation_tdrzone", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "ownerinformation_firstname"];
 
-//     filternames.forEach(function (filtername) {
-//       selectedValues[filtername] = []; 
 
-//       $('#' + filtername + ' input[type="checkbox"]:checked').each(function () {
-//         var single_val = $(this).val();
-//         if (single_val) {
-//           var actualValue = single_val.split(' (')[0];
-//           selectedValues[filtername].push(actualValue);
-//           // //console.log(selectedValues, "lllllllllll99999999999999")
-//         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+// // old code 18/9
+// document.addEventListener('DOMContentLoaded', (event) => {
+//   // Columns to populate
+//   var columns = {"token": "Token No", "siteaddress_area": "Village Name", "gut_no": "Survey No", "ownerinformation_firstname": "Owner Name"  };
+
+//   // Dynamically populate #column-list (using div elements)
+//   var columnList = document.getElementById("column-list");
+//   for (var key in columns) {
+//     if (columns.hasOwnProperty(key)) {
+//       var optionDiv = document.createElement("div");
+//       optionDiv.textContent = columns[key];
+//       optionDiv.dataset.value = key; // Store value in a data attribute
+//       columnList.appendChild(optionDiv);
+//     }
+//   }
+
+//   // Handle search icon click to show/hide column list
+//   document.getElementById("toggle-select").addEventListener("click", function() {
+//     var columnList = document.getElementById("column-list");
+//     columnList.classList.toggle("hidden");
+//   });
+
+//   // Handle option click to populate search input
+//   columnList.addEventListener("click", function(event) {
+//     var target = event.target;
+//     if (target.tagName.toLowerCase() === "div") {
+//       var selectedValue = target.dataset.value;
+//       var selectedText = target.textContent;
+//       document.getElementById("search_type").setAttribute("placeholder", "Search " + selectedText);
+      
+      
+
+//       // Function to fetch dynamic data
+//       // function getValues(callback) {
+//       //   var geoServerURL = `${main_url}${workspace}/wms?service=WFS&version=1.1.0&request=GetFeature&typeName=${layerName}&propertyName=${selectedValue}&outputFormat=application/json`;
+
+//       //   $.getJSON(geoServerURL, function (data) {
+//       //     var workTypeSet = new Set();
+//       //     $.each(data.features, function (index, feature) {
+//       //       var workType = feature.properties[selectedValue];
+//       //       if (typeof workType === 'number') workType = workType.toString();
+//       //       if (workType !== null) workTypeSet.add(workType);
+//       //     });
+//       //     var uniqueWorkTypes = Array.from(workTypeSet);
+//       //     callback(uniqueWorkTypes); // Pass data to autocomplete function
+//       //   });
+//       // }
+
+//       // // Fetch dynamic data and pass it to the autocomplete function
+//       // getValues(function (data) {
+//       //   autocomplete(document.getElementById("search_type"), data);
+//       // });
+
+//       columnList.classList.add("hidden"); // Hide the list after selection
+//     }
+//   });
+
+
+//   // new code 18/9
+
+
+  
+//   // Initialize selected value variable
+//   let selectedValue;
+
+
+
+
+
+//   // Event listener for dropdown change
+//   $("#search_type").change(function () {
+//     alert("ghghghgghhhhhhhhhh")
+//     var selectedValue = $(this).val();
+//     var selectedText = columns[selectedValue]; // Get corresponding label from columns object
+//     var input = document.getElementById("search_type");
+//     // Update input placeholder and clear input value
+//     var selectedValue = select.value;
+//     input.placeholder = "Search " + selectedText;
+//     input.value = "";
+// alert("PPPP")
+
+//     // Call autocomplete with empty array and selected column
+//     autocomplete(input, [], selectedValue);
+
+//     // Trigger search based on the selected column immediately after selecting
+//     if (selectedValue) {
+//       getValues(function (data) {
+//         autocomplete(input, data, selectedValue); // Call autocomplete with fetched data and selected column
 //       });
+//     }
+
+//     function getValues(callback) {
+//       var geoServerURL = `${main_url}pmc/wms?service=WFS&version=1.1.0&request=GetFeature&typeName=IWMS_line,IWMS_point,IWMS_polygon,GIS_Ward_Layer&propertyName=${selectedValue}&outputFormat=application/json`;
+//       console.log(geoServerURL, "geoServerURLsearch");
+
+//       console.log(geoServerURL,"geoserverURL")
+
+//       $.getJSON(geoServerURL, function (data) {
+//         var workTypeSet = new Set();
+
+//         // Populate the Set with work types
+//         $.each(data.features, function (index, feature) {
+//           var workType = feature.properties[selectedValue];
+
+//           // Convert number (double) values to strings
+//           if (typeof workType === 'number') {
+//             workType = workType.toString();
+//           }
+//           if (workType !== null) {
+//             workTypeSet.add(workType);
+//           }
+//         });
+
+//         // Convert the Set to an array
+//         var uniqueWorkTypes = Array.from(workTypeSet);
+//         console.log(uniqueWorkTypes, "uniqueWorkTypes");
+
+//         // Call the callback function with the uniqueWorkTypes array
+//         callback(uniqueWorkTypes);
+//       });
+//     }
+
+//     // Call getValues function and initialize autocomplete
+//     getValues(function (data) {
+//       // console.log("heheheh", data);
+//       console.log(selectedValue, "LLLLLLLLLLLLLLLLLLLLLL")
+//       // Initialize autocomplete with fetched data
+//       autocomplete(document.getElementById("search_type"), data);
+//     });
+//   });
+//   // new code 18/9
+//   // Autocomplete functionality
+//   function autocomplete(input, arr) {
+//     let currentFocus;
+//     input.addEventListener("input", function() {
+//       let list, item, i, val = this.value.toLowerCase();
+//       closeAllLists();
+//       if (!val) return false;
+//       currentFocus = -1;
+
+//       list = document.createElement("ul");
+//       list.setAttribute("id", "autocomplete-list");
+//       list.setAttribute("class", "autocomplete-items");
+//       document.body.appendChild(list);
+
+//       for (i = 0; i < arr.length; i++) {
+//         if (arr[i].toLowerCase().includes(val)) {
+//           item = document.createElement("li");
+//           item.innerHTML = arr[i].replace(new RegExp(val, 'gi'), (match) => `<strong>${match}</strong>`);
+//           item.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+//           item.addEventListener("click", function() {
+//             input.value = this.getElementsByTagName("input")[0].value;
+//             closeAllLists();
+//           });
+//           list.appendChild(item);
+//         }
+//       }
 //     });
 
-//     var filters = [];
-//     for (var key in selectedValues) {
-//       if (selectedValues[key].length > 0) {
-//         filters.push(`${key} IN ('${selectedValues[key].join("','")}')`);
-//       }
-//     }
-//     var checkedValues = getCheckedValuess();
-
-
-//     if (checkedValues) {
-//       var filterString = filters.join(" AND ");
-//     }
-
-//     resolve(filterString);
-//   });
-// }
-
-// function combineFilters(cql_filter123, filterString) {
-//   if (cql_filter123) {
-//     return `${cql_filter123} AND ${filterString}`;
-//   } else {
-//     return filterString;
-//   }
-// }
-
- 
-// map.on("click", async (e) => {
-//   console.log("Click event:", e);
- 
-//   let bbox = map.getBounds().toBBoxString();
-//   let size = map.getSize();
- 
-//   let filterString = await getCheckedValuesforpopuups();
-//   let cqlFilter123 = filterString.trim() !== "" ? encodeURIComponent(filterString) : "";
- 
-//   for (let layer in layerDetails) {
-//     let selectedKeys = layerDetails[layer];
-//     let workspace = "AutoDCR";
-//     let urrr = `https://iwmsgis.pmc.gov.in/geoserver/${workspace}/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&FORMAT=image%2Fpng&TRANSPARENT=true&QUERY_LAYERS=${layer}&STYLES&LAYERS=${layer}&exceptions=application%2Fvnd.ogc.se_inimage&INFO_FORMAT=application/json&FEATURE_COUNT=50&X=${Math.round(e.containerPoint.x)}&Y=${Math.round(e.containerPoint.y)}&SRS=EPSG%3A4326&WIDTH=${size.x}&HEIGHT=${size.y}&BBOX=${bbox}`;
-//     console.log("WMS Request URL:", urrr);
- 
-//     try {
-//       let response = await fetch(urrr);
-//       if (!response.ok) {
-//         throw new Error(`Network response was not ok: ${response.statusText}`);
-//       }
-//       let json = await response.json();
-//       console.log("WMS Response JSON:", json);
- 
-//       if (json.features.length > 0) {
-//         let htmldata = json.features[0].properties;
-//         console.log("Feature Properties:", htmldata);
- 
-//         let txtk1 = "";
-//         for (let key of selectedKeys) {
-//           if (htmldata.hasOwnProperty(key)) {
-//             let value = htmldata[key];
-//             txtk1 += `<tr><td>${key}</td><td>${value}</td></tr>`;
-//           }
+//     input.addEventListener("keydown", function(e) {
+//       let x = document.getElementById("autocomplete-list");
+//       if (x) x = x.getElementsByTagName("li");
+//       if (e.keyCode === 40) {
+//         currentFocus++;
+//         addActive(x);
+//       } else if (e.keyCode === 38) {
+//         currentFocus--;
+//         addActive(x);
+//       } else if (e.keyCode === 13) {
+//         e.preventDefault();
+//         if (currentFocus > -1) {
+//           if (x) x[currentFocus].click();
 //         }
- 
-//         let detaildata1 = `<table style='width:100%;' class='popup-table'>${txtk1}<tr><td>Coordinates</td><td>${e.latlng}</td></tr></table>`;
-//         console.log("Modal Content:", detaildata1);
- 
-//         // Update the modal content
-//         document.getElementById("modalContent").innerHTML = detaildata1;
- 
-//         // Set modal position to clicked position
-//         let modal = document.getElementById("infoModal");
-//         modal.style.display = "block"; // Show the modal
-//         modal.style.left = `${e.containerPoint.x + 10}px`; // Adjust 10px to avoid cursor overlap
-//         modal.style.top = `${e.containerPoint.y + 10}px`; // Adjust 10px to avoid cursor overlap
- 
-//       } else {
-//         console.log("No features found for this location.");
-//         closeModal(); // Close the modal if no features are found
 //       }
-//     } catch (error) {
-//       console.error("Error fetching data:", error);
-//       closeModal(); // Close the modal on error
+//     });
+
+//     function addActive(x) {
+//       if (!x) return false;
+//       removeActive(x);
+//       if (currentFocus >= x.length) currentFocus = 0;
+//       if (currentFocus < 0) currentFocus = x.length - 1;
+//       x[currentFocus].classList.add("autocomplete-active");
 //     }
+
+//     function removeActive(x) {
+//       for (let i = 0; i < x.length; i++) {
+//         x[i].classList.remove("autocomplete-active");
+//       }
+//     }
+
+//     function closeAllLists(elmnt) {
+//       let x = document.getElementsByClassName("autocomplete-items");
+//       for (let i = 0; i < x.length; i++) {
+//         if (elmnt !== x[i] && elmnt !== input) {
+//           x[i].parentNode.removeChild(x[i]);
+//         }
+//       }
+//     }
+
+//     document.addEventListener("click", function(e) {
+//       closeAllLists(e.target);
+//     });
 //   }
 // });
- 
-// // Function to close the modal
-// function closeModal() {
-//   document.getElementById("infoModal").style.display = "none";
-// }
+
+// // old code 18/9
+
+
+
  
 const layerDetails = {
   "AutoDCR:Plot_Layout": ["token","siteaddress_area", "gut_no", "ownerinformation_firstname","caseinformation_applyfor", "caseinformation_casetype", "caseinformation_proposaltype", "caseinformation_tdrzone", "caseinformation_grossplotarea", "plotdetails_developmentzonedp", ],
