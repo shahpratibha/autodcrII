@@ -1973,7 +1973,7 @@ margin-right: 203px;
 
 
 .search-arrow {
-  background: #54A4E6;
+  background: #54A4E6 !important;
   padding: 4px;
   border-radius: 12px;
   color: white;
@@ -2212,3 +2212,80 @@ margin-right: 203px;
   filter: invert(1) brightness(2);
 }
 
+
+
+
+
+#autocomplete-list {
+  position: absolute;
+  z-index: 9999;
+  margin-left:100px;
+  height: auto;
+ 
+  border-radius: 10px;
+  width: auto;
+ 
+  z-index: 9999;
+  top: 98.5%;
+  left: 61%;
+  background-color: #fff;
+  width: 250px;
+ 
+  max-width: 230px;
+  max-height: 400px;
+  overflow-x: hidden;
+  overflow-y: scroll !important;
+  scrollbar-width: thin;
+  line-height: 2.5;
+ }
+
+
+
+.SearchBar1 {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  font-weight: bold;
+  z-index: 9999;
+  position: absolute;
+  top: 10%;
+  right: 20%;
+  border: 1px solid #0077da;
+  background: white;
+  border-radius: 5px 5px 5px 5px;
+}
+.SearchBar .form-select,
+.SearchBar .form-control,
+.SearchBar .btn {
+margin-right: 5px;
+font-size: 12px;
+font-weight: bold;
+width: 1.400%;
+height: 4.5%;
+position: absolute;
+top:10px;
+left: 65%;
+border-left: 2px solid #0077da;
+border-right: 2px solid #0077da ;
+border-top: 2px solid #0077da;
+border-bottom: 2px solid #0077da ;
+z-index: 9999999;
+border-radius: 0;
+border-top-left-radius: 10px;
+border-bottom-left-radius: 10px;
+}
+.SearchBar #searchInputDashboard {
+  
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+ 
+  width: 15%;
+  position: absolute;
+  z-index: 9999;
+  top: 10px;
+  text-align: center;
+  padding-left: 10px;
+  left: 73.5%;
+  transform: translateX(-50%);
+  border: 2px solid #0077da;
+}
