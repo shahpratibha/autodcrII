@@ -71,6 +71,12 @@
           <span class="close-icon" onclick="closeFilters()">&#215;</span>
           <div class="filter_div">
             <div class="filter-group">
+              <label for="token" onclick="toggleFilter(this)">Token No<span class="icon-container"><i
+                    class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
+              <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
+              <ul class="select2 abcscroll " multiple="multiple" id="token"></ul>
+            </div>
+            <div class="filter-group">
               <label for="siteaddress_area" onclick="toggleFilter(this)">Village <span class="icon-container"><i
                     class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
               <input type="text" placeholder="Search" class="filter-input" id="villageSearch">
@@ -78,54 +84,51 @@
               <ul class="select2  abcscroll" multiple="multiple" id="siteaddress_area"></ul>
             </div>
             <div class="filter-group">
+              <label for="gut_no" onclick="toggleFilter(this)">Survey No <span class="icon-container"><i
+                    class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
+              <input type="text" placeholder="Search" class="filter-input" id="statusSearch">
+              <ul class="select2" multiple="multiple" id="gut_no"></ul>
+            </div>
+            <div class="filter-group">
+              <label for="ownerinformation_firstname" onclick="toggleFilter(this)">Owner Name <span class="icon-container"><i
+                    class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
+              <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
+              <ul class="select2 abcscroll " multiple="multiple" id="ownerinformation_firstname"></ul>
+            </div>
+            <div class="filter-group">
               <label for="caseinformation_applyfor" onclick="toggleFilter(this)">Apply For <span class="icon-container"><i
                     class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
               <input type="text" placeholder="Search" class="filter-input" id="widthSearch">
               <ul class="select2 abcscroll" multiple="multiple" id="caseinformation_applyfor"></ul>
             </div>
+           
             <div class="filter-group">
-              <label for="siteaddress_surveyno" onclick="toggleFilter(this)">Survey No <span class="icon-container"><i
-                    class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
-              <input type="text" placeholder="Search" class="filter-input" id="statusSearch">
-              <ul class="select2" multiple="multiple" id="siteaddress_surveyno"></ul>
-            </div>
-            <div class="filter-group">
-              <label for="caseinformation_casetype" onclick="toggleFilter(this)">Casetype <span class="icon-container"><i
+              <label for="caseinformation_casetype" onclick="toggleFilter(this)">Case Type <span class="icon-container"><i
                     class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
               <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
               <ul class="select2 " multiple="multiple" id="caseinformation_casetype"></ul>
             </div>
             <div class="filter-group">
-              <label for="caseinformation_proposaltype" onclick="toggleFilter(this)">proposal type<span class="icon-container"><i
+              <label for="caseinformation_proposaltype" onclick="toggleFilter(this)">Proposal Type<span class="icon-container"><i
                     class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
               <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
               <ul class="select2 " multiple="multiple" id="caseinformation_proposaltype"></ul>
             </div>
+            
             <div class="filter-group">
-              <label for="caseinformation_tdrzone" onclick="toggleFilter(this)">tdrzone<span class="icon-container"><i
+              <label for="caseinformation_grossplotarea" onclick="toggleFilter(this)">Gross Plot Area <span class="icon-container"><i
                     class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
               <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
-              <ul class="select2 " multiple="multiple" id="caseinformation_tdrzone"></ul>
+              <ul class="select2 abcscroll" multiple="multiple" id="caseinformation_grossplotarea"></ul>
             </div>
             <div class="filter-group">
-              <label for="caseinformation_grossplotarea" onclick="toggleFilter(this)">grossplotarea <span class="icon-container"><i
-                    class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
-              <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
-              <ul class="select2 " multiple="multiple" id="caseinformation_grossplotarea"></ul>
-            </div>
-            <div class="filter-group">
-              <label for="plotdetails_developmentzonedp" onclick="toggleFilter(this)">developmentzonedp <span
+              <label for="plotdetails_developmentzonedp" onclick="toggleFilter(this)">Development Zone DP  <span
                   class="icon-container"><i class="fa-solid fa-angle-down"></i></span><span
                   class="selected-count"></span></label>
               <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
               <ul class="select2 " multiple="multiple" id="plotdetails_developmentzonedp"></ul>
             </div>
-            <div class="filter-group">
-              <label for="Owner_Name" onclick="toggleFilter(this)">owner_det_email <span class="icon-container"><i
-                    class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
-              <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
-              <ul class="select2 " multiple="multiple" id="Owner_Name"></ul>
-            </div>
+            
           </div>
 
           <div class="showCount">
