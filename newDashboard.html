@@ -1,94 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Title</title>
+    <title>Dashboard</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="image/pmcjpeg.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet"
+      href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
+    <link rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
+    <link rel="stylesheet" href="css/style2.css">
 
-  <title>Dashboard</title>
-  <link rel="icon" href="image/pmcjpeg.png" type="image/x-icon">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  
-  
-  <link rel="stylesheet" href="css/style2.css">
+    <link rel="stylesheet" href="css/style1.css">
+    <link rel="stylesheet" href="css/leafletCustom.css">
 
-  <link rel="stylesheet" href="css/style1.css">
-  <link rel="stylesheet" href="css/leafletCustom.css">
+  </head>
 
+  <body>
 
-</head>
+    <div class="container-fluid p-0">
+      <!-- Top Section -->
+      <div class="row top-section m-0">
+        <div
+          class="col-12 d-flex justify-content-between align-items-center p-0">
 
-<body>
+        </div>
+      </div>
 
-
-  <div class="container-fluid p-0">
-    <!-- Top Section -->
-    <div class="row top-section m-0">
-      <div class="col-12 d-flex justify-content-between align-items-center p-0">
+      <!-- <button id="printTableBtn">Download CSV</button> -->
+      <div id="tablecontainer"></div>
+      <!-- popup -->
+      <div id="infoModal"
+        style="display: none; position: absolute; background-color: white; border: 1px solid #ddd; padding: 10px; z-index: 9999; max-width: 300px;">
+        <h4>Feature Information</h4>
+        <div id="modalContent"></div>
+        <button onclick="closeModal()">Close</button>
 
       </div>
-    </div>
 
-    <!-- <button id="printTableBtn">Download CSV</button> -->
-    <div id="tablecontainer"></div>
-    <!-- popup -->
-    <div id="infoModal"
-      style="display: none; position: absolute; background-color: white; border: 1px solid #ddd; padding: 10px; z-index: 9999; max-width: 300px;">
-      <h4>Feature Information</h4>
-      <div id="modalContent"></div>
-      <button onclick="closeModal()">Close</button>
-      
-    </div>
+      <!-- Map Section -->
+      <div class="north-arrow-container">
+        <img src="image/North New.png" class="north-arrow" alt="North Arrow">
+      </div>
 
+      <div class="row m-0">
+        <div class="col-12 p-0">
+          <div id="map"></div>
 
-    <!-- Map Section -->
-    <div class="north-arrow-container">
-      <img src="image/North New.png" class="north-arrow" alt="North Arrow">
-    </div>
-   
+          <div class="map-controls" id="map-controls">
+            <button id="search-button" class="search-button">
+              <img src="image/Search.svg" alt="Search Icon" id="search-icon">
+            </button>
 
-    <div class="row m-0">
-      <div class="col-12 p-0">
-        <div id="map"></div>
-
-
-
-        <div class="map-controls" id="map-controls">
-          <button id="search-button" class="search-button">
-            <img src="image/Search.svg" alt="Search Icon" id="search-icon">
-          </button>
-
-
-
-          <!-- Search container -->
-          <div id="search-container" class="search-container hidden">
-            <span class="search-icon" id="toggle-select">&#9660;</span>
-            <!-- Select element initially hidden, will be shown when search-icon is clicked -->
-            <div class="form-select ms-auto hidden" class="hidden" id="column-list">
-              <!-- <option value="search">search</option> -->
-              <!-- Add more options as needed -->
+            <!-- Search container -->
+            <div id="search-container" class="search-container hidden">
+              <span class="search-icon" id="toggle-select">&#9660;</span>
+              <!-- Select element initially hidden, will be shown when search-icon is clicked -->
+              <div class="form-select ms-auto hidden" class="hidden"
+                id="column-list">
+                <!-- <option value="search">search</option> -->
+                <!-- Add more options as needed -->
+              </div>
+              <input type="text" id="search-input" class="search-input"
+                placeholder="Search">
+              <img src="image/Arrow.svg" id class="search-arrow" alt>
+              <span id="clear-icon" class="clear-icon hidden">&#x2715;</span>
             </div>
-            <input type="text" id="search-input" class="search-input" placeholder="Search">
-            <img src="image/Arrow.svg" id="" class="search-arrow" alt="">
-            <span id="clear-icon" class="clear-icon hidden">&#x2715;</span>
-          </div>
 
-
-
-
-          <!-- <select class="form-select ms-auto" id="search_type">
+            <!-- <select class="form-select ms-auto" id="search_type">
               <option value=""> 
                  </select> -->
-          <!-- <span class="search-icon">&#9660;</span>  </option>
+            <!-- <span class="search-icon">&#9660;</span>  </option>
             </select> -->
-        </div>
-        <!-- 
+          </div>
+          <!-- 
 
        <div class="SearchBar">
         <select class="form-select" aria-label="Select search category" id="search_type">
@@ -99,312 +91,128 @@
         <div id="autocompleteSuggestions" class="autocomplete-suggestions"></div>
       </div>
  -->
- <!-- calender -->
- <div class="date-picker">
-
-  <div class="date-range" id="date-range-display">April 1, 2024 - March 31, 2025
-    <div class="calendar-icon" id="calendar-icon">
-      <img src="image/time.png" alt="">
-    </div>
-  </div>
-
-  <button id="select-year-button">Select Year</button>
-  <input type="date" id="date-input" style="display: none;">
-</div>
-        <div class="filters" id="filters" style="">
-          <h3 class="filter-title">Filter</h3>
-          <span class="close-icon" onclick="closeFilters()">&#215;</span>
-          <div class="filter_div">
-            <div class="filter-group">
-              <label for="token" onclick="toggleFilter(this)">Token No<span class="icon-container"><i
-                    class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
-              <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
-              <ul class="select2 abcscroll " multiple="multiple" id="token"></ul>
+          <!-- calender -->
+          <div class="date-picker">
+            <div class="date-range" id="date-range-display">
+              April 1, 2024 - March 31, 2025
+              <div class="calendar-icon" id="calendar-icon">
+                <img src="image/time.png" alt="Calendar Icon">
+              </div>
             </div>
-            <div class="filter-group">
-              <label for="siteaddress_area" onclick="toggleFilter(this)">Village <span class="icon-container"><i
-                    class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
-              <input type="text" placeholder="Search" class="filter-input" id="villageSearch">
-              <!-- <img src="image/searchfilter.svg"> -->
-              <ul class="select2  abcscroll" multiple="multiple" id="siteaddress_area"></ul>
-            </div>
-            <div class="filter-group">
-              <label for="gut_no" onclick="toggleFilter(this)">Survey No <span class="icon-container"><i
-                    class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
-              <input type="text" placeholder="Search" class="filter-input" id="statusSearch">
-              <ul class="select2" multiple="multiple" id="gut_no"></ul>
-            </div>
-            <div class="filter-group">
-              <label for="ownerinformation_firstname" onclick="toggleFilter(this)">Owner Name <span
-                  class="icon-container"><i class="fa-solid fa-angle-down"></i></span><span
-                  class="selected-count"></span></label>
-              <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
-              <ul class="select2 abcscroll " multiple="multiple" id="ownerinformation_firstname"></ul>
-            </div>
-            <div class="filter-group">
-              <label for="caseinformation_applyfor" onclick="toggleFilter(this)">Apply For <span
-                  class="icon-container"><i class="fa-solid fa-angle-down"></i></span><span
-                  class="selected-count"></span></label>
-              <input type="text" placeholder="Search" class="filter-input" id="widthSearch">
-              <ul class="select2 abcscroll" multiple="multiple" id="caseinformation_applyfor"></ul>
-            </div>
-
-            <div class="filter-group">
-              <label for="caseinformation_casetype" onclick="toggleFilter(this)">Case Type <span
-                  class="icon-container"><i class="fa-solid fa-angle-down"></i></span><span
-                  class="selected-count"></span></label>
-              <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
-              <ul class="select2 " multiple="multiple" id="caseinformation_casetype"></ul>
-            </div>
-            <div class="filter-group">
-              <label for="caseinformation_proposaltype" onclick="toggleFilter(this)">Proposal Type<span
-                  class="icon-container"><i class="fa-solid fa-angle-down"></i></span><span
-                  class="selected-count"></span></label>
-              <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
-              <ul class="select2 " multiple="multiple" id="caseinformation_proposaltype"></ul>
-            </div>
-
-            <div class="filter-group">
-              <label for="caseinformation_grossplotarea" onclick="toggleFilter(this)">Gross Plot Area <span
-                  class="icon-container"><i class="fa-solid fa-angle-down"></i></span><span
-                  class="selected-count"></span></label>
-              <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
-              <ul class="select2 abcscroll" multiple="multiple" id="caseinformation_grossplotarea"></ul>
-            </div>
-            <div class="filter-group">
-              <label for="plotdetails_developmentzonedp" onclick="toggleFilter(this)">Development Zone DP <span
-                  class="icon-container"><i class="fa-solid fa-angle-down"></i></span><span
-                  class="selected-count"></span></label>
-              <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
-              <ul class="select2 " multiple="multiple" id="plotdetails_developmentzonedp"></ul>
-            </div>
-
+            <button id="select-year-button">Select Year</button>
+            <input type="date" id="date-input" style="display: none;">
+          </div>type="date" id="date-input" style="display: none;">
           </div>
 
-          <div class="showCount">
-            <h5 class="tablestats" id="tablestats" style="font-size: large;"> </h5>
-          </div>
-        </div>
-      </div>
-    </div>
+          <div class="filters" id="filters" style>
+            <h3 class="filter-title">Filter</h3>
+            <span class="close-icon" onclick="closeFilters()">&#215;</span>
+            <div class="filter_div">
+              <div class="filter-group">
+                <label for="token" onclick="toggleFilter(this)">Token No<span
+                    class="icon-container"><i
+                      class="fa-solid fa-angle-down"></i></span><span
+                    class="selected-count"></span></label>
+                <input type="text" placeholder="Search" class="filter-input"
+                  id="typeSearch">
+                <ul class="select2 abcscroll " multiple="multiple"
+                  id="token"></ul>
+              </div>
+              <div class="filter-group">
+                <label for="siteaddress_area"
+                  onclick="toggleFilter(this)">Village <span
+                    class="icon-container"><i
+                      class="fa-solid fa-angle-down"></i></span><span
+                    class="selected-count"></span></label>
+                <input type="text" placeholder="Search" class="filter-input"
+                  id="villageSearch">
+                <!-- <img src="image/searchfilter.svg"> -->
+                <ul class="select2  abcscroll" multiple="multiple"
+                  id="siteaddress_area"></ul>
+              </div>
+              <div class="filter-group">
+                <label for="gut_no" onclick="toggleFilter(this)">Survey No <span
+                    class="icon-container"><i
+                      class="fa-solid fa-angle-down"></i></span><span
+                    class="selected-count"></span></label>
+                <input type="text" placeholder="Search" class="filter-input"
+                  id="statusSearch">
+                <ul class="select2" multiple="multiple" id="gut_no"></ul>
+              </div>
+              <div class="filter-group">
+                <label for="ownerinformation_firstname"
+                  onclick="toggleFilter(this)">Owner Name <span
+                    class="icon-container"><i
+                      class="fa-solid fa-angle-down"></i></span><span
+                    class="selected-count"></span></label>
+                <input type="text" placeholder="Search" class="filter-input"
+                  id="typeSearch">
+                <ul class="select2 abcscroll " multiple="multiple"
+                  id="ownerinformation_firstname"></ul>
+              </div>
+              <div class="filter-group">
+                <label for="caseinformation_applyfor"
+                  onclick="toggleFilter(this)">Apply For <span
+                    class="icon-container"><i
+                      class="fa-solid fa-angle-down"></i></span><span
+                    class="selected-count"></span></label>
+                <input type="text" placeholder="Search" class="filter-input"
+                  id="widthSearch">
+                <ul class="select2 abcscroll" multiple="multiple"
+                  id="caseinformation_applyfor"></ul>
+              </div>
 
-  </div>
+              <div class="filter-group">
+                <label for="caseinformation_casetype"
+                  onclick="toggleFilter(this)">Case Type <span
+                    class="icon-container"><i
+                      class="fa-solid fa-angle-down"></i></span><span
+                    class="selected-count"></span></label>
+                <input type="text" placeholder="Search" class="filter-input"
+                  id="typeSearch">
+                <ul class="select2 " multiple="multiple"
+                  id="caseinformation_casetype"></ul>
+              </div>
+              <div class="filter-group">
+                <label for="caseinformation_proposaltype"
+                  onclick="toggleFilter(this)">Proposal Type<span
+                    class="icon-container"><i
+                      class="fa-solid fa-angle-down"></i></span><span
+                    class="selected-count"></span></label>
+                <input type="text" placeholder="Search" class="filter-input"
+                  id="typeSearch">
+                <ul class="select2 " multiple="multiple"
+                  id="caseinformation_proposaltype"></ul>
+              </div>
 
-  <!--table-->
-  <button id="openTableBtn"><img src="image/table.svg" alt="" class="tablebtn"></button>
-  <!--image-->
+              <div class="filter-group">
+                <label for="caseinformation_grossplotarea"
+                  onclick="toggleFilter(this)">Gross Plot Area <span
+                    class="icon-container"><i
+                      class="fa-solid fa-angle-down"></i></span><span
+                    class="selected-count"></span></label>
+                <input type="text" placeholder="Search" class="filter-input"
+                  id="typeSearch">
+                <ul class="select2 abcscroll" multiple="multiple"
+                  id="caseinformation_grossplotarea"></ul>
+              </div>
+              <div class="filter-group">
+                <label for="plotdetails_developmentzonedp"
+                  onclick="toggleFilter(this)">Development Zone DP <span
+                    class="icon-container"><i
+                      class="fa-solid fa-angle-down"></i></span><span
+                    class="selected-count"></span></label>
+                <input type="text" placeholder="Search" class="filter-input"
+                  id="typeSearch">
+                <ul class="select2 " multiple="multiple"
+                  id="plotdetails_developmentzonedp"></ul>
+              </div>
 
-
-
-
-  <!-- Summary Section -->
-  <div class="summary-section">
-    <div class="summary-header">
-      <h2 class="">Summary of Commencement</h2>
-      <!-- <button class="close-legend-btn" id="closeLegendButton">&#215;</button> -->
-      <button id="closeSummaryButton" class="close-summary-btn">&times;</button> <!-- Close button -->
-      <div class="proposal-info">
-        <span>Total number of proposals: 06</span>
-        <div class="proposal-icons">
-          <button class="btn-action"><img src="./image/Refresh.svg" alt="Refresh"></button>
-          <button class="btn-action" id="printButton"><img src="./image/Print.svg" alt="Print"></button>
-          <button class="btn-action" id="excelButton"><img src="./image/Excel.svg" alt="Export">
-          </button>
-          <div id="excelData"></div>
-        </div>
-
-        <div class="navigation-icons">
-          <button class="slider-button prev-button">&lt;</button>
-          <button class="slider-button next-button">&gt;</button>
-          <button id="closeButton">&times;</button> <!-- Close button -->
-        </div>
-      </div>
-    </div>
-
-
-
-
-    <!--card1-->
-    <div class="cards slider">
-      <div class="slider-item">
-        <div class="building-permissions">Building Permissions</div>
-        <div class="main-container">
-          <div class="text-small text-600 text-right position-total">Total</div>
-          <div class="text-small text-400 text-right position-submitted">Submitted</div>
-          <div class="text-small text-400 text-right position-approved">Approved</div>
-          <div class="text-small text-400 text-right position-process">In Process</div>
-          <div class="text-small text-400 text-right position-rejected">Rejected</div>
-          <div class="text-small text-400 text-center position-bottom-1">1500</div>
-          <div class="text-small text-400 text-center position-bottom-2">1000</div>
-          <div class="text-small text-400 text-center position-bottom-3">500</div>
-          <div class="text-small text-400 text-center position-bottom-4">0</div>
-          <div class="border-solid" style="left: 265px; top: 176px;"></div>
-          <div class="border-solid" style="left: 205px; top: 176px;"></div>
-          <div class="border-solid" style="left: 145px; top: 176px;"></div>
-          <div class="border-solid" style="left: 93px; top: 176px;"></div>
-          <div class="border-dotted-vertical"></div>
-          <div class="border-dotted-horizontal"></div>
-          <div class="bars-container">
-            <div class="bar-item">
-              <div class="bar-red"></div>
-              <div class="text-small text-400">770</div>
             </div>
-            <div class="bar-item">
-              <div class="bar-yellow"></div>
-              <div class="text-small text-400">147</div>
-            </div>
-            <div class="bar-item">
-              <div class="bar-cyan"></div>
-              <div class="text-small text-400">397</div>
-            </div>
-            <div class="bar-item">
-              <div class="bar-green"></div>
-              <div class="text-small text-400">323</div>
-            </div>
-            <div class="bar-item" style="align-self: stretch;">
-              <div class="bar-blue"></div>
-              <div class="text-small text-400">1315</div>
-            </div>
-          </div>
-        </div>
-      </div>
 
-
-      <!--card2-->
-      <div class=" slider slider-item">
-        <div class="header-text">Plinth</div>
-        <div class="content-box">
-          <div class="label total">Total</div>
-          <div class="label submitted">Submitted</div>
-          <div class="label approved">Approved</div>
-          <div class="label in-process">In Process</div>
-          <div class="label rejected">Rejected</div>
-
-          <div class="number total">750</div>
-          <div class="number submitted">500</div>
-          <div class="number approved">250</div>
-          <div class="number in-process">0</div>
-
-          <div class="vertical-line vertical-line-1"></div>
-          <div class="vertical-line vertical-line-2"></div>
-          <div class="vertical-line vertical-line-3"></div>
-          <div class="vertical-line vertical-line-4"></div>
-          <div class="horizontal-dotted-line"></div>
-          <div class="bottom-dotted-line"></div>
-
-          <div class="status-bars">
-            <div class="status-bar">
-              <div class="bar bar-0"></div>
-              <div class="label">0</div>
-            </div>
-            <div class="status-bar">
-              <div class="bar bar-6-yellow"></div>
-              <div class="label">6</div>
-            </div>
-            <div class="status-bar">
-              <div class="bar bar-6-blue"></div>
-              <div class="label">6</div>
-            </div>
-            <div class="status-bar">
-              <div class="bar bar-593"></div>
-              <div class="label">593</div>
-            </div>
-            <div class="status-bar">
-              <div class="bar bar-12"></div>
-              <div class="label">12</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-      <!--card3-->
-      <div class="slider slider-item">
-
-        <div class="building-permissions">Building Permissions</div>
-        <div class="main-container">
-          <div class="text-small text-600 text-right position-total">Total</div>
-          <div class="text-small text-400 text-right position-submitted">Submitted</div>
-          <div class="text-small text-400 text-right position-approved">Approved</div>
-          <div class="text-small text-400 text-right position-process">In Process</div>
-          <div class="text-small text-400 text-right position-rejected">Rejected</div>
-          <div class="text-small text-400 text-center position-bottom-1">1500</div>
-          <div class="text-small text-400 text-center position-bottom-2">1000</div>
-          <div class="text-small text-400 text-center position-bottom-3">500</div>
-          <div class="text-small text-400 text-center position-bottom-4">0</div>
-          <div class="border-solid" style="left: 265px; top: 176px;"></div>
-          <div class="border-solid" style="left: 205px; top: 176px;"></div>
-          <div class="border-solid" style="left: 145px; top: 176px;"></div>
-          <div class="border-solid" style="left: 93px; top: 176px;"></div>
-          <div class="border-dotted-vertical"></div>
-          <div class="border-dotted-horizontal"></div>
-          <div class="bars-container">
-            <div class="bar-item">
-              <div class="bar-red"></div>
-              <div class="text-small text-400">770</div>
-            </div>
-            <div class="bar-item">
-              <div class="bar-yellow"></div>
-              <div class="text-small text-400">147</div>
-            </div>
-            <div class="bar-item">
-              <div class="bar-cyan"></div>
-              <div class="text-small text-400">397</div>
-            </div>
-            <div class="bar-item">
-              <div class="bar-green"></div>
-              <div class="text-small text-400">323</div>
-            </div>
-            <div class="bar-item" style="align-self: stretch;">
-              <div class="bar-blue"></div>
-              <div class="text-small text-400">1315</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!--card4-->
-      <div class="  slider-item">
-        <div class="header-text">Plinth</div>
-        <div class="content-box">
-          <div class="label total">Total</div>
-          <div class="label submitted">Submitted</div>
-          <div class="label approved">Approved</div>
-          <div class="label in-process">In Process</div>
-          <div class="label rejected">Rejected</div>
-
-          <div class="number total">750</div>
-          <div class="number submitted">500</div>
-          <div class="number approved">250</div>
-          <div class="number in-process">0</div>
-
-          <div class="vertical-line vertical-line-1"></div>
-          <div class="vertical-line vertical-line-2"></div>
-          <div class="vertical-line vertical-line-3"></div>
-          <div class="vertical-line vertical-line-4"></div>
-          <div class="horizontal-dotted-line"></div>
-          <div class="bottom-dotted-line"></div>
-
-          <div class="status-bars">
-            <div class="status-bar">
-              <div class="bar bar-0"></div>
-              <div class="label">0</div>
-            </div>
-            <div class="status-bar">
-              <div class="bar bar-6-yellow"></div>
-              <div class="label">6</div>
-            </div>
-            <div class="status-bar">
-              <div class="bar bar-6-blue"></div>
-              <div class="label">6</div>
-            </div>
-            <div class="status-bar">
-              <div class="bar bar-593"></div>
-              <div class="label">593</div>
-            </div>
-            <div class="status-bar">
-              <div class="bar bar-12"></div>
-              <div class="label">12</div>
+            <div class="showCount">
+              <h5 class="tablestats" id="tablestats" style="font-size: large;">
+              </h5>
             </div>
           </div>
         </div>
@@ -412,74 +220,302 @@
 
     </div>
 
+    <!--table-->
+    <button id="openTableBtn"><img src="image/table.svg" alt
+        class="tablebtn"></button>
+    <!--image-->
 
-  </div>
+    <!-- Summary Section -->
+    <div class="summary-section">
+      <div class="summary-header">
+        <h2 class>Summary of Commencement</h2>
+        <!-- <button class="close-legend-btn" id="closeLegendButton">&#215;</button> -->
+        <button id="closeSummaryButton"
+          class="close-summary-btn">&times;</button> <!-- Close button -->
+        <div class="proposal-info">
+          <span>Total number of proposals: 06</span>
+          <div class="proposal-icons">
+            <button class="btn-action"><img src="./image/Refresh.svg"
+                alt="Refresh"></button>
+            <button class="btn-action" id="printButton"><img
+                src="./image/Print.svg" alt="Print"></button>
+            <button class="btn-action" id="excelButton"><img
+                src="./image/Excel.svg" alt="Export">
+            </button>
+            <div id="excelData"></div>
+          </div>
 
-  <div id="map"></div>
-
-
-  <!-- Toggle Button -->
-  <button id="toggleClusterLegend" class="toggle-legend">
-    <img src="image/legendbottom.svg" alt="" class="toggle-icon">
-  </button>
-
-
-
-  <div id="cluster_legend" class="cluster_legend hidden ">
-    <div class="cluster_legend-title">Cluster Legend</div>
-    <hr>
-  </div>
-
-
-
-
-
-  <a href="https://geopulsea.com/" class="geopulseaname">@GeoPulse Analytics</a>
-  <a class="logoPMC">
-    <img src="image/pmcjpeg.png" alt="Button Image">
-  </a>
-  <!--.tab-section OPTION-->
-
-
-  <div class="tab-section">
-    <div class="tab-main">
-      <div class="component-6" id="analyticsButton">
-        <img class="chart-fill-icon" alt="" src="image/Chart_fill.svg" />
-        <div class="analytics">Analytics</div>
+          <div class="navigation-icons">
+            <button class="slider-button prev-button">&lt;</button>
+            <button class="slider-button next-button">&gt;</button>
+            <button id="closeButton">&times;</button> <!-- Close button -->
+          </div>
+        </div>
       </div>
-      <div class="component-7" id="optionsButton">
-        <img class="ui-iconbookmarklight" alt="" src="image/light.svg" />
-        <div class="analytics">Options</div>
+
+      <!--card1-->
+      <div class="cards slider">
+        <div class="slider-item">
+          <div class="building-permissions">Building Permissions</div>
+          <div class="main-container">
+            <div
+              class="text-small text-600 text-right position-total">Total</div>
+            <div
+              class="text-small text-400 text-right position-submitted">Submitted</div>
+            <div
+              class="text-small text-400 text-right position-approved">Approved</div>
+            <div class="text-small text-400 text-right position-process">In
+              Process</div>
+            <div
+              class="text-small text-400 text-right position-rejected">Rejected</div>
+            <div
+              class="text-small text-400 text-center position-bottom-1">1500</div>
+            <div
+              class="text-small text-400 text-center position-bottom-2">1000</div>
+            <div
+              class="text-small text-400 text-center position-bottom-3">500</div>
+            <div
+              class="text-small text-400 text-center position-bottom-4">0</div>
+            <div class="border-solid" style="left: 265px; top: 176px;"></div>
+            <div class="border-solid" style="left: 205px; top: 176px;"></div>
+            <div class="border-solid" style="left: 145px; top: 176px;"></div>
+            <div class="border-solid" style="left: 93px; top: 176px;"></div>
+            <div class="border-dotted-vertical"></div>
+            <div class="border-dotted-horizontal"></div>
+            <div class="bars-container">
+              <div class="bar-item">
+                <div class="bar-red"></div>
+                <div class="text-small text-400">770</div>
+              </div>
+              <div class="bar-item">
+                <div class="bar-yellow"></div>
+                <div class="text-small text-400">147</div>
+              </div>
+              <div class="bar-item">
+                <div class="bar-cyan"></div>
+                <div class="text-small text-400">397</div>
+              </div>
+              <div class="bar-item">
+                <div class="bar-green"></div>
+                <div class="text-small text-400">323</div>
+              </div>
+              <div class="bar-item" style="align-self: stretch;">
+                <div class="bar-blue"></div>
+                <div class="text-small text-400">1315</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--card2-->
+        <div class=" slider slider-item">
+          <div class="header-text">Plinth</div>
+          <div class="content-box">
+            <div class="label total">Total</div>
+            <div class="label submitted">Submitted</div>
+            <div class="label approved">Approved</div>
+            <div class="label in-process">In Process</div>
+            <div class="label rejected">Rejected</div>
+
+            <div class="number total">750</div>
+            <div class="number submitted">500</div>
+            <div class="number approved">250</div>
+            <div class="number in-process">0</div>
+
+            <div class="vertical-line vertical-line-1"></div>
+            <div class="vertical-line vertical-line-2"></div>
+            <div class="vertical-line vertical-line-3"></div>
+            <div class="vertical-line vertical-line-4"></div>
+            <div class="horizontal-dotted-line"></div>
+            <div class="bottom-dotted-line"></div>
+
+            <div class="status-bars">
+              <div class="status-bar">
+                <div class="bar bar-0"></div>
+                <div class="label">0</div>
+              </div>
+              <div class="status-bar">
+                <div class="bar bar-6-yellow"></div>
+                <div class="label">6</div>
+              </div>
+              <div class="status-bar">
+                <div class="bar bar-6-blue"></div>
+                <div class="label">6</div>
+              </div>
+              <div class="status-bar">
+                <div class="bar bar-593"></div>
+                <div class="label">593</div>
+              </div>
+              <div class="status-bar">
+                <div class="bar bar-12"></div>
+                <div class="label">12</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--card3-->
+        <div class="slider slider-item">
+
+          <div class="building-permissions">Building Permissions</div>
+          <div class="main-container">
+            <div
+              class="text-small text-600 text-right position-total">Total</div>
+            <div
+              class="text-small text-400 text-right position-submitted">Submitted</div>
+            <div
+              class="text-small text-400 text-right position-approved">Approved</div>
+            <div class="text-small text-400 text-right position-process">In
+              Process</div>
+            <div
+              class="text-small text-400 text-right position-rejected">Rejected</div>
+            <div
+              class="text-small text-400 text-center position-bottom-1">1500</div>
+            <div
+              class="text-small text-400 text-center position-bottom-2">1000</div>
+            <div
+              class="text-small text-400 text-center position-bottom-3">500</div>
+            <div
+              class="text-small text-400 text-center position-bottom-4">0</div>
+            <div class="border-solid" style="left: 265px; top: 176px;"></div>
+            <div class="border-solid" style="left: 205px; top: 176px;"></div>
+            <div class="border-solid" style="left: 145px; top: 176px;"></div>
+            <div class="border-solid" style="left: 93px; top: 176px;"></div>
+            <div class="border-dotted-vertical"></div>
+            <div class="border-dotted-horizontal"></div>
+            <div class="bars-container">
+              <div class="bar-item">
+                <div class="bar-red"></div>
+                <div class="text-small text-400">770</div>
+              </div>
+              <div class="bar-item">
+                <div class="bar-yellow"></div>
+                <div class="text-small text-400">147</div>
+              </div>
+              <div class="bar-item">
+                <div class="bar-cyan"></div>
+                <div class="text-small text-400">397</div>
+              </div>
+              <div class="bar-item">
+                <div class="bar-green"></div>
+                <div class="text-small text-400">323</div>
+              </div>
+              <div class="bar-item" style="align-self: stretch;">
+                <div class="bar-blue"></div>
+                <div class="text-small text-400">1315</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--card4-->
+        <div class="  slider-item">
+          <div class="header-text">Plinth</div>
+          <div class="content-box">
+            <div class="label total">Total</div>
+            <div class="label submitted">Submitted</div>
+            <div class="label approved">Approved</div>
+            <div class="label in-process">In Process</div>
+            <div class="label rejected">Rejected</div>
+
+            <div class="number total">750</div>
+            <div class="number submitted">500</div>
+            <div class="number approved">250</div>
+            <div class="number in-process">0</div>
+
+            <div class="vertical-line vertical-line-1"></div>
+            <div class="vertical-line vertical-line-2"></div>
+            <div class="vertical-line vertical-line-3"></div>
+            <div class="vertical-line vertical-line-4"></div>
+            <div class="horizontal-dotted-line"></div>
+            <div class="bottom-dotted-line"></div>
+
+            <div class="status-bars">
+              <div class="status-bar">
+                <div class="bar bar-0"></div>
+                <div class="label">0</div>
+              </div>
+              <div class="status-bar">
+                <div class="bar bar-6-yellow"></div>
+                <div class="label">6</div>
+              </div>
+              <div class="status-bar">
+                <div class="bar bar-6-blue"></div>
+                <div class="label">6</div>
+              </div>
+              <div class="status-bar">
+                <div class="bar bar-593"></div>
+                <div class="label">593</div>
+              </div>
+              <div class="status-bar">
+                <div class="bar bar-12"></div>
+                <div class="label">12</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
+
     </div>
 
-    <!-- Options Content (Initially Hidden) -->
-    <div class="tabs-options" id="tabsOptions" style="display: none">
-      <div class="component-10-parent">
-        <!-- This is the existing component with the icon -->
+    <div id="map"></div>
 
-        <div class="component-10" id="toggleFilters">
+    <!-- Toggle Button -->
+    <button id="toggleClusterLegend" class="toggle-legend">
+      <img src="image/legendbottom.svg" alt class="toggle-icon">
+    </button>
 
-          <img class="right-icons" src="image/filter.svg" alt="Search Icon" id="search-icon">
+    <div id="cluster_legend" class="cluster_legend hidden ">
+      <div class="cluster_legend-title">Cluster Legend</div>
+      <hr>
+    </div>
+
+    <a href="https://geopulsea.com/" class="geopulseaname">@GeoPulse
+      Analytics</a>
+    <a class="logoPMC">
+      <img src="image/pmcjpeg.png" alt="Button Image">
+    </a>
+    <!--.tab-section OPTION-->
+
+    <div class="tab-section">
+      <div class="tab-main">
+        <div class="component-6" id="analyticsButton">
+          <img class="chart-fill-icon" alt src="image/Chart_fill.svg" />
+          <div class="analytics">Analytics</div>
+        </div>
+        <div class="component-7" id="optionsButton">
+          <img class="ui-iconbookmarklight" alt src="image/light.svg" />
+          <div class="analytics">Options</div>
+        </div>
+      </div>
+
+      <!-- Options Content (Initially Hidden) -->
+      <div class="tabs-options" id="tabsOptions" style="display: none">
+        <div class="component-10-parent">
+          <!-- This is the existing component with the icon -->
+
+          <div class="component-10" id="toggleFilters">
+
+            <img class="right-icons" src="image/filter.svg" alt="Search Icon"
+              id="search-icon">
           </button>
           <div class="component-10-child"></div>
         </div>
 
-
-
         <div class="component-11  toggle" id="toggleButton">
-          <img class="right-icons" alt="" src="image/Frame 1410126260.svg" />
+          <img class="right-icons" alt src="image/Frame 1410126260.svg" />
           <div class="component-11-child"></div>
         </div>
 
         <div class="component-11 toggle" id="toggleButton ">
-          <img class="right-icons" alt="" src="image/Pie.svg" />
+          <img class="right-icons" alt src="image/Pie.svg" />
           <div class="component-11-child"></div>
         </div>
 
         <div class="component-11 toggle" id="toggleButton">
           <div class="right-icons3">
-            <img class="vuesaxboldgrid-6-icon" alt="" src="image/grid-6.svg" />
+            <img class="vuesaxboldgrid-6-icon" alt src="image/grid-6.svg" />
           </div>
           <div class="component-11-child"></div>
         </div>
@@ -606,7 +642,7 @@
           <div class="autodcr-aviation-data">AutoDCR: DP Ward Road</div>
           <div class="div18">
             <div class="frame-parent">
-              <img class="frame-child" alt="" src="image/Frame 1410126079.svg">
+              <img class="frame-child" alt src="image/Frame 1410126079.svg">
               <div class="nda-arp">Single Symbol</div>
             </div>
           </div>
@@ -625,7 +661,7 @@
           <div class="autodcr-aviation-data">AutoDCR: JE Names</div>
           <div class="div18">
             <div class="frame-parent">
-              <img class="frame-child" alt="" src="image/Frame 1410126079.svg">
+              <img class="frame-child" alt src="image/Frame 1410126079.svg">
               <div class="buffer-is">Buffer is “</div>
             </div>
           </div>
@@ -686,7 +722,8 @@
             <div class="frame-parent">
               <div class="frame-child9">
               </div>
-              <div class="nda-arp">Existing Traffic & Transport Reservation</div>
+              <div class="nda-arp">Existing Traffic & Transport
+                Reservation</div>
             </div>
             <div class="frame-parent">
               <div class="frame-child10">
@@ -769,7 +806,7 @@
           <div class="autodcr-aviation-data">AutoDCR: Boundary</div>
           <div class="div18">
             <div class="frame-parent">
-              <img class="frame-child" alt="" src="image/Frame 1410126079.svg">
+              <img class="frame-child" alt src="image/Frame 1410126079.svg">
               <div class="buffer-is">Buffer is “</div>
             </div>
           </div>
@@ -918,7 +955,7 @@
           <div class="autodcr-aviation-data">AutoDCR: TDR Zones</div>
           <div class="div18">
             <div class="frame-parent">
-              <img class="frame-child" alt="" src="image/Frame 1410126079.svg">
+              <img class="frame-child" alt src="image/Frame 1410126079.svg">
               <div class="buffer-is">Buffer is “</div>
             </div>
           </div>
@@ -947,7 +984,7 @@
           <div class="autodcr-aviation-data">AutoDCR: Ward Boundary</div>
           <div class="div18">
             <div class="frame-parent">
-              <img class="frame-child" alt="" src="image/ward.svg">
+              <img class="frame-child" alt src="image/ward.svg">
               <div class="buffer-is">Buffer is “</div>
             </div>
           </div>
@@ -1000,7 +1037,6 @@
       </div>
     </div>
 
-
     <!--graphs-->
     <div class="data-graphs">
       <div class="summary-of-commencement">
@@ -1014,12 +1050,13 @@
             <b class="b">06</b>
           </div>
           <div class="icons">
-            <img class="marketeqrefresh-round-icon" alt="" src="image/Refresh.svg "> |
+            <img class="marketeqrefresh-round-icon" alt
+              src="image/Refresh.svg "> |
 
+            <img class="marketeqrefresh-round-icon" alt="Print"
+              src="image/Print.svg" onclick="printWindow()">
 
-            <img class="marketeqrefresh-round-icon" alt="Print" src="image/Print.svg" onclick="printWindow()">
-
-            <img class="marketeqrefresh-round-icon" alt="" src="image/Excel.svg">
+            <img class="marketeqrefresh-round-icon" alt src="image/Excel.svg">
 
           </div>
         </div>
@@ -1028,8 +1065,10 @@
             <div class="status-wise">
               <div class="building-permissions-parent">
                 <div class="summary-of-commencement">Building Permissions</div>
-                <img class="toggle-icon up-icon" alt="" src="image/up.svg"> <!-- Up arrow initially shown -->
-                <img class="toggle-icon down-icon" alt="" src="image/down.svg" style="display: none;">
+                <img class="toggle-icon up-icon" alt src="image/up.svg">
+                <!-- Up arrow initially shown -->
+                <img class="toggle-icon down-icon" alt src="image/down.svg"
+                  style="display: none;">
                 <!-- Down arrow initially hidden -->
 
               </div>
@@ -1051,9 +1090,11 @@
                 </div>
                 <div class="segment-line-1">
                 </div>
-                <img class="partition-line-middle-icon" alt="" src="Partition_line_Middle.svg">
+                <img class="partition-line-middle-icon" alt
+                  src="Partition_line_Middle.svg">
 
-                <img class="partition-line-bottom-icon" alt="" src="Partition_line_Bottom.svg">
+                <img class="partition-line-bottom-icon" alt
+                  src="Partition_line_Bottom.svg">
 
                 <div class="bar-graphs">
                   <div class="bar-rejected">
@@ -1089,10 +1130,11 @@
             <div class="status-wise1">
               <div class="building-permissions-parent">
                 <div class="summary-of-commencement">Plinth</div>
-                <img class="toggle-icon up-icon" alt="" src="image/up.svg"> <!-- Up arrow initially shown -->
-                <img class="toggle-icon down-icon" alt="" src="image/down.svg" style="display: none;">
+                <img class="toggle-icon up-icon" alt src="image/up.svg">
+                <!-- Up arrow initially shown -->
+                <img class="toggle-icon down-icon" alt src="image/down.svg"
+                  style="display: none;">
                 <!-- Down arrow initially hidden -->
-
 
               </div>
               <div class="bar-chart-container">
@@ -1113,9 +1155,11 @@
                 </div>
                 <div class="segment-line-1">
                 </div>
-                <img class="partition-line-middle-icon" alt="" src="Partition_line_Middle.svg">
+                <img class="partition-line-middle-icon" alt
+                  src="Partition_line_Middle.svg">
 
-                <img class="partition-line-bottom-icon" alt="" src="Partition_line_Bottom.svg">
+                <img class="partition-line-bottom-icon" alt
+                  src="Partition_line_Bottom.svg">
 
                 <div class="bar-graphs1">
                   <div class="bar-rejected1">
@@ -1151,8 +1195,10 @@
             <div class="status-wise">
               <div class="building-permissions-parent">
                 <div class="summary-of-commencement">Occupancy</div>
-                <img class="toggle-icon up-icon" alt="" src="image/up.svg"> <!-- Up arrow initially shown -->
-                <img class="toggle-icon down-icon" alt="" src="image/down.svg" style="display: none;">
+                <img class="toggle-icon up-icon" alt src="image/up.svg">
+                <!-- Up arrow initially shown -->
+                <img class="toggle-icon down-icon" alt src="image/down.svg"
+                  style="display: none;">
                 <!-- Down arrow initially hidden -->
 
               </div>
@@ -1177,9 +1223,11 @@
                 </div>
                 <div class="segment-line-1">
                 </div>
-                <img class="partition-line-middle-icon" alt="" src="Partition_line_Middle.svg">
+                <img class="partition-line-middle-icon" alt
+                  src="Partition_line_Middle.svg">
 
-                <img class="partition-line-bottom-icon2" alt="" src="Partition_line_Bottom.svg">
+                <img class="partition-line-bottom-icon2" alt
+                  src="Partition_line_Bottom.svg">
 
                 <div class="bar-graphs">
                   <div class="bar-rejected1">
@@ -1215,11 +1263,11 @@
             <div class="status-wise">
               <div class="building-permissions-parent">
                 <div class="summary-of-commencement">Gunthewari</div>
-                <img class="toggle-icon up-icon" alt="" src="image/up.svg"> <!-- Up arrow initially shown -->
-                <img class="toggle-icon down-icon" alt="" src="image/down.svg" style="display: none;">
+                <img class="toggle-icon up-icon" alt src="image/up.svg">
+                <!-- Up arrow initially shown -->
+                <img class="toggle-icon down-icon" alt src="image/down.svg"
+                  style="display: none;">
                 <!-- Down arrow initially hidden -->
-
-
 
               </div>
               <div class="bar-chart-container">
@@ -1243,9 +1291,11 @@
                 </div>
                 <div class="segment-line-1">
                 </div>
-                <img class="partition-line-middle-icon" alt="" src="Partition_line_Middle.svg">
+                <img class="partition-line-middle-icon" alt
+                  src="Partition_line_Middle.svg">
 
-                <img class="partition-line-bottom-icon2" alt="" src="Partition_line_Bottom.svg">
+                <img class="partition-line-bottom-icon2" alt
+                  src="Partition_line_Bottom.svg">
 
                 <div class="bar-graphs3">
                   <div class="bar-rejected1">
@@ -1281,10 +1331,11 @@
             <div class="status-wise">
               <div class="building-permissions-parent">
                 <div class="summary-of-commencement">Risk Based Approval</div>
-                <img class="toggle-icon up-icon" alt="" src="image/up.svg"> <!-- Up arrow initially shown -->
-                <img class="toggle-icon down-icon" alt="" src="image/down.svg" style="display: none;">
+                <img class="toggle-icon up-icon" alt src="image/up.svg">
+                <!-- Up arrow initially shown -->
+                <img class="toggle-icon down-icon" alt src="image/down.svg"
+                  style="display: none;">
                 <!-- Down arrow initially hidden -->
-
 
               </div>
               <div class="bar-chart-container">
@@ -1305,9 +1356,11 @@
                 </div>
                 <div class="segment-line-1">
                 </div>
-                <img class="partition-line-middle-icon" alt="" src="Partition_line_Middle.svg">
+                <img class="partition-line-middle-icon" alt
+                  src="Partition_line_Middle.svg">
 
-                <img class="partition-line-bottom-icon2" alt="" src="Partition_line_Bottom.svg">
+                <img class="partition-line-bottom-icon2" alt
+                  src="Partition_line_Bottom.svg">
 
                 <div class="bar-graphs4">
                   <div class="bar-rejected1">
@@ -1343,10 +1396,11 @@
             <div class="status-wise">
               <div class="building-permissions-parent">
                 <div class="summary-of-commencement">IT & ITES Approval</div>
-                <img class="toggle-icon up-icon" alt="" src="image/up.svg"> <!-- Up arrow initially shown -->
-                <img class="toggle-icon down-icon" alt="" src="image/down.svg" style="display: none;">
+                <img class="toggle-icon up-icon" alt src="image/up.svg">
+                <!-- Up arrow initially shown -->
+                <img class="toggle-icon down-icon" alt src="image/down.svg"
+                  style="display: none;">
                 <!-- Down arrow initially hidden -->
-
 
               </div>
               <div class="bar-chart-container">
@@ -1364,9 +1418,11 @@
                 </div>
                 <div class="segment-line-1">
                 </div>
-                <img class="partition-line-middle-icon" alt="" src="Partition_line_Middle.svg">
+                <img class="partition-line-middle-icon" alt
+                  src="Partition_line_Middle.svg">
 
-                <img class="partition-line-bottom-icon2" alt="" src="Partition_line_Bottom.svg">
+                <img class="partition-line-bottom-icon2" alt
+                  src="Partition_line_Bottom.svg">
 
                 <div class="bar-graphs5">
                   <div class="bar-rejected1">
@@ -1402,34 +1458,38 @@
       </div>
     </div>
 
-
-
-
-
-
-
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
+    <script
+      src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
     <script src="https://unpkg.com/@turf/turf"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+    <script
+      src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css"
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script type="text/javascript"
+      src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css"
       integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw=="
       crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+      rel="stylesheet" />
 
-
-
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css"
+      href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
     <script type="text/javascript" charset="utf8"
       src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/togeojson/2.0.0/togeojson.min.js"></script>
 
 
     <!-- <script src="js/legend.js"></script> -->
@@ -1438,6 +1498,7 @@
     <script src="js/script.js"></script>
     <script src="js/script2.js"></script>
 
-</body>
+    
+  </body>
 
 </html>
