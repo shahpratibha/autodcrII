@@ -169,88 +169,88 @@ L.control.scale({
   position: 'bottomleft' // Change position to bottom right
 }).addTo(map);
 
-// old code 18/9
-// search
-// document.getElementById('search-button').addEventListener('click', function () {
-//   // Toggle the search container visibility
-//   const searchContainer = document.getElementById('search-container');
-//   searchContainer.classList.toggle('hidden');
-  
-//   // Focus the search input when shown
-//   if (!searchContainer.classList.contains('hidden')) {
-//       document.getElementById('search_type').focus();
-//   }
-// });
 
-// document.getElementById('search_type').addEventListener('input', function () {
-//   const clearIcon = document.getElementById('clear-icon');
-//   if (this.value.trim() !== '') {
-//       clearIcon.classList.remove('hidden');
-//   } else {
-//       clearIcon.classList.add('hidden');
-//   }
-// });
+//search
+document.getElementById('search-button').addEventListener('click', function () {
+  // Toggle the search container visibility
+  const searchContainer = document.getElementById('search-container');
+  searchContainer.classList.toggle('hidden');
 
-// // Clear the search input when the clear icon is clicked
-// document.getElementById('clear-icon').addEventListener('click', function () {
-//   const searchInput = document.getElementById('search_type');
-//   searchInput.value = '';
-//   this.classList.add('hidden');
-//   searchInput.focus();
-// });
-// // old code 18/9
+  // Focus the search input when shown
+  if (!searchContainer.classList.contains('hidden')) {
+    document.getElementById('search-input').focus();
+  }
+});
 
-// // Add click event listener to .component-10 elements
-// document.querySelectorAll('.component-10').forEach(function (element) {
-//   element.addEventListener('click', function () {
-//     // Remove the 'active' class from all .component-10 elements
-//     document.querySelectorAll('.component-10').forEach(function (el) {
-//       el.classList.remove('active');
-//     });
+document.getElementById('search-input').addEventListener('input', function () {
+  const clearIcon = document.getElementById('clear-icon');
+  if (this.value.trim() !== '') {
+    clearIcon.classList.remove('hidden');
+  } else {
+    clearIcon.classList.add('hidden');
+  }
+});
 
-//     // Remove the 'active' class from all .component-11 elements
-//     document.querySelectorAll('.component-11').forEach(function (el) {
-//       el.classList.remove('active');
-//     });
-
-//     // Add the 'active' class to the currently clicked element
-//     element.classList.add('active');
-//   });
-// });
-
-// // Add click event listener to .component-11 elements
-// document.querySelectorAll('.component-11').forEach(function (element) {
-//   element.addEventListener('click', function () {
-//     // Remove the 'active' class from all .component-11 elements
-//     document.querySelectorAll('.component-11').forEach(function (el) {
-//       el.classList.remove('active');
-//     });
-
-//     // Remove the 'active' class from all .component-10 elements
-//     document.querySelectorAll('.component-10').forEach(function (el) {
-//       el.classList.remove('active');
-//     });
-
-//     // Add the 'active' class to the currently clicked element
-//     element.classList.add('active');
-//   });
-// });
+// Clear the search input when the clear icon is clicked
+document.getElementById('clear-icon').addEventListener('click', function () {
+  const searchInput = document.getElementById('search-input');
+  searchInput.value = '';
+  this.classList.add('hidden');
+  searchInput.focus();
+});
 
 
-// //status
-// // Select all tabs within the parent
-// const tabs = document.querySelectorAll('.tab');
+// Add click event listener to .component-10 elements
+document.querySelectorAll('.component-10').forEach(function (element) {
+  element.addEventListener('click', function () {
+    // Remove the 'active' class from all .component-10 elements
+    document.querySelectorAll('.component-10').forEach(function (el) {
+      el.classList.remove('active');
+    });
 
-// // Function to handle tab click
-// tabs.forEach(tab => {
-//   tab.addEventListener('click', function () {
-//     // Remove 'active' class from all tabs
-//     tabs.forEach(t => t.classList.remove('active'));
+    // Remove the 'active' class from all .component-11 elements
+    document.querySelectorAll('.component-11').forEach(function (el) {
+      el.classList.remove('active');
+    });
 
-//     // Add 'active' class to the clicked tab
-//     this.classList.add('active');
-//   });
-// });
+    // Add the 'active' class to the currently clicked element
+    element.classList.add('active');
+  });
+});
+
+// Add click event listener to .component-11 elements
+document.querySelectorAll('.component-11').forEach(function (element) {
+  element.addEventListener('click', function () {
+    // Remove the 'active' class from all .component-11 elements
+    document.querySelectorAll('.component-11').forEach(function (el) {
+      el.classList.remove('active');
+    });
+
+    // Remove the 'active' class from all .component-10 elements
+    document.querySelectorAll('.component-10').forEach(function (el) {
+      el.classList.remove('active');
+    });
+
+    // Add the 'active' class to the currently clicked element
+    element.classList.add('active');
+  });
+});
+
+
+//status
+// Select all tabs within the parent
+const tabs = document.querySelectorAll('.tab');
+
+// Function to handle tab click
+tabs.forEach(tab => {
+  tab.addEventListener('click', function () {
+    // Remove 'active' class from all tabs
+    tabs.forEach(t => t.classList.remove('active'));
+
+    // Add 'active' class to the clicked tab
+    this.classList.add('active');
+  });
+});
 
 
 
@@ -460,16 +460,16 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
-document.getElementById('toggle-select').addEventListener('click', function() {
-    const searchContainer = document.getElementById('search-container');
-    const selectElement = document.getElementById('search_type');
-    
-    // Toggle the display of the select element
-    if (selectElement.style.display === 'none' || selectElement.style.display === '') {
-        selectElement.style.display = 'block';
-    } else {
-        // selectElement.style.display = 'none';
-    }
+document.getElementById('toggle-select').addEventListener('click', function () {
+  const searchContainer = document.getElementById('search-container');
+  const selectElement = document.getElementById('search_type');
+
+  // Toggle the display of the select element
+  if (selectElement.style.display === 'none' || selectElement.style.display === '') {
+    selectElement.style.display = 'block';
+  } else {
+    selectElement.style.display = 'none';
+  }
 });
 
 // Optional: Close the select element if clicked outside
@@ -524,7 +524,7 @@ $(document).ready(function () {
     var formattedStartDate = start.format('YYYY-MM-DDTHH:mm:ssZ');;
     var formattedEndDate = end.format('YYYY-MM-DDTHH:mm:ssZ');;
     // cql_filter1 = `entry_timestamp >= '${formattedStartDate}' AND entry_timestamp < '${formattedEndDate}'`;
-    cql_filter1 = `entry_timestamp >='2024-09-04T00:00:00Z' AND entry_timestamp < '2024-09-04T23:59:59Z'`
+    cql_filter1 = `entry_timestamp >='2024-09-04T00:00:00Z' AND entry_timestamp< '2024-09-04T23:59:59Z'`
 
     console.log(cql_filter1, "lllokkkkk")
 
