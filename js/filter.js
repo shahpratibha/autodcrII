@@ -1,4 +1,6 @@
-    var apply_for = {};
+//    cluster
+   
+   var apply_for = {};
 
     // Define gradient colors for each caseinformation_proposaltype
     var caseinformation_proposaltypeColors = {
@@ -12,14 +14,6 @@
     "Assembly": "green", // Green
     // Default gradient color if proposaltype is not defined
 
-    // "Residential": "radial-gradient(65.32% 65.32% at 50% 50%, rgba(255, 255, 0, 0.10) 0%, #FFFF00 100%)", // Yellow
-    // "Commercial": "radial-gradient(65.32% 65.32% at 50% 50%, rgba(0, 108, 198, 0.10) 0%, #006CC6 100%)", // Blue
-    // "Industrial": "radial-gradient(65.32% 65.32% at 50% 50%, rgba(238, 130, 238, 0.10) 0%, #EE82EE 100%)", // Violet
-    // "Other": "radial-gradient(65.32% 65.32% at 50% 50%, rgba(255, 255, 255, 0.10) 0%, #FFFFFF 100%)", // Custom Color
-    // "Resi+Comm": "radial-gradient(65.32% 65.32% at 50% 50%, rgba(255, 165, 0, 0.10) 0%, #FFA500 100%)", // Orange
-    // "Institutional": "radial-gradient(65.32% 65.32% at 50% 50%, rgba(255, 192, 203, 0.10) 0%, #FFC0CB 100%)", // Pink
-    // "InfoTech": "radial-gradient(65.32% 65.32% at 50% 50%, rgba(75, 0, 130, 0.10) 0%, #4B0082 100%)", // Indigo
-    // "Assembly": "radial-gradient(65.32% 65.32% at 50% 50%, rgba(0, 128, 0, 0.10) 0%, #008000 100%)", // Green
     };
 
 

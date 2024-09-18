@@ -461,12 +461,12 @@ backdrop-filter: blur(2px); */
 }
 
 
-/* Your existing CSS styles */
+/* Date Range */
 
 .date-picker {
   position: absolute;
-  top: 11px;
-  right: 20px;
+  top: 17px;
+  right: 112px;
   z-index: 999;
   color: var(--Grey-700, #393939);
   font-size: 14px;
