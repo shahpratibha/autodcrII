@@ -14,7 +14,7 @@ function toggleFilter(label) {
   const input = label.nextElementSibling; // Get the input element next to the label
   const ul = input.nextElementSibling; // Get the ul element next to the input
 
-  // Toggle 'active' class for the clicked filter input and its associated ul
+  // Toggle 'active' class for the clicked filter input and its associated ul  
   input.classList.toggle('active');
   ul.classList.toggle('active');
 }
@@ -101,7 +101,7 @@ const cluster_url = "https://iwmsgis.pmc.gov.in/geoserver/";
 
 
   function loadinitialData(cql_filter) {
-    const filternames = ["siteaddress_area", "caseinformation_applyfor","siteaddress_surveyno", "caseinformation_casetype", "caseinformation_proposaltype", "caseinformation_tdrzone", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "ownerinformation_firstname"];//accordn column names , if want add one more filter criteria add here
+    const filternames = ["siteaddress_area", "caseinformation_applyfor","gut_no", "caseinformation_casetype", "caseinformation_proposaltype", "token", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "ownerinformation_firstname"];//accordn column names , if want add one more  criteria add here
     var workspace = 'AutoDCR';
     var layerName = 'Plot_Layout';
     filternames.forEach(function (filtername) {
@@ -131,20 +131,59 @@ const cluster_url = "https://iwmsgis.pmc.gov.in/geoserver/";
    
 });
 
+// old code 18/9
+// function DataTableFilter(cql_filter1) {
+//   var layers = ["AutoDCR:Plot_Layout"];
+//   var typeName = layers.join(',');
+//   var cqlFilter = cql_filter1;
+//   var workspace = 'AutoDCR'
+//   var geoServerURL =
+//     `${main_url}${workspace}/wms?service=WFS&version=1.1.0&request=GetFeature&typeName=${typeName}&outputFormat=application/json`;
+//   if (cql_filter1 !== '') {
+//     geoServerURL += "&CQL_FILTER=" + encodeURIComponent(cqlFilter);
+//   }
+//   var headers = ["token","gut_no","siteaddress_area",  "ownerinformation_firstname", "caseinformation_grossplotarea","caseinformation_applyfor", "caseinformation_casetype", "caseinformation_proposaltype", "caseinformation_tdrzone","plotdetails_developmentzonedp","entry_timestamp"];
+//   showtable(typeName, geoServerURL, cqlFilter, headers);
 
+
+// }
+// old code 18/9
+
+// new code 18/9
 function DataTableFilter(cql_filter1) {
   var layers = ["AutoDCR:Plot_Layout"];
   var typeName = layers.join(',');
   var cqlFilter = cql_filter1;
-  var workspace = 'AutoDCR'
+  var workspace = 'AutoDCR';
   var geoServerURL =
     `${main_url}${workspace}/wms?service=WFS&version=1.1.0&request=GetFeature&typeName=${typeName}&outputFormat=application/json`;
+
   if (cql_filter1 !== '') {
     geoServerURL += "&CQL_FILTER=" + encodeURIComponent(cqlFilter);
   }
-  var headers = ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype","siteaddress_surveyno", "caseinformation_proposaltype", "caseinformation_tdrzone", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "ownerinformation_firstname"];
-  showtable(typeName, geoServerURL, cqlFilter, headers);
+
+  // Define the headers and their display names
+  var headerMapping = {
+    "token": "Token",
+    "gut_no": "Survey No",
+    "siteaddress_area": "Village Name",
+    "ownerinformation_firstname": "Owner Name",
+    "caseinformation_grossplotarea": "Plot Area",
+    "caseinformation_applyfor": "Apply For",
+    "caseinformation_casetype": "Case Type",
+    "caseinformation_proposaltype": "Proposal Type",
+    "caseinformation_tdrzone": "TDR Zone",
+    "plotdetails_developmentzonedp": "Development Zone",
+    "entry_timestamp": "Date & Time"
+  };
+
+  var headers = Object.keys(headerMapping);  // Pass keys from the mapping
+  showtable(typeName, geoServerURL, cqlFilter, headers, headerMapping);  // Pass the mapping as well
 }
+
+
+// new code 18/9
+
 
 function populateDropdown(dropdownId, data) {
 
@@ -159,49 +198,14 @@ function populateDropdown(dropdownId, data) {
 
 }
 
-// new 12/9
-// function updateDependentFilters() {
-//   getCheckedValues(function (filterString) {
-//     // Fetch and update dropdowns based on the current filter string
-//     const activeFilters = Object.keys(selectedValues).reduce((acc, filterName) => {
-//       if (selectedValues[filterName].length > 0) {
-//         acc[filterName] = selectedValues[filterName];
-//       }
-//       return acc;
-//     }, {});
-
-//     Object.keys(layerDetails["AutoDCR:Plot_Layout"]).forEach(function (filterName) {
-//       if (!activeFilters[filterName]) {
-//         var url = `${main_url}${workspace}/wms?service=WFS&version=1.1.0&request=GetFeature&typeName=${layerName}&propertyName=${filterName}&outputFormat=application/json&cql_filter=${encodeURIComponent(filterString)}`;
-//         $.getJSON(url, function (data) {
-//           var filteredData = data.features.map(feature => feature.properties[filterName]).filter(value => value);
-//           var uniqueFilteredData = [...new Set(filteredData)];
-//           populateDropdown(filterName, uniqueFilteredData);
-//         });
-//       }
-//     });
-//   });
-// }
-// new end 12/9
 
 
 function getCheckedValues(callback) {
   var selectedValues = {};
-  const filternames = ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype", "caseinformation_proposaltype","siteaddress_surveyno", "caseinformation_tdrzone", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "ownerinformation_firstname"];
+  const filternames = ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype", "caseinformation_proposaltype","gut_no", "token", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "ownerinformation_firstname"];
 
   filternames.forEach(function (filtername) {
     selectedValues[filtername] = []; 
-
-  //    // new 12/9
-  //    $('#' + filtername + ' input[type="checkbox"]:checked').each(function () {
-  //     var single_val = $(this).val();
-  //     if (single_val) {
-  //       var actualValue = single_val.split(' (')[0];
-  //       selectedValues[filtername].push(actualValue);
-  //     }
-  //   });
-  // });
-      // new end 12/9
 
     $('#' + filtername).on('click', 'input[type="checkbox"]', function (event) {
      
@@ -241,16 +245,6 @@ function getCheckedValues(callback) {
       }
     });
   });
-  // new 12/9
-
-    // Update dependent filters
-    // updateDependentFilters();
-
-    // if (typeof callback === 'function') {
-    //   callback(filterString);
-    // }
-
-  // new end 12/9
 }
 
 function FilterAndZoom(filter) {
@@ -340,72 +334,277 @@ function fitbouss(filter) {
     });
   });
 }
+// ----------------------old code 18/9
+// function showtable(typeName, geoServerURL, cqlFilter, headers) {
+//   tableData(typeName, geoServerURL, cqlFilter, headers);
 
-function showtable(typeName, geoServerURL, cqlFilter, headers) {
+//   var currentPage = 1;
+//   var rowsPerPage = 10;
+//   var buttonsToShow = 3;
+
+//   function setupPagination(data, rowsPerPage, headers, tableContainer) {
+//     var paginationContainer = document.createElement('div');
+//     paginationContainer.id = 'pagination';
+
+//     var pageCount = Math.ceil(data.length / rowsPerPage);
+
+//     function renderPageButtons(startPage) {
+//       paginationContainer.innerHTML = "";
+
+//       // Previous Button
+//       var prevButton = document.createElement('button');
+//       prevButton.innerHTML = '&larr;';
+//       prevButton.disabled = currentPage === 1;
+//       prevButton.addEventListener('click', function () {
+//         if (currentPage > 1) {
+//           currentPage--;
+//           createTable(data, currentPage, rowsPerPage, headers);
+//           renderPageButtons(Math.max(1, currentPage - Math.floor(buttonsToShow / 2)));
+//         }
+//       });
+//       paginationContainer.appendChild(prevButton);
+
+//       // Page Buttons
+//       var endPage = Math.min(startPage + buttonsToShow - 1, pageCount);
+//       for (var i = startPage; i <= endPage; i++) {
+//         var pageButton = document.createElement('button');
+//         pageButton.innerText = i;
+//         if (i === currentPage) {
+//           pageButton.classList.add('active');
+//         }
+//         pageButton.addEventListener('click', function (event) {
+//           currentPage = Number(event.target.innerText);
+//           createTable(data, currentPage, rowsPerPage, headers);
+//           renderPageButtons(Math.max(1, currentPage - Math.floor(buttonsToShow / 2)));
+//         });
+//         paginationContainer.appendChild(pageButton);
+//       }
+
+//       // Next Button
+//       var nextButton = document.createElement('button');
+//       nextButton.innerHTML = '&rarr;';
+//       nextButton.disabled = currentPage === pageCount;
+//       nextButton.addEventListener('click', function () {
+//         if (currentPage < pageCount) {
+//           currentPage++;
+//           createTable(data, currentPage, rowsPerPage, headers);
+//           renderPageButtons(Math.max(1, currentPage - Math.floor(buttonsToShow / 2)));
+//         }
+//       });
+//       paginationContainer.appendChild(nextButton);
+//     }
+
+//     renderPageButtons(1);
+//     tableContainer.appendChild(paginationContainer); // Append paginationContainer after rendering buttons
+//   }
+
+
+
+
+//   function createTable(data, headers) {
+//     var tableContainer = document.getElementById('tablecontainer');
+//     if (!tableContainer) {
+//       console.error("Table container not found");
+//       return;
+//     }
+//     tableContainer.innerHTML = ""; // Clear any existing content
+//     // Create container for minimize button and pagination
+//     var topContainer = document.createElement('div');
+//     topContainer.className = 'top-container';
+
+//     // Create minimize button
+//     var minimizeButton = document.createElement('button');
+//     minimizeButton.innerHTML = '<i class="fas fa-minus"></i>';
+//     minimizeButton.className = 'minimize-button';
+//     minimizeButton.addEventListener('click', function () {
+//       var tableDetail = document.querySelector('.tableDetail');
+//       if (tableDetail.style.display === 'none') {
+//         tableDetail.style.display = 'block';
+//         minimizeButton.innerHTML = '<i class="fas fa-minus"></i>';
+//         document.getElementById('openTableBtn').style.display = 'none'; // Hide the show button
+//       } else {
+//         tableDetail.style.display = 'none';
+//         minimizeButton.style.display = 'none';
+//         // minimizeButton.innerTextpagination = '+';
+//         document.getElementById('openTableBtn').style.display = 'block'; // Show the show button
+//       }
+//     });
+
+    
+//     tableContainer.appendChild(minimizeButton);
+//     // Create pagination controls
+//     var paginationContainer = document.createElement('div');
+//     paginationContainer.id = 'pagination';
+
+//     // Append pagination container to top container
+//     topContainer.appendChild(paginationContainer);
+
+//     // Append top container to tableContainer
+//     tableContainer.appendChild(topContainer);
+
+//     // Create tableDetail div
+//     var tableDetail = document.createElement('div');
+//     tableDetail.className = 'tableDetail';
+//     tableContainer.appendChild(tableDetail);
+
+//     var table = document.createElement('table');
+//     table.className = 'data-table'; 
+//     table.id = 'data-table'; 
+
+//     var thead = document.createElement('thead');
+//     var headerRow = document.createElement('tr');
+
+//     // Add 'Serial No' as the first header
+//     headers.unshift('Sr_no');
+
+//     // Create header cells
+//     headers.forEach(headerText => {
+//       var th = document.createElement('th');
+//       th.textContent = headerText;
+//       headerRow.appendChild(th);
+//     });
+//     thead.appendChild(headerRow);
+//     table.appendChild(thead);
+
+//     var tbody = document.createElement('tbody');
+
+//     // Populate table rows with data
+
+//     data.forEach((item, index) => {
+//       var row = document.createElement('tr');
+
+//       // Add serial number as the first column
+//       var serialNumberCell = document.createElement('td');
+//       serialNumberCell.textContent = index + 1;
+//       row.appendChild(serialNumberCell);
+
+//       // Add other data columns
+//       headers.slice(1).forEach(header => {
+//         if (header !== 'Serial No' && header !== 'geometry') {
+//           var cell = document.createElement('td');
+//           cell.textContent = item[header] || ''; 
+//           row.appendChild(cell);
+//         }
+//       });
+
+//       row.addEventListener('click', function () {
+//         // //console.log(item);
+//         var boundsLayer = L.geoJSON(item.geometry, {
+//           style: {
+//             fillColor: "blue",
+//             fillOpacity: 0.3,
+//             color: "blue", 
+//             weight: 2, 
+//           },
+//         }).addTo(map); 
+
+//         var bounds = boundsLayer.getBounds();
+//         map.fitBounds(bounds);
+//         setTimeout(function () {
+//           map.removeLayer(boundsLayer);
+//         }, 5000);
+//       });
+
+//       tbody.appendChild(row);
+//     });
+
+//     table.appendChild(tbody);
+//     tableDetail.appendChild(table);
+
+//     // Initialize DataTables after rendering the table
+//     $(document).ready(function () {
+//       if ($.fn.DataTable.isDataTable('#data-table')) {
+//         $('#data-table').DataTable().destroy(); 
+//       }
+//       $('#data-table').DataTable({
+//         paging: true, // Enable pagination
+//         lengthChange: true, // Enable the 'Show X entries' dropdown
+//         searching: true, // Enable search box
+//         ordering: true, // Enable column sorting
+//         info: true, // Enable showing 'Showing X of Y entries' info
+//         autoWidth: false,
+//         scrollY: 400,
+//         scrollX: true,
+//         scrollCollapse: true,
+//         fixedHeader: true
+//       });
+//     });
+//   }
+
+//   // Function to show the hidden table
+//   function showTable() {
+//     var tableDetail = document.querySelector('.tableDetail');
+//     var minimizeButton = document.querySelector('.minimize-button');
+//     tableDetail.style.display = 'block';
+//     minimizeButton.style.display = 'block';
+//     // minimizeButton.innerText = '-';
+//     document.getElementById('openTableBtn').style.display = 'none'; // Hide the show button
+//   }
+
+//   // Add event listener to the show table button
+//   document.getElementById('openTableBtn').addEventListener('click', showTable);
+
+
+//   // -------------------------------------------------------------
+//   function tableData(typeName, geoServerURL, cqlFilter, headers) {
+//     $.getJSON(geoServerURL, function (data) {
+//       var filteredData = data;
+
+//       const work_id = [];
+//       var exampleData = filteredData.features.map(feature => {
+//         let mappedData = {};
+//         headers.forEach(header => {
+//           // Convert header to camelCase or other naming convention if necessary
+//           let propertyName = header.replace(/ /g, '');
+//           if (header === 'length_m') {
+//             mappedData[propertyName] = (feature.properties[header]).toFixed(2); // Format to two decimal places
+//           } else {
+//             mappedData[propertyName] = feature.properties[header];
+//           }
+//         });
+//         mappedData.geometry = feature.geometry;
+//         work_id.push(feature.properties.id)
+
+//         return mappedData;
+//       });
+
+//       const shapeAreaSum = data.features.reduce((sum, feature) => {
+//         return sum + feature.properties.length_m;
+//       }, 0);
+//       let uniqueCount = new Set(work_id).size;
+//       // //console.log(work_id.length, "lllllllllllll", work_id, uniqueCount)
+//     //   document.getElementById('tablestats').innerHTML = `
+//     //   // <div class="stat-button">
+//     //   //   <div class="stat-label">Total Length (In Meter):</div>
+//     //   //   <div class="stat-value" id="totalLength">${shapeAreaSum.toFixed(2)}</div>
+//     //   // </div>
+//     //   <div class="stat-button">
+//     //     <div class="stat-label">Total Links:</div>
+//     //     <div class="stat-value" id="totalLinks">${uniqueCount}</div>
+//     //   </div>
+//     // `;
+//     document.getElementById('tablestats').innerHTML = `
+    
+//       <div class="stat-button">
+        
+//       </div>
+//     `;
+
+//       createTable(exampleData, headers);
+
+//     });
+//   }
+
+// };
+// ----------------old code 18/9
+
+// new code 18/9-----------------
+function showtable(typeName, geoServerURL, cqlFilter, headers, headerMapping) {
   tableData(typeName, geoServerURL, cqlFilter, headers);
 
   var currentPage = 1;
   var rowsPerPage = 10;
   var buttonsToShow = 3;
-
-  function setupPagination(data, rowsPerPage, headers, tableContainer) {
-    var paginationContainer = document.createElement('div');
-    paginationContainer.id = 'pagination';
-
-    var pageCount = Math.ceil(data.length / rowsPerPage);
-
-    function renderPageButtons(startPage) {
-      paginationContainer.innerHTML = "";
-
-      // Previous Button
-      var prevButton = document.createElement('button');
-      prevButton.innerHTML = '&larr;';
-      prevButton.disabled = currentPage === 1;
-      prevButton.addEventListener('click', function () {
-        if (currentPage > 1) {
-          currentPage--;
-          createTable(data, currentPage, rowsPerPage, headers);
-          renderPageButtons(Math.max(1, currentPage - Math.floor(buttonsToShow / 2)));
-        }
-      });
-      paginationContainer.appendChild(prevButton);
-
-      // Page Buttons
-      var endPage = Math.min(startPage + buttonsToShow - 1, pageCount);
-      for (var i = startPage; i <= endPage; i++) {
-        var pageButton = document.createElement('button');
-        pageButton.innerText = i;
-        if (i === currentPage) {
-          pageButton.classList.add('active');
-        }
-        pageButton.addEventListener('click', function (event) {
-          currentPage = Number(event.target.innerText);
-          createTable(data, currentPage, rowsPerPage, headers);
-          renderPageButtons(Math.max(1, currentPage - Math.floor(buttonsToShow / 2)));
-        });
-        paginationContainer.appendChild(pageButton);
-      }
-
-      // Next Button
-      var nextButton = document.createElement('button');
-      nextButton.innerHTML = '&rarr;';
-      nextButton.disabled = currentPage === pageCount;
-      nextButton.addEventListener('click', function () {
-        if (currentPage < pageCount) {
-          currentPage++;
-          createTable(data, currentPage, rowsPerPage, headers);
-          renderPageButtons(Math.max(1, currentPage - Math.floor(buttonsToShow / 2)));
-        }
-      });
-      paginationContainer.appendChild(nextButton);
-    }
-
-    renderPageButtons(1);
-    tableContainer.appendChild(paginationContainer); // Append paginationContainer after rendering buttons
-  }
-
-
-
 
   function createTable(data, headers) {
     var tableContainer = document.getElementById('tablecontainer');
@@ -414,7 +613,7 @@ function showtable(typeName, geoServerURL, cqlFilter, headers) {
       return;
     }
     tableContainer.innerHTML = ""; // Clear any existing content
-    // Create container for minimize button and pagination
+
     var topContainer = document.createElement('div');
     topContainer.className = 'top-container';
 
@@ -431,24 +630,13 @@ function showtable(typeName, geoServerURL, cqlFilter, headers) {
       } else {
         tableDetail.style.display = 'none';
         minimizeButton.style.display = 'none';
-        // minimizeButton.innerTextpagination = '+';
         document.getElementById('openTableBtn').style.display = 'block'; // Show the show button
       }
     });
 
-    
     tableContainer.appendChild(minimizeButton);
-    // Create pagination controls
-    var paginationContainer = document.createElement('div');
-    paginationContainer.id = 'pagination';
-
-    // Append pagination container to top container
-    topContainer.appendChild(paginationContainer);
-
-    // Append top container to tableContainer
     tableContainer.appendChild(topContainer);
 
-    // Create tableDetail div
     var tableDetail = document.createElement('div');
     tableDetail.className = 'tableDetail';
     tableContainer.appendChild(tableDetail);
@@ -460,22 +648,22 @@ function showtable(typeName, geoServerURL, cqlFilter, headers) {
     var thead = document.createElement('thead');
     var headerRow = document.createElement('tr');
 
-    // Add 'Serial No' as the first header
-    headers.unshift('Sr_no');
+    headers.unshift('Sr_no'); // Add 'Serial No' as the first header
 
-    // Create header cells
-    headers.forEach(headerText => {
+    // Create header cells using the headerMapping
+    headers.forEach(header => {
       var th = document.createElement('th');
-      th.textContent = headerText;
+      var displayHeader = headerMapping[header] || header; // Get custom header or fallback to original
+      th.textContent = displayHeader;
       headerRow.appendChild(th);
     });
+
     thead.appendChild(headerRow);
     table.appendChild(thead);
 
     var tbody = document.createElement('tbody');
 
     // Populate table rows with data
-
     data.forEach((item, index) => {
       var row = document.createElement('tr');
 
@@ -484,25 +672,21 @@ function showtable(typeName, geoServerURL, cqlFilter, headers) {
       serialNumberCell.textContent = index + 1;
       row.appendChild(serialNumberCell);
 
-      // Add other data columns
       headers.slice(1).forEach(header => {
-        if (header !== 'Serial No' && header !== 'geometry') {
-          var cell = document.createElement('td');
-          cell.textContent = item[header] || ''; 
-          row.appendChild(cell);
-        }
+        var cell = document.createElement('td');
+        cell.textContent = item[header] || ''; // Fill the cell with data
+        row.appendChild(cell);
       });
 
       row.addEventListener('click', function () {
-        // //console.log(item);
         var boundsLayer = L.geoJSON(item.geometry, {
           style: {
             fillColor: "blue",
             fillOpacity: 0.3,
-            color: "blue", 
-            weight: 2, 
+            color: "blue",
+            weight: 2,
           },
-        }).addTo(map); 
+        }).addTo(map);
 
         var bounds = boundsLayer.getBounds();
         map.fitBounds(bounds);
@@ -517,17 +701,16 @@ function showtable(typeName, geoServerURL, cqlFilter, headers) {
     table.appendChild(tbody);
     tableDetail.appendChild(table);
 
-    // Initialize DataTables after rendering the table
     $(document).ready(function () {
       if ($.fn.DataTable.isDataTable('#data-table')) {
         $('#data-table').DataTable().destroy(); 
       }
       $('#data-table').DataTable({
-        paging: true, // Enable pagination
-        lengthChange: true, // Enable the 'Show X entries' dropdown
-        searching: true, // Enable search box
-        ordering: true, // Enable column sorting
-        info: true, // Enable showing 'Showing X of Y entries' info
+        paging: true,
+        lengthChange: true,
+        searching: true,
+        ordering: true,
+        info: true,
         autoWidth: false,
         scrollY: 400,
         scrollX: true,
@@ -537,73 +720,23 @@ function showtable(typeName, geoServerURL, cqlFilter, headers) {
     });
   }
 
-  // Function to show the hidden table
-  function showTable() {
-    var tableDetail = document.querySelector('.tableDetail');
-    var minimizeButton = document.querySelector('.minimize-button');
-    tableDetail.style.display = 'block';
-    minimizeButton.style.display = 'block';
-    // minimizeButton.innerText = '-';
-    document.getElementById('openTableBtn').style.display = 'none'; // Hide the show button
-  }
-
-  // Add event listener to the show table button
-  document.getElementById('openTableBtn').addEventListener('click', showTable);
-
-
-  // -------------------------------------------------------------
   function tableData(typeName, geoServerURL, cqlFilter, headers) {
     $.getJSON(geoServerURL, function (data) {
-      var filteredData = data;
-
-      const work_id = [];
-      var exampleData = filteredData.features.map(feature => {
+      var filteredData = data.features.map(feature => {
         let mappedData = {};
         headers.forEach(header => {
-          // Convert header to camelCase or other naming convention if necessary
-          let propertyName = header.replace(/ /g, '');
-          if (header === 'length_m') {
-            mappedData[propertyName] = (feature.properties[header]).toFixed(2); // Format to two decimal places
-          } else {
-            mappedData[propertyName] = feature.properties[header];
-          }
+          mappedData[header] = feature.properties[header] || '';
         });
         mappedData.geometry = feature.geometry;
-        work_id.push(feature.properties.id)
-
         return mappedData;
       });
 
-      const shapeAreaSum = data.features.reduce((sum, feature) => {
-        return sum + feature.properties.length_m;
-      }, 0);
-      let uniqueCount = new Set(work_id).size;
-      // //console.log(work_id.length, "lllllllllllll", work_id, uniqueCount)
-    //   document.getElementById('tablestats').innerHTML = `
-    //   // <div class="stat-button">
-    //   //   <div class="stat-label">Total Length (In Meter):</div>
-    //   //   <div class="stat-value" id="totalLength">${shapeAreaSum.toFixed(2)}</div>
-    //   // </div>
-    //   <div class="stat-button">
-    //     <div class="stat-label">Total Links:</div>
-    //     <div class="stat-value" id="totalLinks">${uniqueCount}</div>
-    //   </div>
-    // `;
-    document.getElementById('tablestats').innerHTML = `
-    
-      <div class="stat-button">
-        <div class="stat-label">Total Plot count:</div>
-        <div class="stat-value" id="totalLinks">${uniqueCount}</div>
-      </div>
-    `;
-
-      createTable(exampleData, headers);
-
+      createTable(filteredData, headers);
     });
   }
+}
 
-};
-
+// new code 18/9-----------------
 $(document).ready(function () {
   // Handle click event on minimize-button
   $('#minimize-button').click(function () {
@@ -614,108 +747,84 @@ $(document).ready(function () {
 
 
 document.addEventListener('DOMContentLoaded', (event) => {
-  var columns = { "name": "Road Name", "caseinformation_applyfor": "caseinformation_applyfor", "width": "Road width", "link_no": "Link_number" };
-  var select = document.getElementById("search_type");
+  // Columns to populate
+  var columns = { "name": "Village", "caseinformation_applyfor": "Survey No", "width": "Owner Name",  };
 
-  // Populate dropdown with column names
+  // Dynamically populate #column-list (using div elements)
+  var columnList = document.getElementById("column-list");
   for (var key in columns) {
     if (columns.hasOwnProperty(key)) {
-      var option = document.createElement("option");
-      option.text = columns[key]; // Use columns[key] to get the column name
-      option.value = key; // Use key as the value (e.g., Work_ID, Budget_Code)
-      select.appendChild(option);
+      var optionDiv = document.createElement("div");
+      optionDiv.textContent = columns[key];
+      optionDiv.dataset.value = key; // Store value in a data attribute
+      columnList.appendChild(optionDiv);
     }
   }
 
-  // Initialize selected value variable
-  let selectedValue;
-
-  $("#search_type").change(function () {
-    var selectedValue = $(this).val();
-    var selectedText = $("#search_type option:selected").text(); // Get the selected option text
-    $("#searchInputDashboard").attr("placeholder", "Search " + selectedText); // Set the input placeholder
-    var layerName = 'Plot_Layout'
-    var workspace = 'AutoDCR'
-    function getValues(callback) {
-      var geoServerURL = `${main_url}${workspace}/wms?service=WFS&version=1.1.0&request=GetFeature&typeName=${layerName}&propertyName=${selectedValue}&outputFormat=application/json`;
-      // //console.log(geoServerURL, "geoServerURLsearch");
-
-      $.getJSON(geoServerURL, function (data) {
-        var workTypeSet = new Set();
-
-        // Populate the Set with work types
-        $.each(data.features, function (index, feature) {
-          var workType = feature.properties[selectedValue];
-
-          // Convert number (double) values to strings
-          if (typeof workType === 'number') {
-            workType = workType.toString();
-          }
-          if (workType !== null) {
-            workTypeSet.add(workType);
-          }
-        });
-
-        // Convert the Set to an array
-        var uniqueWorkTypes = Array.from(workTypeSet);
-        callback(uniqueWorkTypes);
-      });
-    }
-
-    getValues(function (data) {
-      autocomplete(document.getElementById("searchInputDashboard"), data);
-    });
+  // Handle search icon click to show/hide column list
+  document.getElementById("toggle-select").addEventListener("click", function() {
+    var columnList = document.getElementById("column-list");
+    columnList.classList.toggle("hidden");
   });
 
-  // autocomplete function
+  // Handle option click to populate search input
+  columnList.addEventListener("click", function(event) {
+    var target = event.target;
+    if (target.tagName.toLowerCase() === "div") {
+      var selectedValue = target.dataset.value;
+      var selectedText = target.textContent;
+      document.getElementById("search-input").setAttribute("placeholder", "Search " + selectedText);
+      
+      var layerName = 'Plot_Layout';
+      var workspace = 'AutoDCR';
+      var main_url = ''; // Ensure you set this to your actual URL
+
+      // Function to fetch dynamic data
+      function getValues(callback) {
+        var geoServerURL = `${main_url}${workspace}/wms?service=WFS&version=1.1.0&request=GetFeature&typeName=${layerName}&propertyName=${selectedValue}&outputFormat=application/json`;
+
+        $.getJSON(geoServerURL, function (data) {
+          var workTypeSet = new Set();
+          $.each(data.features, function (index, feature) {
+            var workType = feature.properties[selectedValue];
+            if (typeof workType === 'number') workType = workType.toString();
+            if (workType !== null) workTypeSet.add(workType);
+          });
+          var uniqueWorkTypes = Array.from(workTypeSet);
+          callback(uniqueWorkTypes); // Pass data to autocomplete function
+        });
+      }
+
+      // Fetch dynamic data and pass it to the autocomplete function
+      getValues(function (data) {
+        autocomplete(document.getElementById("search-input"), data);
+      });
+
+      columnList.classList.add("hidden"); // Hide the list after selection
+    }
+  });
+
+  // Autocomplete functionality
   function autocomplete(input, arr) {
     let currentFocus;
-    input.addEventListener("input", function () {
-      let list, item, i, val = this.value.toLowerCase(); // Convert input value to lowercase for case-insensitive comparison
+    input.addEventListener("input", function() {
+      let list, item, i, val = this.value.toLowerCase();
       closeAllLists();
       if (!val) return false;
       currentFocus = -1;
+
       list = document.createElement("ul");
       list.setAttribute("id", "autocomplete-list");
       list.setAttribute("class", "autocomplete-items");
-      document.getElementById("autocompleteSuggestions").appendChild(list);
+      document.body.appendChild(list);
+
       for (i = 0; i < arr.length; i++) {
-        if (arr[i].toLowerCase().includes(val)) { // Check if the suggestion contains the input value
+        if (arr[i].toLowerCase().includes(val)) {
           item = document.createElement("li");
-          item.innerHTML = arr[i].replace(new RegExp(val, 'gi'), (match) => `<strong>${match}</strong>`); // Highlight matching letters
+          item.innerHTML = arr[i].replace(new RegExp(val, 'gi'), (match) => `<strong>${match}</strong>`);
           item.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
-          item.addEventListener("click", function () {
-            selectedValue = this.getElementsByTagName("input")[0].value; // Store the selected value
-
-            var searchtypefield = $("#search_type").val();
-
-            let cqlFilter;
-
-            cqlFilter = `${searchtypefield} IN ('${selectedValue}')`;
-
-            Plot_Layout.setParams({
-              CQL_FILTER: cqlFilter,
-              maxZoom: 19.5,
-           
-            });
-
-            Plot_Layout.addTo(map).bringToFront();
-
-            Plot_Layout.setParams({
-              CQL_FILTER: cqlFilter,
-              maxZoom: 19.5,
-              
-            });
-
-            Plot_Layout.addTo(map).bringToFront();
-
-            fitbous(cqlFilter);
-
-            DataTableFilter(cqlFilter)
-
-
-
-            input.value = selectedValue;
+          item.addEventListener("click", function() {
+            input.value = this.getElementsByTagName("input")[0].value;
             closeAllLists();
           });
           list.appendChild(item);
@@ -723,23 +832,19 @@ document.addEventListener('DOMContentLoaded', (event) => {
       }
     });
 
-    input.addEventListener("keydown", function (e) {
+    input.addEventListener("keydown", function(e) {
       let x = document.getElementById("autocomplete-list");
       if (x) x = x.getElementsByTagName("li");
       if (e.keyCode === 40) {
         currentFocus++;
         addActive(x);
-      } else if (e.keyCode === 38) { //up
+      } else if (e.keyCode === 38) {
         currentFocus--;
         addActive(x);
       } else if (e.keyCode === 13) {
         e.preventDefault();
         if (currentFocus > -1) {
-          if (x) {
-            selectedValue = x[currentFocus].getElementsByTagName("input")[0].value; // Store the selected value
-            input.value = selectedValue;
-            closeAllLists();
-          }
+          if (x) x[currentFocus].click();
         }
       }
     });
@@ -748,7 +853,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
       if (!x) return false;
       removeActive(x);
       if (currentFocus >= x.length) currentFocus = 0;
-      if (currentFocus < 0) currentFocus = (x.length - 1);
+      if (currentFocus < 0) currentFocus = x.length - 1;
       x[currentFocus].classList.add("autocomplete-active");
     }
 
@@ -767,35 +872,21 @@ document.addEventListener('DOMContentLoaded', (event) => {
       }
     }
 
-    document.addEventListener("click", function (e) {
+    document.addEventListener("click", function(e) {
       closeAllLists(e.target);
     });
   }
 });
 
-function getCheckedValuess() {
-  var checkedValues = [];
-  var checkboxes = document.querySelectorAll("#checkboxContainer input[type='checkbox']:checked");
-  checkboxes.forEach(function (checkbox) {
-    checkedValues.push("'" + checkbox.value + "'"); // Push value wrapped in single quotes
-  });
-
-  if (checkedValues.length === 0) {
-    checkedValues.push("''"); // Push an empty string to simulate no results
-  }
-
-  return checkedValues;
-}
-
 
 // const layerDetails = {
-//   "AutoDCR:Plot_Layout": ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype", "caseinformation_proposaltype","siteaddress_surveyno", "caseinformation_tdrzone", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "ownerinformation_firstname"],
+//   "AutoDCR:Plot_Layout": ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype", "caseinformation_proposaltype","gut_no", "caseinformation_tdrzone", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "ownerinformation_firstname"],
 // };
 
 // function getCheckedValuesforpopuups() {
 //   return new Promise((resolve, reject) => {
 //     var selectedValues = {};
-//     const filternames = ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype", "siteaddress_surveyno","caseinformation_proposaltype", "caseinformation_tdrzone", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "ownerinformation_firstname"];
+//     const filternames = ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype", "gut_no","caseinformation_proposaltype", "caseinformation_tdrzone", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "ownerinformation_firstname"];
 
 //     filternames.forEach(function (filtername) {
 //       selectedValues[filtername] = []; 
@@ -900,26 +991,28 @@ function getCheckedValuess() {
 // }
  
 const layerDetails = {
-  "AutoDCR:Plot_Layout": ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype", "caseinformation_proposaltype", "siteaddress_surveyno", "caseinformation_tdrzone", "caseinformation_grossplotarea", "plotdetails_developmentzonedp", "ownerinformation_firstname"],
+  "AutoDCR:Plot_Layout": ["token","siteaddress_area", "gut_no", "ownerinformation_firstname","caseinformation_applyfor", "caseinformation_casetype", "caseinformation_proposaltype", "caseinformation_tdrzone", "caseinformation_grossplotarea", "plotdetails_developmentzonedp", ],
 };
 
 // Mapping of field names to display names
 const fieldDisplayNames = {
+  "token": "Token No",
   "siteaddress_area": "Village Name",
+  "gut_no": "Survey No",
+  "ownerinformation_firstname": "Owner Name",
   "caseinformation_applyfor": "Apply For",
   "caseinformation_casetype": "Case Type",
   "caseinformation_proposaltype": "Proposal Type",
-  "siteaddress_surveyno": "Survey No",
   "caseinformation_tdrzone": "TDR Zone",
   "caseinformation_grossplotarea": "Gross Plot Area",
   "plotdetails_developmentzonedp": "Development Zone",
-  "ownerinformation_firstname": "Owner Name",
+  
 };
 
 function getCheckedValuesforpopuups() {
   return new Promise((resolve, reject) => {
     var selectedValues = {};
-    const filternames = ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype", "siteaddress_surveyno", "caseinformation_proposaltype", "caseinformation_tdrzone", "caseinformation_grossplotarea", "plotdetails_developmentzonedp", "ownerinformation_firstname"];
+    const filternames = ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype", "gut_no", "caseinformation_proposaltype", "caseinformation_tdrzone", "caseinformation_grossplotarea", "plotdetails_developmentzonedp", "ownerinformation_firstname"];
 
     filternames.forEach(function (filtername) {
       selectedValues[filtername] = []; 
@@ -953,139 +1046,8 @@ function combineFilters(cql_filter123, filterString) {
   }
 }
 
-// Function to close the modal
 
-// Function to handle the click event and show the popup
-// Function to handle the click event and show the popup
-// async function handleMapClick(e) {
-//   console.log("Click event:", e);
-
-//   let bbox = map.getBounds().toBBoxString();
-//   let size = map.getSize();
-
-//   let filterString = await getCheckedValuesforpopuups();
-//   let cqlFilter123 = filterString.trim() !== "" ? encodeURIComponent(filterString) : "";
-
-//   for (let layer in layerDetails) {
-//     let selectedKeys = layerDetails[layer];
-//     let workspace = "AutoDCR";
-//     let urrr = `https://iwmsgis.pmc.gov.in/geoserver/${workspace}/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&FORMAT=image%2Fpng&TRANSPARENT=true&QUERY_LAYERS=${layer}&STYLES&LAYERS=${layer}&exceptions=application%2Fvnd.ogc.se_inimage&INFO_FORMAT=application/json&FEATURE_COUNT=50&X=${Math.round(e.containerPoint.x)}&Y=${Math.round(e.containerPoint.y)}&SRS=EPSG%3A4326&WIDTH=${size.x}&HEIGHT=${size.y}&BBOX=${bbox}`;
-//     console.log("WMS Request URL:", urrr);
-
-//     try {
-//       let response = await fetch(urrr);
-//       if (!response.ok) {
-//         throw new Error(`Network response was not ok: ${response.statusText}`);
-//       }
-//       let json = await response.json();
-//       if (json.features.length > 0) {
-//         let htmldata = json.features[0].properties;
-//         let txtk1 = "";
-//         for (let key of selectedKeys) {
-//           if (htmldata.hasOwnProperty(key)) {
-//             let value = htmldata[key];
-//             let displayName = fieldDisplayNames[key] || key; // Use the mapping or default to key
-//             txtk1 += `<tr><td>${displayName}</td><td>${value}</td></tr>`;
-//           }
-//         }
-//         let detaildata1 = `<table style='width:100%;' class='popup-table'>${txtk1}<tr><td>Coordinates</td><td>${e.latlng}</td></tr></table>`;
-//         console.log("Modal Content:", detaildata1);
-
-//         // Update the modal content
-//         document.getElementById("modalContent").innerHTML = detaildata1;
-//         // Set modal position to clicked position
-//         updatePopupPosition(e);
-//       } else {
-//         console.log("No features found for this location.");
-//         closeModal(); // Close the modal if no features are found
-//       }
-//     } catch (error) {
-//       console.error("Error fetching data:", error);
-//       closeModal(); // Close the modal on error
-//     }
-//   }
-// }
-
-
-// // Function to update the popup position
-// function updatePopupPosition(e) {
-//   let modal = document.getElementById("infoModal");
-//   if (!modal) return;
-
-//   modal.style.display = "block"; // Show the modal
-//   const modalWidth = modal.offsetWidth;
-//   const modalHeight = modal.offsetHeight;
-
-//   console.log(`Popup position: x=${e.containerPoint.x}, y=${e.containerPoint.y}`);
-//   console.log(`Modal size: width=${modalWidth}, height=${modalHeight}`);
-
-//   modal.style.left = `${e.containerPoint.x - modalWidth / 2}px`; // Center horizontally
-//   modal.style.top = `${e.containerPoint.y - modalHeight}px`; // Position above the click point
-// }
-
-
-// // Function to close the modal
-// function closeModal() {
-//   document.getElementById("infoModal").style.display = "none";
-// }
-
-// // Event listener for map click
-// map.on("click", (e) => {
-//   lastClickEvent = e;
-//   handleMapClick(e);
-// });
-
-// // Event listener for map move and zoom to update the popup position
-// map.on("moveend", () => {
-//   if (lastClickEvent) {
-//     updatePopupPosition(lastClickEvent);
-//   }
-// });
-
-
-// // Function to update the popup position
-// function updatePopupPosition(e) {
-//   let modal = document.getElementById("infoModal");
-//   if (!modal) return;
-
-//   modal.style.display = "block"; // Show the modal
-//   const modalWidth = modal.offsetWidth;
-//   const modalHeight = modal.offsetHeight;
- 
-//   // Calculate the position to center bottom
-//   modal.style.left = `${e.containerPoint.x - modalWidth / 2}px`; // Center horizontally
-//   modal.style.top = `${e.containerPoint.y - modalHeight}px`; // Position above the click point
-// }
-
-// // Function to close the modal
-// function closeModal() {
-//   document.getElementById("infoModal").style.display = "none";
-// }
-
-// // Event listener for map click
-// map.on("click", handleMapClick);
-
-// // Event listener for map move and zoom to update the popup position
-// map.on("moveend", () => {
-//   let modal = document.getElementById("infoModal");
-//   if (modal.style.display === "block") {
-//     // Recalculate the position based on the map's new view
-//     // You may need to store and pass the last click event coordinates to update the popup position.
-//     updatePopupPosition(lastClickEvent);
-//   }
-// });
-
-// // Store the last click event to use when the map moves
-// let lastClickEvent;
-// map.on("click", (e) => {
-//   lastClickEvent = e;
-//   handleMapClick(e);
-// });
-
-// function closeModal() {
-//   document.getElementById("infoModal").style.display = "none";
-// }
-
+// code for modal changes move modal with data , open after right click , after close modal that modal is not reopen 
 
 let isModalOpen = false; // Flag to track modal visibility
 

@@ -459,3 +459,25 @@ document.addEventListener('DOMContentLoaded', function () {
     closeFilterAndLegend();
   });
 });
+
+document.getElementById('toggle-select').addEventListener('click', function() {
+    const searchContainer = document.getElementById('search-container');
+    const selectElement = document.getElementById('search_type');
+    
+    // Toggle the display of the select element
+    if (selectElement.style.display === 'none' || selectElement.style.display === '') {
+        selectElement.style.display = 'block';
+    } else {
+        selectElement.style.display = 'none';
+    }
+});
+
+// Optional: Close the select element if clicked outside
+document.addEventListener('click', function(event) {
+    const toggleSelect = document.getElementById('toggle-select');
+    
+    // Close dropdown if clicked outside
+    if (!searchContainer.contains(event.target) && !toggleSelect.contains(event.target)) {
+        selectElement.style.display = 'none';
+    }
+});
