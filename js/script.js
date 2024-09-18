@@ -101,7 +101,7 @@ const cluster_url = "https://iwmsgis.pmc.gov.in/geoserver/";
 
 
   function loadinitialData(cql_filter) {
-    const filternames = ["siteaddress_area", "caseinformation_applyfor","siteaddress_surveyno", "caseinformation_casetype", "caseinformation_proposaltype", "caseinformation_tdrzone", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "Owner_Name"];//accordn column names , if want add one more filter criteria add here
+    const filternames = ["siteaddress_area", "caseinformation_applyfor","siteaddress_surveyno", "caseinformation_casetype", "caseinformation_proposaltype", "caseinformation_tdrzone", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "ownerinformation_firstname"];//accordn column names , if want add one more filter criteria add here
     var workspace = 'AutoDCR';
     var layerName = 'Plot_Layout';
     filternames.forEach(function (filtername) {
@@ -142,7 +142,7 @@ function DataTableFilter(cql_filter1) {
   if (cql_filter1 !== '') {
     geoServerURL += "&CQL_FILTER=" + encodeURIComponent(cqlFilter);
   }
-  var headers = ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype","siteaddress_surveyno", "caseinformation_proposaltype", "caseinformation_tdrzone", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "Owner_Name"];
+  var headers = ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype","siteaddress_surveyno", "caseinformation_proposaltype", "caseinformation_tdrzone", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "ownerinformation_firstname"];
   showtable(typeName, geoServerURL, cqlFilter, headers);
 }
 
@@ -187,7 +187,7 @@ function populateDropdown(dropdownId, data) {
 
 function getCheckedValues(callback) {
   var selectedValues = {};
-  const filternames = ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype", "caseinformation_proposaltype","siteaddress_surveyno", "caseinformation_tdrzone", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "Owner_Name"];
+  const filternames = ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype", "caseinformation_proposaltype","siteaddress_surveyno", "caseinformation_tdrzone", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "ownerinformation_firstname"];
 
   filternames.forEach(function (filtername) {
     selectedValues[filtername] = []; 
@@ -789,13 +789,13 @@ function getCheckedValuess() {
 
 
 // const layerDetails = {
-//   "AutoDCR:Plot_Layout": ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype", "caseinformation_proposaltype","siteaddress_surveyno", "caseinformation_tdrzone", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "Owner_Name"],
+//   "AutoDCR:Plot_Layout": ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype", "caseinformation_proposaltype","siteaddress_surveyno", "caseinformation_tdrzone", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "ownerinformation_firstname"],
 // };
 
 // function getCheckedValuesforpopuups() {
 //   return new Promise((resolve, reject) => {
 //     var selectedValues = {};
-//     const filternames = ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype", "siteaddress_surveyno","caseinformation_proposaltype", "caseinformation_tdrzone", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "Owner_Name"];
+//     const filternames = ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype", "siteaddress_surveyno","caseinformation_proposaltype", "caseinformation_tdrzone", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "ownerinformation_firstname"];
 
 //     filternames.forEach(function (filtername) {
 //       selectedValues[filtername] = []; 
@@ -900,7 +900,7 @@ function getCheckedValuess() {
 // }
  
 const layerDetails = {
-  "AutoDCR:Plot_Layout": ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype", "caseinformation_proposaltype", "siteaddress_surveyno", "caseinformation_tdrzone", "caseinformation_grossplotarea", "plotdetails_developmentzonedp", "Owner_Name"],
+  "AutoDCR:Plot_Layout": ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype", "caseinformation_proposaltype", "siteaddress_surveyno", "caseinformation_tdrzone", "caseinformation_grossplotarea", "plotdetails_developmentzonedp", "ownerinformation_firstname"],
 };
 
 // Mapping of field names to display names
@@ -913,13 +913,13 @@ const fieldDisplayNames = {
   "caseinformation_tdrzone": "TDR Zone",
   "caseinformation_grossplotarea": "Gross Plot Area",
   "plotdetails_developmentzonedp": "Development Zone",
-  "Owner_Name": "Owner Name",
+  "ownerinformation_firstname": "Owner Name",
 };
 
 function getCheckedValuesforpopuups() {
   return new Promise((resolve, reject) => {
     var selectedValues = {};
-    const filternames = ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype", "siteaddress_surveyno", "caseinformation_proposaltype", "caseinformation_tdrzone", "caseinformation_grossplotarea", "plotdetails_developmentzonedp", "Owner_Name"];
+    const filternames = ["siteaddress_area", "caseinformation_applyfor", "caseinformation_casetype", "siteaddress_surveyno", "caseinformation_proposaltype", "caseinformation_tdrzone", "caseinformation_grossplotarea", "plotdetails_developmentzonedp", "ownerinformation_firstname"];
 
     filternames.forEach(function (filtername) {
       selectedValues[filtername] = []; 
@@ -957,8 +957,141 @@ function combineFilters(cql_filter123, filterString) {
 
 // Function to handle the click event and show the popup
 // Function to handle the click event and show the popup
-async function handleMapClick(e) {
-  console.log("Click event:", e);
+// async function handleMapClick(e) {
+//   console.log("Click event:", e);
+
+//   let bbox = map.getBounds().toBBoxString();
+//   let size = map.getSize();
+
+//   let filterString = await getCheckedValuesforpopuups();
+//   let cqlFilter123 = filterString.trim() !== "" ? encodeURIComponent(filterString) : "";
+
+//   for (let layer in layerDetails) {
+//     let selectedKeys = layerDetails[layer];
+//     let workspace = "AutoDCR";
+//     let urrr = `https://iwmsgis.pmc.gov.in/geoserver/${workspace}/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&FORMAT=image%2Fpng&TRANSPARENT=true&QUERY_LAYERS=${layer}&STYLES&LAYERS=${layer}&exceptions=application%2Fvnd.ogc.se_inimage&INFO_FORMAT=application/json&FEATURE_COUNT=50&X=${Math.round(e.containerPoint.x)}&Y=${Math.round(e.containerPoint.y)}&SRS=EPSG%3A4326&WIDTH=${size.x}&HEIGHT=${size.y}&BBOX=${bbox}`;
+//     console.log("WMS Request URL:", urrr);
+
+//     try {
+//       let response = await fetch(urrr);
+//       if (!response.ok) {
+//         throw new Error(`Network response was not ok: ${response.statusText}`);
+//       }
+//       let json = await response.json();
+//       if (json.features.length > 0) {
+//         let htmldata = json.features[0].properties;
+//         let txtk1 = "";
+//         for (let key of selectedKeys) {
+//           if (htmldata.hasOwnProperty(key)) {
+//             let value = htmldata[key];
+//             let displayName = fieldDisplayNames[key] || key; // Use the mapping or default to key
+//             txtk1 += `<tr><td>${displayName}</td><td>${value}</td></tr>`;
+//           }
+//         }
+//         let detaildata1 = `<table style='width:100%;' class='popup-table'>${txtk1}<tr><td>Coordinates</td><td>${e.latlng}</td></tr></table>`;
+//         console.log("Modal Content:", detaildata1);
+
+//         // Update the modal content
+//         document.getElementById("modalContent").innerHTML = detaildata1;
+//         // Set modal position to clicked position
+//         updatePopupPosition(e);
+//       } else {
+//         console.log("No features found for this location.");
+//         closeModal(); // Close the modal if no features are found
+//       }
+//     } catch (error) {
+//       console.error("Error fetching data:", error);
+//       closeModal(); // Close the modal on error
+//     }
+//   }
+// }
+
+
+// // Function to update the popup position
+// function updatePopupPosition(e) {
+//   let modal = document.getElementById("infoModal");
+//   if (!modal) return;
+
+//   modal.style.display = "block"; // Show the modal
+//   const modalWidth = modal.offsetWidth;
+//   const modalHeight = modal.offsetHeight;
+
+//   console.log(`Popup position: x=${e.containerPoint.x}, y=${e.containerPoint.y}`);
+//   console.log(`Modal size: width=${modalWidth}, height=${modalHeight}`);
+
+//   modal.style.left = `${e.containerPoint.x - modalWidth / 2}px`; // Center horizontally
+//   modal.style.top = `${e.containerPoint.y - modalHeight}px`; // Position above the click point
+// }
+
+
+// // Function to close the modal
+// function closeModal() {
+//   document.getElementById("infoModal").style.display = "none";
+// }
+
+// // Event listener for map click
+// map.on("click", (e) => {
+//   lastClickEvent = e;
+//   handleMapClick(e);
+// });
+
+// // Event listener for map move and zoom to update the popup position
+// map.on("moveend", () => {
+//   if (lastClickEvent) {
+//     updatePopupPosition(lastClickEvent);
+//   }
+// });
+
+
+// // Function to update the popup position
+// function updatePopupPosition(e) {
+//   let modal = document.getElementById("infoModal");
+//   if (!modal) return;
+
+//   modal.style.display = "block"; // Show the modal
+//   const modalWidth = modal.offsetWidth;
+//   const modalHeight = modal.offsetHeight;
+ 
+//   // Calculate the position to center bottom
+//   modal.style.left = `${e.containerPoint.x - modalWidth / 2}px`; // Center horizontally
+//   modal.style.top = `${e.containerPoint.y - modalHeight}px`; // Position above the click point
+// }
+
+// // Function to close the modal
+// function closeModal() {
+//   document.getElementById("infoModal").style.display = "none";
+// }
+
+// // Event listener for map click
+// map.on("click", handleMapClick);
+
+// // Event listener for map move and zoom to update the popup position
+// map.on("moveend", () => {
+//   let modal = document.getElementById("infoModal");
+//   if (modal.style.display === "block") {
+//     // Recalculate the position based on the map's new view
+//     // You may need to store and pass the last click event coordinates to update the popup position.
+//     updatePopupPosition(lastClickEvent);
+//   }
+// });
+
+// // Store the last click event to use when the map moves
+// let lastClickEvent;
+// map.on("click", (e) => {
+//   lastClickEvent = e;
+//   handleMapClick(e);
+// });
+
+// function closeModal() {
+//   document.getElementById("infoModal").style.display = "none";
+// }
+
+
+let isModalOpen = false; // Flag to track modal visibility
+
+// Function to handle right-click on the map
+async function handleMapRightClick(e) {
+  console.log("Right-click event:", e);
 
   let bbox = map.getBounds().toBBoxString();
   let size = map.getSize();
@@ -995,6 +1128,7 @@ async function handleMapClick(e) {
         document.getElementById("modalContent").innerHTML = detaildata1;
         // Set modal position to clicked position
         updatePopupPosition(e);
+        isModalOpen = true; // Mark the modal as open
       } else {
         console.log("No features found for this location.");
         closeModal(); // Close the modal if no features are found
@@ -1022,64 +1156,30 @@ function updatePopupPosition(e) {
   modal.style.top = `${e.containerPoint.y - modalHeight}px`; // Position above the click point
 }
 
+// Function to update popup position on map move
+function updatePopupPositionOnMapMove() {
+  if (lastClickEvent && isModalOpen) {
+    const newContainerPoint = map.latLngToContainerPoint(lastClickEvent.latlng); // Get new container point after map move
+    updatePopupPosition({ containerPoint: newContainerPoint, latlng: lastClickEvent.latlng });
+  }
+}
+
 // Function to close the modal
 function closeModal() {
   document.getElementById("infoModal").style.display = "none";
+  isModalOpen = false; // Mark the modal as closed
 }
 
-// Event listener for map click
-map.on("click", (e) => {
+// Event listener for right-click on map (contextmenu event)
+map.on("contextmenu", (e) => {
   lastClickEvent = e;
-  handleMapClick(e);
+  handleMapRightClick(e);
 });
 
 // Event listener for map move and zoom to update the popup position
-map.on("moveend", () => {
-  if (lastClickEvent) {
-    updatePopupPosition(lastClickEvent);
-  }
+map.on("move", () => {
+  updatePopupPositionOnMapMove(); // Update popup position in real-time while the map is being dragged
 });
 
-
-// Function to update the popup position
-function updatePopupPosition(e) {
-  let modal = document.getElementById("infoModal");
-  if (!modal) return;
-
-  modal.style.display = "block"; // Show the modal
-  const modalWidth = modal.offsetWidth;
-  const modalHeight = modal.offsetHeight;
- 
-  // Calculate the position to center bottom
-  modal.style.left = `${e.containerPoint.x - modalWidth / 2}px`; // Center horizontally
-  modal.style.top = `${e.containerPoint.y - modalHeight}px`; // Position above the click point
-}
-
-// Function to close the modal
-function closeModal() {
-  document.getElementById("infoModal").style.display = "none";
-}
-
-// Event listener for map click
-map.on("click", handleMapClick);
-
-// Event listener for map move and zoom to update the popup position
-map.on("moveend", () => {
-  let modal = document.getElementById("infoModal");
-  if (modal.style.display === "block") {
-    // Recalculate the position based on the map's new view
-    // You may need to store and pass the last click event coordinates to update the popup position.
-    updatePopupPosition(lastClickEvent);
-  }
-});
-
-// Store the last click event to use when the map moves
+// Store the last right-click event to use when the map moves
 let lastClickEvent;
-map.on("click", (e) => {
-  lastClickEvent = e;
-  handleMapClick(e);
-});
-
-function closeModal() {
-  document.getElementById("infoModal").style.display = "none";
-}
