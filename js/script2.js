@@ -169,88 +169,88 @@ L.control.scale({
   position: 'bottomleft' // Change position to bottom right
 }).addTo(map);
 
+// old code 18/9
+// search
+// document.getElementById('search-button').addEventListener('click', function () {
+//   // Toggle the search container visibility
+//   const searchContainer = document.getElementById('search-container');
+//   searchContainer.classList.toggle('hidden');
+  
+//   // Focus the search input when shown
+//   if (!searchContainer.classList.contains('hidden')) {
+//       document.getElementById('search_type').focus();
+//   }
+// });
 
-//search
-document.getElementById('search-button').addEventListener('click', function () {
-  // Toggle the search container visibility
-  const searchContainer = document.getElementById('search-container');
-  searchContainer.classList.toggle('hidden');
+// document.getElementById('search_type').addEventListener('input', function () {
+//   const clearIcon = document.getElementById('clear-icon');
+//   if (this.value.trim() !== '') {
+//       clearIcon.classList.remove('hidden');
+//   } else {
+//       clearIcon.classList.add('hidden');
+//   }
+// });
 
-  // Focus the search input when shown
-  if (!searchContainer.classList.contains('hidden')) {
-    document.getElementById('search-input').focus();
-  }
-});
+// // Clear the search input when the clear icon is clicked
+// document.getElementById('clear-icon').addEventListener('click', function () {
+//   const searchInput = document.getElementById('search_type');
+//   searchInput.value = '';
+//   this.classList.add('hidden');
+//   searchInput.focus();
+// });
+// // old code 18/9
 
-document.getElementById('search-input').addEventListener('input', function () {
-  const clearIcon = document.getElementById('clear-icon');
-  if (this.value.trim() !== '') {
-    clearIcon.classList.remove('hidden');
-  } else {
-    clearIcon.classList.add('hidden');
-  }
-});
+// // Add click event listener to .component-10 elements
+// document.querySelectorAll('.component-10').forEach(function (element) {
+//   element.addEventListener('click', function () {
+//     // Remove the 'active' class from all .component-10 elements
+//     document.querySelectorAll('.component-10').forEach(function (el) {
+//       el.classList.remove('active');
+//     });
 
-// Clear the search input when the clear icon is clicked
-document.getElementById('clear-icon').addEventListener('click', function () {
-  const searchInput = document.getElementById('search-input');
-  searchInput.value = '';
-  this.classList.add('hidden');
-  searchInput.focus();
-});
+//     // Remove the 'active' class from all .component-11 elements
+//     document.querySelectorAll('.component-11').forEach(function (el) {
+//       el.classList.remove('active');
+//     });
 
+//     // Add the 'active' class to the currently clicked element
+//     element.classList.add('active');
+//   });
+// });
 
-// Add click event listener to .component-10 elements
-document.querySelectorAll('.component-10').forEach(function (element) {
-  element.addEventListener('click', function () {
-    // Remove the 'active' class from all .component-10 elements
-    document.querySelectorAll('.component-10').forEach(function (el) {
-      el.classList.remove('active');
-    });
+// // Add click event listener to .component-11 elements
+// document.querySelectorAll('.component-11').forEach(function (element) {
+//   element.addEventListener('click', function () {
+//     // Remove the 'active' class from all .component-11 elements
+//     document.querySelectorAll('.component-11').forEach(function (el) {
+//       el.classList.remove('active');
+//     });
 
-    // Remove the 'active' class from all .component-11 elements
-    document.querySelectorAll('.component-11').forEach(function (el) {
-      el.classList.remove('active');
-    });
+//     // Remove the 'active' class from all .component-10 elements
+//     document.querySelectorAll('.component-10').forEach(function (el) {
+//       el.classList.remove('active');
+//     });
 
-    // Add the 'active' class to the currently clicked element
-    element.classList.add('active');
-  });
-});
-
-// Add click event listener to .component-11 elements
-document.querySelectorAll('.component-11').forEach(function (element) {
-  element.addEventListener('click', function () {
-    // Remove the 'active' class from all .component-11 elements
-    document.querySelectorAll('.component-11').forEach(function (el) {
-      el.classList.remove('active');
-    });
-
-    // Remove the 'active' class from all .component-10 elements
-    document.querySelectorAll('.component-10').forEach(function (el) {
-      el.classList.remove('active');
-    });
-
-    // Add the 'active' class to the currently clicked element
-    element.classList.add('active');
-  });
-});
+//     // Add the 'active' class to the currently clicked element
+//     element.classList.add('active');
+//   });
+// });
 
 
-//status
-// Select all tabs within the parent
-const tabs = document.querySelectorAll('.tab');
+// //status
+// // Select all tabs within the parent
+// const tabs = document.querySelectorAll('.tab');
 
-// Function to handle tab click
-tabs.forEach(tab => {
-  tab.addEventListener('click', function () {
-    // Remove 'active' class from all tabs
-    tabs.forEach(t => t.classList.remove('active'));
+// // Function to handle tab click
+// tabs.forEach(tab => {
+//   tab.addEventListener('click', function () {
+//     // Remove 'active' class from all tabs
+//     tabs.forEach(t => t.classList.remove('active'));
 
-    // Add 'active' class to the clicked tab
-    this.classList.add('active');
-  });
-});
+//     // Add 'active' class to the clicked tab
+//     this.classList.add('active');
+//   });
+// });
 
 
 
@@ -460,173 +460,24 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
-document.getElementById('toggle-select').addEventListener('click', function () {
-  const searchContainer = document.getElementById('search-container');
-  const selectElement = document.getElementById('search_type');
-
-  // Toggle the display of the select element
-  if (selectElement.style.display === 'none' || selectElement.style.display === '') {
-    selectElement.style.display = 'block';
-  } else {
-    selectElement.style.display = 'none';
-  }
+document.getElementById('toggle-select').addEventListener('click', function() {
+    const searchContainer = document.getElementById('search-container');
+    const selectElement = document.getElementById('search_type');
+    
+    // Toggle the display of the select element
+    if (selectElement.style.display === 'none' || selectElement.style.display === '') {
+        selectElement.style.display = 'block';
+    } else {
+        // selectElement.style.display = 'none';
+    }
 });
 
-// Optional: Close the select element if clicked outside
-document.addEventListener('click', function (event) {
-  const toggleSelect = document.getElementById('toggle-select');
-
-  // Close dropdown if clicked outside
-  if (!searchContainer.contains(event.target) && !toggleSelect.contains(event.target)) {
-    selectElement.style.display = 'none';
-  }
-});
-
-
-// calender
-
-
-
-document.getElementById('calendar-icon').addEventListener('click', function () {
-  let calendarElement = document.querySelector('.flatpickr-calendar');
-  if (calendarElement) {
-    calendarElement.remove();
-    return;
-  }
-
-  let calendarContainer = document.createElement('div');
-  calendarContainer.id = 'calendar-container';
-  document.getElementById('date-range-display').appendChild(calendarContainer);
-
-  flatpickr(calendarContainer, {
-    mode: "range",
-    inline: true,
-    defaultDate: ["2024-04-01", "2025-03-31"],
-    onClose: function (selectedDates) {
-      let formattedDates = selectedDates.map(date => formatDate(date)).join(' to ');
-      document.getElementById('date-range-display').firstChild.textContent = formattedDates;
-      handleDateRange(selectedDates);
-    },
-    onReady: function () {
-      let calendarFooter = document.createElement('div');
-      calendarFooter.className = 'flatpickr-custom-buttons';
-      calendarFooter.innerHTML = `
-        <button id="cancel-button" class="flatpickr-button">Apply</button>
-        <button id="apply-button" class="flatpickr-button">Choose Date</button>
-      `;
-      document.querySelector('.flatpickr-calendar').appendChild(calendarFooter);
-
-      document.getElementById('cancel-button').addEventListener('click', function () {
-        document.querySelector('.flatpickr-calendar').remove();
-      });
-
-      document.getElementById('apply-button').addEventListener('click', function () {
-        instance.close();
-      });
-
-      updateWeekdayLabels();
-    }
-  });
-});
-
-function formatDate(date) {
-  let options = { year: 'numeric', month: 'long', day: 'numeric' };
-  return date.toLocaleDateString('en-US', options);
-}
-
-function handleDateRange(selectedDates) {
-  const startDate = selectedDates[0].toISOString().split('T')[0];
-  const endDate = selectedDates[1].toISOString().split('T')[0];
-
-  const cql_filter = `conc_appr_ >= '${startDate}' AND conc_appr_ < '${endDate}'`;
-  console.log('CQL Filter:', cql_filter);
-
-  loadFilteredData(cql_filter);
-}
-
-function loadFilteredData(cql_filter) {
-  const main_url = "https://iwmsgis.pmc.gov.in/geoserver/";
-  const filterNames = ["entry_timestamp"];
-
-  filterNames.forEach(filterName => {
-    const url = `${main_url}AutoDCR/wms?service=WFS&version=1.1.0&request=GetFeature&typeName=Plot_Layout&propertyName=${filterName}&outputFormat=application/json&cql_filter=${encodeURIComponent(cql_filter)}`;
-    console.log(url);
-    $.getJSON(url, function(data) {
-      displayDataOnMap(data);
-    });
-  });
-}
-
-function displayDataOnMap(data) {
-  map.eachLayer(layer => {
-    if (layer instanceof L.GeoJSON) {
-      map.removeLayer(layer);
-    }
-  });
-
-  L.geoJSON(data, {
-    style: function(feature) {
-      return { color: feature.properties.color || 'blue' };
-    },
-    onEachFeature: function(feature, layer) {
-      if (feature.properties && feature.properties.name) {
-        layer.bindPopup(feature.properties.name);
-      }
-    }
-  }).addTo(map);
-}
-
-function updateWeekdayLabels() {
-  let weekdays = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
-  let weekdayElements = document.querySelectorAll('.flatpickr-weekday');
-  weekdayElements.forEach((element, index) => {
-    if (element.textContent.trim() !== '') {
-      element.textContent = weekdays[index];
-    }
-  });
-}
-
-
-// Function to toggle the visibility of the search input
-function toggleSearchInput() {
-  const searchButton = document.getElementById('search-button');
-  const searchInput = document.getElementById('searchInputDashboard');
-  const searchIcon = document.getElementById('search-icon');
-  const closeIcon = document.getElementById('close-icon');
-
-  // Toggle the full-width class on the button
-  searchButton.classList.toggle('full-width');
-
-  // Toggle the visibility of the search input field and icons
-  if (searchButton.classList.contains('full-width')) {
-    searchInput.style.display = 'block';
-    searchIcon.style.display = 'none';
-    closeIcon.style.display = 'inline';
-    searchInput.focus();
-  } else {
-    searchInput.style.display = 'none';
-    searchIcon.style.display = 'inline';
-    closeIcon.style.display = 'none';
-  }
-}
-
-// Function to handle closing the search input when clicking outside of it
-function handleClickOutside(event) {
-  const searchButton = document.getElementById('search-button');
-  const searchInput = document.getElementById('searchInputDashboard');
-  const searchIcon = document.getElementById('search-icon');
-  const closeIcon = document.getElementById('close-icon');
-
-  // Check if the click is outside the search button and input
-  if (!searchButton.contains(event.target) && !searchInput.contains(event.target) && !closeIcon.contains(event.target)) {
-    // Close search input if it's visible
-    if (searchButton.classList.contains('full-width')) {
-      searchButton.classList.remove('full-width');
-      searchInput.style.display = 'none';
-      searchIcon.style.display = 'inline';
-      closeIcon.style.display = 'none';
-    }
-  }
-}
-
-
+// // Optional: Close the select element if clicked outside
+// document.addEventListener('click', function(event) {
+//     const toggleSelect = document.getElementById('toggle-select');
+    
+//     // Close dropdown if clicked outside
+//     if (!searchContainer.contains(event.target) && !toggleSelect.contains(event.target)) {
+//         selectElement.style.display = 'none';
+//     }
+// });

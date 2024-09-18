@@ -18,10 +18,18 @@
 
     <link rel="stylesheet" href="css/style2.css">
 
-    <link rel="stylesheet" href="css/style1.css">
-    <link rel="stylesheet" href="css/leafletCustom.css">
+  <title>Dashboard</title>
+  <link rel="icon" href="image/pmcjpeg.png" type="image/x-icon">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-  </head>
+
+  <link rel="stylesheet" href="css/style2.css">
+
+  <link rel="stylesheet" href="css/leafletCustom.css">
 
   <body>
 
@@ -54,50 +62,98 @@
         <div class="col-12 p-0">
           <div id="map"></div>
 
+    <!-- Map Section -->
+    <div class="north-arrow-container">
+      <img src="image/North New.png" class="north-arrow" alt="North Arrow">
+    </div>
+
+
+    <div class="row m-0">
+      <div class="col-12 p-0">
+        <div id="map"></div>
+
+
+<!-- old code 18/9 -->
+        <!-- <div class="map-controls" id="map-controls">
+          <button id="search-button" class="search-button">
+            <img src="image/Search.svg" alt="Search Icon" id="search-icon">
+          </button>
+
+
+
+          <div id="search-container" class="search-container hidden">
+            <span class="search-icon" id="toggle-select">&#9660;</span>
+
+            <div class="form-select ms-auto hidden" class="hidden" id="column-list">
+
+            </div>
+
+
+        </div> -->
+
+        <!-- old code 18/9 -->
+
+        <!-- new code 18/9 -->
+          <!-- search bar -->
           <div class="map-controls" id="map-controls">
             <button id="search-button" class="search-button">
               <img src="image/Search.svg" alt="Search Icon" id="search-icon">
             </button>
 
-            <!-- Search container -->
-            <div id="search-container" class="search-container hidden">
-              <span class="search-icon" id="toggle-select">&#9660;</span>
-              <!-- Select element initially hidden, will be shown when search-icon is clicked -->
-              <div class="form-select ms-auto hidden" class="hidden"
-                id="column-list">
-                <!-- <option value="search">search</option> -->
-                <!-- Add more options as needed -->
-              </div>
-              <input type="text" id="search-input" class="search-input"
-                placeholder="Search">
-              <img src="image/Arrow.svg" id class="search-arrow" alt>
-              <span id="clear-icon" class="clear-icon hidden">&#x2715;</span>
-            </div>
+        <div class="SearchBar search-container" id="search-container" >
+<!-- 
+          <span class="search-icon" id="toggle-select">&#9660;</span>
+          <div class="form-select ms-auto hidden" class="hidden" id="column-list"> -->
 
-            <!-- <select class="form-select ms-auto" id="search_type">
-              <option value=""> 
-                 </select> -->
-            <!-- <span class="search-icon">&#9660;</span>  </option>
-            </select> -->
+            <select class="search-icon" aria-label="Select search category" id="search_type">
+              <option value=""> search type</option>
+            </select>
+
+
+  
+            <input class="form-contro ms-2" type="search" placeholder="Search" aria-label="Search"
+            id="searchInputDashboard"  />
+          <div id="autocompleteSuggestions" class="autocomplete-suggestions"></div>
           </div>
-          <!-- 
+          
 
-       <div class="SearchBar">
-        <select class="form-select" aria-label="Select search category" id="search_type">
-          <option value="">Select Type</option>
-        </select>
-        <input class="form-control" type="search" placeholder="Search" aria-label="Search"
-          id="searchInputDashboard" />
-        <div id="autocompleteSuggestions" class="autocomplete-suggestions"></div>
-      </div>
- -->
-          <!-- calender -->
-          <div class="date-picker">
-            <div class="date-range" id="date-range-display">
-              April 1, 2024 - March 31, 2025
-              <div class="calendar-icon" id="calendar-icon">
-                <img src="image/time.png" alt="Calendar Icon">
-              </div>
+          <!-- <input type="text" id="search_type" class="search_type" placeholder="Search">
+         <select class=" search_type ms-auto" aria-label="Select search category" id="search_type">
+            <option value=""> </option>
+          </select> --> 
+          
+
+          <!-- <input class="form-contro ms-2" type="search" placeholder="Search" aria-label="Search"
+            id="searchInputDashboard"  /> -->
+          <!-- <div id="autocompleteSuggestions" class="autocomplete-suggestions"></div> -->
+          <!-- <img src="image/Arrow.svg" id="" class="search-arrow" alt="">
+          <span id="clear-icon" class="clear-icon hidden">&#x2715;</span> -->
+        </div>
+        </div>
+        <!-- search bar -->
+        <!-- new code 18/9 -->
+      
+        <!-- calender -->
+        <div class="date-picker">
+
+          <div class="date-range" id="date-range-display">April 1, 2024 - March 31, 2025
+            <div class="calendar-icon" id="calendar-icon">
+              <img src="image/time.png" alt="">
+            </div>
+          </div>
+
+          <button id="select-year-button">Select Year</button>
+          <input type="date" id="date-input" style="display: none;">
+        </div>
+        <div class="filters" id="filters" style="">
+          <h3 class="filter-title">Filter</h3>
+          <span class="close-icon" onclick="closeFilters()">&#215;</span>
+          <div class="filter_div">
+            <div class="filter-group">
+              <label for="token" onclick="toggleFilter(this)">Token No<span class="icon-container"><i
+                    class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
+              <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
+              <ul class="select2 abcscroll " multiple="multiple" id="token"></ul>
             </div>
             <button id="select-year-button">Select Year</button>
             <input type="date" id="date-input" style="display: none;">
@@ -1495,8 +1551,9 @@
     <!-- <script src="js/legend.js"></script> -->
     <script src="js/map.js"></script>
     <script src="js/filter.js"></script>
-    <script src="js/script.js"></script>
+   
     <script src="js/script2.js"></script>
+    <script src="js/script.js"></script>
 
     
   </body>
