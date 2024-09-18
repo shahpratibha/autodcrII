@@ -15,6 +15,9 @@
       href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Include daterangepicker CSS -->
+    <link rel="stylesheet" type="text/css"
+      href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
     <link rel="stylesheet" href="css/style2.css">
 
@@ -105,59 +108,13 @@
           <span class="search-icon" id="toggle-select">&#9660;</span>
           <div class="form-select ms-auto hidden" class="hidden" id="column-list"> -->
 
-            <select class="search-icon" aria-label="Select search category" id="search_type">
-              <option value=""> search type</option>
-            </select>
-
-
-  
-            <input class="form-contro ms-2" type="search" placeholder="Search" aria-label="Search"
-            id="searchInputDashboard"  />
-          <div id="autocompleteSuggestions" class="autocomplete-suggestions"></div>
+           
           </div>
           
-
-          <!-- <input type="text" id="search_type" class="search_type" placeholder="Search">
-         <select class=" search_type ms-auto" aria-label="Select search category" id="search_type">
-            <option value=""> </option>
-          </select> --> 
-          
-
-          <!-- <input class="form-contro ms-2" type="search" placeholder="Search" aria-label="Search"
-            id="searchInputDashboard"  /> -->
-          <!-- <div id="autocompleteSuggestions" class="autocomplete-suggestions"></div> -->
-          <!-- <img src="image/Arrow.svg" id="" class="search-arrow" alt="">
-          <span id="clear-icon" class="clear-icon hidden">&#x2715;</span> -->
-        </div>
-        </div>
-        <!-- search bar -->
-        <!-- new code 18/9 -->
-      
-        <!-- calender -->
-        <div class="date-picker">
-
-          <div class="date-range" id="date-range-display">April 1, 2024 - March 31, 2025
-            <div class="calendar-icon" id="calendar-icon">
-              <img src="image/time.png" alt="">
-            </div>
-          </div>
-
-          <button id="select-year-button">Select Year</button>
-          <input type="date" id="date-input" style="display: none;">
-        </div>
-        <div class="filters" id="filters" style="">
-          <h3 class="filter-title">Filter</h3>
-          <span class="close-icon" onclick="closeFilters()">&#215;</span>
-          <div class="filter_div">
-            <div class="filter-group">
-              <label for="token" onclick="toggleFilter(this)">Token No<span class="icon-container"><i
-                    class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
-              <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
-              <ul class="select2 abcscroll " multiple="multiple" id="token"></ul>
-            </div>
-            <button id="select-year-button">Select Year</button>
-            <input type="date" id="date-input" style="display: none;">
-          </div>type="date" id="date-input" style="display: none;">
+          <div class="daterange-container">
+            <input type="text" name="daterange" id="daterange"
+              class="form-control">
+            <i id="calendarIcon" class="fa-solid fa-calendar-days"></i>
           </div>
 
           <div class="filters" id="filters" style>
@@ -1545,8 +1502,16 @@
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
 
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/togeojson/2.0.0/togeojson.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/togeojson/2.0.0/togeojson.min.js"></script>
 
+    <!-- for date picker -->
+    <script type="text/javascript"
+      src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+
+    <!-- Include daterangepicker JS -->
+    <script type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
     <!-- <script src="js/legend.js"></script> -->
     <script src="js/map.js"></script>
@@ -1555,7 +1520,6 @@
     <script src="js/script2.js"></script>
     <script src="js/script.js"></script>
 
-    
   </body>
 
 </html>
