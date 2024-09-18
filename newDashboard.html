@@ -47,25 +47,48 @@
       <div class="col-12 p-0">
         <div id="map"></div>
 
+        
+
         <div class="map-controls" id="map-controls">
           <button id="search-button" class="search-button">
-              <img src="image/Search.svg" alt="Search Icon" id="search-icon">
+            <img src="image/Search.svg" alt="Search Icon" id="search-icon">
           </button>
 
 
-          <div id="search-container" class="search-container hidden">
-            <span class="search-icon">&#9660;</span> 
-            <input type="text" id="search-input" class="search-input" placeholder="Search">
-            <div id="column-list" class="column-list hidden"></div> 
-            <img src="image/Arrow.svg" id="search-arrow" class="search-arrow" alt="">
+        
+          <!-- Search container -->
+<div id="search-container" class="search-container hidden">
+  <span class="search-icon" id="toggle-select">&#9660;</span>
+  <!-- Select element initially hidden, will be shown when search-icon is clicked -->
+  <div class="form-select ms-auto hidden" class="hidden" id="column-list">
+      <!-- <option value="search">search</option> -->
+      <!-- Add more options as needed -->
+  </div>
+  <input type="text" id="search-input" class="search-input" placeholder="Search">
+  <img src="image/Arrow.svg" id="" class="search-arrow" alt="">
+  <span id="clear-icon" class="clear-icon hidden">&#x2715;</span>
+</div>
 
-            <span id="clear-icon" class="clear-icon hidden">&#x2715;</span> <!-- Unicode cross icon -->
-          </div>
-          
-          
 
-    
-        </div>
+
+          
+          <!-- <select class="form-select ms-auto" id="search_type">
+              <option value=""> 
+                 </select> -->
+                <!-- <span class="search-icon">&#9660;</span>  </option>
+            </select> -->
+       </div>
+<!-- 
+
+       <div class="SearchBar">
+        <select class="form-select" aria-label="Select search category" id="search_type">
+          <option value="">Select Type</option>
+        </select>
+        <input class="form-control" type="search" placeholder="Search" aria-label="Search"
+          id="searchInputDashboard" />
+        <div id="autocompleteSuggestions" class="autocomplete-suggestions"></div>
+      </div>
+ -->
 
         <div class="filters" id="filters" style="">  <h3 class="filter-title">Filter</h3>
           <span class="close-icon" onclick="closeFilters()">&#215;</span>

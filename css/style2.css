@@ -867,9 +867,6 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   display: inline-block;
 }
 
-#searchInputDashboard {
-  padding-right: 40px; /* Add padding to make room for the close icon */
-}
 .close-icon {
   position: absolute;
   right: -3px; /* Positioning the ico3n */
@@ -882,12 +879,6 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   align-items: center;
   justify-content: center;
 }
-
-/* When search input is shown */
-.full-width #searchInputDashboard {
-  display: block;
-}
-
 .full-width #search-icon {
   display: none;
 }
@@ -899,24 +890,6 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   opacity: 0; /* Hide the icon */
 }
 
-/* Search input styling */
-#searchInputDashboard {
-  display: none; /* Hide initially */
-  height: 40px; /* Height */
-  padding: 0 20px; /* Padding */
-  border-radius: 25px; /* Rounded corners */
-  border: 1px solid #ccc; /* Border color */
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Box shadow */
-  position: absolute; /* Position absolute within the container */
-  top: -88px; /* Align with container top */
-  right: 0;
-  transition: opacity 0.3s, width 0.3s; /* Smooth transition */
-}
-
-/* Show input field when button is expanded */
-#search-button.full-width ~ #searchInputDashboard {
-  display: block; /* Show the input field */
-}
 
 /* filter */
 
@@ -1859,3 +1832,45 @@ overflow: visible;
 
 
 
+#search_type {
+  display: none; /* Initially hidden */
+  position: absolute; /* Positioned absolutely relative to search-container */
+  top: 100%; /* Position it directly below the search-container */
+  left: 0; /* Align to the left of the search-container */
+  z-index: 1000; /* Ensure it appears above other elements */
+  background-color: white; /* Background color for visibility */
+  border: 1px solid #ddd; /* Border for better visibility */
+}
+
+.search-container.hidden #search_type {
+  display: none;
+}
+
+.search-container .search-icon {
+  cursor: pointer; /* Pointer cursor to indicate it's clickable */
+}
+
+#column-list {
+  position: absolute; /* Position dropdown relative to search container */
+  top: 105%; /* Position below the search-container */
+  left: 0;
+  z-index: 1000; /* Ensure it appears above other content */
+  border: 1px solid #ddd;
+  background-color: #fff;
+  max-height: 200px;
+  overflow-y: auto;
+  border-radius: 5px;
+  width: 44%; /* Make sure it matches the width of the container */
+}
+
+#column-list div {
+  padding: 8px;
+  cursor: pointer;
+}
+
+#column-list div:hover {
+  background-color: #E6F1FB;
+}
+.hidden {
+  display: none;
+}
