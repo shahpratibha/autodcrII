@@ -54,7 +54,7 @@ html {
   right: 97px;
   z-index: 1000;
   border-radius: 5px;
-  border: 1px solid #0077DA;
+  border: 1px solid #0077da;
   top: -5px;
   height: 213px !important;
   overflow: auto;
@@ -99,7 +99,6 @@ html {
   color: var(--Grey-800, #262626);
   leading-trim: both;
   text-edge: cap;
-  font-family: "Plus Jakarta Sans";
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -125,12 +124,11 @@ html {
   height: 24px;
 }
 
-
 .slider-title {
   text-align: right;
   color: #262626;
   font-size: 14px;
-  font-family: "Plus Jakarta Sans", sans-serif;
+ 
   font-weight: 600;
   word-wrap: break-word;
 }
@@ -148,7 +146,7 @@ html {
   text-align: right;
   color: #262626;
   font-size: 12px;
-  font-family: "Plus Jakarta Sans", sans-serif;
+ 
   font-weight: 400;
   word-wrap: break-word;
 }
@@ -158,7 +156,7 @@ html {
   text-align: center;
   color: #262626;
   font-size: 12px;
-  font-family: "Plus Jakarta Sans", sans-serif;
+ 
   font-weight: 400;
   word-wrap: break-word;
 }
@@ -211,7 +209,6 @@ html {
 .legend-text {
   color: #262626;
   font-size: 12px;
-  font-family: "Plus Jakarta Sans", sans-serif;
   font-weight: 400;
   word-wrap: break-word;
 }
@@ -236,7 +233,7 @@ html {
 
   background-color: rgba(255, 255, 255, 0.9);
   border-radius: 8px;
- 
+
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
   padding: 15px; /* Add padding inside the card */
@@ -255,7 +252,6 @@ html {
 .cards::-webkit-scrollbar-thumb:hover {
   background-color: #555;
 }
-
 
 .navigation-icons button {
   font-size: 20px;
@@ -416,7 +412,6 @@ html {
   justify-content: center;
 }
 
-
 .btn-group {
   display: flex;
   gap: 10px;
@@ -487,11 +482,8 @@ html {
   align-items: center; /* Align items vertically centered */
 }
 
-
-
 .calendar-icon {
   margin-left: 10px; /* Space between date range and icon */
-
 }
 
 .calendar-icon img {
@@ -532,14 +524,13 @@ html {
   width: 32px;
   margin-left: 10px;
   color: white; /* Ensures the arrow itself is white */
-  border-radius: 8px; /* Adjusted border radius */
-  border: 1px solid rgba(255, 255, 255, 0.5); /* Light white border */
-  background: linear-gradient(
-    180deg,
-    #6f6f6f 0%,
-    #262626 100%
-  ); /* Background gradient */
-  box-shadow: 0px 0px 14.035px 0px rgba(0, 0, 0, 0.15); /* Slight shadow for depth */
+  /* border-radius: 8px;
+border: 1px solid rgba(255, 255, 255, 0.50);
+background: radial-gradient(400.2% 139.23% at 0% 3.13%, rgba(0, 119, 218, 0.80) 0%, rgba(0, 84, 155, 0.80) 100%);
+box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+backdrop-filter: blur(2px);
+  */
+  
 }
 /* 
 .top-section {
@@ -669,25 +660,11 @@ html {
 
 }
 
-.leaflet-control-layers {
-    margin-left:  73%;
-    
-  
-}
-/* Position the layer control on the left side of the map */
-.leaflet-left .leaflet-control-layers {
-    left: 10px;
-    right: auto;
-    top: 10px;
-    bottom: auto;
-    width: auto;
-    height: auto;
-    z-index: 1000; /* Ensure it stays above other map elements */
-}
-
 /* Define how the .move-up class affects the elements */
 .move-up {
-  transform: translateY(-315px); /* Adjust value based on how much you want to move up */
+  transform: translateY(
+    -315px
+  ); /* Adjust value based on how much you want to move up */
   transition: transform 0.3s ease; /* Smooth transition */
 }
 
@@ -709,11 +686,15 @@ html {
 
 /* Style for the calendar popup */
 /* Style for the selected date range boxes */
-day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRange.endRange {
-  border-radius:8px !important;
+day.selected.endRange,
+.flatpickr-day.startRange.endRange,
+.flatpickr-day.endRange.endRange {
+  border-radius: 8px !important;
 }
 
-.flatpickr-day.selected.startRange, .flatpickr-day.startRange.startRange, .flatpickr-day.endRange.startRange {
+.flatpickr-day.selected.startRange,
+.flatpickr-day.startRange.startRange,
+.flatpickr-day.endRange.startRange {
   border-radius: 8px !important;
 }
 .flatpickr-day.selected.startRange {
@@ -748,11 +729,21 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   /* -webkit-box-shadow: -5px 0 0 #e6e6e6, 5px 0 0 #e6e6e6; */
   /* box-shadow: -5px 0 0 #e6e6e6, 5px 0 0 #e6e6e6; */
 }
-.flatpickr-day.inRange, .flatpickr-day.prevMonthDay.inRange, .flatpickr-day.nextMonthDay.inRange, .flatpickr-day.today.inRange, .flatpickr-day.prevMonthDay.today.inRange, .flatpickr-day.nextMonthDay.today.inRange, .flatpickr-day:hover, .flatpickr-day.prevMonthDay:hover, .flatpickr-day.nextMonthDay:hover, .flatpickr-day:focus, .flatpickr-day.prevMonthDay:focus, .flatpickr-day.nextMonthDay:focus {
+.flatpickr-day.inRange,
+.flatpickr-day.prevMonthDay.inRange,
+.flatpickr-day.nextMonthDay.inRange,
+.flatpickr-day.today.inRange,
+.flatpickr-day.prevMonthDay.today.inRange,
+.flatpickr-day.nextMonthDay.today.inRange,
+.flatpickr-day:hover,
+.flatpickr-day.prevMonthDay:hover,
+.flatpickr-day.nextMonthDay:hover,
+.flatpickr-day:focus,
+.flatpickr-day.prevMonthDay:focus,
+.flatpickr-day.nextMonthDay:focus {
   cursor: pointer;
   outline: 0;
   background: #e6e6e6 !important;
-
 }
 
 .flatpickr-day.inRange {
@@ -766,7 +757,7 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   display: inline !important;
   top: 40px !important;
   width: 280px;
- right: 38px !important;
+  right: 38px !important;
   position: absolute !important;
 }
 
@@ -842,11 +833,11 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
 }
 
 #apply-button {
-  background-color: #888; /* Blue background for apply button */;
+  background-color: #888; /* Blue background for apply button */
 }
 
 #cancel-button {
-  background-color: #007bff /* Gray background for cancel button */
+  background-color: #007bff; /* Gray background for cancel button */
 }
 
 .flatpickr-calendar {
@@ -899,8 +890,10 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   -ms-touch-action: manipulation;
   touch-action: manipulation;
   background: #fff;
-  -webkit-box-shadow: 1px 0 0 #e6e6e6, -1px 0 0 #e6e6e6, 0 1px 0 #e6e6e6, 0 -1px 0 #e6e6e6, 0 3px 13px rgba(0, 0, 0, 0.08);
-  box-shadow: 1px 0 0 #e6e6e6, -1px 0 0 #e6e6e6, 0 1px 0 #e6e6e6, 0 -1px 0 #e6e6e6, 0 3px 13px rgba(0, 0, 0, 0.08);
+  -webkit-box-shadow: 1px 0 0 #e6e6e6, -1px 0 0 #e6e6e6, 0 1px 0 #e6e6e6,
+    0 -1px 0 #e6e6e6, 0 3px 13px rgba(0, 0, 0, 0.08);
+  box-shadow: 1px 0 0 #e6e6e6, -1px 0 0 #e6e6e6, 0 1px 0 #e6e6e6,
+    0 -1px 0 #e6e6e6, 0 3px 13px rgba(0, 0, 0, 0.08);
 }
 
 /* Search icon inside the button */
@@ -929,15 +922,14 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   background: linear-gradient(180deg, #6f6f6f 0%, #262626 100%);
   box-shadow: 0px 0px 14.035px 0px rgba(0, 0, 0, 0.15);
   border: none; /* Remove border */
-  border-radius: 50%; /* Make it round */
+  
   cursor: pointer; /* Pointer cursor on hover */
   display: flex; /* Center the icon */
   align-items: center;
- bottom: 52px;
+  bottom: 52px;
   justify-content: center;
   overflow: hidden; /* Ensure smooth resizing */
   position: absolute; /* Position absolute within the container */
-  
 }
 
 /* Full width when expanded */
@@ -972,27 +964,6 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   padding-right: 40px; /* Add padding to make room for the close icon */
 }
 
-.close-icon {
-  position: absolute;
-  right: 10px;
-  bottom: 66px;
-  transform: translateY(60%); /* Center vertically */
-  cursor: pointer;
-  display: none; /* Initially hidden */
-  width: 18px; /* Adjust size as needed */
-  height: 18px; /* Adjust size as needed */
-}
-.close {
-  position: absolute;
-  right: -6px;
-  top: 6px;
-  /* bottom: 66px; */
-  cursor: pointer;
-  /* display: none; */
-  width: 20px;
-  height: 20px;
-}
-
 /* When search input is shown */
 .full-width #searchInputDashboard {
   display: block;
@@ -1001,8 +972,6 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
 .full-width #search-icon {
   display: none;
 }
-
-
 
 /* Hide the icon when button is expanded */
 #search-button.full-width img {
@@ -1027,8 +996,18 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
 #search-button.full-width ~ #searchInputDashboard {
   display: block; /* Show the input field */
 }
+/* CSS to hide filters initially */
+#filters {
+  margin-left: -35vw; /* Hide off-screen */
+  opacity: 0; /* Invisible */
+  transition: margin-left 0.3s, opacity 0.3s; /* Smooth transition */
+}
+*/
 
 /* filter */
+/* .filters{
+  display: none ;
+} */
 
 /* Search icon inside the button */
 /* #toggleFilters img {
@@ -1046,41 +1025,6 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   margin-top: 50px; /* Added margin for better visual placement */
   position: relative; /* Position relative for the button and search input */
 }
-
-/* Initial button styling */
-#toggleFilters {
-  right: 1px;
-  width: 30px; /* Initial width */
-  height: 30px; /* Initial height */
-  transition: width 0.3s, height 0.3s, background-color 0.3s, opacity 0.3s; /* Smooth transition */
-  background: linear-gradient(180deg, #6f6f6f 0%, #262626 100%);
-  box-shadow: 0px 0px 14.035px 0px rgba(0, 0, 0, 0.15);
-  border: none; /* Remove border */
-  border-radius: 50%; /* Make it round */
-  cursor: pointer; /* Pointer cursor on hover */
-  display: flex; /* Center the icon */
-  align-items: center;
-
-  justify-content: center;
-  overflow: hidden; /* Ensure smooth resizing */
-  position: absolute; /* Position absolute within the container */
-  top: 50px; /* Align with container top */
-}
-
-
-
-/* Search icon inside the button */
-#toggleFilters img {
-  width: 19px; /* Icon size */
-  height: auto; /* Maintain aspect ratio */
-  transition: opacity 0.3s; /* Smooth transition for opacity */
-  position: absolute; /* Fix the icon in place */
-  top: 55%;
-  left: 52%;
-  transform: translate(-50%, -50%); /* Center the icon */
-}
-
-
 
 
 
@@ -1107,7 +1051,6 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   /* text-align: right; */
   color: #262626;
   font-size: 14px;
-  font-family: "Plus Jakarta Sans", sans-serif;
   font-weight: 600;
   word-wrap: break-word;
 }
@@ -1125,7 +1068,7 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
 .text-small {
   color: #262626;
   font-size: 12px;
-  font-family: "Plus Jakarta Sans", sans-serif;
+ 
   word-wrap: break-word;
 }
 
@@ -1302,7 +1245,6 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   text-align: right;
   color: #262626;
   font-size: 14px;
-  font-family: "Plus Jakarta Sans", sans-serif;
   font-weight: 600;
   word-wrap: break-word;
 }
@@ -1322,7 +1264,6 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   left: 6px;
 
   font-size: 12px;
-  font-family: "Plus Jakarta Sans", sans-serif;
   font-weight: 400;
   word-wrap: break-word;
 }
@@ -1358,7 +1299,6 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   text-align: center;
   color: #262626;
   font-size: 12px;
-  font-family: "Plus Jakarta Sans", sans-serif;
   font-weight: 400;
   word-wrap: break-word;
 }
@@ -1481,18 +1421,16 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   background: #0077da;
 }
 
-.filter_div{
-  height: auto; 
+.filter_div {
+  height: auto;
   max-height: 65vh;
   overflow: hidden;
   transition: overflow 0.3s ease;
-
 }
 .filter_div:hover {
   overflow: auto;
   scrollbar-width: thin;
   scrollbar-color: #888 #f1f1f1;
-
 }
 .toggle-button {
   position: relative;
@@ -1501,7 +1439,7 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   z-index: 1000;
   border: none;
   background: none;
-  color:#8AC0EE;
+  color: #8ac0ee;
   font-size: 21px;
   border-radius: 5px;
 }
@@ -1524,211 +1462,4 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
 }
 
 
-.filters {
-  margin-bottom: 20px;
-  margin-top: 20px;
-  position: absolute;
-  top: 20px;
-  right: 18px;
-  width:250px;
 
-}
-
-
-.filter-group {
-  margin-bottom: 5px;
-  padding: 10px;
-  border: 1px solid gray;
-  font-size: 10px;
-}
-.filter-group label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 5px;
-  font-size: 12px;
-  cursor: pointer;
-  position: relative;
-  background: aliceblue;
-}
-
-.filter-group input[type="text"] {
-width: 80%;
-padding: 5px;
-margin-bottom: 10px;
-font-size: 12px;
-font-weight: bold;
-display: none;
-border-radius: 8px;
-border: 2px solid #bbb;
-}
-.filter-group ul {
-list-style-type: none;
-padding: 0;
-display: none;
-}
-.filter-group ul.active,
-.filter-group input[type="text"].active {
-display: block;
-forced-color-adjust: blue;
-}
-.filter-group li {
-  margin-bottom: 5px;
-}
-
-.icon-container {
-position:absolute;
-right:1%; 
-top:0%;
-font-size: 15px;
-}
-
-/* Style the icon */
-.icon-container i {
-color: black; /* Default color */
-}
-
-.abcscroll {
-  height: auto;
-  max-height: 200px;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  scrollbar-width: thin; /* For Firefox */
-  scrollbar-color: #888 #f1f1f1; /* For Firefox */
-}
-
-/* WebKit (Safari, older Chrome) */
-.abcscroll::-webkit-scrollbar {
-  width: 10px; /* Makes scrollbars thinner */
-}
-
-.abcscroll::-webkit-scrollbar-track {
-  background: #f1f1f1; /* Color of scrollbar track */
-  border-radius: 10px; /* Rounded corners for scrollbar track */
-}
-
-.abcscroll::-webkit-scrollbar-thumb {
-  background: #888; /* Color of scrollbar handle */
-  border-radius: 10px; /* Rounded corners for scrollbar handle */
-}
-
-.abcscroll::-webkit-scrollbar-thumb:hover {
-  background: #555; /* Darker color on hover state for visibility */
-}
-
-
-
-
-
-
-#tablecontainer {
-  z-index: 9999;
-  position: absolute;
-  width: 53%;
-  bottom: 24%;
-  right: 4%;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  max-height: 200px;
-  font-size: 12px;
-  transition: all 0.3s ease;
-}
-
-
-.tableDetail {
-max-height: 550px; 
-overflow-y: auto; 
-/* margin-top: 10px;  */
-border: 1px solid #ccc; 
-background-color: #f9f9f9; 
-
-}
-
-.minimize-button {
-background-color:#8AC0EE;
-color: red;
-border: none;
-padding: 5px;
-cursor: pointer;
-font-size: 15px;
-/* border-radius: 50%; */
-position: absolute;
-right: 0%;
-top:0%;
-z-index: 1000;
-width: 27px;
-height:28px;
-display: flex;
-justify-content: center;
-align-items: center;
-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
-} 
-/* 
-
-.download-button
- {
-  
-  background-color: darkblue;
-  color: white;
-  border: none;
-  padding: 5px;
-  cursor: pointer;
-  font-size: 15px;
-  
-  position: absolute;
-  right: 5%;
-  top:0%;
-  z-index: 1000;
-  width: 27px;
-  height:28px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  
-  } 
-
-.data-table {
-width: 100%;
-border-collapse: collapse;
-}
-
-
-.data-table th {
-
-background-color:#E6F1FB;
-color: var(--Blue-500, #0077DA);
-
-font-size: 10px;
-font-style: normal;
-font-weight: 500;
-line-height: normal;
-text-align: center;
-
-text-transform: uppercase;
-font-weight: bold;
-
-
-
-}
-
-
-
-.dataTables_wrapper .dataTables_scrollHead {
-overflow: visible;
-}
-
-.dataTables_wrapper .dataTables_scrollBody {
-overflow: auto;
-scrollbar-width: thin;
-text-align: center;
-height: 248px;
-max-height: 248px; }
-
-.dataTables_wrapper .dataTables_scrollFoot {
-overflow: visible;
-}
- 
-
- */

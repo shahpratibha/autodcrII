@@ -11,7 +11,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
@@ -41,7 +41,8 @@
                 <!-- Date Picker -->
                 <div class="date-picker">
 
-                    <div class="date-range" id="date-range-display">April 1, 2024 – March 31, 2025
+                    <div class="date-range" id="date-range-display">April 1, 2024 - March 31, 2025
+        
                         <div class="calendar-icon" id="calendar-icon">
                             <img src="image/time.png" alt="">
                         </div>
@@ -75,7 +76,7 @@
             <div class="col-12 p-0">
                 <div id="map"></div>
                 <div class="map-controls" id="map-controls">
-                    <button id="search-button" class="search-button">
+                    <button id="search-button" class="search-button" >
                         <img src="image/Search.svg" alt="Search Icon" id="search-icon">
                     </button>
                     <div class="search-wrapper">
@@ -86,77 +87,85 @@
 
                 <div class="map-controls">
                     <button class="toggle-button" id="toggleFilters">
-                        <img src="image/filter.png" alt="Search Icon" id="search-icon">
+                        <img src="image/filter.svg" alt="" id="search-icon">
                     </button>
-
+                
                 </div>
 
+               
+            
+
+                <button id="openTableBtn"><img src="image/table.svg" alt="" class="tablebtn"></button>
+
+                
                 <div class="filters" id="filters">
-                    <h3>Filters <span class="close-icon" onclick="closeFilters()">×</span></h3>
-                    <div class="filter_div">
+                    <h3>Filters <span class="close" onclick="closeFilters()"></span></h3>
+                    <div class="filter_div" >
                         <div class="filter-group">
-                            <label for="village_na" onclick="toggleFilter(this)">Village <span class="icon-container"><i
-                                        class="fa-solid fa-angle-down"></i></span><span
-                                    class="selected-count"></span></label>
+                            <label for="village_na" onclick="toggleFilter(this)">
+                              Village 
+                              <span class="icon-container">
+                                <i class="fa-solid fa-angle-down"></i>
+                              </span>
+                              <span class="selected-count"></span>
+                            </label>
                             <input type="text" placeholder="Search" class="filter-input" id="villageSearch">
-                            <ul class="select2  abcscroll" multiple="multiple" id="village_na"></ul>
-                        </div>
-                        <div class="filter-group">
-                            <label for="wapplyfor" onclick="toggleFilter(this)">Apply For <span
-                                    class="icon-container"><i class="fa-solid fa-angle-down"></i></span><span
-                                    class="selected-count"></span></label>
-                            <input type="text" placeholder="Search" class="filter-input" id="widthSearch">
-                            <ul class="select2 abcscroll" multiple="multiple" id="applyfor"></ul>
-                        </div>
-                        <div class="filter-group">
-                            <label for="projecttype" onclick="toggleFilter(this)">projecttype <span
-                                    class="icon-container"><i class="fa-solid fa-angle-down"></i></span><span
-                                    class="selected-count"></span></label>
-                            <input type="text" placeholder="Search" class="filter-input" id="statusSearch">
-                            <ul class="select2" multiple="multiple" id="projecttype"></ul>
-                        </div>
-                        <div class="filter-group">
-                            <label for="casetype" onclick="toggleFilter(this)">Casetype <span class="icon-container"><i
-                                        class="fa-solid fa-angle-down"></i></span><span
-                                    class="selected-count"></span></label>
-                            <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
-                            <ul class="select2 " multiple="multiple" id="casetype"></ul>
-                        </div>
-                        <div class="filter-group">
-                            <label for="proposaltype" onclick="toggleFilter(this)">proposal type<span
-                                    class="icon-container"><i class="fa-solid fa-angle-down"></i></span><span
-                                    class="selected-count"></span></label>
-                            <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
-                            <ul class="select2 " multiple="multiple" id="proposaltype"></ul>
-                        </div>
-                        <div class="filter-group">
-                            <label for="tdrzone" onclick="toggleFilter(this)">tdrzone<span class="icon-container"><i
-                                        class="fa-solid fa-angle-down"></i></span><span
-                                    class="selected-count"></span></label>
-                            <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
-                            <ul class="select2 " multiple="multiple" id="tdrzone"></ul>
-                        </div>
-                        <div class="filter-group">
-                            <label for="grossplotarea" onclick="toggleFilter(this)">grossplotarea <span
-                                    class="icon-container"><i class="fa-solid fa-angle-down"></i></span><span
-                                    class="selected-count"></span></label>
-                            <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
-                            <ul class="select2 " multiple="multiple" id="grossplotarea"></ul>
-                        </div>
-                        <div class="filter-group">
-                            <label for="developmentzonedp" onclick="toggleFilter(this)">developmentzonedp <span
-                                    class="icon-container"><i class="fa-solid fa-angle-down"></i></span><span
-                                    class="selected-count"></span></label>
-                            <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
-                            <ul class="select2 " multiple="multiple" id="developmentzonedp"></ul>
-                        </div>
-                        <div class="filter-group">
-                            <label for="owner_det_email" onclick="toggleFilter(this)">owner_det_email <span
-                                    class="icon-container"><i class="fa-solid fa-angle-down"></i></span><span
-                                    class="selected-count"></span></label>
-                            <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
-                            <ul class="select2 " multiple="multiple" id="owner_det_email"></ul>
-                        </div>
+                            <ul class="select2 abcscroll" multiple="multiple" id="village_na"></ul>
+                          </div>
+                          
+                          
+                      <div class="filter-group">
+
+                        <label for="applyfor" onclick="toggleFilter(this)">Apply For <span class="icon-
+                            container"><i
+                              class="fa-solid fa-angle-down"></i></span><span class="selected-count"></s
+                                pan></label>
+                        <input type="text" placeholder="Search" class="filter-input" id="widthSearch">
+                        <ul class="select2 abcscroll" multiple="multiple" id="applyfor"></ul>
+                      </div>
+
+                      <div class="filter-group">
+                        <label for="projecttype" onclick="toggleFilter(this)">projecttype <span class="icon-container"><i
+                              class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
+                        <input type="text" placeholder="Search" class="filter-input" id="statusSearch">
+                        <ul class="select2" multiple="multiple" id="projecttype"></ul>
+                      </div>
+                      <div class="filter-group">
+                        <label for="casetype" onclick="toggleFilter(this)">Casetype <span class="icon-container"><i
+                              class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
+                        <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
+                        <ul class="select2 " multiple="multiple" id="casetype"></ul>
+                      </div>
+                      <div class="filter-group">
+                        <label for="proposaltype" onclick="toggleFilter(this)">proposal type<span class="icon-container"><i
+                              class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
+                        <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
+                        <ul class="select2 " multiple="multiple" id="proposaltype"></ul>
+                      </div>
+                      <div class="filter-group">
+                        <label for="tdrzone" onclick="toggleFilter(this)">tdrzone<span class="icon-container"><i
+                              class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
+                        <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
+                        <ul class="select2 " multiple="multiple" id="tdrzone"></ul>
+                      </div>
+                      <div class="filter-group">
+                        <label for="grossplotarea" onclick="toggleFilter(this)">grossplotarea <span class="icon-container"><i
+                              class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
+                        <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
+                        <ul class="select2 " multiple="multiple" id="grossplotarea"></ul>
+                      </div>
+                      <div class="filter-group">
+                        <label for="developmentzonedp" onclick="toggleFilter(this)">developmentzonedp <span class="icon-container"><i
+                              class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
+                        <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
+                        <ul class="select2 " multiple="multiple" id="developmentzonedp"></ul>
+                      </div>
+                      <div class="filter-group">
+                        <label for="owner_det_email" onclick="toggleFilter(this)">owner_det_email <span class="icon-container"><i
+                              class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
+                        <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
+                        <ul class="select2 " multiple="multiple" id="owner_det_email"></ul>
+                      </div>
                     </div>
 
                     <div class="showCount">
@@ -428,9 +437,9 @@
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <!-- Custom JS -->
     <!-- <script src="filter.js"></script> -->
-    <script src="script.js"></script>
-    <script src="script1.js"></script>
-    <script src="legend.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/script1.js"></script>
+    <script src="js/legend.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
 
