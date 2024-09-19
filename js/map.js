@@ -2,7 +2,7 @@ var map = L.map("map", {
     center: [18.52, 73.89],
     zoom: 12,
     minZoom: 11,
-    maxZoom: 18,
+    maxZoom: 20,
     boxZoom: true,
     trackResize: true,
     wheelPxPerZoomLevel: 40,
