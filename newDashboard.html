@@ -10,15 +10,11 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-
   <link rel="stylesheet" href="css/style2.css">
-
   <link rel="stylesheet" href="css/leafletCustom.css">
 
 
 </head>
-
 <body>
 
 
@@ -45,89 +41,9 @@
     <div class="north-arrow-container">
       <img src="image/North New.png" class="north-arrow" alt="North Arrow">
     </div>
-
-
-    <div class="row m-0">
-      <div class="col-12 p-0">
-        <div id="map"></div>
-
-
-<!-- old code 18/9 -->
-        <!-- <div class="map-controls" id="map-controls">
-          <button id="search-button" class="search-button">
-            <img src="image/Search.svg" alt="Search Icon" id="search-icon">
-          </button>
-
-
-
-          <div id="search-container" class="search-container hidden">
-            <span class="search-icon" id="toggle-select">&#9660;</span>
-
-            <div class="form-select ms-auto hidden" class="hidden" id="column-list">
-
-            </div>
-            <input type="text" id="search-input" class="search-input" placeholder="Search">
-            <img src="image/Arrow.svg" id="" class="search-arrow" alt="">
-            <span id="clear-icon" class="clear-icon hidden">&#x2715;</span>
-          </div>
-
-
-        </div> -->
-
-        <!-- old code 18/9 -->
-
-        <!-- new code 18/9 -->
-          <!-- search bar -->
-          <div class="map-controls" id="map-controls">
-            <button id="search-button" class="search-button">
-              <img src="image/Search.svg" alt="Search Icon" id="search-icon">
-            </button>
-
-        <div class="SearchBar search-container" id="search-container" >
-<!-- 
-          <span class="search-icon" id="toggle-select">&#9660;</span>
-          <div class="form-select ms-auto hidden" class="hidden" id="column-list"> -->
-
-            <select class="search-icon" aria-label="Select search category" id="search_type">
-              <option value=""> search type</option>
-            </select>
-
-
-  
-            <input class="form-contro ms-2" type="search" placeholder="Search" aria-label="Search"
-            id="searchInputDashboard"  />
-          <div id="autocompleteSuggestions" class="autocomplete-suggestions"></div>
-          </div>
           
 
-          <!-- <input type="text" id="search_type" class="search_type" placeholder="Search">
-         <select class=" search_type ms-auto" aria-label="Select search category" id="search_type">
-            <option value=""> </option>
-          </select> --> 
-          
-
-          <!-- <input class="form-contro ms-2" type="search" placeholder="Search" aria-label="Search"
-            id="searchInputDashboard"  /> -->
-          <!-- <div id="autocompleteSuggestions" class="autocomplete-suggestions"></div> -->
-          <!-- <img src="image/Arrow.svg" id="" class="search-arrow" alt="">
-          <span id="clear-icon" class="clear-icon hidden">&#x2715;</span> -->
-        </div>
-        </div>
-        <!-- search bar -->
-        <!-- new code 18/9 -->
-      
-        <!-- calender -->
-        <!-- <div class="date-picker">
-
-          <div class="date-range" id="date-range-display">April 1, 2024 - March 31, 2025
-            <div class="calendar-icon" id="calendar-icon">
-              <img src="image/time.png" alt="">
-            </div>
-          </div>
-
-          <button id="select-year-button">Select Year</button>
-          <input type="date" id="date-input" style="display: none;">
-        </div> -->
+    
 
         <!-- new code  date-->
         <div class="daterange-container">
@@ -441,7 +357,26 @@
 
   </div>
 
-  <div id="map"></div>
+  <div class="map-container">
+    <div id="map"></div>
+    
+    <button id="searchButton" class="search-button">
+      <img src="image/Search.svg" alt="Search Icon" class="search">
+    </button>
+  </div>
+
+  <!--search bar -->
+  
+
+        <div class="SearchBar search-container" id="search-container" >
+          <select class="search-icon" aria-label="" id="search_type">
+              <option value="">Select Type</option>
+            </select>
+            <input class="form-contro ms-2" type="search" placeholder="Search" aria-label="Search"
+            id="searchInputDashboard"  />
+          <div id="autocompleteSuggestions" class="autocomplete-suggestions"></div>
+          <!-- <img src="image/Arrow.svg" id="search-arrow" class="search-arrow" alt=""> -->
+          </div> 
 
 
   <!-- Toggle Button -->
@@ -1461,8 +1396,7 @@
     <!-- <script src="js/legend.js"></script> -->
     <script src="js/map.js"></script>
     <script src="js/filter.js"></script>
-   
-    <script src="js/script2.js"></script>
+   <script src="js/script2.js"></script>
     <script src="js/script.js"></script>
 
 </body>

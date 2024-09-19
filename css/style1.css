@@ -1995,11 +1995,6 @@ margin-right: 203px;
   display: none;
 }
 
-.search-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-}
 
 .leaflet-left .leaflet-control-scale {
   margin-left: 15px;
