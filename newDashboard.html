@@ -15,6 +15,9 @@
       href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Include daterangepicker CSS -->
+    <link rel="stylesheet" type="text/css"
+      href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
     <link rel="stylesheet" href="css/style2.css">
 
@@ -74,34 +77,13 @@
               <span id="clear-icon" class="clear-icon hidden">&#x2715;</span>
             </div>
 
-            <!-- <select class="form-select ms-auto" id="search_type">
-              <option value=""> 
-                 </select> -->
-            <!-- <span class="search-icon">&#9660;</span>  </option>
-            </select> -->
+           
           </div>
-          <!-- 
-
-       <div class="SearchBar">
-        <select class="form-select" aria-label="Select search category" id="search_type">
-          <option value="">Select Type</option>
-        </select>
-        <input class="form-control" type="search" placeholder="Search" aria-label="Search"
-          id="searchInputDashboard" />
-        <div id="autocompleteSuggestions" class="autocomplete-suggestions"></div>
-      </div>
- -->
-          <!-- calender -->
-          <div class="date-picker">
-            <div class="date-range" id="date-range-display">
-              April 1, 2024 - March 31, 2025
-              <div class="calendar-icon" id="calendar-icon">
-                <img src="image/time.png" alt="Calendar Icon">
-              </div>
-            </div>
-            <button id="select-year-button">Select Year</button>
-            <input type="date" id="date-input" style="display: none;">
-          </div>type="date" id="date-input" style="display: none;">
+          
+          <div class="daterange-container">
+            <input type="text" name="daterange" id="daterange"
+              class="form-control">
+            <i id="calendarIcon" class="fa-solid fa-calendar-days"></i>
           </div>
 
           <div class="filters" id="filters" style>
@@ -1489,8 +1471,16 @@
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
 
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/togeojson/2.0.0/togeojson.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/togeojson/2.0.0/togeojson.min.js"></script>
 
+    <!-- for date picker -->
+    <script type="text/javascript"
+      src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+
+    <!-- Include daterangepicker JS -->
+    <script type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
     <!-- <script src="js/legend.js"></script> -->
     <script src="js/map.js"></script>
@@ -1498,7 +1488,6 @@
     <script src="js/script.js"></script>
     <script src="js/script2.js"></script>
 
-    
   </body>
 
 </html>
