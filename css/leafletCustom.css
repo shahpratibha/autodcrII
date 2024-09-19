@@ -246,4 +246,70 @@
   z-index: 10000 !important;
 } */
 
+/* style2.css */
+.leaflet-left .leaflet-control-scale {
+  margin-left: 15px;
+  }
+  
 
+.leaflet-control-layers label {
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  margin: 4px 0;
+  border-radius: 6px;
+  transition: background 0.3s;
+}
+
+.leaflet-control-layers label:hover {
+  background: #f0f0f0;
+}
+
+/* Styling for checkboxes and radio buttons */
+.leaflet-control-layers-selector {
+  margin-right: 10px;
+  accent-color: #0077DA; /* Modern browsers support this property for custom checkbox and radio button color */
+}
+
+/* Separator between base layers and overlays */
+.leaflet-control-layers-separator {
+  height: 1px;
+  background: #ddd;
+  margin: 10px 0;
+}
+
+/* Styling the layer names */
+.leaflet-control-layers label span {
+  color: #333;
+  font-weight: normal;
+}
+.leaflet-control-layers-list {
+  max-height: 200px; /* Adjust the height as needed */
+  overflow-y: auto; /* Enables vertical scrolling */
+  overflow-x: hidden; /* Prevents horizontal scrolling */
+  border-radius: 8px;
+  padding-right: 10px; /* Optional: adds some padding to avoid scrollbar overlapping the content */
+  background: #e6f1fb;
+}
+
+/* Optional: customize the scrollbar appearance */
+.leaflet-control-layers-list::-webkit-scrollbar {
+  width: 5px;
+}
+
+.leaflet-control-layers-list::-webkit-scrollbar-thumb {
+ background-color: gray;
+  border-radius: 4px;
+}
+
+.leaflet-control-layers-list::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.5); /* Customize the track color */
+}
+
+.leaflet-popup-pane, .leaflet-control {
+  cursor: pointer;
+}
+
+.leaflet-popup-content {
+  /* width: 181px; */
+}
