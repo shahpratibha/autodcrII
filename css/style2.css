@@ -1364,7 +1364,7 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
 .filters {
   display: none;                    /* Hide the filter panel by default */
   position: absolute;
-  top: 14%;
+  top: 15%;
   left: 18px;
   overflow-x: hidden;
   overflow-y: hidden;
