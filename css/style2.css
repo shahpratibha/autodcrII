@@ -462,7 +462,7 @@ backdrop-filter: blur(2px); */
 
 
 /* Date Range */
-
+/* 
 .date-picker {
   position: absolute;
   top: 20px;
@@ -498,19 +498,19 @@ backdrop-filter: blur(2px); */
 }
 .date-range {
   display: flex;
-  align-items: center; /* Align items vertically centered */
+  align-items: center; 
 }
 
 
 
 .calendar-icon {
-  margin-left: 10px; /* Space between date range and icon */
+  margin-left: 10px; 
 
 }
 
 .calendar-icon img {
-  width: 24px; /* Adjust width as needed */
-  height: 24px; /* Adjust height as needed */
+  width: 24px;
+  height: 24px; 
   margin-top: 3px;
   position: fixed;
 }
@@ -529,8 +529,44 @@ backdrop-filter: blur(2px); */
 
   color: white;
   cursor: pointer;
+} */
+#daterange {
+  z-index: 9999;
+  position: fixed !important;
+  padding: 16px;
+  font-size: 13px !important;
+  left: 67%;
+  top: 2.3%;
+  width: 15% !important;
+  border: 2px solid #0078A8;
+  border-radius: 30px;
+  height: 4.8%;
+  }
+  
+  .daterange-container {
+    display: flex;
+    align-items: center;
+    position: relative; 
+  }
+  
+  
+  .daterange-container .fa-solid {
+    position: fixed !important;
+    top: 4.5%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    left: 80% !important;
+    z-index: 9999 !important;
+    color: #0078A8;
 }
-
+  .daterangepicker .drp-buttons .btn {
+    margin-left: 8px;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 4px 8px;
+    background-color: #0078A8 !important;
+    color: white !important;
+}
 
 .btn-active {
   background: #0077da70 !important;

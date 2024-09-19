@@ -126,7 +126,166 @@ document.addEventListener('DOMContentLoaded', function () {
   }, 100);
 });
 
-    
+$(document).ready(function () {
+// date range code
+// Example usage of the function
+const layername = "AutoDCR:Plot_Layout";
+const main_url = "https://iwmsgis.pmc.gov.in/geoserver/";
+// const filter = ""; // Add any additional filter if required
+
+// loadAndProcessGeoJSON(main_url, layername,cql_filter1 );
+var start =  moment('2024-04-01');
+var end = moment();
+var cql_filter1; // Declare the variable in the outer scope
+$('#daterange').daterangepicker({
+  opens: 'left',
+  locale: {
+    format: 'MMMM D, YYYY' // Format to show Month name, Day, and Year
+  },
+  startDate: moment('2024-04-01'), // Set the start date to April 1st, 2024
+  endDate: moment('2025-03-31'),   // Set the end date to March 31st, 2025
+  ranges: {
+    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+    'This Month': [moment().startOf('month'), moment().endOf('month')],
+    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+    '2024-2025': [moment('2024-04-01'), moment('2025-03-31')],
+    '2023-2024': [moment('2023-04-01'), moment('2024-03-31')],
+    '2022-2023': [moment('2022-04-01'), moment('2023-03-31')],
+    '2021-2022': [moment('2021-04-01'), moment('2022-03-31')],
+  }
+}, cb);
+cb(start, end);
+
+function cb(start, end) {
+  // $('#daterange').val(start.format('2023') + ' - ' + end.format('YYYY'));
+  var formattedStartDate = start.format('YYYY-MM-DDTHH:mm:ssZ');
+  const newFormatStart = moment(formattedStartDate).format('MMM D, YYYY, h:mm:ss A');
+  var formattedEndDate = end.format('YYYY-MM-DDTHH:mm:ssZ');
+  const newFormatEnd = moment(formattedEndDate).format('MMM D, YYYY, h:mm:ss A');
+  console.log(newFormatStart,"newFormatStart",newFormatEnd,"newFormatEnd")
+  cql_filter1 = `entry_timestamp >= '${newFormatStart}' AND entry_timestamp < '${newFormatEnd}'`;
+  // cql_filter1 = `entry_timestamp >='2024-09-04T00:00:00Z' AND entry_timestamp < '2024-09-04T23:59:59Z'`
+
+  console.log(cql_filter1, "lllokkkkk")
+
+
+  // loadAndProcessGeoJSON(main_url, layername,cql_filter1);
+  DataTableFilter(cql_filter1)
+
+  loadinitialData(cql_filter1);
+  
+  console.log(cql_filter1,"cql_filter1")
+  getCheckedValues(function (filterString) {
+    const mainfilter = combineFilters(cql_filter1, filterString);
+    console.log("Main Filterfor checking:", mainfilter);
+    FilterAndZoom(mainfilter);
+    DataTableFilter(mainfilter)
+  });
+}
+// $('#calendarIcon').on('click', function () {
+//   $('#daterange').click();
+// // });
+// $('#daterange').on('apply.daterangepicker', function (ev, picker) {
+//   var startDate = picker.startDate.format('YYYY-MM-DDTHH:mm:ssZ');
+//   var endDate = picker.endDate.format('YYYY-MM-DDTHH:mm:ssZ');
+//   console.log('Selected date range:', startDate, 'to', endDate);
+//   cql_filter1= `entry_timestamp >= '${startDate}' AND entry_timestamp < '${endDate}'`;
+  
+//   console.log(" cql_filter1", cql_filter1);
+//   // alert("hhhhhhhhh");
+//   loadinitialData(cql_filter1);
+//   const cql_filter = getCqlFilter();
+//   getCheckedValues(function (filterString) {
+//     const mainfilter = combineFilters(cql_filter1, filterString);
+//     console.log("Main Filterfor checking:", mainfilter);
+//     FilterAndZoom(mainfilter);
+//     DataTableFilter(mainfilter);
+//   });
+// });
+
+// Function to get cql_filter1 value
+function getCqlFilter() {
+  return cql_filter1;
+}
+
+function loadinitialData(cql_filter) {
+  const filternames = ["siteaddress_area", "caseinformation_applyfor","gut_no", "caseinformation_casetype", "caseinformation_proposaltype", "token", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "ownerinformation_firstname"]; //accordn column names , if want add one more filter criteria add here
+
+  filternames.forEach(function (filtername) {
+    var url = `${main_url}AutoDCR/wms?service=WFS&version=1.1.0&request=GetFeature&typeName=Plot_Layout&propertyName=${filtername}&outputFormat=application/json&cql_filter=${encodeURIComponent(cql_filter)}`;
+    console.log(url);
+    $.getJSON(url, function (data) {
+      var projectFiSet = new Set();
+      var projectFiMap = new Map();
+
+      // Iterate through the features and add non-null values to the set
+      $.each(data.features, function (index, feature) {
+        var column_name = feature.properties[filtername];
+        if (column_name !== null && column_name !== "#N/A") {
+          if (projectFiMap.has(column_name)) {
+           
+            projectFiMap.set(column_name, (projectFiMap.get(column_name) || 0) + 1);
+          } else {
+            projectFiMap.set(column_name, 1);
+          }
+        }
+      });
+
+      var uniqueProjectFiList = Array.from(projectFiMap.entries()).map(([name]) => `${name}`);
+      populateDropdown(filtername, uniqueProjectFiList);
+    });
+  });
+
+  FilterAndZoom(cql_filter)
+}
+function combineFilters(cql_filter123, filterString) {
+  if (filterString !== null && filterString !== undefined && filterString !== '') {
+    return `${cql_filter123} AND ${filterString}`;
+  } else {
+    return cql_filter123;
+  }
+}
+
+function initialize() {
+
+  $('#daterange').on('apply.daterangepicker', function (ev, picker) {
+    var startDate = picker.startDate.format('YYYY-MM-DDTHH:mm:ssZ');
+    var endDate = picker.endDate.format('YYYY-MM-DDTHH:mm:ssZ');
+
+    console.log('Selected date rangelooooooooooooooo:', startDate, 'to', endDate);
+
+    cql_filter1 = `entry_timestamp >= '${startDate}' AND entry_timestamp < '${endDate}'`;
+
+    loadinitialData(cql_filter1);
+    const cql_filter = getCqlFilter();
+    getCheckedValues(function (filterString) {
+
+
+      const mainfilter = combineFilters(cql_filter1, filterString);
+      console.log("Main Filterfor checking:", mainfilter);
+
+      FilterAndZoom(mainfilter);
+
+      DataTableFilter(mainfilter)
+
+    });
+  });
+}
+
+initialize();
+});
+
+
+
+
+
+
+
+// date range code
+
+
+
+
 // Toggle arrow direction
 function toggleFilter(label) {
     const icon = label.querySelector('.icon-container i');
