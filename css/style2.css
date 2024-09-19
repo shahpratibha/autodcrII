@@ -837,6 +837,7 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
   overflow: hidden; /* Ensure smooth resizing */
   position: absolute; /* Position absolute within the container */
    bottom: 222px;/* Align with container top */
+   display: none;
 }
 
 /* Full width when expanded */
