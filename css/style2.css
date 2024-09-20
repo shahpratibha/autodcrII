@@ -1530,13 +1530,13 @@ color: black;
   z-index: 9999;
   position: absolute;
   width: 30%;
-  bottom: 2%;
-  max-height: 350px;
+  bottom: 4%;
+  /* max-height: 350px; */
   right: 4%;
-  background-color: white;
+  /* background-color: white; */
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  max-height: 350px;
+  /* max-height: 350px; */
   font-size: 12px;
   transition: all 0.3s ease;
 
@@ -1549,8 +1549,7 @@ color: black;
   font-size: 12px;
 }
 .dataTables_scrollBody{
-
-  height: 196px;
+  /* height: 196px; */
   font-size: 10px;
 }
 
@@ -1566,6 +1565,12 @@ background-color: #f9f9f9;
 
 }
 
+.dataTables_filter{
+  margin-right: 37px;
+  /* margin-top: 10px; */
+
+}
+
 .minimize-button {
 background-color:#8AC0EE;
 color: red;
@@ -1576,7 +1581,7 @@ font-size: 15px;
 /* border-radius: 50%; */
 position: absolute;
 right: 0%;
-top:0%;
+top:3%;
 z-index: 1000;
 width: 27px;
 height:28px;
@@ -1705,6 +1710,7 @@ overflow: visible;
   backdrop-filter: blur(2px);
   height: 34px;
   width: 34px;
+  outline: none ;
   cursor: pointer;
   display: inline-block;
   z-index: 1000;
@@ -1765,7 +1771,7 @@ overflow: visible;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15); /* Shadow for a better look */
   transition: opacity 0.3s ease; /* Smooth transition effect */
   z-index: 1000; /* Keeps the container above other content */
-  height: 40px;
+  height: 35px;
   display: none;
 }
 
@@ -3703,7 +3709,7 @@ right: 1px;
   top: 50px;
 }
 .dataTables_scrollBody{
-max-height: 270px !important;
+max-height: 196px !important;
 }
 .dataTable thead th {
 
@@ -4067,7 +4073,7 @@ border-radius: 5px 5px 5px 5px;
    outline: none;
     padding: 5px;
     border: none;
-    margin: 5px;
+    /* margin: 5px; */
     background: transparent;
 
 } 
@@ -4114,7 +4120,7 @@ border-radius: 5px 5px 5px 5px;
   padding-right: 25px; /* Adjust padding to make space for the icon */
   background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 6"><path d="M0 0h10L5 6z" fill="black"/></svg>') no-repeat; /* Custom SVG arrow */
   background-position: right 5px center; /* Default position */
-  background-size: 16px; /* Size of the icon */
+  background-size: 13px; /* Size of the icon */
   border: none; /* Remove the default border */
   border-right: 2px solid #0077DA; /* Add a border only to the right side */
   /* padding: 8px; */
@@ -4125,12 +4131,6 @@ border-radius: 5px 5px 5px 5px;
 }
 
 
-
-#search_type option {
-  padding: 10px 0; /* Add padding to move text lower */
-  line-height: 3; /* Adjust line height if needed */
-}
-
 /* Optional: Adjust for IE or other older browsers */
 .select-container {
   position: relative;
@@ -4139,12 +4139,26 @@ border-radius: 5px 5px 5px 5px;
 .select-container select {
   padding-right: 40px; /* Additional padding to make space for the arrow */
 }
-
-
-
 #data-table {
-  min-height: 200px; 
+  min-height: 50px; 
   max-height: 400px;
   overflow-y: auto; 
   border-collapse: collapse;
+}
+
+#search_type {
+  padding: 7px 13px;
+}
+.dataTables_wrapper .dataTables_filter input {
+  border: 1px solid #aaa;
+  border-radius: 10px;
+  padding: 5px;
+  width: 53%;
+  margin-top: 3px;
+  background-color: transparent;
+  margin-left: 5px;
+}
+
+#data-table_length{
+  margin-top: 5px;
 }
