@@ -4142,3 +4142,9 @@ border-radius: 5px 5px 5px 5px;
 
 
 
+#data-table {
+  min-height: 200px; 
+  max-height: 400px;
+  overflow-y: auto; 
+  border-collapse: collapse;
+}
