@@ -456,6 +456,22 @@ function showtable(typeName, geoServerURL, cqlFilter, headers, headerMapping) {
     });
   }
 
+
+  
+  // Function to show the hidden table
+  function showTable() {
+    var tableDetail = document.querySelector('.tableDetail');
+    var minimizeButton = document.querySelector('.minimize-button');
+    tableDetail.style.display = 'block';
+    minimizeButton.style.display = 'block';
+    // minimizeButton.innerText = '-';
+    document.getElementById('openTableBtn').style.display = 'none'; // Hide the show button
+  }
+
+  // Add event listener to the show table button
+  document.getElementById('openTableBtn').addEventListener('click', showTable);
+
+
   function tableData(typeName, geoServerURL, cqlFilter, headers) {
     $.getJSON(geoServerURL, function (data) {
       var filteredData = data.features.map(feature => {
