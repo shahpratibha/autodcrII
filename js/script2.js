@@ -129,7 +129,8 @@ document.addEventListener('DOMContentLoaded', function () {
 $(document).ready(function () {
 // date range code
 // Example usage of the function
-const layername = "pmc:IWMS_polygon,pmc:IWMS_line,pmc:IWMS_point";
+
+const layername = "AutoDCR:Plot_Layout";
 const main_url = "https://iwmsgis.pmc.gov.in/geoserver/";
 
 // const filter = ""; // Add any additional filter if required
@@ -540,4 +541,14 @@ const searchButton = document.getElementById('searchButton');
       searchContainer.style.display = 'none'; // Hide the search container
     }
   });
+
+
+  
+
+  $(document).ready(function () {
+    $('#calendarButton').on('click', function () {
+        $('.daterange-container').toggle(); // Toggle visibility of the date range input
+    });
+});
+
 

@@ -520,40 +520,40 @@ text-shadow: 2px 2px 4px darkblue; /* Adjust the values to control the shadow */
   width: 15% !important;
   border: 2px solid #0077DA;;
   border-radius: 30px;
-  height: 4.8%;
+  /* height: 4.8%; */
   }
-  
-  .daterange-container {
-    display: flex;
-    align-items: center;
-    position: relative; 
+    
+    .daterange-container {
+      display: flex;
+      align-items: center;
+      position: relative; 
+    }
+    
+    
+    .daterange-container .fa-solid {
+      position: fixed !important;
+      top: 4.5%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      left: 80% !important;
+      z-index: 9999 !important;
+      color: #0077DA;
+      ;
   }
-  
-  
-  .daterange-container .fa-solid {
-    position: fixed !important;
-    top: 4.5%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    left: 80% !important;
-    z-index: 9999 !important;
-    color: #0077DA;
-    ;
-}
-  .daterangepicker .drp-buttons .btn {
-    margin-left: 8px;
-    font-size: 12px;
-    font-weight: bold;
-    padding: 4px 8px;
-    background-color: #0078A8 !important;
-    color: white !important;
-}
+    .daterangepicker .drp-buttons .btn {
+      margin-left: 8px;
+      font-size: 12px;
+      font-weight: bold;
+      padding: 4px 8px;
+      background-color: #0078A8 !important;
+      color: white !important;
+  }
 
-.btn-active {
-  background: #0077da70 !important;
-  color: white; /* Active text color */
-  border: #0077da70 !important;
-}
+  .btn-active {
+    background: #0077da70 !important;
+    color: white; /* Active text color */
+    border: #0077da70 !important;
+  }
 /* CSS for moving elements */
 .move-up {
   transform: translateY(-312px);
@@ -1573,7 +1573,7 @@ background-color: #f9f9f9;
 }
 
 .minimize-button {
-background-color:#0077DA;
+
 color: red;
 border: none;
 padding: 5px;
@@ -1582,7 +1582,8 @@ font-size: 15px;
 /* border-radius: 50%; */
 position: absolute;
 right: 0%;
-top:3%;
+top:5%;
+background-color: none;
 z-index: 1000;
 width: 27px;
 height:28px;
@@ -1712,7 +1713,7 @@ overflow: visible;
   backdrop-filter: blur(2px);
   height: 34px;
   width: 34px;
-  outline: none ;
+  outline: none !important;
   cursor: pointer;
   display: inline-block;
   z-index: 1000;
@@ -4163,4 +4164,68 @@ border-radius: 5px 5px 5px 5px;
 
 #data-table_length{
   margin-top: 5px;
+}
+
+
+
+
+.calendar-button {
+  position: absolute;
+  top:12%; /* Adjust this value to position the button vertically */
+  right: 13px; /* Adjust this value to position the button horizontally */
+  width: 34px; /* Set the width of the button */
+  height: 34px; /* Set the height of the button */
+  background-color: #0077DA; /* Background color of the button */
+  border: none;
+  border-radius: 8px; /* Make the button circular */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: none; /* Remove the border when clicking or focusing */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Optional shadow */
+  cursor: pointer;
+  z-index: 999;
+  outline: none;
+  font-size: 15px; /* Adjust the icon size */
+}
+
+.calendar-button i {
+  color: white; /* Icon color */
+}
+
+
+
+.calendar-button {
+  position: absolute;
+  top: 12%; /* Adjust this value to position the button vertically */
+  right: 13px; /* Adjust this value to position the button horizontally */
+  width: 34px; /* Set the width of the button */
+  height: 34px; /* Set the height of the button */
+  background-color: #0077DA; /* Background color of the button */
+  border: none;
+  border-radius: 8px; /* Rounded corners */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: none !important;
+
+  cursor: pointer;
+  z-index: 999; /* Ensure it appears above other elements */
+}
+
+.calendar-button i {
+  color: white; /* Icon color */
+}
+
+.daterange-container {
+  display: none; /* Initially hidden */
+  position: absolute; /* Position it under the button */
+  top: 70px; /* Adjust to position below the button */
+  right: 10px; /* Align with the button */
+  background-color: #fff; /* Background color */
+  padding: 10px; /* Padding */
+  border: 1px solid #ccc; /* Border */
+  border-radius: 5px; /* Rounded corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Shadow */
+  z-index: 10; /* Ensure it appears above other elements */
 }
