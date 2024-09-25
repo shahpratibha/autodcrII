@@ -1822,6 +1822,7 @@ overflow: visible;
   transition: opacity 0.3s ease; /* Smooth transition effect */
   z-index: 1000; /* Keeps the container above other content */
   height: auto;
+  font-size: 12px;
 }
 
 
