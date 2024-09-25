@@ -355,13 +355,14 @@ function showtable(typeName, geoServerURL, cqlFilter, headers, headerMapping) {
 
     // Create minimize button
     var minimizeButton = document.createElement('button');
-    minimizeButton.innerHTML = '<i class="fas fa-minus"></i>';
+    minimizeButton.innerHTML = '<i class="fas fa-times"></i>'; // Set cross icon
+    // minimizeButton.innerHTML = '<i class="fas fa-minus"></i>';
     minimizeButton.className = 'minimize-button';
     minimizeButton.addEventListener('click', function () {
       var tableDetail = document.querySelector('.tableDetail');
       if (tableDetail.style.display === 'none') {
         tableDetail.style.display = 'block';
-        minimizeButton.innerHTML = '<i class="fas fa-minus"></i>';
+        minimizeButton.innerHTML = '<i class="fas fa-times"></i>'; // Set cross icon
         document.getElementById('openTableBtn').style.display = 'none'; // Hide the show button
       } else {
         tableDetail.style.display = 'none';

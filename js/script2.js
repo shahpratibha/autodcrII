@@ -539,3 +539,13 @@ const searchButton = document.getElementById('searchButton');
     }
   });
 
+
+  
+
+  $(document).ready(function () {
+    $('#calendarButton').on('click', function () {
+        $('.daterange-container').toggle(); // Toggle visibility of the date range input
+    });
+});
+
+
