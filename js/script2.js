@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function () {
 $(document).ready(function () {
 // date range code
 // Example usage of the function
-const layername = "pmc:IWMS_polygon,pmc:IWMS_line,pmc:IWMS_point";
+const layername = "AutoDCR:plot1_layout_test";
 const main_url = "https://iwmsgis.pmc.gov.in/geoserver/";
 
 // const filter = ""; // Add any additional filter if required
@@ -158,13 +158,18 @@ $('#daterange').daterangepicker({
 cb(start, end);
 
 function cb(start, end) {
+
+  var formattedStartDate = start.format('YYYY-MM-DDTHH:mm:ssZ');;
+  var formattedEndDate = end.format('YYYY-MM-DDTHH:mm:ssZ');;
+  cql_filter1 = `entry_timestamp >= '${formattedStartDate}' AND entry_timestamp < '${formattedEndDate}'`;
+  // cql_filter1 = `entry_timestamp >='2024-09-04T00:00:00Z' AND entry_timestamp < '2024-09-04T23:59:59Z'`
   // $('#daterange').val(start.format('2023') + ' - ' + end.format('YYYY'));
-  var formattedStartDate = start.format('M/D/YY, h:mm A'); 
-  var formattedEndDate = end.format('M/D/YY, h:mm A');
-  cql_filter1 = `conc_appr_ >= '${formattedStartDate}' AND conc_appr_ < '${formattedEndDate}'`;
+  // var formattedStartDate = start.format('M/D/YY, h:mm A'); 
+  // var formattedEndDate = end.format('M/D/YY, h:mm A');
+  // cql_filter1 = `conc_appr_ >= '${formattedStartDate}' AND conc_appr_ < '${formattedEndDate}'`;
   console.log(cql_filter1, "lll")
 
-
+// alert(cql_filter1)
 
   console.log(cql_filter1, "lllokkkkk")
 
@@ -174,9 +179,10 @@ function cb(start, end) {
 
   loadinitialData(cql_filter1);
   
-
+// alert(cql_filter1)
   console.log(cql_filter1,"cql_filter1")
   getCheckedValues(function (filterString) {
+    // alert(filterString)
     const mainfilter = combineFilters(cql_filter1, filterString);
     console.log("Main Filterfor checking:", mainfilter);
     FilterAndZoom(mainfilter);
@@ -186,20 +192,6 @@ function cb(start, end) {
 
 $('#calendarIcon').on('click', function () {
   $('#daterange').click();
-});
-$('#daterange').on('apply.daterangepicker', function (ev, picker) {
-  var startDate = picker.startDate.format('YYYY-MM-DD');
-  var endDate = picker.endDate.format('YYYY-MM-DD');
-  console.log('Selected date range:', startDate, 'to', endDate);
-  cql_filter1 = `conc_appr_ >= '${startDate}' AND conc_appr_ < '${endDate}'`;
-  loadinitialData(cql_filter1);
-  const cql_filter = getCqlFilter();
-  getCheckedValues(function (filterString) {
-    const mainfilter = combineFilters(cql_filter1, filterString);
-    console.log("Main Filterfor checking:", mainfilter);
-    FilterAndZoom(mainfilter);
-    DataTableFilter(mainfilter);
-  });
 });
 
 
@@ -213,7 +205,7 @@ function loadinitialData(cql_filter) {
 
   filternames.forEach(function (filtername) {
     var url = `${main_url}AutoDCR/wms?service=WFS&version=1.1.0&request=GetFeature&typeName=Plot_Layout&propertyName=${filtername}&outputFormat=application/json&cql_filter=${encodeURIComponent(cql_filter)}`;
-    console.log(url);
+    console.log(url,"mainurl");
     $.getJSON(url, function (data) {
       var projectFiSet = new Set();
       var projectFiMap = new Map();
@@ -243,7 +235,7 @@ function loadinitialData(cql_filter) {
 
 function combineFilters(cql_filter123, filterString) {
   if (filterString !== null && filterString !== undefined && filterString !== '') {
-    return `${cql_filter123} AND ${filterString}`;
+    return `(${cql_filter123}) AND ${filterString}`;
   } else {
     return cql_filter123;
   }
@@ -252,12 +244,18 @@ function combineFilters(cql_filter123, filterString) {
 function initialize() {
 
   $('#daterange').on('apply.daterangepicker', function (ev, picker) {
-    var startDate = picker.startDate.format('YYYY-MM-DD');
-    var endDate = picker.endDate.format('YYYY-MM-DD');
+    // var startDate = picker.startDate.format('YYYY-MM-DD');
+    // var endDate = picker.endDate.format('YYYY-MM-DD');
 
-    console.log('Selected date rangelooooooooooooooo:', startDate, 'to', endDate);
+    var formattedStartDate = start.format('YYYY-MM-DDTHH:mm:ssZ');;
+    var formattedEndDate = end.format('YYYY-MM-DDTHH:mm:ssZ');;
+    cql_filter1 = `entry_timestamp >= '${formattedStartDate}' AND entry_timestamp < '${formattedEndDate}'`;
 
-    cql_filter1 = `conc_appr_ >= '${startDate}' AND conc_appr_ < '${endDate}'`;
+
+
+    // console.log('Selected date rangelooooooooooooooo:', startDate, 'to', endDate);
+
+    // cql_filter1 = `conc_appr_ >= '${startDate}' AND conc_appr_ < '${endDate}'`;
 
     loadinitialData(cql_filter1);
     const cql_filter = getCqlFilter();
