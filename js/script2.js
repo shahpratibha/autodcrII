@@ -465,24 +465,16 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
-document.getElementById('toggle-select').addEventListener('click', function() {
-    const searchContainer = document.getElementById('search-container');
-    const selectElement = document.getElementById('search_type');
-    
-    // Toggle the display of the select element
-    if (selectElement.style.display === 'none' || selectElement.style.display === '') {
-        selectElement.style.display = 'block';
-    } else {
-        // selectElement.style.display = 'none';
-    }
-});
 
-// // Optional: Close the select element if clicked outside
-// document.addEventListener('click', function(event) {
-//     const toggleSelect = document.getElementById('toggle-select');
-    
-//     // Close dropdown if clicked outside
-//     if (!searchContainer.contains(event.target) && !toggleSelect.contains(event.target)) {
-//         selectElement.style.display = 'none';
-//     }
-// });
+
+
+const searchButton = document.getElementById('searchButton');
+  const searchContainer = document.getElementById('search-container');
+
+  searchButton.addEventListener('click', () => {
+    if (searchContainer.style.display === 'none' || searchContainer.style.display === '') {
+      searchContainer.style.display = 'block'; // Show the search container
+    } else {
+      searchContainer.style.display = 'none'; // Hide the search container
+    }
+  });
