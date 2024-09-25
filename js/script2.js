@@ -440,7 +440,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 });
-////
+
+
+
+
+//
 document.addEventListener('DOMContentLoaded', function () {
   const dataGraphsElement = document.querySelector('.data-graphs');
   const tabElements = document.querySelectorAll('.tab'); // Select all tab elements
@@ -487,28 +491,23 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
-////
 
-
+// close the box and all 
 document.addEventListener('DOMContentLoaded', function () {
   const filters = document.getElementById('filters');
   const legendsDiv = document.querySelector('.legends');
   const northArrowContainer = document.querySelector('.north-arrow-container');
   const scaleControlElement = document.querySelector('.leaflet-control-scale');
-  const analyticsButton = document.getElementById('analyticsButton'); // Select the analytics button
+  const analyticsButton = document.getElementById('analyticsButton');
+  const box = document.getElementById('box');
+  const button = document.getElementById('Button');
+  const closeBoxIcon = document.getElementById('closeBox');
 
   function closeFilterAndLegend() {
-    console.log('Closing filter and legend'); // Debugging message
+    console.log('Closing filter and legend'); 
 
-    // Hide filters
     filters.style.display = 'none';
-    filters.style.opacity = '0';
-    filters.style.visibility = 'hidden';
-
-    // Hide legends
     legendsDiv.classList.add('hidden');
-
-    // Reset positions of north container and scale
     resetScaleControlPosition();
     northArrowContainer.classList.remove('move-right');
   }
@@ -519,32 +518,48 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  // Attach click events to component-10 and component-11
+  // Toggle box visibility below the button
+  button.addEventListener('click', function (event) {
+    event.stopPropagation(); // Prevent the document click from immediately hiding the box
+    const buttonRect = button.getBoundingClientRect();
+
+    if (box.style.display === 'none' || box.style.display === '') {
+      box.style.top = `${buttonRect.bottom + 10}px`; // 10px gap below the button
+      box.style.left = `${buttonRect.left}px`;
+      box.style.display = 'block';
+    } else {
+      box.style.display = 'none';
+    }
+  });
+
+  // Close box when clicking outside of it or outside the button
+  document.addEventListener('click', function (event) {
+    if (!box.contains(event.target) && !button.contains(event.target)) {
+      box.style.display = 'none';
+    }
+  });
+
+  // Close the box when the close icon is clicked
+  closeBoxIcon.addEventListener('click', function () {
+    box.style.display = 'none';
+  });
+
   document.querySelectorAll('.component-10').forEach(function (element) {
     element.addEventListener('click', function () {
-      console.log('Component 10 clicked'); // Debugging message
       closeFilterAndLegend();
     });
   });
 
   document.querySelectorAll('.component-11').forEach(function (element) {
     element.addEventListener('click', function () {
-      console.log('Component 11 clicked'); // Debugging message
       closeFilterAndLegend();
     });
   });
 
-  // Attach click event to analytics button
   analyticsButton.addEventListener('click', function () {
-    console.log('Analytics button clicked'); // Debugging message
     closeFilterAndLegend();
   });
 });
-
-
-
-
-
 
 
 //search bar 
@@ -576,36 +591,4 @@ const searchButton = document.getElementById('searchButton');
 });
 
 
-
-
-//box close 
-
-document.addEventListener('DOMContentLoaded', function () {
-  const box = document.getElementById('box');
-  const closeBoxIcon = document.getElementById('closeBox');
-  const button = document.getElementById('Button');
-
-  // Event listener to close the box div when the close icon is clicked
-  closeBoxIcon.addEventListener('click', function () {
-    box.style.display = 'none';
-  });
-
-  // Toggle the box below the button
-  button.addEventListener('click', function () {
-    if (box.style.display === 'none') {
-      // Get the button's position and size
-      const buttonRect = button.getBoundingClientRect();
-
-      // Set the position of the box to be below the button
-      box.style.top = `${buttonRect.bottom + 10}px`; // 10px gap below the button
-      box.style.left = `${buttonRect.left}px`;
-
-      // Show the box
-      box.style.display = 'block';
-    } else {
-      // Hide the box
-      box.style.display = 'none';
-    }
-  });
-});
 
