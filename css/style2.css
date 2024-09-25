@@ -80,29 +80,9 @@ background-size: 175% 175%;
 color: #fff;
 text-shadow: 2px 2px 4px darkblue; /* Adjust the values to control the shadow */
   font-size: 14px; /* Default font size */
-  /* border-radius: 4px; */
-/* background: rgba(255, 255, 255, 0.20);
-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
-backdrop-filter: blur(2px); */
-}
-/* summery section */
-
-/* .summary-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
+ 
 }
 
-.summary-header h2 {
-  margin: 0;
-  color: var(--Grey-800, #262626);
-  font-size: 17px;
-  font-style: normal;
-  font-weight: 600;
-
-  line-height: normal;
-} */
 
 .cluster_legend {
   background-color:white;
@@ -1436,7 +1416,7 @@ day.selected.endRange, .flatpickr-day.startRange.endRange, .flatpickr-day.endRan
 .filters {
   display: none;                    /* Hide the filter panel by default */
   position: absolute;
-  top: 15%;
+  top: 19%;
   left: 18px;
   overflow-x: hidden;
   overflow-y: hidden;
@@ -1588,12 +1568,13 @@ color: black;
   z-index: 9999;
   position: absolute;
   width: 30%;
-  bottom: 2%;
+  bottom: 4%;
+  /* max-height: 350px; */
   right: 4%;
-  background-color: white;
+  /* background-color: white; */
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  max-height: 350px;
+  /* max-height: 350px; */
   font-size: 12px;
   transition: all 0.3s ease;
 
@@ -1606,24 +1587,30 @@ color: black;
   font-size: 12px;
 }
 .dataTables_scrollBody{
-
-  height: 196px;
+  /* height: 196px; */
   font-size: 10px;
 }
 
 .tableDetail {
-  max-height: 500px;
 overflow-y: auto; 
-height: 296px;
 font-size: 10px;
-/* margin-top: 10px;  */
+ /* height: 296px; */
+ overflow-x: hidden;
+max-height: 500px; 
+ margin-top: 10px;  
 border: 1px solid #ccc; 
 background-color: #f9f9f9; 
 
 }
 
+.dataTables_filter{
+  margin-right: 37px;
+  /* margin-top: 10px; */
+
+}
+
 .minimize-button {
-background-color:#8AC0EE;
+background-color:#0077DA;
 color: red;
 border: none;
 padding: 5px;
@@ -1632,7 +1619,7 @@ font-size: 15px;
 /* border-radius: 50%; */
 position: absolute;
 right: 0%;
-top:0%;
+top:3%;
 z-index: 1000;
 width: 27px;
 height:28px;
@@ -1761,6 +1748,7 @@ overflow: visible;
   backdrop-filter: blur(2px);
   height: 34px;
   width: 34px;
+  outline: none ;
   cursor: pointer;
   display: inline-block;
   z-index: 1000;
@@ -1821,8 +1809,8 @@ overflow: visible;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15); /* Shadow for a better look */
   transition: opacity 0.3s ease; /* Smooth transition effect */
   z-index: 1000; /* Keeps the container above other content */
-  height: auto;
-  font-size: 12px;
+  height: 35px;
+  display: none;
 }
 
 
@@ -1834,22 +1822,10 @@ overflow: visible;
   font-size: 16px;
   border-radius: 30px; /* Keep the input rounded */
 }
-.search-icon {
-   /* cursor: pointer;
-  margin-right: 10px;
-  padding-left: 10px; 
-  display: flex; 
-  align-items: center;
-    position: relative;  */
-    padding: 5px;
-    margin: 5px;
-    border: none;
-}
 
-.search-container .search-icon {
+.search-container {
   border-right: 2px solid #0077DA; /* Add right border to the search icon */
-  padding-right: 8px; /* Adjust padding as needed */
-  margin-right: 8px; /* Adjust margin as needed */
+  
 }
 
 
@@ -1870,32 +1846,6 @@ overflow: visible;
 
 .search-container .search-icon {
   cursor: pointer; /* Pointer cursor to indicate it's clickable */
-}
-
-#column-list {
-  position: absolute; /* Position dropdown relative to search container */
-  top: 105%; /* Position below the search-container */
-  left: 0;
-  z-index: 1000; /* Ensure it appears above other content */
-  border: 1px solid #ddd;
-  background-color: #fff;
-  max-height: 200px;
-  overflow-y: auto;
-  border-radius: 5px;
-  width: 44%;   
-  height: auto;
-}
-
-#column-list div {
-  padding: 8px;
-  cursor: pointer;
-}
-
-#column-list div:hover {
-  background-color: #E6F1FB;
-}
-.hidden {
-  display: none;
 }
 
 
@@ -3797,7 +3747,7 @@ right: 1px;
   top: 50px;
 }
 .dataTables_scrollBody{
-max-height: 270px !important;
+max-height: 196px !important;
 }
 .dataTable thead th {
 
@@ -3886,6 +3836,7 @@ right: 12px ;
   border-bottom-right-radius: 22px;
   border-top-right-radius: 22px;
 }
+
 .clear-icon {
 position: absolute;
 right:40px; /* Adjust based on input length */
@@ -4125,7 +4076,7 @@ filter: invert(1) brightness(2);
   width: auto;
   z-index: 9999;
   top: 102.5%;
-  left: 5%;
+  left: -31%;
   background-color: #fff;
   width: 250px;
   max-width: 230px;
@@ -4154,47 +4105,98 @@ border: 1px solid #0077da;
 background: white;
 border-radius: 5px 5px 5px 5px;
 }
-.SearchBar .form-select,
-.SearchBar .form-control,
-.SearchBar .btn {
-
-/* margin-right: 5px;
-font-size: 12px;
-font-weight: bold;
-width: 1.400%;
-height: 4.5%;
-position: absolute;
-top:10px;
-left: 65%;
-border-left: 2px solid #0077da;
-border-right: 2px solid #0077da ;
-border-top: 2px solid #0077da;
-border-bottom: 2px solid #0077da ;
-z-index: 9999999;
-border-radius: 0;
-border-top-left-radius: 10px;
-border-bottom-left-radius: 10px; */
-}
  .SearchBar #searchInputDashboard {
-/*
-border-top-right-radius: 10px;
-border-bottom-right-radius: 10px;
-
-width: 15%;
-position: absolute;
-z-index: 9999;
-top: 10px;
-text-align: center;
-padding-left: 10px;
-left: 73.5%;
-transform: translateX(-50%);
-border: 2px solid #0077da;
-*/
 
 
+   outline: none;
     padding: 5px;
     border: none;
-    margin: 5px;
+    /* margin: 5px; */
     background: transparent;
 
 } 
+
+
+
+.map-container {
+  position: relative;
+}
+.search-button {
+  position: absolute; /* Position it relative to the nearest positioned ancestor */
+  top: 50px; /* Adjust the button position from the top */
+  right: 14px; /* Adjust the button position from the right */
+  background: none; /* Remove default button styling */
+  height: 34px; /* Set button height */
+  width: 34px; /* Set button width */
+  background-color: #0077DA; /* Button background color */
+  cursor: pointer; /* Change cursor to pointer on hover */
+  border: none; /* Remove default button border */
+  border-radius: 8px; /* Rounded corners */
+  z-index: 1000; /* Ensure the button is above other elements */
+  display: flex; /* Center the content inside the button */
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
+  padding: 0; /* Remove any default padding */
+}
+
+.search-button:focus,
+.search-button:active {
+  outline: none; /* Remove the default focus outline */
+  box-shadow: none; /* Remove any default box shadow */
+}
+
+.search {
+  width: 20px; /* Set desired width */
+  height: auto; /* Maintain aspect ratio */
+}
+
+/* Style the select element to add the down arrow icon */
+#search_type {
+  appearance: none; /* Remove default browser styles */
+  -webkit-appearance: none; /* For Safari */
+  -moz-appearance: none; /* For Firefox */
+  padding-right: 25px; /* Adjust padding to make space for the icon */
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 6"><path d="M0 0h10L5 6z" fill="black"/></svg>') no-repeat; /* Custom SVG arrow */
+  background-position: right 5px center; /* Default position */
+  background-size: 13px; /* Size of the icon */
+  border: none; /* Remove the default border */
+  border-right: 2px solid #0077DA; /* Add a border only to the right side */
+  /* padding: 8px; */
+  width: 23px;
+  border-radius: 0px; /* No rounded corners */
+  outline: none; /* Remove the outline (focus border) when clicked */
+  background-position: right 5px 45%; /* Move icon slightly upward */
+}
+
+
+/* Optional: Adjust for IE or other older browsers */
+.select-container {
+  position: relative;
+}
+
+.select-container select {
+  padding-right: 40px; /* Additional padding to make space for the arrow */
+}
+#data-table {
+  min-height: 50px; 
+  max-height: 400px;
+  overflow-y: auto; 
+  border-collapse: collapse;
+}
+
+#search_type {
+  padding: 7px 13px;
+}
+.dataTables_wrapper .dataTables_filter input {
+  border: 1px solid #aaa;
+  border-radius: 10px;
+  padding: 5px;
+  width: 53%;
+  margin-top: 3px;
+  background-color: transparent;
+  margin-left: 5px;
+}
+
+#data-table_length{
+  margin-top: 5px;
+}
