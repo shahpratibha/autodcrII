@@ -37,26 +37,35 @@
         </div>
       </div>
 
-      <!-- <button id="printTableBtn">Download CSV</button> -->
-      <div id="tablecontainer"></div>
-      <!-- popup -->
-      <div id="infoModal"
-        style="display: none; position: absolute; background-color: white; border: 1px solid #ddd; padding: 10px; z-index: 9999; max-width: 300px;">
-        <h4>Feature Information</h4>
-        <div id="modalContent"></div>
-        <button onclick="closeModal()">Close</button>
+   
 
-      </div>
-
-      <!-- Map Section -->
-      <div class="north-arrow-container">
-        <img src="image/North New.png" class="north-arrow" alt="North Arrow">
-      </div>
+ 
+    <div id="tablecontainer"></div>
+    <!-- popup -->
+    <div id="infoModal"
+      style="display: none; position: absolute; background-color: white; border: 1px solid #ddd; padding: 10px; z-index: 9999; max-width: 300px;">
+      <h4>Feature Information</h4>
+      <div id="modalContent"></div>
+      <button onclick="closeModal()">Close</button>
+    </div>
 
       <div class="row m-0">
         <div class="col-12 p-0">
           <div id="map"></div>
 
+    <!-- Map Section -->
+    <div class="north-arrow-container">
+      <img src="image/North New.png" class="north-arrow" alt="North Arrow">
+    </div>
+
+
+    <div class="row m-0">
+      <div class="col-12 p-0">
+        <div id="map"></div>
+
+
+
+          <!-- search bar -->
           <div class="map-controls" id="map-controls">
             <button id="search-button" class="search-button">
               <img src="image/Search.svg" alt="Search Icon" id="search-icon">

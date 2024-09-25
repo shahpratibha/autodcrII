@@ -126,6 +126,11 @@ document.addEventListener('DOMContentLoaded', function () {
   }, 100);
 });
 
+// ---------------------slides change code end
+
+
+
+
 
 // Toggle arrow direction
 function toggleFilter(label) {
