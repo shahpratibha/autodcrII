@@ -543,7 +543,7 @@ const searchButton = document.getElementById('searchButton');
   });
 
 
-  
+
 
   $(document).ready(function () {
     $('#calendarButton').on('click', function () {
@@ -551,4 +551,14 @@ const searchButton = document.getElementById('searchButton');
     });
 });
 
-
+ // Get the button and the box elements
+ document.getElementById('Button').addEventListener('click', function() {
+  var box = document.getElementById('box');
+  
+  // Toggle the display of the box on button click
+  if (box.style.display === 'none' || box.style.display === '') {
+      box.style.display = 'block'; // Show the box
+  } else {
+      box.style.display = 'none'; // Hide the box
+  }
+});

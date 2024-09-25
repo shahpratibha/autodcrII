@@ -4229,3 +4229,28 @@ border-radius: 5px 5px 5px 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Shadow */
   z-index: 10; /* Ensure it appears above other elements */
 }
+/* Initially hide the box */
+.box {
+  display: none; /* Hidden by default */
+  width: 200px;
+  height: 100px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-top: 10px;
+  position: absolute;
+  top: 50px; /* Adjust to position below the button */
+  left: 0;
+  z-index: 100; /* Make sure it appears on top of other elements */
+}
+
+/* Optional styles for the button */
+.component-11 {
+  position: relative;
+  cursor: pointer;
+}
+
+.right-icons {
+  width: 30px; /* Adjust the size of the icon */
+  height: 30px;
+}
