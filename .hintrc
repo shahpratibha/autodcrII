@@ -3,15 +3,12 @@
     "development"
   ],
   "hints": {
-<<<<<<< HEAD
-=======
     "axe/forms": [
       "default",
       {
         "label": "off"
       }
     ],
->>>>>>> f37736617fad42ade8c161bdbc4146a78e14ab40
     "axe/name-role-value": [
       "default",
       {
@@ -25,16 +22,6 @@
           "backdrop-filter"
         ]
       }
-<<<<<<< HEAD
-    ],
-    "meta-charset-utf-8": "off",
-    "axe/forms": [
-      "default",
-      {
-        "label": "off"
-      }
-=======
->>>>>>> f37736617fad42ade8c161bdbc4146a78e14ab40
     ]
   }
 }
