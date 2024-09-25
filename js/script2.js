@@ -1,12 +1,20 @@
+// Ensure tabsOptions is shown by default on page load
+document.addEventListener("DOMContentLoaded", function() {
+  var tabsOptions = document.getElementById("tabsOptions");
+  var tabParent = document.getElementById("tabParent");
+
+  tabsOptions.style.display = "flex"; // Show tabsOptions by default
+  tabParent.style.display = "none";   // Hide tabParent by default
+});
+
 // Toggle options visibility when the optionsButton is clicked
 document.getElementById("optionsButton").addEventListener("click", function () {
   var tabsOptions = document.getElementById("tabsOptions");
   var tabParent = document.getElementById("tabParent");
 
-  // Show the options and hide the tabParent, only if options are currently hidden
   if (tabsOptions.style.display === "none" || tabsOptions.style.display === "") {
     tabsOptions.style.display = "flex"; // Show the options
-    tabParent.style.display = "none"; // Hide the tab-parent
+    tabParent.style.display = "none"; // Hide tab-parent
   } else {
     // Do nothing, keeping the options visible
   }
@@ -17,10 +25,13 @@ document.querySelector(".component-6").addEventListener("click", function () {
   var tabParent = document.getElementById("tabParent");
   var tabsOptions = document.getElementById("tabsOptions");
 
-  // Show the tabParent and hide tabsOptions when Analytics is clicked
-  tabParent.style.display = "flex";
-  tabsOptions.style.display = "none";
+  tabParent.style.display = "flex";   // Show tabParent
+  tabsOptions.style.display = "none"; // Hide tabsOptions
 });
+
+
+
+
 
 //move the north arrow container 
 document.addEventListener('DOMContentLoaded', function () {
@@ -309,7 +320,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-// date range code
+
 
 
 
@@ -670,8 +681,8 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 document.addEventListener('DOMContentLoaded', function() {
-  const component6 = document.querySelector('.component-6');
-  const component7 = document.querySelector('.component-7');
+  const component6 = document.querySelector('.component-7');
+  const component7 = document.querySelector('.component-6');
   const images = document.querySelectorAll('.ui-iconbookmarklight'); // Select all images
 
   // Define colors
@@ -746,7 +757,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 });
-////
+
+
+
+
+//
 document.addEventListener('DOMContentLoaded', function () {
   const dataGraphsElement = document.querySelector('.data-graphs');
   const tabElements = document.querySelectorAll('.tab'); // Select all tab elements
@@ -793,28 +808,23 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
-////
 
-
+// close the box and all 
 document.addEventListener('DOMContentLoaded', function () {
   const filters = document.getElementById('filters');
   const legendsDiv = document.querySelector('.legends');
   const northArrowContainer = document.querySelector('.north-arrow-container');
   const scaleControlElement = document.querySelector('.leaflet-control-scale');
-  const analyticsButton = document.getElementById('analyticsButton'); // Select the analytics button
+  const analyticsButton = document.getElementById('analyticsButton');
+  const box = document.getElementById('box');
+  const button = document.getElementById('Button');
+  const closeBoxIcon = document.getElementById('closeBox');
 
   function closeFilterAndLegend() {
-    console.log('Closing filter and legend'); // Debugging message
+    console.log('Closing filter and legend'); 
 
-    // Hide filters
     filters.style.display = 'none';
-    filters.style.opacity = '0';
-    filters.style.visibility = 'hidden';
-
-    // Hide legends
     legendsDiv.classList.add('hidden');
-
-    // Reset positions of north container and scale
     resetScaleControlPosition();
     northArrowContainer.classList.remove('move-right');
   }
@@ -825,31 +835,51 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  // Attach click events to component-10 and component-11
+  // Toggle box visibility below the button
+  button.addEventListener('click', function (event) {
+    event.stopPropagation(); // Prevent the document click from immediately hiding the box
+    const buttonRect = button.getBoundingClientRect();
+
+    if (box.style.display === 'none' || box.style.display === '') {
+      box.style.top = `${buttonRect.bottom + 10}px`; // 10px gap below the button
+      box.style.left = `${buttonRect.left}px`;
+      box.style.display = 'block';
+    } else {
+      box.style.display = 'none';
+    }
+  });
+
+  // Close box when clicking outside of it or outside the button
+  document.addEventListener('click', function (event) {
+    if (!box.contains(event.target) && !button.contains(event.target)) {
+      box.style.display = 'none';
+    }
+  });
+
+  // Close the box when the close icon is clicked
+  closeBoxIcon.addEventListener('click', function () {
+    box.style.display = 'none';
+  });
+
   document.querySelectorAll('.component-10').forEach(function (element) {
     element.addEventListener('click', function () {
-      console.log('Component 10 clicked'); // Debugging message
       closeFilterAndLegend();
     });
   });
 
   document.querySelectorAll('.component-11').forEach(function (element) {
     element.addEventListener('click', function () {
-      console.log('Component 11 clicked'); // Debugging message
       closeFilterAndLegend();
     });
   });
 
-  // Attach click event to analytics button
   analyticsButton.addEventListener('click', function () {
-    console.log('Analytics button clicked'); // Debugging message
     closeFilterAndLegend();
   });
 });
 
 
-
-
+//search bar 
 const searchButton = document.getElementById('searchButton');
   const searchContainer = document.getElementById('search-container');
 
@@ -862,12 +892,20 @@ const searchButton = document.getElementById('searchButton');
   });
 
 
-  
 
+
+
+
+
+
+
+  
+  //click on calender button show the calender box
   $(document).ready(function () {
     $('#calendarButton').on('click', function () {
         $('.daterange-container').toggle(); // Toggle visibility of the date range input
     });
 });
+
 
 
