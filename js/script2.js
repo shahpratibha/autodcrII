@@ -129,8 +129,9 @@ document.addEventListener('DOMContentLoaded', function () {
 $(document).ready(function () {
 // date range code
 // Example usage of the function
-const layername = "AutoDCR:Plot_Layout";
+const layername = "pmc:IWMS_polygon,pmc:IWMS_line,pmc:IWMS_point";
 const main_url = "https://iwmsgis.pmc.gov.in/geoserver/";
+
 // const filter = ""; // Add any additional filter if required
 
 // loadAndProcessGeoJSON(main_url, layername,cql_filter1 );
@@ -158,13 +159,12 @@ cb(start, end);
 
 function cb(start, end) {
   // $('#daterange').val(start.format('2023') + ' - ' + end.format('YYYY'));
-  var formattedStartDate = start.format('YYYY-MM-DDTHH:mm:ssZ');
-  const newFormatStart = moment(formattedStartDate).format('MMM D, YYYY, h:mm:ss A');
-  var formattedEndDate = end.format('YYYY-MM-DDTHH:mm:ssZ');
-  const newFormatEnd = moment(formattedEndDate).format('MMM D, YYYY, h:mm:ss A');
-  console.log(newFormatStart,"newFormatStart",newFormatEnd,"newFormatEnd")
-  cql_filter1 = `entry_timestamp >= '${newFormatStart}' AND entry_timestamp < '${newFormatEnd}'`;
-  // cql_filter1 = `entry_timestamp >='2024-09-04T00:00:00Z' AND entry_timestamp < '2024-09-04T23:59:59Z'`
+  var formattedStartDate = start.format('M/D/YY, h:mm A'); 
+  var formattedEndDate = end.format('M/D/YY, h:mm A');
+  cql_filter1 = `conc_appr_ >= '${formattedStartDate}' AND conc_appr_ < '${formattedEndDate}'`;
+  console.log(cql_filter1, "lll")
+
+
 
   console.log(cql_filter1, "lllokkkkk")
 
@@ -174,6 +174,7 @@ function cb(start, end) {
 
   loadinitialData(cql_filter1);
   
+
   console.log(cql_filter1,"cql_filter1")
   getCheckedValues(function (filterString) {
     const mainfilter = combineFilters(cql_filter1, filterString);
@@ -182,26 +183,25 @@ function cb(start, end) {
     DataTableFilter(mainfilter)
   });
 }
-// $('#calendarIcon').on('click', function () {
-//   $('#daterange').click();
-// // });
-// $('#daterange').on('apply.daterangepicker', function (ev, picker) {
-//   var startDate = picker.startDate.format('YYYY-MM-DDTHH:mm:ssZ');
-//   var endDate = picker.endDate.format('YYYY-MM-DDTHH:mm:ssZ');
-//   console.log('Selected date range:', startDate, 'to', endDate);
-//   cql_filter1= `entry_timestamp >= '${startDate}' AND entry_timestamp < '${endDate}'`;
-  
-//   console.log(" cql_filter1", cql_filter1);
-//   // alert("hhhhhhhhh");
-//   loadinitialData(cql_filter1);
-//   const cql_filter = getCqlFilter();
-//   getCheckedValues(function (filterString) {
-//     const mainfilter = combineFilters(cql_filter1, filterString);
-//     console.log("Main Filterfor checking:", mainfilter);
-//     FilterAndZoom(mainfilter);
-//     DataTableFilter(mainfilter);
-//   });
-// });
+
+$('#calendarIcon').on('click', function () {
+  $('#daterange').click();
+});
+$('#daterange').on('apply.daterangepicker', function (ev, picker) {
+  var startDate = picker.startDate.format('YYYY-MM-DD');
+  var endDate = picker.endDate.format('YYYY-MM-DD');
+  console.log('Selected date range:', startDate, 'to', endDate);
+  cql_filter1 = `conc_appr_ >= '${startDate}' AND conc_appr_ < '${endDate}'`;
+  loadinitialData(cql_filter1);
+  const cql_filter = getCqlFilter();
+  getCheckedValues(function (filterString) {
+    const mainfilter = combineFilters(cql_filter1, filterString);
+    console.log("Main Filterfor checking:", mainfilter);
+    FilterAndZoom(mainfilter);
+    DataTableFilter(mainfilter);
+  });
+});
+
 
 // Function to get cql_filter1 value
 function getCqlFilter() {
@@ -230,14 +230,17 @@ function loadinitialData(cql_filter) {
           }
         }
       });
+   // var uniqueProjectFiList = Array.from(projectFiMap.entries()).map(([name, count]) => `${name} (${count})`);
+   var uniqueProjectFiList = Array.from(projectFiMap.entries()).map(([name]) => `${name}`);
+   populateDropdown(filtername, uniqueProjectFiList);
+ });
+});
 
-      var uniqueProjectFiList = Array.from(projectFiMap.entries()).map(([name]) => `${name}`);
-      populateDropdown(filtername, uniqueProjectFiList);
-    });
-  });
+
 
   FilterAndZoom(cql_filter)
 }
+
 function combineFilters(cql_filter123, filterString) {
   if (filterString !== null && filterString !== undefined && filterString !== '') {
     return `${cql_filter123} AND ${filterString}`;
@@ -249,12 +252,12 @@ function combineFilters(cql_filter123, filterString) {
 function initialize() {
 
   $('#daterange').on('apply.daterangepicker', function (ev, picker) {
-    var startDate = picker.startDate.format('YYYY-MM-DDTHH:mm:ssZ');
-    var endDate = picker.endDate.format('YYYY-MM-DDTHH:mm:ssZ');
+    var startDate = picker.startDate.format('YYYY-MM-DD');
+    var endDate = picker.endDate.format('YYYY-MM-DD');
 
     console.log('Selected date rangelooooooooooooooo:', startDate, 'to', endDate);
 
-    cql_filter1 = `entry_timestamp >= '${startDate}' AND entry_timestamp < '${endDate}'`;
+    cql_filter1 = `conc_appr_ >= '${startDate}' AND conc_appr_ < '${endDate}'`;
 
     loadinitialData(cql_filter1);
     const cql_filter = getCqlFilter();
@@ -274,6 +277,9 @@ function initialize() {
 
 initialize();
 });
+
+
+
 
 
 
@@ -313,109 +319,11 @@ function toggleFilter(label) {
 
 
 
-//print 
-function printWindow() {
-    // Directly open the print dialog
-    window.print();
-}
-
-
-
-
 
 // Add scale control
 L.control.scale({
   position: 'bottomleft' // Change position to bottom right
 }).addTo(map);
-
-// old code 18/9
-// search
-// document.getElementById('search-button').addEventListener('click', function () {
-//   // Toggle the search container visibility
-//   const searchContainer = document.getElementById('search-container');
-//   searchContainer.classList.toggle('hidden');
-  
-//   // Focus the search input when shown
-//   if (!searchContainer.classList.contains('hidden')) {
-//       document.getElementById('search_type').focus();
-//   }
-// });
-
-// document.getElementById('search_type').addEventListener('input', function () {
-//   const clearIcon = document.getElementById('clear-icon');
-//   if (this.value.trim() !== '') {
-//       clearIcon.classList.remove('hidden');
-//   } else {
-//       clearIcon.classList.add('hidden');
-//   }
-// });
-
-// // Clear the search input when the clear icon is clicked
-// document.getElementById('clear-icon').addEventListener('click', function () {
-//   const searchInput = document.getElementById('search_type');
-//   searchInput.value = '';
-//   this.classList.add('hidden');
-//   searchInput.focus();
-// });
-// // old code 18/9
-
-// // Add click event listener to .component-10 elements
-// document.querySelectorAll('.component-10').forEach(function (element) {
-//   element.addEventListener('click', function () {
-//     // Remove the 'active' class from all .component-10 elements
-//     document.querySelectorAll('.component-10').forEach(function (el) {
-//       el.classList.remove('active');
-//     });
-
-//     // Remove the 'active' class from all .component-11 elements
-//     document.querySelectorAll('.component-11').forEach(function (el) {
-//       el.classList.remove('active');
-//     });
-
-//     // Add the 'active' class to the currently clicked element
-//     element.classList.add('active');
-//   });
-// });
-
-// // Add click event listener to .component-11 elements
-// document.querySelectorAll('.component-11').forEach(function (element) {
-//   element.addEventListener('click', function () {
-//     // Remove the 'active' class from all .component-11 elements
-//     document.querySelectorAll('.component-11').forEach(function (el) {
-//       el.classList.remove('active');
-//     });
-
-//     // Remove the 'active' class from all .component-10 elements
-//     document.querySelectorAll('.component-10').forEach(function (el) {
-//       el.classList.remove('active');
-//     });
-
-//     // Add the 'active' class to the currently clicked element
-//     element.classList.add('active');
-//   });
-// });
-
-
-// //status
-// // Select all tabs within the parent
-// const tabs = document.querySelectorAll('.tab');
-
-// // Function to handle tab click
-// tabs.forEach(tab => {
-//   tab.addEventListener('click', function () {
-//     // Remove 'active' class from all tabs
-//     tabs.forEach(t => t.classList.remove('active'));
-
-//     // Add 'active' class to the clicked tab
-//     this.classList.add('active');
-//   });
-// });
-
-
-
-
-
-//
 
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -632,3 +540,4 @@ const searchButton = document.getElementById('searchButton');
       searchContainer.style.display = 'none'; // Hide the search container
     }
   });
+
