@@ -126,8 +126,168 @@ document.addEventListener('DOMContentLoaded', function () {
   }, 100);
 });
 
-// ---------------------slides change code end
+$(document).ready(function () {
+// date range code
+// Example usage of the function
+const layername = "pmc:IWMS_polygon,pmc:IWMS_line,pmc:IWMS_point";
+const main_url = "https://iwmsgis.pmc.gov.in/geoserver/";
 
+// const filter = ""; // Add any additional filter if required
+
+// loadAndProcessGeoJSON(main_url, layername,cql_filter1 );
+var start =  moment('2024-04-01');
+var end = moment();
+var cql_filter1; // Declare the variable in the outer scope
+$('#daterange').daterangepicker({
+  opens: 'left',
+  locale: {
+    format: 'MMMM D, YYYY' // Format to show Month name, Day, and Year
+  },
+  startDate: moment('2024-04-01'), // Set the start date to April 1st, 2024
+  endDate: moment('2025-03-31'),   // Set the end date to March 31st, 2025
+  ranges: {
+    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+    'This Month': [moment().startOf('month'), moment().endOf('month')],
+    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+    '2024-2025': [moment('2024-04-01'), moment('2025-03-31')],
+    '2023-2024': [moment('2023-04-01'), moment('2024-03-31')],
+    '2022-2023': [moment('2022-04-01'), moment('2023-03-31')],
+    '2021-2022': [moment('2021-04-01'), moment('2022-03-31')],
+  }
+}, cb);
+cb(start, end);
+
+function cb(start, end) {
+  // $('#daterange').val(start.format('2023') + ' - ' + end.format('YYYY'));
+  var formattedStartDate = start.format('M/D/YY, h:mm A'); 
+  var formattedEndDate = end.format('M/D/YY, h:mm A');
+  cql_filter1 = `conc_appr_ >= '${formattedStartDate}' AND conc_appr_ < '${formattedEndDate}'`;
+  console.log(cql_filter1, "lll")
+
+
+
+  console.log(cql_filter1, "lllokkkkk")
+
+
+  // loadAndProcessGeoJSON(main_url, layername,cql_filter1);
+  DataTableFilter(cql_filter1)
+
+  loadinitialData(cql_filter1);
+  
+
+  console.log(cql_filter1,"cql_filter1")
+  getCheckedValues(function (filterString) {
+    const mainfilter = combineFilters(cql_filter1, filterString);
+    console.log("Main Filterfor checking:", mainfilter);
+    FilterAndZoom(mainfilter);
+    DataTableFilter(mainfilter)
+  });
+}
+
+$('#calendarIcon').on('click', function () {
+  $('#daterange').click();
+});
+$('#daterange').on('apply.daterangepicker', function (ev, picker) {
+  var startDate = picker.startDate.format('YYYY-MM-DD');
+  var endDate = picker.endDate.format('YYYY-MM-DD');
+  console.log('Selected date range:', startDate, 'to', endDate);
+  cql_filter1 = `conc_appr_ >= '${startDate}' AND conc_appr_ < '${endDate}'`;
+  loadinitialData(cql_filter1);
+  const cql_filter = getCqlFilter();
+  getCheckedValues(function (filterString) {
+    const mainfilter = combineFilters(cql_filter1, filterString);
+    console.log("Main Filterfor checking:", mainfilter);
+    FilterAndZoom(mainfilter);
+    DataTableFilter(mainfilter);
+  });
+});
+
+
+// Function to get cql_filter1 value
+function getCqlFilter() {
+  return cql_filter1;
+}
+
+function loadinitialData(cql_filter) {
+  const filternames = ["siteaddress_area", "caseinformation_applyfor","gut_no", "caseinformation_casetype", "caseinformation_proposaltype", "token", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "ownerinformation_firstname"]; //accordn column names , if want add one more filter criteria add here
+
+  filternames.forEach(function (filtername) {
+    var url = `${main_url}AutoDCR/wms?service=WFS&version=1.1.0&request=GetFeature&typeName=Plot_Layout&propertyName=${filtername}&outputFormat=application/json&cql_filter=${encodeURIComponent(cql_filter)}`;
+    console.log(url);
+    $.getJSON(url, function (data) {
+      var projectFiSet = new Set();
+      var projectFiMap = new Map();
+
+      // Iterate through the features and add non-null values to the set
+      $.each(data.features, function (index, feature) {
+        var column_name = feature.properties[filtername];
+        if (column_name !== null && column_name !== "#N/A") {
+          if (projectFiMap.has(column_name)) {
+           
+            projectFiMap.set(column_name, (projectFiMap.get(column_name) || 0) + 1);
+          } else {
+            projectFiMap.set(column_name, 1);
+          }
+        }
+      });
+   // var uniqueProjectFiList = Array.from(projectFiMap.entries()).map(([name, count]) => `${name} (${count})`);
+   var uniqueProjectFiList = Array.from(projectFiMap.entries()).map(([name]) => `${name}`);
+   populateDropdown(filtername, uniqueProjectFiList);
+ });
+});
+
+
+
+  FilterAndZoom(cql_filter)
+}
+
+function combineFilters(cql_filter123, filterString) {
+  if (filterString !== null && filterString !== undefined && filterString !== '') {
+    return `${cql_filter123} AND ${filterString}`;
+  } else {
+    return cql_filter123;
+  }
+}
+
+function initialize() {
+
+  $('#daterange').on('apply.daterangepicker', function (ev, picker) {
+    var startDate = picker.startDate.format('YYYY-MM-DD');
+    var endDate = picker.endDate.format('YYYY-MM-DD');
+
+    console.log('Selected date rangelooooooooooooooo:', startDate, 'to', endDate);
+
+    cql_filter1 = `conc_appr_ >= '${startDate}' AND conc_appr_ < '${endDate}'`;
+
+    loadinitialData(cql_filter1);
+    const cql_filter = getCqlFilter();
+    getCheckedValues(function (filterString) {
+
+
+      const mainfilter = combineFilters(cql_filter1, filterString);
+      console.log("Main Filterfor checking:", mainfilter);
+
+      FilterAndZoom(mainfilter);
+
+      DataTableFilter(mainfilter)
+
+    });
+  });
+}
+
+initialize();
+});
+
+
+
+
+
+
+
+
+
+
+// date range code
 
 
 
@@ -159,109 +319,11 @@ function toggleFilter(label) {
 
 
 
-//print 
-function printWindow() {
-    // Directly open the print dialog
-    window.print();
-}
-
-
-
-
 
 // Add scale control
 L.control.scale({
   position: 'bottomleft' // Change position to bottom right
 }).addTo(map);
-
-// old code 18/9
-// search
-// document.getElementById('search-button').addEventListener('click', function () {
-//   // Toggle the search container visibility
-//   const searchContainer = document.getElementById('search-container');
-//   searchContainer.classList.toggle('hidden');
-  
-//   // Focus the search input when shown
-//   if (!searchContainer.classList.contains('hidden')) {
-//       document.getElementById('search_type').focus();
-//   }
-// });
-
-// document.getElementById('search_type').addEventListener('input', function () {
-//   const clearIcon = document.getElementById('clear-icon');
-//   if (this.value.trim() !== '') {
-//       clearIcon.classList.remove('hidden');
-//   } else {
-//       clearIcon.classList.add('hidden');
-//   }
-// });
-
-// // Clear the search input when the clear icon is clicked
-// document.getElementById('clear-icon').addEventListener('click', function () {
-//   const searchInput = document.getElementById('search_type');
-//   searchInput.value = '';
-//   this.classList.add('hidden');
-//   searchInput.focus();
-// });
-// // old code 18/9
-
-// // Add click event listener to .component-10 elements
-// document.querySelectorAll('.component-10').forEach(function (element) {
-//   element.addEventListener('click', function () {
-//     // Remove the 'active' class from all .component-10 elements
-//     document.querySelectorAll('.component-10').forEach(function (el) {
-//       el.classList.remove('active');
-//     });
-
-//     // Remove the 'active' class from all .component-11 elements
-//     document.querySelectorAll('.component-11').forEach(function (el) {
-//       el.classList.remove('active');
-//     });
-
-//     // Add the 'active' class to the currently clicked element
-//     element.classList.add('active');
-//   });
-// });
-
-// // Add click event listener to .component-11 elements
-// document.querySelectorAll('.component-11').forEach(function (element) {
-//   element.addEventListener('click', function () {
-//     // Remove the 'active' class from all .component-11 elements
-//     document.querySelectorAll('.component-11').forEach(function (el) {
-//       el.classList.remove('active');
-//     });
-
-//     // Remove the 'active' class from all .component-10 elements
-//     document.querySelectorAll('.component-10').forEach(function (el) {
-//       el.classList.remove('active');
-//     });
-
-//     // Add the 'active' class to the currently clicked element
-//     element.classList.add('active');
-//   });
-// });
-
-
-// //status
-// // Select all tabs within the parent
-// const tabs = document.querySelectorAll('.tab');
-
-// // Function to handle tab click
-// tabs.forEach(tab => {
-//   tab.addEventListener('click', function () {
-//     // Remove 'active' class from all tabs
-//     tabs.forEach(t => t.classList.remove('active'));
-
-//     // Add 'active' class to the clicked tab
-//     this.classList.add('active');
-//   });
-// });
-
-
-
-
-
-//
 
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -478,3 +540,4 @@ const searchButton = document.getElementById('searchButton');
       searchContainer.style.display = 'none'; // Hide the search container
     }
   });
+

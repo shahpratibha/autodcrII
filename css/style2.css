@@ -518,7 +518,7 @@ text-shadow: 2px 2px 4px darkblue; /* Adjust the values to control the shadow */
   left: 67%;
   top: 2.3%;
   width: 15% !important;
-  border: 2px solid #0078A8;
+  border: 2px solid #0077DA;;
   border-radius: 30px;
   height: 4.8%;
   }
@@ -537,7 +537,8 @@ text-shadow: 2px 2px 4px darkblue; /* Adjust the values to control the shadow */
     cursor: pointer;
     left: 80% !important;
     z-index: 9999 !important;
-    color: #0078A8;
+    color: #0077DA;
+    ;
 }
   .daterangepicker .drp-buttons .btn {
     margin-left: 8px;
@@ -1585,6 +1586,7 @@ top:3%;
 z-index: 1000;
 width: 27px;
 height:28px;
+outline: none;
 display: flex;
 justify-content: center;
 align-items: center;
