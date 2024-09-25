@@ -447,7 +447,7 @@ $(document).ready(function () {
           const cql_filter = getCqlFilter();
           getCheckedValues(function (filterString) {
               const mainfilter = combineFilters(cql_filter1, filterString);
-              alert("egrhubybv")
+              // alert("egrhubybv")
               console.log("Main Filter for checking:", mainfilter);
 
               FilterAndZoom(mainfilter);

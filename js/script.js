@@ -89,7 +89,7 @@ const cluster_url = "https://iwmsgis.pmc.gov.in/geoserver/";
   loadinitialData(filterString1);
   loadAndProcessGeoJSON(cluster_url, cluster_layerName, filterString1);
   getCheckedValues(function (filterString) {
-    alert("opjojihu")
+    // alert("opjojihu")
     // //console.log("Filter Stringinside: ", filterString1);
     const mainfilter = combineFilters(filterString1, filterString);
     console.log("Filter Stringinsidedfgnjfhfufh: ", mainfilter);
