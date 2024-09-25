@@ -126,155 +126,179 @@ document.addEventListener('DOMContentLoaded', function () {
   }, 100);
 });
 
-$(document).ready(function () {
-// date range code
-// Example usage of the function
-const layername = "AutoDCR:plot1_layout_test";
-const main_url = "https://iwmsgis.pmc.gov.in/geoserver/";
+// $(document).ready(function () {
+// // date range code
+// // Example usage of the function
+// const layername = "AutoDCR:plot1_layout_test";
+// const main_url = "https://iwmsgis.pmc.gov.in/geoserver/";
+// let villageLayer; 
 
-// const filter = ""; // Add any additional filter if required
+// var start =  moment('2024-04-01');
+// var end = moment();
+// var cql_filter1; // Declare the variable in the outer scope
+// $('#daterange').daterangepicker({
+//   opens: 'left',
+//   locale: {
+//     format: 'MMMM D, YYYY' // Format to show Month name, Day, and Year
+//   },
+//   startDate: moment('2024-04-01'), // Set the start date to April 1st, 2024
+//   endDate: moment('2025-03-31'),   // Set the end date to March 31st, 2025
+//   ranges: {
+//     'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+//     'This Month': [moment().startOf('month'), moment().endOf('month')],
+//     'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+//     '2024-2025': [moment('2024-04-01'), moment('2025-03-31')],
+//     '2023-2024': [moment('2023-04-01'), moment('2024-03-31')],
+//     '2022-2023': [moment('2022-04-01'), moment('2023-03-31')],
+//     '2021-2022': [moment('2021-04-01'), moment('2022-03-31')],
+//   }
+// }, cb);
+// cb(start, end);
 
-// loadAndProcessGeoJSON(main_url, layername,cql_filter1 );
-var start =  moment('2024-04-01');
-var end = moment();
-var cql_filter1; // Declare the variable in the outer scope
-$('#daterange').daterangepicker({
-  opens: 'left',
-  locale: {
-    format: 'MMMM D, YYYY' // Format to show Month name, Day, and Year
-  },
-  startDate: moment('2024-04-01'), // Set the start date to April 1st, 2024
-  endDate: moment('2025-03-31'),   // Set the end date to March 31st, 2025
-  ranges: {
-    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-    'This Month': [moment().startOf('month'), moment().endOf('month')],
-    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
-    '2024-2025': [moment('2024-04-01'), moment('2025-03-31')],
-    '2023-2024': [moment('2023-04-01'), moment('2024-03-31')],
-    '2022-2023': [moment('2022-04-01'), moment('2023-03-31')],
-    '2021-2022': [moment('2021-04-01'), moment('2022-03-31')],
-  }
-}, cb);
-cb(start, end);
+// function cb(start, end) {
 
-function cb(start, end) {
+//   var formattedStartDate = start.format('YYYY-MM-DDTHH:mm:ssZ');;
+//   var formattedEndDate = end.format('YYYY-MM-DDTHH:mm:ssZ');;
+//   cql_filter1 = `entry_timestamp >= '${formattedStartDate}' AND entry_timestamp < '${formattedEndDate}'`;
 
-  var formattedStartDate = start.format('YYYY-MM-DDTHH:mm:ssZ');;
-  var formattedEndDate = end.format('YYYY-MM-DDTHH:mm:ssZ');;
-  cql_filter1 = `entry_timestamp >= '${formattedStartDate}' AND entry_timestamp < '${formattedEndDate}'`;
-  // cql_filter1 = `entry_timestamp >='2024-09-04T00:00:00Z' AND entry_timestamp < '2024-09-04T23:59:59Z'`
-  // $('#daterange').val(start.format('2023') + ' - ' + end.format('YYYY'));
-  // var formattedStartDate = start.format('M/D/YY, h:mm A'); 
-  // var formattedEndDate = end.format('M/D/YY, h:mm A');
-  // cql_filter1 = `conc_appr_ >= '${formattedStartDate}' AND conc_appr_ < '${formattedEndDate}'`;
-  console.log(cql_filter1, "lll")
+//   console.log(cql_filter1, "lll")
 
-// alert(cql_filter1)
+// // alert(cql_filter1)
 
-  console.log(cql_filter1, "lllokkkkk")
+//   console.log(cql_filter1, "lllokkkkk")
 
 
-  // loadAndProcessGeoJSON(main_url, layername,cql_filter1);
-  DataTableFilter(cql_filter1)
+//   // loadAndProcessGeoJSON(main_url, layername,cql_filter1);
+//   DataTableFilter(cql_filter1)
 
-  loadinitialData(cql_filter1);
+//   loadinitialData(cql_filter1);
+//   highlightVillages(); // Call to highlight villages
+// // alert(cql_filter1)
+//   // console.log(cql_filter1,"cql_filter1")
+//   getCheckedValues(function (filterString) {
+//     // alert(filterString)
+//     const mainfilter = combineFilters(cql_filter1, filterString);
+//     console.log("Main Filterfor checking:", mainfilter);
+//     FilterAndZoom(mainfilter);
+//     DataTableFilter(mainfilter);
+//     highlightVillages();
+//   });
+// }
+
+// $('#calendarIcon').on('click', function () {
+//   $('#daterange').click();
+// });
+
+
+// // Function to get cql_filter1 value
+// function getCqlFilter() {
+//   return cql_filter1;
+// }
+
+
+// // -------------------------------------------------
+// function loadinitialData(cql_filter) {
+
+//   const layername = "AutoDCR:plot1_layout_test";
+// const main_url = "https://iwmsgis.pmc.gov.in/geoserver/";
+//   const filternames = ["siteaddress_area", "caseinformation_applyfor", "gut_no", 
+//                        "caseinformation_casetype", "caseinformation_proposaltype", 
+//                        "token", "caseinformation_grossplotarea", 
+//                        "plotdetails_developmentzonedp", "ownerinformation_firstname"];
+
+//   // Load data from the specified layer
+//   const url = `${main_url}AutoDCR/wms?service=WFS&version=1.1.0&request=GetFeature&typeName=${layername}&outputFormat=application/json&cql_filter=${encodeURIComponent(cql_filter)}`;
+//   console.log(url, "mainurl");
+
+//   return $.getJSON(url).then(function (data) {
+//       // Assuming villageLayer is created here
+//       villageLayer = L.geoJSON(data, {
+//           onEachFeature: function (feature, layer) {
+//               // Add any popups or bindings here
+//               layer.bindPopup(feature.properties['siteaddress_area']);
+//           }
+//       }).addTo(map); // Assuming you have a map variable defined
+//       highlightVillages(); // Highlight villages after loading the data
+//   });
+// }
+
+// // Function to highlight selected villages
+// function highlightVillages() {
+//   const selectedVillages = [];
   
-// alert(cql_filter1)
-  console.log(cql_filter1,"cql_filter1")
-  getCheckedValues(function (filterString) {
-    // alert(filterString)
-    const mainfilter = combineFilters(cql_filter1, filterString);
-    console.log("Main Filterfor checking:", mainfilter);
-    FilterAndZoom(mainfilter);
-    DataTableFilter(mainfilter)
-  });
-}
+//   $('#siteaddress_area input[type="checkbox"]:checked').each(function () {
+//       const villageName = $(this).val();
+//       if (villageName) {
+//           selectedVillages.push(villageName); // Add to array if valid
+//       }
+//   });
 
-$('#calendarIcon').on('click', function () {
-  $('#daterange').click();
-});
+//   console.log("Selected Villages:", selectedVillages); // Debugging
 
+//   if (villageLayer) {
+//       villageLayer.eachLayer(function (layer) {
+//           const villageName = layer.feature.properties['siteaddress_area'];
+//           console.log("Checking village:", villageName); // Debugging
+//           if (selectedVillages.includes(villageName)) {
+//               // Highlight the village
+//               layer.setStyle({ color: 'yellow', weight: 3 }); // Change the style as needed
+//               console.log("Highlighting village:", villageName); // Debugging
+//           } else {
+//               // Reset the style for unselected villages
+//               layer.setStyle({ color: 'blue', weight: 1 }); // Original style
+//           }
+//       });
+//   } else {
+//       console.error("villageLayer is not defined."); // Debugging
+//   }
+// }
 
-// Function to get cql_filter1 value
-function getCqlFilter() {
-  return cql_filter1;
-}
-
-function loadinitialData(cql_filter) {
-  const filternames = ["siteaddress_area", "caseinformation_applyfor","gut_no", "caseinformation_casetype", "caseinformation_proposaltype", "token", "caseinformation_grossplotarea","plotdetails_developmentzonedp", "ownerinformation_firstname"]; //accordn column names , if want add one more filter criteria add here
-
-  filternames.forEach(function (filtername) {
-    var url = `${main_url}AutoDCR/wms?service=WFS&version=1.1.0&request=GetFeature&typeName=Plot_Layout&propertyName=${filtername}&outputFormat=application/json&cql_filter=${encodeURIComponent(cql_filter)}`;
-    console.log(url,"mainurl");
-    $.getJSON(url, function (data) {
-      var projectFiSet = new Set();
-      var projectFiMap = new Map();
-
-      // Iterate through the features and add non-null values to the set
-      $.each(data.features, function (index, feature) {
-        var column_name = feature.properties[filtername];
-        if (column_name !== null && column_name !== "#N/A") {
-          if (projectFiMap.has(column_name)) {
-           
-            projectFiMap.set(column_name, (projectFiMap.get(column_name) || 0) + 1);
-          } else {
-            projectFiMap.set(column_name, 1);
-          }
-        }
-      });
-   // var uniqueProjectFiList = Array.from(projectFiMap.entries()).map(([name, count]) => `${name} (${count})`);
-   var uniqueProjectFiList = Array.from(projectFiMap.entries()).map(([name]) => `${name}`);
-   populateDropdown(filtername, uniqueProjectFiList);
- });
-});
+// // Event listener for checkboxes
+// $('#siteaddress_area input[type="checkbox"]').on('change', function () {
+//   highlightVillages(); // Call the highlighting function whenever a checkbox is changed
+// });
 
 
 
-  FilterAndZoom(cql_filter)
-}
 
-function combineFilters(cql_filter123, filterString) {
-  if (filterString !== null && filterString !== undefined && filterString !== '') {
-    return `(${cql_filter123}) AND ${filterString}`;
-  } else {
-    return cql_filter123;
-  }
-}
+// function combineFilters(cql_filter123, filterString) {
+//   if (filterString !== null && filterString !== undefined && filterString !== '') {
+//     return `(${cql_filter123}) AND ${filterString}`;
+//   } else {
+//     return cql_filter123;
+//   }
+// }
 
-function initialize() {
+// function initialize() {
 
-  $('#daterange').on('apply.daterangepicker', function (ev, picker) {
-    // var startDate = picker.startDate.format('YYYY-MM-DD');
-    // var endDate = picker.endDate.format('YYYY-MM-DD');
+//   $('#daterange').on('apply.daterangepicker', function (ev, picker) {
+//     // var startDate = picker.startDate.format('YYYY-MM-DD');
+//     // var endDate = picker.endDate.format('YYYY-MM-DD');
 
-    var formattedStartDate = start.format('YYYY-MM-DDTHH:mm:ssZ');;
-    var formattedEndDate = end.format('YYYY-MM-DDTHH:mm:ssZ');;
-    cql_filter1 = `entry_timestamp >= '${formattedStartDate}' AND entry_timestamp < '${formattedEndDate}'`;
+//     var formattedStartDate = start.format('YYYY-MM-DDTHH:mm:ssZ');;
+//     var formattedEndDate = end.format('YYYY-MM-DDTHH:mm:ssZ');;
+//     cql_filter1 = `entry_timestamp >= '${formattedStartDate}' AND entry_timestamp < '${formattedEndDate}'`;
 
 
-
-    // console.log('Selected date rangelooooooooooooooo:', startDate, 'to', endDate);
-
-    // cql_filter1 = `conc_appr_ >= '${startDate}' AND conc_appr_ < '${endDate}'`;
-
-    loadinitialData(cql_filter1);
-    const cql_filter = getCqlFilter();
-    getCheckedValues(function (filterString) {
+//     loadinitialData(cql_filter1);
+//     const cql_filter = getCqlFilter();
+//     getCheckedValues(function (filterString) {
 
 
-      const mainfilter = combineFilters(cql_filter1, filterString);
-      console.log("Main Filterfor checking:", mainfilter);
+//       const mainfilter = combineFilters(cql_filter1, filterString);
+//       console.log("Main Filterfor checking:", mainfilter);
 
-      FilterAndZoom(mainfilter);
+//       FilterAndZoom(mainfilter);
 
-      DataTableFilter(mainfilter)
+//       DataTableFilter(mainfilter);
+//       highlightVillages();
 
-    });
-  });
-}
+//     });
+//   });
+// }
 
-initialize();
-});
+// initialize();
+// });
 
 
 
@@ -291,6 +315,304 @@ initialize();
 
 
 // Toggle arrow direction
+
+
+$(document).ready(function () {
+  // date range code
+  const layername = "AutoDCR:Plot_Layout";
+  const main_url = "https://iwmsgis.pmc.gov.in/geoserver/";
+  let villageLayer;
+
+  var start = moment('2024-04-01');
+  var end = moment();
+  var cql_filter1; // Declare the variable in the outer scope
+
+  $('#daterange').daterangepicker({
+      opens: 'left',
+      locale: {
+          format: 'MMMM D, YYYY' // Format to show Month name, Day, and Year
+      },
+      startDate: moment('2024-04-01'), // Set the start date to April 1st, 2024
+      endDate: moment('2025-03-31'),   // Set the end date to March 31st, 2025
+      ranges: {
+          'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+          'This Month': [moment().startOf('month'), moment().endOf('month')],
+          'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+          '2024-2025': [moment('2024-04-01'), moment('2025-03-31')],
+          '2023-2024': [moment('2023-04-01'), moment('2024-03-31')],
+          '2022-2023': [moment('2022-04-01'), moment('2023-03-31')],
+          '2021-2022': [moment('2021-04-01'), moment('2022-03-31')],
+      }
+  }, cb);
+  cb(start, end);
+
+  function cb(start, end) {
+      var formattedStartDate = start.format('YYYY-MM-DDTHH:mm:ssZ');
+      var formattedEndDate = end.format('YYYY-MM-DDTHH:mm:ssZ');
+      cql_filter1 = `entry_timestamp >= '${formattedStartDate}' AND entry_timestamp < '${formattedEndDate}'`;
+
+      console.log(cql_filter1, "lll");
+
+      DataTableFilter(cql_filter1);
+      loadinitialData(cql_filter1); // Load the initial data
+  }
+
+  $('#calendarIcon').on('click', function () {
+      $('#daterange').click();
+  });
+
+  // Function to load initial data
+  function loadinitialData(cql_filter) {
+      const url = `${main_url}AutoDCR/wfs?service=WFS&version=1.0.0&request=GetFeature&typeName=${layername}&outputFormat=application/json&cql_filter=${encodeURIComponent(cql_filter)}`;
+      console.log(url, "Main URL");
+
+      return $.getJSON(url).then(function (data) {
+          // Create villageLayer from GeoJSON data
+          villageLayer = L.geoJSON(data, {
+              onEachFeature: function (feature, layer) {
+                  layer.bindPopup(feature.properties['caseinformation_area']);
+              }
+          }).addTo(map); // Assuming you have a map variable defined
+
+          // Highlight villages based on current checkbox selections
+          highlightVillages(); // Call highlighting here only for initial load
+      }).catch(function (error) {
+          console.error("Error loading GeoJSON data:", error);
+      });
+  }
+
+  // Function to highlight selected villages
+  function highlightVillages() {
+      const selectedVillages = [];
+
+      $('#siteaddress_area input[type="checkbox"]:checked').each(function () {
+          const villageName = $(this).val();
+          if (villageName) {
+              selectedVillages.push(villageName); // Add to array if valid
+          }
+      });
+
+      console.log("Selected Villages:", selectedVillages); // Debugging
+
+      if (villageLayer) {
+          villageLayer.eachLayer(function (layer) {
+              const villageName = layer.feature.properties['caseinformation_area']; // Using 'caseinformation_area' for village name
+              console.log("Checking village:", villageName); // Debugging
+              if (selectedVillages.includes(villageName)) {
+                  // Highlight the village
+                  layer.setStyle({ color: 'yellow', weight: 3 }); // Change the style as needed
+                  console.log("Highlighting village:", villageName); // Debugging
+              } else {
+                  // Reset the style for unselected villages
+                  layer.setStyle({ color: 'blue', weight: 1 }); // Original style
+              }
+          });
+      } else {
+          console.error("villageLayer is not defined."); // Debugging
+      }
+  }
+
+  // Event listener for checkboxes
+  $('#siteaddress_area input[type="checkbox"]').on('change', function () {
+      highlightVillages(); // Call the highlighting function whenever a checkbox is changed
+  });
+
+  // Additional code for combining filters and other functionality
+  function combineFilters(cql_filter123, filterString) {
+      if (filterString !== null && filterString !== undefined && filterString !== '') {
+          return `(${cql_filter123}) AND ${filterString}`;
+      } else {
+          return cql_filter123;
+      }
+  }
+
+  function initialize() {
+      $('#daterange').on('apply.daterangepicker', function (ev, picker) {
+          var formattedStartDate = picker.startDate.format('YYYY-MM-DDTHH:mm:ssZ');
+          var formattedEndDate = picker.endDate.format('YYYY-MM-DDTHH:mm:ssZ');
+          cql_filter1 = `entry_timestamp >= '${formattedStartDate}' AND entry_timestamp < '${formattedEndDate}'`;
+
+          loadinitialData(cql_filter1);
+          const cql_filter = getCqlFilter();
+          getCheckedValues(function (filterString) {
+              const mainfilter = combineFilters(cql_filter1, filterString);
+              alert("egrhubybv")
+              console.log("Main Filter for checking:", mainfilter);
+
+              FilterAndZoom(mainfilter);
+              DataTableFilter(mainfilter);
+              highlightVillages(); // Call to highlight after applying filter
+          });
+      });
+  }
+
+  initialize();
+});
+
+
+
+
+// $(document).ready(function () {
+//   // Date range code
+//   const layername = "AutoDCR:Plot_Layout"; // Correct layer name
+//   const main_url = "https://iwmsgis.pmc.gov.in/geoserver/";
+//   let villageLayer;
+
+//   var start = moment('2024-04-01');
+//   var end = moment();
+//   var cql_filter1; // Declare the variable in the outer scope
+
+//   // Initialize the date range picker
+//   $('#daterange').daterangepicker({
+//       opens: 'left',
+//       locale: {
+//           format: 'MMMM D, YYYY' // Format to show Month name, Day, and Year
+//       },
+//       startDate: moment('2024-04-01'), // Set the start date to April 1st, 2024
+//       endDate: moment('2025-03-31'),   // Set the end date to March 31st, 2025
+//       ranges: {
+//           'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+//           'This Month': [moment().startOf('month'), moment().endOf('month')],
+//           'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+//           '2024-2025': [moment('2024-04-01'), moment('2025-03-31')],
+//           '2023-2024': [moment('2023-04-01'), moment('2024-03-31')],
+//           '2022-2023': [moment('2022-04-01'), moment('2023-03-31')],
+//           '2021-2022': [moment('2021-04-01'), moment('2022-03-31')],
+//       }
+//   }, cb);
+  
+//   cb(start, end);
+
+//   // Callback function to handle date selection
+//   function cb(start, end) {
+//       var formattedStartDate = start.format('YYYY-MM-DDTHH:mm:ssZ');
+//       var formattedEndDate = end.format('YYYY-MM-DDTHH:mm:ssZ');
+//       cql_filter1 = `entry_timestamp >= '${formattedStartDate}' AND entry_timestamp < '${formattedEndDate}'`;
+
+//       console.log(cql_filter1, "CQL Filter");
+
+//       DataTableFilter(cql_filter1);
+//       loadinitialData(cql_filter1); // Load the initial data
+//   }
+
+//   // Click event for calendar icon
+//   $('#calendarIcon').on('click', function () {
+//       $('#daterange').click();
+//   });
+
+//   // Function to load initial data
+//   // function loadinitialData(cql_filter) {
+//   //     const url = `${main_url}AutoDCR/wfs?service=WFS&version=1.0.0&request=GetFeature&typeName=${layername}&outputFormat=application/json&cql_filter=${encodeURIComponent(cql_filter)}`;
+//   //     console.log(url, "Main URL");
+
+//   //     return $.getJSON(url).then(function (data) {
+//   //         // Create villageLayer from GeoJSON data
+//   //         villageLayer = L.geoJSON(data, {
+//   //             onEachFeature: function (feature, layer) {
+//   //                 layer.bindPopup(feature.properties['siteaddress_area']);
+//   //             }
+//   //         }).addTo(map); // Assuming you have a map variable defined
+          
+//   //         // Now that villageLayer is defined, highlight villages
+//   //         highlightVillages();
+//   //     }).catch(function (error) {
+//   //         console.error("Error loading GeoJSON data:", error);
+//   //     });
+//   // }
+
+
+//   function loadinitialData(cql_filter) {
+//     const url = `${main_url}AutoDCR/wfs?service=WFS&version=1.0.0&request=GetFeature&typeName=${layername}&outputFormat=application/json&cql_filter=${encodeURIComponent(cql_filter)}`;
+//     console.log(url, "Main URL");
+
+//     return $.getJSON(url).then(function (data) {
+//         // Create villageLayer from GeoJSON data
+//         villageLayer = L.geoJSON(data, {
+//             onEachFeature: function (feature, layer) {
+//                 layer.bindPopup(feature.properties['siteaddress_area']);
+//             }
+//         }).addTo(map); // Assuming you have a map variable defined
+        
+//         // Call highlightVillages after loading the data
+//         highlightVillages(); // Highlight the villages based on the current selection
+//     }).catch(function (error) {
+//         console.error("Error loading GeoJSON data:", error);
+//     });
+// }
+
+//   // Function to highlight selected villages
+//   function highlightVillages() {
+//     const selectedVillages = [];
+
+//     $('#siteaddress_area input[type="checkbox"]:checked').each(function () {
+//         const villageName = $(this).val();
+//         if (villageName) {
+//             selectedVillages.push(villageName); // Add to array if valid
+//         }
+//     });
+
+//     console.log("Selected Villages:", selectedVillages); // Debugging
+
+//     if (villageLayer) {
+//         villageLayer.eachLayer(function (layer) {
+//             const villageName = layer.feature.properties['siteaddress_area'];
+//             console.log("Checking village:", villageName); // Debugging
+//             if (selectedVillages.includes(villageName)) {
+//                 // Highlight the village
+//                 layer.setStyle({ color: 'yellow', weight: 3 }); // Change the style as needed
+//                 console.log("Highlighting village:", villageName); // Debugging
+//             } else {
+//                 // Reset the style for unselected villages
+//                 layer.setStyle({ color: 'blue', weight: 1 }); // Original style
+//             }
+//         });
+//     } else {
+//         console.error("villageLayer is not defined."); // Debugging
+//     }
+// }
+
+
+//   // Event listener for checkboxes
+//   // $('#siteaddress_area input[type="checkbox"]').on('change', function () {
+//   //     highlightVillages(); // Call the highlighting function whenever a checkbox is changed
+//   // });
+
+//   // Function to combine filters
+//   function combineFilters(cql_filter123, filterString) {
+//       if (filterString !== null && filterString !== undefined && filterString !== '') {
+//           return `(${cql_filter123}) AND ${filterString}`;
+//       } else {
+//           return cql_filter123;
+//       }
+//   }
+
+//   // Initialize event listeners
+//   function initialize() {
+//       $('#daterange').on('apply.daterangepicker', function (ev, picker) {
+//           var formattedStartDate = picker.startDate.format('YYYY-MM-DDTHH:mm:ssZ');
+//           var formattedEndDate = picker.endDate.format('YYYY-MM-DDTHH:mm:ssZ');
+//           cql_filter1 = `entry_timestamp >= '${formattedStartDate}' AND entry_timestamp < '${formattedEndDate}'`;
+
+//           loadinitialData(cql_filter1);
+//           const cql_filter = getCqlFilter();
+//           getCheckedValues(function (filterString) {
+//               const mainfilter = combineFilters(cql_filter1, filterString);
+//               console.log("Main Filter for checking:", mainfilter);
+
+//               FilterAndZoom(mainfilter);
+//               DataTableFilter(mainfilter);
+//               highlightVillages();
+//           });
+//       });
+//   }
+
+//   initialize();
+// });
+
+
+
+
+
 function toggleFilter(label) {
     const icon = label.querySelector('.icon-container i');
     const filterInput = label.nextElementSibling; // Assuming the input follows the label

@@ -89,9 +89,10 @@ const cluster_url = "https://iwmsgis.pmc.gov.in/geoserver/";
   loadinitialData(filterString1);
   loadAndProcessGeoJSON(cluster_url, cluster_layerName, filterString1);
   getCheckedValues(function (filterString) {
+    alert("opjojihu")
     // //console.log("Filter Stringinside: ", filterString1);
     const mainfilter = combineFilters(filterString1, filterString);
-    // //console.log("Filter Stringinside: ", mainfilter);
+    console.log("Filter Stringinsidedfgnjfhfufh: ", mainfilter);
     loadAndProcessGeoJSON(cluster_url, cluster_layerName, mainfilter);
     // loadAndProcessGeoJSON(main_url, layername, mainfilter);
     FilterAndZoom(mainfilter);
@@ -225,9 +226,20 @@ function getCheckedValues(callback) {
       selectedValues[filtername] = values;
 
       var filters = [];
+      var fovillagefilter =[]
       for (var key in selectedValues) {
+        
         if (selectedValues[key].length > 0) {
+          if (key == 'siteaddress_area'){
+            // alert(key)
+            fovillagefilter.push(`${key} IN ('${selectedValues[key].join("','")}')`);
+            var ff= `village_na IN ('${selectedValues[key].join("','")}')`
+            console.log(ff,"ffffffffffffffffffffffffffffffff")
+            FilterAndZoomforvillage(ff)
+          }
+          
           filters.push(`${key} IN ('${selectedValues[key].join("','")}')`);
+          console.log(key,"forororroro")
         }
       }
 
@@ -252,6 +264,19 @@ function FilterAndZoom(filter) {
   Plot_Layout.setParams({
     CQL_FILTER: filter,
     maxZoom: 19.5,
+  }).addTo(map);
+  // Plot_Layout.setParams({
+  //   CQL_FILTER: filter,
+  //   maxZoom: 19.5,
+  // }).addTo(map);
+};
+
+function FilterAndZoomforvillage(filter) {
+  // fitbous(filter)
+  Village_Boundary1.setParams({
+    CQL_FILTER: filter,
+    maxZoom: 19.5,
+    styles: 'Village_Highlight'
   }).addTo(map);
   // Plot_Layout.setParams({
   //   CQL_FILTER: filter,
@@ -497,18 +522,6 @@ $(document).ready(function () {
     $('#pagination').hide();
   });
 });
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 document.addEventListener('DOMContentLoaded', (event) => {

@@ -91,6 +91,17 @@ var map = L.map("map", {
     opacity: 1
   });
 
+
+  var Village_Boundary1 = L.tileLayer.wms("https://iwmsgis.pmc.gov.in/geoserver/AutoDCR/wms", {
+    layers: "Village_Boundary1",
+    format: "image/png",
+    transparent: true,
+    tiled: true,
+    version: "1.1.0",
+    opacity: 1
+  });
+
+
   var Plot_Layout = L.tileLayer.wms(
   "https://iwmsgis.pmc.gov.in/geoserver/wms",
   {
