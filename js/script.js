@@ -131,22 +131,7 @@ const cluster_url = "https://iwmsgis.pmc.gov.in/geoserver/";
    
 });
 
-// old code 18/9
-// function DataTableFilter(cql_filter1) {
-//   var layers = ["AutoDCR:Plot_Layout"];
-//   var typeName = layers.join(',');
-//   var cqlFilter = cql_filter1;
-//   var workspace = 'AutoDCR'
-//   var geoServerURL =
-//     `${main_url}${workspace}/wms?service=WFS&version=1.1.0&request=GetFeature&typeName=${typeName}&outputFormat=application/json`;
-//   if (cql_filter1 !== '') {
-//     geoServerURL += "&CQL_FILTER=" + encodeURIComponent(cqlFilter);
-//   }
-//   var headers = ["token","gut_no","siteaddress_area",  "ownerinformation_firstname", "caseinformation_grossplotarea","caseinformation_applyfor", "caseinformation_casetype", "caseinformation_proposaltype", "caseinformation_tdrzone","plotdetails_developmentzonedp","entry_timestamp"];
-//   showtable(typeName, geoServerURL, cqlFilter, headers);
 
-
-// }
 // old code 18/9
 
 // new code 18/9
@@ -1111,3 +1096,6 @@ map.on("move", () => {
 
 // Store the last right-click event to use when the map moves
 let lastClickEvent;
+
+
+

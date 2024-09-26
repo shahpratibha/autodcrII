@@ -10,8 +10,6 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="css/style2.css">
- 
-
   <link rel="stylesheet" href="css/leafletCustom.css">
 
   <!-- Include daterangepicker CSS -->
@@ -63,6 +61,7 @@
           <h3 class="filter-title">Filter</h3>
           <span class="close-icon" onclick="closeFilters()">&#215;</span>
           <div class="filter_div">
+            
             <div class="filter-group">
               <label for="token" onclick="toggleFilter(this)">Token No<span class="icon-container"><i
                     class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
@@ -104,6 +103,7 @@
               <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
               <ul class="select2 " multiple="multiple" id="caseinformation_casetype"></ul>
             </div>
+            
             <div class="filter-group">
               <label for="caseinformation_proposaltype" onclick="toggleFilter(this)">Proposal Type<span
                   class="icon-container"><i class="fa-solid fa-angle-down"></i></span><span
@@ -455,11 +455,13 @@
           <img class="right-icons" alt="" src="image/Pie.svg" />
           <div class="component-11-child"></div>
         </div>
-        
+
         <div id="box" class="box">
           <span id="closeBox" class="box-icon">&times;</span>
-          This is the box content.
-        </div>
+          <h5>Proposal Type</h5>
+         
+          
+</div>
         
 
         
@@ -1274,6 +1276,7 @@
               </div>
             </div>
           </div>
+          
           <div class="graph-dropdown">
             <div class="status-wise">
               <div class="building-permissions-parent">
