@@ -4212,19 +4212,19 @@ border-radius: 5px 5px 5px 5px;
 }
 
 /* Box initially hidden */
-.box {
+.box{
   display: none;
   width: 280px;
-  height: 60vh;
+  height: 46vh;
   background-color: white;
-  border: 1px solid #ccc;
+  /* border: 1px solid #ccc; */
   padding: 10px;
-  margin-top: -58px;
+  margin-top: -33px;
   position: absolute;
   border-radius: 10px;
   z-index: 100;
   top: 100px;
-  margin-left: -187px;
+
 }
 
 /* Style for the close icon */
@@ -4238,3 +4238,18 @@ border-radius: 5px 5px 5px 5px;
 }
 
 
+
+.proposal-type {
+  padding: 10px 0; /* Padding for each type */
+}
+
+.proposal-type span {
+  font-weight: bold; /* Make the type bold */
+  display: inline-block; /* Allow margin and padding to apply */
+  margin-right: 10px; /* Spacing between type and count */
+}
+
+.total-projects {
+  font-size: 10px; /* Larger font for total projects */
+ 
+}
