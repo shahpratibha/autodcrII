@@ -1794,20 +1794,6 @@ overflow: visible;
 
 
 
-/* #search_type {
-  display: none;
-  position: absolute; 
-  top: 100%; 
-  left: 0; 
-  z-index: 1000; 
-  background-color: white; 
-  border: 1px solid #ddd; 
-}
-
-.search-container.hidden #search_type {
-  display: none;
-} */
-
 .search-container .search-icon {
   cursor: pointer; /* Pointer cursor to indicate it's clickable */
 }
@@ -4017,11 +4003,7 @@ display: flex;
 align-items: center;
 justify-content: center;
 }
-/* CSS to move the map section to the right */
-/* .move-right {
-transform: translateX(43vh); 
-transition: transform 0.1s ease;
-} */
+
 
 .white-filter {
 filter: invert(1) brightness(2);
