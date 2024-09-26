@@ -1561,8 +1561,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const buttonRect = button.getBoundingClientRect();
 
     if (box.style.display === 'none' || box.style.display === '') {
-      // box.style.top = `${buttonRect.bottom + 0}px`; // 10px gap below the button
-      // box.style.left = `${buttonRect.left}px`;
       box.style.display = 'block';
     } else {
       box.style.display = 'none';
@@ -1620,9 +1618,9 @@ const searchButton = document.getElementById('searchButton');
 });
 
 
-//box pie chart 
+//box pie chart total projrct 
 
-      const box_url = "https://iwmsgis.pmc.gov.in/geoserver/";
+const box_url = "https://iwmsgis.pmc.gov.in/geoserver/";
 const layer_name = "AutoDCR:Plot_Layout";
 
 const proposalTypeColors = {
@@ -1634,7 +1632,7 @@ const proposalTypeColors = {
     "Institutional": "pink",
     "InfoTech": "indigo",
     "Assembly": "green",
-    // Add more types and colors as needed
+   
 };
 
 // Function to fetch data from GeoServer
