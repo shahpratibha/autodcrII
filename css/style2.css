@@ -23,15 +23,7 @@ html {
   transform: translate();
   transition: 6ms ease-in;
    background: radial-gradient(65.32% 65.32% at 50% 50%, rgba(0, 108, 198, 0.10) 0%, #006CC6  100% );
-   /* linear-gradient(133deg, rgba(0, 108, 198, 0.10) 2.35%, #006CC6 89.11%); */
-/* radial-gradient(#0876ff 5%,  #0876ff69) 
-  50% calc(50% + 2em); 
-
-&:nth-child(2) {
-background-size: 175% 175%;
-}  */
-  /* box-shadow: rgba(8, 118, 255, 0.412) 0px 30px 60px -12px inset,
-    rgb(8, 118, 255) 0px 18px 36px -18px inset; */
+   
 }
 
 
@@ -4212,19 +4204,19 @@ border-radius: 5px 5px 5px 5px;
 }
 
 /* Box initially hidden */
-.box {
+.box{
   display: none;
   width: 280px;
-  height: 60vh;
+  height: 46vh;
   background-color: white;
-  border: 1px solid #ccc;
+  /* border: 1px solid #ccc; */
   padding: 10px;
-  margin-top: -58px;
+  margin-top: -33px;
   position: absolute;
   border-radius: 10px;
   z-index: 100;
   top: 100px;
-  margin-left: -187px;
+
 }
 
 /* Style for the close icon */
@@ -4236,3 +4228,22 @@ border-radius: 5px 5px 5px 5px;
   cursor: pointer;
   color: black;
 }
+
+
+
+.proposal-type {
+  padding: 10px 0; /* Padding for each type */
+}
+
+.proposal-type span {
+  font-weight: bold; /* Make the type bold */
+  display: inline-block; /* Allow margin and padding to apply */
+  margin-right: 10px; /* Spacing between type and count */
+}
+
+.total-projects {
+  font-size: 10px; /* Larger font for total projects */
+ 
+}
+
+

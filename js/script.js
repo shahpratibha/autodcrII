@@ -1478,7 +1478,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-//
+
 document.addEventListener('DOMContentLoaded', function () {
   const dataGraphsElement = document.querySelector('.data-graphs');
   const tabElements = document.querySelectorAll('.tab'); // Select all tab elements
@@ -1537,6 +1537,9 @@ document.addEventListener('DOMContentLoaded', function () {
   const button = document.getElementById('Button');
   const closeBoxIcon = document.getElementById('closeBox');
 
+  // By default, open the box
+  box.style.display = 'block'; // Ensure the box is open by default
+
   function closeFilterAndLegend() {
     console.log('Closing filter and legend'); 
 
@@ -1558,8 +1561,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const buttonRect = button.getBoundingClientRect();
 
     if (box.style.display === 'none' || box.style.display === '') {
-      box.style.top = `${buttonRect.bottom + 10}px`; // 10px gap below the button
-      box.style.left = `${buttonRect.left}px`;
       box.style.display = 'block';
     } else {
       box.style.display = 'none';
@@ -1617,4 +1618,77 @@ const searchButton = document.getElementById('searchButton');
 });
 
 
+//box pie chart total projrct 
+
+const box_url = "https://iwmsgis.pmc.gov.in/geoserver/";
+const layer_name = "AutoDCR:Plot_Layout";
+
+const proposalTypeColors = {
+    "Residential": "yellow",
+    "Commercial": "blue",
+    "Industrial": "violet",
+    "Other": "gray",
+    "Resi+Comm": "orange",
+    "Institutional": "pink",
+    "InfoTech": "indigo",
+    "Assembly": "green",
+   
+};
+
+// Function to fetch data from GeoServer
+async function fetchProposalData() {
+    // Set initial loading message
+    document.getElementById("box-content").innerHTML = "Loading proposal type and project count...";
+
+    const wfs_url = `${box_url}wfs?service=WFS&version=1.0.0&request=GetFeature&typeName=${layer_name}&outputFormat=application/json`;
+
+    try {
+        const response = await fetch(wfs_url);
+        const geojson = await response.json();
+
+        // Count number of features (projects)
+        const projectCount = geojson.features.length;
+
+        // Count occurrences of each proposal type
+        const proposalCounts = {};
+        geojson.features.forEach(feature => {
+            const proposalType = feature.properties.caseinformation_proposaltype; // Use the correct property name
+            proposalCounts[proposalType] = (proposalCounts[proposalType] || 0) + 1;
+        });
+
+        // Create a display string for proposal counts with color boxes
+        const proposalCountDisplay = Object.entries(proposalCounts)
+            .map(([type, count]) => {
+                const color = proposalTypeColors[type] || "black"; // Default to black if not defined
+                return `
+                    <div style="padding: 2px; font-size: 13px; display: flex; align-items: center;">
+                        <div style="width: 12px; height: 12px; background-color: ${color}; margin-right: 5px;"></div>
+                        ${type}: ${count}
+                    </div>
+                `; // Colored square div next to the proposal type
+            })
+            .join('');
+
+        // Display total project count and proposal counts in the box
+        const content = `
+            <strong>Total Projects: ${projectCount}</strong><hr>
+            <strong>Proposal Counts:</strong><br>
+            <div style="background-color: #e6f1fb; padding: 5px; border-radius: 5px;">
+                ${proposalCountDisplay}
+            </div>
+        `;
+        document.getElementById("box-content").innerHTML = content;
+    } catch (error) {
+        console.error("Error fetching proposal data:", error);
+        document.getElementById("box-content").textContent = "Error loading proposal data.";
+    }
+}
+
+// Call the function when the page loads
+document.addEventListener("DOMContentLoaded", fetchProposalData);
+
+// Close the box when the close icon is clicked
+document.getElementById("closeBox").addEventListener("click", () => {
+    document.getElementById("box").style.display = "none";
+});
 

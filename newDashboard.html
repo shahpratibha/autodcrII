@@ -15,8 +15,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
   <link rel="stylesheet" href="css/style2.css">
- 
-
   <link rel="stylesheet" href="css/leafletCustom.css">
 
   <!-- Include daterangepicker CSS -->
@@ -68,6 +66,7 @@
           <h3 class="filter-title">Filter</h3>
           <span class="close-icon" onclick="closeFilters()">&#215;</span>
           <div class="filter_div">
+            
             <div class="filter-group">
               <label for="token" onclick="toggleFilter(this)">Token No<span class="icon-container"><i
                     class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
@@ -85,7 +84,7 @@
               <label for="gut_no" onclick="toggleFilter(this)">Survey No <span class="icon-container"><i
                     class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
               <input type="text" placeholder="Search" class="filter-input" id="statusSearch">
-              <ul class="select2" multiple="multiple" id="gut_no"></ul>
+              <ul class="select2  abcscroll" multiple="multiple" id="gut_no"></ul>
             </div>
             <div class="filter-group">
               <label for="ownerinformation_firstname" onclick="toggleFilter(this)">Owner Name <span
@@ -109,6 +108,7 @@
               <input type="text" placeholder="Search" class="filter-input" id="typeSearch">
               <ul class="select2 " multiple="multiple" id="caseinformation_casetype"></ul>
             </div>
+            
             <div class="filter-group">
               <label for="caseinformation_proposaltype" onclick="toggleFilter(this)">Proposal Type<span
                   class="icon-container"><i class="fa-solid fa-angle-down"></i></span><span
@@ -1262,6 +1262,7 @@
               </div>
             </div>
           </div>
+          
           <div class="graph-dropdown">
             <div class="status-wise">
               <div class="building-permissions-parent">
@@ -1417,75 +1418,5 @@
 
 
 
-    <script>
-      const box_url = "https://iwmsgis.pmc.gov.in/geoserver/";
-      const layer_name = "AutoDCR:Plot_Layout";
-
-      // Define gradient colors for each caseinformation_proposaltype
-      const caseinformation_proposaltypeColors1 = {
-          "Residential": "yellow",
-          "Commercial": "blue",
-          "Industrial": "violet",
-          "Other": "gray",
-          "Resi+Comm": "orange",
-          "Institutional": "pink",
-          "InfoTech": "indigo",
-          "Assembly": "green",
-          // Add more types and colors as needed
-      };
-
-      // Function to fetch data from GeoServer
-      async function fetchProposalData() {
-          // Set initial loading message
-          document.getElementById("box-content").innerHTML = "Loading proposal type and project count...";
-
-          const wfs_url = `${box_url}wfs?service=WFS&version=1.0.0&request=GetFeature&typeName=${layer_name}&outputFormat=application/json`;
-
-          try {
-              const response = await fetch(wfs_url);
-              const geojson = await response.json();
-
-              // Count number of features (projects)
-              const projectCount = geojson.features.length;
-
-              // Count occurrences of each proposal type
-              const proposalCounts = {};
-              geojson.features.forEach(feature => {
-                  const proposalType = feature.properties.caseinformation_proposaltype; // Use the correct property name
-                  proposalCounts[proposalType] = (proposalCounts[proposalType] || 0) + 1;
-              });
-
-              // Create a display string for proposal counts with colors
-              const proposalCountDisplay = Object.entries(proposalCounts)
-                  .map(([type, count]) => {
-                      const color = caseinformation_proposaltypeColors1[type] || "black"; // Default to black if not defined
-                      return `<span style="color: ${color};">${type}: ${count}</span>`;
-                  })
-                  .join('<br>');
-
-              // Display total project count and proposal counts in the box
-              const content = `
-                  <strong>Total Projects: ${projectCount}</strong><br>
-                  <strong>Proposal Counts:</strong><br>${proposalCountDisplay}
-              `;
-              document.getElementById("box-content").innerHTML = content;
-          } catch (error) {
-              console.error("Error fetching proposal data:", error);
-              document.getElementById("box-content").textContent = "Error loading proposal data.";
-          }
-      }
-
-      // Call the function when the page loads
-      document.addEventListener("DOMContentLoaded", fetchProposalData);
-
-      // Close the box when the close icon is clicked
-      document.getElementById("closeBox").addEventListener("click", () => {
-          document.getElementById("box").style.display = "none";
-      });
-  </script>
-
-    
-
 </body>
-
 </html>
