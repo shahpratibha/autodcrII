@@ -1478,7 +1478,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-//
+
 document.addEventListener('DOMContentLoaded', function () {
   const dataGraphsElement = document.querySelector('.data-graphs');
   const tabElements = document.querySelectorAll('.tab'); // Select all tab elements

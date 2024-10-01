@@ -31,6 +31,7 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://unpkg.com/leaflet-draw/dist/leaflet.draw.js"></script>
+    
 
 </head>
 
@@ -69,7 +70,7 @@
             </form>
         </section>
     </div>
-    
+
     <script>
 
       // print all window
@@ -242,26 +243,35 @@ var map = L.map("map", {
     $(document).ready(function () {
     var urlParams = new URLSearchParams(window.location.search);
     var villageName = urlParams.get('Token');  // Handle null Token
-    var filter = "Token =' " + villageName+"'"; // Add single quotes for the filter
+    var filter = "Token=" + villageName + "";  // Correcting the single quotes spacing
+
 
     console.log(villageName, "Token", filter);
+   
+            //    FitbouCustomiseRevenue(filter);
+
+            // IWMS_line.setParams({ CQL_FILTER: filter, maxZoom: 19.5, styles: "IWMS_line" }).addTo(map);
+            // IWMS_polygon.setParams({ CQL_FILTER: filter, maxZoom: 19.5, styles: "IWMS_polygon" }).addTo(map);
+            // IWMS_point.setParams({ CQL_FILTER: filter, maxZoom: 19.5, styles: "IWMS_points" }).addTo(map);
+            // Ward_layer.setParams({ CQL_FILTER: filter, maxZoom: 19.5, styles: "GIS_Ward_Layer" }).addTo(map);
+
 
     // Call the getdata function to load data based on the filter
     getdata(filter);
 
     // Function to get data from the API and display in the table
     function getdata(filters) {
-        const layers = ["pmc:IWMS_line", "pmc:IWMS_polygon", "pmc:IWMS_point", "pmc:GIS_Ward_Layer"];
+        const layers = ["PMC_test:plot1_layouts_test"];
         const promises = [];
-        const layerDetails = ["id", "Token", "Name_of_Work", "Department", "Project_Office", "zone", "ward", "Tender_Amount", "Name_of_JE", "length_1", "width", "area", "geometry"];
+        const layerDetails = ["Token", "Survey No", "Village Name", "Owner Name", "Plot Area", "Apply For", "Case Type", "Proposal Type", "TDR Zone", "Development Zone", "Date & Time", "geometry"];
 
         layers.forEach(function (layerName) {
-            const urlm = "https://iwmsgis.pmc.gov.in/geoserver/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" +
-                layerName +
-                "&CQL_FILTER=" +
-                filters +
-                "&outputFormat=application/json";
-                
+          const urlm = "https://iwmsgis.pmc.gov.in/geoserver/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" +
+    layerName +
+    "&CQL_FILTER=" +
+    filters +
+    "&outputFormat=application/json";
+
 
             $('#table-container').show();
 
@@ -295,11 +305,13 @@ var map = L.map("map", {
 
     // Pagination and table display logic
     function paginateResults(data) {
-        const itemsPerPage = 5;  // Adjust the number of items per page as needed
+        const itemsPerPage = 1;  // Adjust the number of items per page as needed
         let currentPage = 1;
 
         // Function to display data on the current page
         function displayPage(page) {
+          console.log(page);
+
             const tableBody = document.getElementById('workTableData');
             tableBody.innerHTML = '';
 
