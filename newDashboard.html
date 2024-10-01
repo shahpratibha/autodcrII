@@ -1398,79 +1398,25 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css"
       integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw=="
       crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
     <script type="text/javascript" charset="utf8"
       src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
-      
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
 
 
-    <!-- <script src="js/legend.js"></script> -->
     <script src="js/map.js"></script>
     <script src="js/filter.js"></script>
-   <!-- <script src="js/script2.js"></script> -->
     <script src="js/script.js"></script>
 
 
 
 
-<!-- 
-    <script>
-      const box_url = "https://iwmsgis.pmc.gov.in/geoserver/";
-      const layer_name = "AutoDCR:Plot_Layout";
-    
-      // Function to fetch data from GeoServer
-      async function fetchProposalData() {
-        const wfs_url = `${box_url}wfs?service=WFS&version=1.0.0&request=GetFeature&typeName=${layer_name}&outputFormat=application/json`;
-    
-        try {
-          const response = await fetch(wfs_url);
-          const geojson = await response.json();
-    
-          // Count number of features (projects)
-          const projectCount = geojson.features.length;
-    
-          // Count occurrences of each proposal type
-          const proposalCounts = {};
-          geojson.features.forEach(feature => {
-            const proposalType = feature.properties.caseinformation_proposaltype; // Use the correct property name
-            proposalCounts[proposalType] = (proposalCounts[proposalType] || 0) + 1;
-          });
-    
-          // Create a display string for proposal counts
-          const proposalCountDisplay = Object.entries(proposalCounts)
-            .map(([type, count]) => `${type}: ${count}`)
-            .join('<br>');
-    
-          // Display total project count and proposal counts in the box
-          const content = `
-            <strong>Total Projects: ${projectCount}</strong><br>
-            <strong>Proposal Counts:</strong><br>${proposalCountDisplay}
-          `;
-          document.getElementById("box-content").innerHTML = content;
-        } catch (error) {
-          console.error("Error fetching proposal data:", error);
-          document.getElementById("box-content").textContent = "Error loading proposal data.";
-        }
-      }
-    
-      // Call the function when the page loads
-      document.addEventListener("DOMContentLoaded", fetchProposalData);
-    
-      // Close the box when the close icon is clicked
-      document.getElementById("closeBox").addEventListener("click", () => {
-        document.getElementById("box").style.display = "none";
-      });
-    </script> -->
     <script>
       const box_url = "https://iwmsgis.pmc.gov.in/geoserver/";
       const layer_name = "AutoDCR:Plot_Layout";
