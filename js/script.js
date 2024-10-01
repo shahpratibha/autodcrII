@@ -1526,7 +1526,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-// close the box and all 
+// close the box and all
 document.addEventListener('DOMContentLoaded', function () {
   const filters = document.getElementById('filters');
   const legendsDiv = document.querySelector('.legends');
@@ -1541,7 +1541,7 @@ document.addEventListener('DOMContentLoaded', function () {
   box.style.display = 'block'; // Ensure the box is open by default
 
   function closeFilterAndLegend() {
-    console.log('Closing filter and legend'); 
+    console.log('Closing filter and legend');
 
     filters.style.display = 'none';
     legendsDiv.classList.add('hidden');
@@ -1579,18 +1579,39 @@ document.addEventListener('DOMContentLoaded', function () {
     box.style.display = 'none';
   });
 
+  // Helper function to remove active class from all elements
+  function removeActiveClass() {
+    document.querySelectorAll('.component-10, .component-11').forEach(el => el.classList.remove('active')); // Remove active class from all elements
+  }
+
+  // Add event listener for .component-10 elements to change color on click
   document.querySelectorAll('.component-10').forEach(function (element) {
     element.addEventListener('click', function () {
+      // Close filters and legend
       closeFilterAndLegend();
+
+      // Remove active class from all elements and add to clicked element
+      removeActiveClass();
+      this.classList.add('active'); // Add active class to clicked element
     });
   });
 
+  // Set default color for .component-11 elements
   document.querySelectorAll('.component-11').forEach(function (element) {
+    element.classList.add('default-component-11'); // Add default class
+
+    // Add event listener to toggle active class on click
     element.addEventListener('click', function () {
+      // Close filters and legend
       closeFilterAndLegend();
+
+      // Remove active class from all elements and add to clicked element
+      removeActiveClass();
+      this.classList.add('active'); // Add active class to clicked element
     });
   });
 
+  // Close filters and legend when the analytics button is clicked
   analyticsButton.addEventListener('click', function () {
     closeFilterAndLegend();
   });
