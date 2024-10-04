@@ -1713,3 +1713,23 @@ document.getElementById("closeBox").addEventListener("click", () => {
     document.getElementById("box").style.display = "none";
 });
 
+//filter icon close 
+ // JavaScript to handle showing and hiding the clear icon
+ const input = document.getElementById('typeSearch');
+ const clearIcon = document.getElementById('clearIcon');
+
+ // Clear input when the cross icon is clicked
+ clearIcon.addEventListener('click', () => {
+   input.value = ''; // Clear input value
+   clearIcon.style.display = 'block'; // Hide the icon after clearing
+   input.focus(); // Keep focus on input after clearing
+ });
+
+ // Show or hide the clear icon depending on input's value
+ input.addEventListener('input', () => {
+   if (input.value) {
+     clearIcon.style.display = 'block'; // Show the icon if there's text
+   } else {
+     clearIcon.style.display = 'none'; // Hide the icon if input is empty
+   }
+ });
